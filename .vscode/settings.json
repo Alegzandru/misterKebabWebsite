@@ -1,0 +1,6 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescriptHero.imports.insertSemicolons": false,
+  "npm-intellisense.importLinebreak": "",
+}
