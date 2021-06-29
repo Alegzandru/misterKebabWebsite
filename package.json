@@ -2,12 +2,11 @@
   "name": "misterkebab",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "cls & next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint pages src"
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +23,7 @@
     "@typescript-eslint/parser": "4.28.0",
     "autoprefixer": "10.2.6",
     "eslint": "7.29.0",
-    "eslint-plugin-import": "2.23.4",
+    "eslint-config-next": "11.0.1",
     "eslint-plugin-jsdoc": "35.4.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-react": "7.24.0",
