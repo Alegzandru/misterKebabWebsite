@@ -6,7 +6,6 @@
   "plugins": [
     "jsdoc",
     "prefer-arrow",
-    "react",
     "@typescript-eslint"
   ],
   "rules": {
