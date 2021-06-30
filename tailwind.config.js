@@ -3,10 +3,20 @@ module.exports = {
   darkMode: false,
   theme: {
     screen: {
-      sm: '512px',
-      md: '816px',
+      sm: '513px',
+      md: '817px',
+      lg: '1024px',
+      xl: '1440px',
     },
-    extend: {},
+    borderRadius: {
+      DEFAULT: '8px',
+      full: '9999px',
+    },
+    extend: {
+      zIndex: {
+        '-10': '-10',
+      },
+    },
   },
   variants: {
     extend: {},

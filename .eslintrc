@@ -219,6 +219,7 @@
     ],
     "react/jsx-wrap-multilines": "error",
     "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
     "space-before-function-paren": [
       "error",
       {

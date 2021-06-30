@@ -3,4 +3,7 @@
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "typescriptHero.imports.insertSemicolons": false,
   "npm-intellisense.importLinebreak": "",
+  "cSpell.words": [
+    "hallal"
+  ],
 }
