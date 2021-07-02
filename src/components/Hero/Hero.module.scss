@@ -17,6 +17,10 @@
     }
   }
 
+  &__logo {
+    left: -10%;
+  }
+
   &__insignia {
     height: 52px;
     margin-bottom: 26px;
@@ -43,17 +47,17 @@
     margin: 0 4px;
 
     &.wrap {
-      background-image: url(/images/temp/wrap.png);
+      background-image: url(/images/thumbnails/wrap.png);
       background-position: -80px -25px;
     }
 
     &.burger {
-      background-image: url(/images/temp/burger.png);
+      background-image: url(/images/thumbnails/burger.png);
       background-position: -90px -10px;
     }
 
     &.pita {
-      background-image: url(/images/temp/pita.png);
+      background-image: url(/images/thumbnails/pita.png);
       background-position: -65px -30px;
     }
   }
@@ -166,8 +170,8 @@
     height: 150vh;
 
     &__background {
-      background-position-y: 108%;
-      background-size: 185%;
+      background-position-y: 100%;
+      background-size: auto 1950px;
     }
 
     &__insignia {

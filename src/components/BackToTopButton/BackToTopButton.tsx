@@ -5,14 +5,14 @@ import ArrowUp from '../Svgs/ArrowUp/ArrowUp'
 import styles from './BackToTopButton.module.scss'
 
 const BackToTopButton = () => {
-
   const [show, setShow] = useState(false)
 
-  const checkScrollTop = () => {
-    setShow(window.pageYOffset > 200)
-  }
-
   useEffect(() => {
+    const checkScrollTop = () => {
+      setShow(window.pageYOffset > 200)
+    }
+
+    checkScrollTop()
     window.addEventListener('scroll', checkScrollTop)
 
     return () => window.removeEventListener('scroll', checkScrollTop)

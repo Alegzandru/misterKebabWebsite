@@ -1,7 +1,7 @@
 export const HERO_BUTTONS = [
   { name: 'Lavaș', id: 'wrap' },
   { name: 'Burger', id: 'burger' },
-  { name: 'Pița', id: 'pita' },
+  { name: 'Pita', id: 'pita' },
 ]
 
 export const SIZES = {
