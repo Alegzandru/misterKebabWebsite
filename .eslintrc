@@ -220,6 +220,10 @@
     "react/jsx-wrap-multilines": "error",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "off",
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
     "space-before-function-paren": [
       "error",
       {

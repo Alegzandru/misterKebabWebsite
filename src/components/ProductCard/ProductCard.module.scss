@@ -1,0 +1,36 @@
+.productCardContainer {
+  height: 228px;
+  border: 1.5px solid #fab729;
+  box-shadow: 0px 9px 16px rgba(255, 184, 0, 0.06);
+
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 600;
+
+  &__description {
+    height: 100px;
+    padding: 12px 14px 14px;
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__price {
+    font-size: 12px;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__addToCart {
+    background-color: #fff7f8;
+    border: 2px solid #ff2828;
+    border-radius: 4px;
+    height: 36px;
+    margin-top: 20px;
+
+    font-size: 12px;
+    color: #ff2828;
+    font-weight: 600;
+  }
+}
