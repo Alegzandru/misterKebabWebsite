@@ -1,0 +1,22 @@
+.sliderContainer {
+  height: 276px;
+  width: calc(100% - 32px);
+  border-radius: 16px;
+  margin: -110px 16px 0;
+}
+
+@media only screen and (min-width: 816px) {
+  .sliderContainer {
+    height: 464px;
+    width: calc(100% - 40px);
+    margin: -50px 20px 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .sliderContainer {
+    height: 704px;
+    width: calc(100% - 80px);
+    margin: -385px 40px 0;
+  }
+}

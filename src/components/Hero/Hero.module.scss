@@ -1,0 +1,233 @@
+.heroContainer {
+  background: radial-gradient(47.6% 182.72% at 28.05% 52.09%, #e32332 0%, #ca1e2c 100%);
+
+  &__background {
+    background-size: 160%;
+    background-position: center;
+    opacity: 0.6;
+
+    &.mobile {
+      background-image: url(/images/mobile-logo-bg.png);
+    }
+    &.tablet {
+      background-image: url(/images/tablet-logo-bg.png);
+    }
+    &.desktop {
+      background-image: url(/images/desktop-logo-bg.png);
+    }
+  }
+
+  &__insignia {
+    height: 52px;
+    margin-bottom: 26px;
+  }
+
+  &__heading {
+    font-family: "Red Hat Display", sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #f9eac5;
+    text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
+    margin: 0 4px;
+    line-height: 100%;
+  }
+
+  &__buttonsContainer {
+    height: 88px;
+    margin: 40px 0 85px;
+  }
+
+  &__button {
+    background-color: #fff7f8;
+    background-size: 150px;
+    margin: 0 4px;
+
+    &.mrWrap {
+      background-image: url(/images/thumbnails/wrap.png);
+      background-position: -80px -25px;
+    }
+
+    &.mrChicken {
+      background-image: url(/images/thumbnails/burger.png);
+      background-position: -90px -10px;
+    }
+
+    &.pita {
+      background-image: url(/images/thumbnails/pita.png);
+      background-position: -65px -30px;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+
+      .heroContainer__buttonText {
+        color: #fab729;
+      }
+    }
+  }
+
+  &__buttonText {
+    font-family: "B612", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #611220;
+    right: 14px;
+    bottom: 12px;
+  }
+
+  &__chooseButton {
+    height: 52px;
+    width: 272px;
+    color: #ffffff;
+    background: #611220;
+    font-weight: 600;
+
+    &:hover {
+      color: #ff2828;
+      transform: translateY(-5px);
+    }
+  }
+}
+
+@media only screen and (min-width: 412px) {
+  .heroContainer {
+    &__heading {
+      font-size: 51px;
+    }
+  }
+}
+
+@media only screen and (min-width: 512px) {
+  .heroContainer {
+    &__button {
+      &.mrWrap {
+        background-position-x: -55px;
+      }
+
+      &.mrChicken {
+        background-position: -75px -18px;
+        background-size: 160px;
+      }
+
+      &.pita {
+        background-position: -35px -20px;
+        background-size: 140px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .heroContainer {
+    &__background {
+      opacity: 1;
+      background-size: 100%;
+    }
+
+    &__insignia {
+      height: 80px;
+      margin-bottom: 16px;
+    }
+
+    &__heading {
+      font-size: 64px;
+    }
+
+    &__buttonsContainer {
+      height: 144px;
+      margin: 32px 0 64px;
+    }
+
+    &__button {
+      margin: 0 12px;
+
+      &.mrWrap {
+        background-position: -60px -35px;
+        background-size: 200px;
+      }
+
+      &.mrChicken {
+        background-position: -100px -30px;
+        background-size: 260px;
+      }
+
+      &.pita {
+        background-position: -30px -35px;
+        background-size: 215px;
+      }
+    }
+
+    &__buttonText {
+      font-size: 22px;
+      right: 14px;
+      bottom: 12px;
+    }
+
+    &__chooseButton {
+      font-family: "B612", sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      height: 56px;
+      width: 300px;
+      background: #fff7f8;
+      color: #611220;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .heroContainer {
+    height: 150vh;
+
+    &__background {
+      background-position-y: 100%;
+      background-size: auto 1950px;
+    }
+
+    &__logo {
+      left: calc(50% - 470px - 100% * 351 / 1024);
+      opacity: 0.9;
+    }
+
+    &__insignia {
+      height: 92px;
+      margin-bottom: 32px;
+    }
+
+    &__heading {
+      font-size: 72px;
+      line-height: 88px;
+      color: #f9c97e;
+      text-shadow: none;
+    }
+
+    &__buttonsContainer {
+      width: 800px;
+      height: 146px;
+      margin: 46px 0 58px;
+    }
+
+    &__buttonText {
+      font-size: 24px;
+      right: 17px;
+      bottom: 17px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .heroContainer {
+    &__logo {
+      left: auto;
+      right: calc((100% - 1440px) / 2 + 740px);
+    }
+
+    &__contentContainer {
+      right: calc((100% - 1440px) / 2);
+    }
+
+    &__heading {
+      text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
+    }
+  }
+}

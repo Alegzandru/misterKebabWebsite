@@ -1,0 +1,36 @@
+.headingContainer {
+  height: 72px;
+  margin-top: 80px;
+  max-width: 1400px;
+
+  &__heading {
+    font-family: "B612", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #f7a82a;
+    text-shadow: 0px 0px 13.2215px rgba(255, 193, 71, 0.69);
+    margin: 0 16px;
+  }
+
+  &__line {
+    border-top: 2px dashed #fbb040;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .headingContainer {
+    margin-top: 112px;
+
+    &__heading {
+      font-size: 56px;
+      margin: 0 16px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .headingContainer {
+    margin-top: 146px;
+  }
+}

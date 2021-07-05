@@ -1,0 +1,66 @@
+.categoriesNavbarContainer {
+  margin-top: 312px;
+  height: 64px;
+  touch-action: none;
+
+  &__categoriesNavbarItemContainer {
+    margin: 0 16px;
+  }
+
+  &__categoriesNavbarItem {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #58606e;
+    transition: 0.3s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: #ff2828;
+      top: 195%;
+      left: 0;
+      pointer-events: none;
+      transform-origin: 50% 100%;
+      transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+      clip-path: polygon(0% 0%, 0% 100%, 0 100%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 100% 100%, 100% 0%);
+    }
+
+    &:hover,
+    &.active {
+      color: #ff2828;
+    }
+
+    &:hover::before,
+    &.active::before {
+      transform: translate3d(0, 2px, 0) scale3d(1, 2, 1);
+      clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 0, 50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%);
+    }
+  }
+
+  &__categoriesNavbarItemText {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .categoriesNavbarContainer {
+    margin-top: 496px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoriesNavbarContainer {
+    margin-top: 416px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .categoriesNavbarContainer {
+    margin-top: 370px;
+  }
+}

@@ -2,18 +2,33 @@
   "name": "misterkebab",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev" : "next",
-    "build" : "next build",
-    "start" : "next start"
+    "dev": "cls & next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "next": "^11.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "classnames": "2.3.1",
+    "next": "11.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.11",
+    "@typescript-eslint/eslint-plugin": "4.28.0",
+    "@typescript-eslint/parser": "4.28.0",
+    "autoprefixer": "10.2.6",
+    "eslint": "7.29.0",
+    "eslint-config-next": "11.0.1",
+    "eslint-plugin-jsdoc": "35.4.0",
+    "eslint-plugin-prefer-arrow": "1.2.3",
+    "postcss": "8.3.5",
+    "sass": "1.35.1",
+    "tailwindcss": "2.2.4",
+    "typescript": "4.3.4"
   }
 }

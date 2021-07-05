@@ -1,0 +1,142 @@
+.productCardContainer {
+  border: 1.5px solid #fab729;
+  box-shadow: 0px 9px 16px rgba(255, 184, 0, 0.06);
+
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 600;
+
+  &__imageContainer {
+    min-height: 128px;
+  }
+
+  &__description {
+    padding: 12px 14px 14px;
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__price {
+    font-size: 12px;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__badges {
+    top: 12px;
+    right: 12px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+    }
+  }
+
+  &__changeCountButton {
+    height: 36px;
+    width: 36px;
+    background-color: #f4f4f6;
+    border-radius: 4px;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #fff7f8;
+      color: #ff2828;
+    }
+  }
+
+  &__count {
+    margin: 0 9px;
+    font-size: 14px;
+    width: 18px;
+    text-align: center;
+  }
+
+  &__addToCartButton {
+    background-color: #fff7f8;
+    border: 2px solid #ff2828;
+    border-radius: 4px;
+    height: 36px;
+    font-size: 12px;
+    color: #ff2828;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #ff2828;
+      color: #ffffff;
+
+      .productCardContainer__bag {
+        width: 0;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .productCardContainer {
+    box-shadow: none;
+
+    &__imageContainer {
+      min-height: 208px;
+      max-height: 208px;
+    }
+
+    &__description {
+      padding: 32px 24px;
+    }
+
+    &__title {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &__price {
+      font-size: 14px;
+    }
+
+    &__weight {
+      font-family: "Red Hat Display", sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    &__badges svg {
+      width: 32px;
+      height: 32px;
+      margin-left: 8px;
+    }
+
+    &__addToCart {
+      width: calc(100% - 48px);
+      bottom: 15px;
+    }
+
+    &:hover {
+      .productCardContainer {
+        &__imageContainer {
+          max-height: 194px;
+          min-height: 194px;
+        }
+
+        &__description {
+          margin-top: -15px;
+        }
+
+        &__badgesContainer {
+          opacity: 0;
+        }
+
+        &__addToCart {
+          opacity: 1;
+          bottom: 28px;
+        }
+      }
+    }
+  }
+}
