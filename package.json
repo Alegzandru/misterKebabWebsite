@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "cls & next",
+    "dev": "cls & next -p 3200",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3200",
     "lint": "next lint"
   },
   "keywords": [],
