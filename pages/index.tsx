@@ -11,7 +11,7 @@ import Slider from '../src/components/Slider/Slider'
 const MainPage = () => (
   <Layout>
     <Hero />
-    <Slider slides={[banner, banner, banner]} autoPlayInterval={3500} />
+    <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
     <CategoriesNavbar />
     <Menu />
     <BackToTopButton />

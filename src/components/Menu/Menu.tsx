@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 
 import { MENU } from '../../constants'
@@ -8,10 +9,10 @@ import styles from './Menu.module.scss'
 
 const Menu = () => {
   const category = ({ categoryName, subCategories }: MenuObject, index: number) => (
-    <section key={index} className={styles.menuContainer__section}>
+    <section key={index} className={classNames(styles.menuContainer__section, 'flex flex-col items-center')}>
       <hr className="invisible" />
       {categoryName ? <CategoryHeading name={categoryName} /> : null}
-      {subCategories.map((subCategory) => <CategoryProducts key={subCategory.id} {...subCategory} />)}
+      {subCategories.map((subCategory, subCategoryIndex) => <CategoryProducts key={subCategoryIndex} {...subCategory} />)}
     </section>
   )
 

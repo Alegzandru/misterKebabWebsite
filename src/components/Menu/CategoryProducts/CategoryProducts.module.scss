@@ -1,8 +1,13 @@
 .categoryProductsContainer {
   margin-top: 96px;
+  max-width: 1400px;
 
   &:nth-child(3) {
     margin-top: 48px;
+  }
+
+  &:last-child {
+    padding-bottom: 60px;
   }
 
   &__heading {
@@ -15,5 +20,23 @@
 
   &__line {
     border-top: 1px solid #e1e1e1;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryProductsContainer {
+    &:last-child {
+      padding-bottom: 125px;
+    }
+
+    &__heading {
+      font-size: 32px;
+      line-height: 52px;
+    }
+
+    &__line {
+      border-top: 1px solid #e1e1e1;
+      margin: 8px 0 25px;
+    }
   }
 }

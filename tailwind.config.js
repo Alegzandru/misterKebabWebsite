@@ -2,7 +2,7 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
-    screen: {
+    screens: {
       sm: '513px',
       md: '817px',
       lg: '1024px',

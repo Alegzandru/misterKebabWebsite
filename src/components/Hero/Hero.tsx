@@ -35,27 +35,41 @@ const Hero = () => {
     <a
       key={id}
       href={`#${id}`}
-      className={classNames(styles.heroContainer__button, styles[id], 'h-full flex-1 overflow-hidden relative rounded bg-no-repeat')}
+      className={classNames(
+        styles.heroContainer__button,
+        styles[id],
+        'h-full flex-1 overflow-hidden relative rounded bg-no-repeat transition-transform'
+      )}
     >
-      <span className={classNames(styles.heroContainer__buttonText, 'absolute')}>{name}</span>
+      <span className={classNames(styles.heroContainer__buttonText, 'absolute transition-colors')}>{name}</span>
     </a>
   )
 
   return (
-    <section className={classNames(styles.heroContainer, 'flex items-center justify-center lg:justify-end h-screen relative')}>
+    <section className={classNames(styles.heroContainer, 'flex items-center justify-center lg:justify-end xl:justify-center h-screen relative')}>
       <div className={classNames(
         styles.heroContainer__background,
         styles[currentBackgroundImageType],
         'absolute mix-blend-darken inset-0 bg-no-repeat')}
       />
       <img className={classNames(styles.heroContainer__logo, 'absolute top-0 z-10 hidden lg:block')} src="/images/logo.png" alt="Logo" />
-      <div className="flex flex-col items-center z-20 text-center -mt-24 md:-mt-1 lg:-mt-96 px-3 md:px-2 md:w-full lg:w-auto">
+      <div
+        className={classNames(
+          styles.heroContainer__contentContainer,
+          'flex flex-col items-center z-20 text-center -mt-24 px-3 md:px-2 md:w-full md:-mt-1 lg:-mt-96 lg:w-auto xl:absolute'
+        )}
+      >
         <HallalInsignia className={styles.heroContainer__insignia} />
         <h1 className={styles.heroContainer__heading}>Ce vei comanda astăzi?</h1>
         <div className={classNames(styles.heroContainer__buttonsContainer, 'flex flex-nowrap w-full')}>
           {HERO_BUTTONS.map(heroButton)}
         </div>
-        <a href="#categories" className={classNames(styles.heroContainer__chooseButton, 'flex items-center justify-center rounded')}>alege altceva</a>
+        <a
+          href="#categories"
+          className={classNames(styles.heroContainer__chooseButton, 'flex items-center justify-center rounded transition-all')}
+        >
+          alege altceva
+        </a>
       </div>
     </section>
   )

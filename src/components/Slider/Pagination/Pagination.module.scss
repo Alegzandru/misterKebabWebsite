@@ -1,0 +1,16 @@
+.paginationContainer {
+  bottom: 8px;
+  height: 4px;
+  padding: 0 40px;
+
+  &__button {
+    max-width: 64px;
+    height: 4px;
+    background-color: #e1e1e1;
+    margin: 0 8px;
+
+    &_active {
+      background-color: #ff2828;
+    }
+  }
+}

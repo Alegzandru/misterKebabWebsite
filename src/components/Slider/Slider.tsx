@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
+import Pagination from './Pagination/Pagination'
 import styles from './Slider.module.scss'
 
 type Props = {
@@ -13,29 +14,41 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
   const [state, setState] = useState({
     activeSlide: 0,
     translate: 0,
-    transition: 0.45,
   })
-  const { translate, transition, activeSlide } = state
+  const { translate, activeSlide } = state
 
   const autoPlayRef = useRef<() => void>()
+  const autoPlayIntervalRef = useRef<NodeJS.Timeout>()
   const sliderContainer = useRef<HTMLElement>(null)
 
-  const nextSlide = () => {
-    if (activeSlide === slides.length - 1) {
-      return setState({
-        ...state,
-        translate: 0,
-        activeSlide: 0,
-      })
-    }
+  const getSliderContainerWidth = () => sliderContainer.current ? sliderContainer.current.getBoundingClientRect().width : 0
 
-    const { current } = sliderContainer
+  const nextSlide = () => {
+    const isLastSlide = activeSlide === slides.length - 1
 
     setState({
-      ...state,
-      activeSlide: activeSlide + 1,
-      translate: (activeSlide + 1) * (current ? current.getBoundingClientRect().width : 0),
+      activeSlide: isLastSlide ? 0 : activeSlide + 1,
+      translate: isLastSlide
+        ? 0
+        : (activeSlide + 1) * getSliderContainerWidth(),
     })
+  }
+
+  const setAutoPlayInterval = () => {
+    const play = () => {
+      if (autoPlayRef.current) {
+        autoPlayRef.current()
+      }
+    }
+
+    autoPlayIntervalRef.current = setInterval(play, autoPlayInterval)
+  }
+
+  const resetAutoPlayInterval = () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayIntervalRef.current as NodeJS.Timeout)
+      setAutoPlayInterval()
+    }
   }
 
   useEffect(() => {
@@ -43,27 +56,48 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
   })
 
   useEffect(() => {
-    const play = () => {
-      if (autoPlayRef.current) {
-        autoPlayRef.current()
+    const onResizeHandler = () => {
+      resetAutoPlayInterval()
+
+      setState((prevState) => ({
+        ...prevState,
+        translate: prevState.activeSlide * getSliderContainerWidth(),
+      }))
+    }
+
+    window.addEventListener('resize', onResizeHandler)
+
+    if (autoPlayInterval) {
+      setAutoPlayInterval()
+
+      return () => {
+        clearInterval(autoPlayIntervalRef.current as NodeJS.Timeout)
+        window.removeEventListener('resize', onResizeHandler)
       }
     }
 
-    if (autoPlayInterval) {
-      const interval = setInterval(play, autoPlayInterval)
-
-      return () => clearInterval(interval)
-    }
+    return () => window.removeEventListener('resize', onResizeHandler)
   }, [])
 
+  const onClickHandler = (index: number) => {
+    resetAutoPlayInterval()
+
+    setState({
+      activeSlide: index,
+      translate: index * getSliderContainerWidth(),
+    })
+  }
+
   const slide = (image: StaticImageData, index: number) => (
-    <Image
-      key={index}
-      className="flex-1"
-      src={image}
-      alt="Banner"
-      objectFit="cover"
-    />
+    <div key={index} className="flex-1 relative">
+      <Image
+        src={image}
+        alt="Banner"
+        layout="fill"
+        objectFit="cover"
+        quality={80}
+      />
+    </div>
   )
 
   return (
@@ -71,13 +105,13 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
       <div
         style={{
           transform: `translateX(-${translate}px)`,
-          transition: `transform ease-out ${transition}s`,
-          width: `${(sliderContainer.current ? sliderContainer.current.getBoundingClientRect().width : 0) * slides.length}px`,
+          width: `${getSliderContainerWidth() * slides.length}px`,
         }}
-        className="h-full flex"
+        className="h-full flex transition-transform ease-out duration-500"
       >
         {slides.map(slide)}
       </div>
+      <Pagination slides={slides} activeSlide={activeSlide} onClick={onClickHandler} />
     </section >
   )
 }

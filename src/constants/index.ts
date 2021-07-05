@@ -1,6 +1,6 @@
 export const HERO_BUTTONS = [
-  { name: 'Lavaș', id: 'wrap' },
-  { name: 'Burger', id: 'burger' },
+  { name: 'Lavaș', id: 'mrWrap' },
+  { name: 'Burger', id: 'mrChicken' },
   { name: 'Pita', id: 'pita' },
 ]
 
@@ -35,18 +35,6 @@ export const CATEGORIES = [
   { id: 'deserturi', name: 'Deserturi' },
   { id: 'bauturi', name: 'Bauturi' },
 ]
-
-export const BADGES = {
-  cow: { name: 'cow' },
-  sheep: { name: 'sheep' },
-  chicken: { name: 'chicken' },
-  kebab: { name: 'kebab' },
-  skewer: { name: 'skewer' },
-  ice: { name: 'ice' },
-  coffeeBean: { name: 'coffeeBean' },
-  coffeeBeans: { name: 'coffeeBeans' },
-  ibrik: { name: 'ibrik' },
-}
 
 export const MENU = [
   {

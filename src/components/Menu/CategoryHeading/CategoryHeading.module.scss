@@ -1,6 +1,7 @@
 .headingContainer {
   height: 72px;
   margin-top: 80px;
+  max-width: 1400px;
 
   &__heading {
     font-family: "B612", sans-serif;
@@ -14,5 +15,22 @@
 
   &__line {
     border-top: 2px dashed #fbb040;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .headingContainer {
+    margin-top: 112px;
+
+    &__heading {
+      font-size: 56px;
+      margin: 0 16px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .headingContainer {
+    margin-top: 146px;
   }
 }

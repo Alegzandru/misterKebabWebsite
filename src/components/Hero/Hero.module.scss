@@ -17,10 +17,6 @@
     }
   }
 
-  &__logo {
-    left: -10%;
-  }
-
   &__insignia {
     height: 52px;
     margin-bottom: 26px;
@@ -46,12 +42,12 @@
     background-size: 150px;
     margin: 0 4px;
 
-    &.wrap {
+    &.mrWrap {
       background-image: url(/images/thumbnails/wrap.png);
       background-position: -80px -25px;
     }
 
-    &.burger {
+    &.mrChicken {
       background-image: url(/images/thumbnails/burger.png);
       background-position: -90px -10px;
     }
@@ -59,6 +55,14 @@
     &.pita {
       background-image: url(/images/thumbnails/pita.png);
       background-position: -65px -30px;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+
+      .heroContainer__buttonText {
+        color: #fab729;
+      }
     }
   }
 
@@ -76,6 +80,12 @@
     width: 272px;
     color: #ffffff;
     background: #611220;
+    font-weight: 600;
+
+    &:hover {
+      color: #ff2828;
+      transform: translateY(-5px);
+    }
   }
 }
 
@@ -90,11 +100,11 @@
 @media only screen and (min-width: 512px) {
   .heroContainer {
     &__button {
-      &.wrap {
+      &.mrWrap {
         background-position-x: -55px;
       }
 
-      &.burger {
+      &.mrChicken {
         background-position: -75px -18px;
         background-size: 160px;
       }
@@ -131,12 +141,12 @@
     &__button {
       margin: 0 12px;
 
-      &.wrap {
+      &.mrWrap {
         background-position: -60px -35px;
         background-size: 200px;
       }
 
-      &.burger {
+      &.mrChicken {
         background-position: -100px -30px;
         background-size: 260px;
       }
@@ -174,6 +184,11 @@
       background-size: auto 1950px;
     }
 
+    &__logo {
+      left: calc(50% - 470px - 100% * 351 / 1024);
+      opacity: 0.9;
+    }
+
     &__insignia {
       height: 92px;
       margin-bottom: 32px;
@@ -196,6 +211,23 @@
       font-size: 24px;
       right: 17px;
       bottom: 17px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .heroContainer {
+    &__logo {
+      left: auto;
+      right: calc((100% - 1440px) / 2 + 740px);
+    }
+
+    &__contentContainer {
+      right: calc((100% - 1440px) / 2);
+    }
+
+    &__heading {
+      text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
     }
   }
 }
