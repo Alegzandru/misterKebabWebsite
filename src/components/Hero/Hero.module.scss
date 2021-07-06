@@ -25,10 +25,8 @@
   &__heading {
     font-family: "Red Hat Display", sans-serif;
     font-size: 42px;
-    font-weight: 600;
     color: #f9eac5;
     text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
-    margin: 0 4px;
     line-height: 100%;
   }
 
@@ -68,7 +66,6 @@
 
   &__buttonText {
     font-family: "B612", sans-serif;
-    font-weight: 600;
     font-size: 18px;
     color: #611220;
     right: 14px;
@@ -80,7 +77,6 @@
     width: 272px;
     color: #ffffff;
     background: #611220;
-    font-weight: 600;
 
     &:hover {
       color: #ff2828;
@@ -165,7 +161,6 @@
 
     &__chooseButton {
       font-family: "B612", sans-serif;
-      font-weight: 600;
       font-size: 18px;
       height: 56px;
       width: 300px;

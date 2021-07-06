@@ -41,7 +41,7 @@ const Hero = () => {
         'h-full flex-1 overflow-hidden relative rounded bg-no-repeat transition-transform'
       )}
     >
-      <span className={classNames(styles.heroContainer__buttonText, 'absolute transition-colors')}>{name}</span>
+      <span className={classNames(styles.heroContainer__buttonText, 'absolute transition-colors font-bold')}>{name}</span>
     </a>
   )
 
@@ -60,13 +60,13 @@ const Hero = () => {
         )}
       >
         <HallalInsignia className={styles.heroContainer__insignia} />
-        <h1 className={styles.heroContainer__heading}>Ce vei comanda astăzi?</h1>
+        <h1 className={classNames(styles.heroContainer__heading, 'font-bold my-0 mx-1')}>Ce vei comanda astăzi?</h1>
         <div className={classNames(styles.heroContainer__buttonsContainer, 'flex flex-nowrap w-full')}>
           {HERO_BUTTONS.map(heroButton)}
         </div>
         <a
           href="#categories"
-          className={classNames(styles.heroContainer__chooseButton, 'flex items-center justify-center rounded transition-all')}
+          className={classNames(styles.heroContainer__chooseButton, 'flex items-center justify-center rounded font-bold transition-all')}
         >
           alege altceva
         </a>

@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react'
 
+import Header from '../Header/Header'
+
 type Props = PropsWithChildren<unknown>
 
 const Layout = (props: Props) => {
@@ -7,6 +9,7 @@ const Layout = (props: Props) => {
 
   return (
     <>
+      <Header />
       <main>
         {children}
       </main>
