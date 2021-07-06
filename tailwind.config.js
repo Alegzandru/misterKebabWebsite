@@ -3,8 +3,8 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      sm: '513px',
-      md: '817px',
+      sm: '512px',
+      md: '816px',
       lg: '1024px',
       xl: '1440px',
     },
@@ -15,6 +15,12 @@ module.exports = {
     extend: {
       zIndex: {
         '-10': '-10',
+      },
+      width: {
+        18: '4.5rem',
+      },
+      maxWidth: {
+        screen: '1400px',
       },
     },
   },

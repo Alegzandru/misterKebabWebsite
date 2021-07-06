@@ -1,3 +1,9 @@
+export const PAGES = {
+  home: { name: 'Principală', path: '/' },
+  careers: { name: 'Cariere', path: '/careers' },
+  locations: { name: 'Locații', path: '/locations' },
+}
+
 export const HERO_BUTTONS = [
   { name: 'Lavaș', id: 'mrWrap' },
   { name: 'Burger', id: 'mrChicken' },
