@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import { SVGAttributes } from 'react'
+
 import { BADGES } from '../../constants/badges'
 
 type Props = {
   type: 'big' | 'small'
   badges: string[]
-  className?: SVGAttributes<SVGSVGElement>['className']
+  className?: string
 }
 
 const Badges = ({ badges, type, className }: Props) => (

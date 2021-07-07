@@ -18,9 +18,21 @@ module.exports = {
       },
       width: {
         18: '4.5rem',
+        38: '9.5rem',
+        50: '12.5rem',
+      },
+      padding: {
+        18: '4.5rem',
+        22: '5.5rem',
+      },
+      margin: {
+        22: '5.5rem',
       },
       maxWidth: {
         screen: '1400px',
+      },
+      flex: {
+        half: '1 1 50%',
       },
     },
   },
