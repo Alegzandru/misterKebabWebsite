@@ -1,11 +1,7 @@
 /* eslint-disable max-len */
 import { SVGAttributes } from 'react'
 
-type Props = {
-  className?: SVGAttributes<SVGSVGElement>['className']
-  width?: SVGAttributes<SVGSVGElement>['width']
-  height?: SVGAttributes<SVGSVGElement>['height']
-}
+type Props = Pick<SVGAttributes<SVGSVGElement>, 'className' | 'width' | 'height'>
 
 const HallalInsignia = (props: Props) => {
   const { width, height, className } = { width: '86', height: '95', ...props }

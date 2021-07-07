@@ -1,8 +1,6 @@
 import { SVGAttributes } from 'react'
 
-type Props = {
-  className?: SVGAttributes<SVGSVGElement>['className']
-}
+type Props = Pick<SVGAttributes<SVGSVGElement>, 'className'>
 
 const ArrowUp = ({ className }: Props) => (
   <svg className={className} width="20" height="14" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">

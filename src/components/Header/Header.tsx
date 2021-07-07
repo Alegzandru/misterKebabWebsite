@@ -62,7 +62,7 @@ const Header = () => {
           {Object.values(PAGES).map(link)}
         </ul>
       </nav>
-      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor="#611220" />
+      <LanguageButton asSvg={true} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor="#611220" />
       <a
         style={transparent && !showMobileHeader ? {
           backgroundColor: 'transparent',
@@ -115,7 +115,7 @@ const Header = () => {
       </div>
       {navbar}
       <div className="flex md:hidden">
-        <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+        <LanguageButton asSvg={true} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
         {mobileButton}
       </div>
     </header>

@@ -22,15 +22,15 @@ const ProductCard = ({ name, price, image, weight, badges }: Props) => {
 
   return (
     <div className={classNames(styles.productCardContainer, 'w-full relative rounded flex flex-col bg-white font-bold')}>
-      <div className={classNames(styles.productCardContainer__imageContainer, 'relative w-full flex-1 transition-all duration-700')}>
+      <div className={classNames(styles.productCardContainer__imageContainer, 'relative w-full flex-1 transition-all duration-500')}>
         <Image className="rounded-t" src={`/images/food/${image}.png`} alt="Product image" layout="fill" objectFit="cover" quality={80} />
       </div>
-      <div className={classNames(styles.productCardContainer__description, 'w-full rounded transition-all duration-700')}>
+      <div className={classNames(styles.productCardContainer__description, 'w-full rounded transition-all duration-500')}>
         <div className="flex">
           <h4 className={classNames(styles.productCardContainer__title)}>{name}</h4>
           <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>{price} MDL</span>
         </div>
-        <div className={classNames(styles.productCardContainer__badgesContainer, 'flex lg:mt-8 transition-opacity duration-500')}>
+        <div className={classNames(styles.productCardContainer__badgesContainer, 'flex lg:mt-8 transition-opacity duration-300')}>
           <span className={classNames(
             styles.productCardContainer__weight,
             'hidden lg:flex items-center whitespace-nowrap mr-auto pr-2'
@@ -38,7 +38,7 @@ const ProductCard = ({ name, price, image, weight, badges }: Props) => {
           >{weight}g</span>
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
-        <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-700')}>
+        <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
           <div className="hidden lg:flex items-center mr-4">
             {changeCountButton('-', () => setCount(count > 1 ? count - 1 : count))}
             <span className={styles.productCardContainer__count}>{count}</span>
