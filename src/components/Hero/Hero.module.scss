@@ -7,13 +7,13 @@
     opacity: 0.6;
 
     &.mobile {
-      background-image: url(/images/mobile-logo-bg.png);
+      background-image: url(/images/logos/mobile-logo-bg.png);
     }
     &.tablet {
-      background-image: url(/images/tablet-logo-bg.png);
+      background-image: url(/images/logos/tablet-logo-bg.png);
     }
     &.desktop {
-      background-image: url(/images/desktop-logo-bg.png);
+      background-image: url(/images/logos/desktop-logo-bg.png);
     }
   }
 
@@ -131,7 +131,7 @@
 
     &__buttonsContainer {
       height: 144px;
-      margin: 32px 0 64px;
+      margin: 32px 0 34px;
     }
 
     &__button {
@@ -163,9 +163,10 @@
       font-family: "B612", sans-serif;
       font-size: 18px;
       height: 56px;
-      width: 300px;
-      background: #fff7f8;
-      color: #611220;
+      width: 298px;
+      background: rgba(97, 18, 32, 0.7);
+      color: #e1e1e1;
+      letter-spacing: 1px;
     }
   }
 }
@@ -180,7 +181,7 @@
     }
 
     &__logo {
-      left: calc(50% - 470px - 100% * 351 / 1024);
+      left: calc(50% - 470px - 100% * 108 / 256);
       opacity: 0.9;
     }
 
@@ -192,8 +193,6 @@
     &__heading {
       font-size: 72px;
       line-height: 88px;
-      color: #f9c97e;
-      text-shadow: none;
     }
 
     &__buttonsContainer {
@@ -206,6 +205,10 @@
       font-size: 24px;
       right: 17px;
       bottom: 17px;
+    }
+
+    &__arrow {
+      top: 60%;
     }
   }
 }
@@ -220,9 +223,32 @@
     &__contentContainer {
       right: calc((100% - 1440px) / 2);
     }
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .heroContainer {
+    &__contentContainer {
+      margin-top: -16px;
+    }
+
+    &__insignia {
+      height: 52px;
+      margin-bottom: 8px;
+    }
 
     &__heading {
-      text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
+      font-size: 46px;
+    }
+
+    &__buttonsContainer {
+      height: 72px;
+      margin: 20px 0 38px;
+    }
+
+    &__chooseButton {
+      height: 42px;
+      width: 224px;
     }
   }
 }

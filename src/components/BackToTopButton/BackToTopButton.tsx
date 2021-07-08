@@ -8,14 +8,14 @@ const BackToTopButton = () => {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const checkScrollTop = () => {
+    const onScrollHandler = () => {
       setShow(window.pageYOffset > 200)
     }
 
-    checkScrollTop()
-    window.addEventListener('scroll', checkScrollTop)
+    onScrollHandler()
+    window.addEventListener('scroll', onScrollHandler)
 
-    return () => window.removeEventListener('scroll', checkScrollTop)
+    return () => window.removeEventListener('scroll', onScrollHandler)
   }, [])
 
   return (

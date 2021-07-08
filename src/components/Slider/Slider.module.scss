@@ -20,3 +20,9 @@
     margin: -385px 40px 0;
   }
 }
+
+@media only screen and (max-height: 500px) {
+  .sliderContainer {
+    margin-top: -36px;
+  }
+}

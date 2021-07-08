@@ -28,3 +28,8 @@ export type MenuObject = {
     }[]
   }[]
 }
+
+export type AnyAction = {
+  type: string
+  payload: Record<string, any>
+}

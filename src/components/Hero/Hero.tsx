@@ -52,11 +52,11 @@ const Hero = () => {
         styles[currentBackgroundImageType],
         'absolute mix-blend-darken inset-0 bg-no-repeat')}
       />
-      <img className={classNames(styles.heroContainer__logo, 'absolute top-0 z-10 hidden lg:block')} src="/images/logo.png" alt="Logo" />
+      <img className={classNames(styles.heroContainer__logo, 'absolute top-0 z-10 hidden lg:block')} src="/images/logos/logo.png" alt="Logo" />
       <div
         className={classNames(
           styles.heroContainer__contentContainer,
-          'flex flex-col items-center z-20 text-center -mt-24 px-3 md:px-2 md:w-full md:-mt-1 lg:-mt-96 lg:w-auto xl:absolute'
+          'flex flex-col items-center z-20 text-center -mt-24 px-3 md:px-2 md:w-full md:-mt-1 lg:mt-0 lg:w-auto lg:absolute lg:top-48'
         )}
       >
         <HallalInsignia className={styles.heroContainer__insignia} />
@@ -71,6 +71,14 @@ const Hero = () => {
           alege altceva
         </a>
       </div>
+      <img
+        className={classNames(
+          styles.heroContainer__chooseButton__arrow,
+          'hidden lg:block absolute z-20 inset-x-0 mx-auto animate-bounce'
+        )}
+        src="/images/scroll-arrow.png"
+        alt="Scroll down arrow"
+      />
     </section>
   )
 }

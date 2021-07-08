@@ -1,13 +1,17 @@
 import classNames from 'classnames'
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useContext, useEffect, useRef } from 'react'
 
 import { CATEGORIES } from '../../constants'
+import { ActiveSectionContext } from '../../store/ActiveSection/ActiveSection.context'
 import { CategoryItem, TouchData } from '../../types'
 import styles from './CategoriesNavbar.module.scss'
 
 const CategoriesNavbar = () => {
+  const { sections } = useContext(ActiveSectionContext)
+
   const touchData = useRef<TouchData>({ lastPosition: 0, position: 0, locked: false })
   const categoriesList = useRef<HTMLUListElement>(null)
+  const movedRef = useRef<boolean>(false)
 
   const theEvent = (event: React.MouseEvent | React.TouchEvent | TouchEvent) => 'changedTouches' in event ? event.changedTouches[0] : event
   const moveList = (value: number) => categoriesList.current ? categoriesList.current.style.transform = `translateX(${value}px` : null
@@ -19,7 +23,7 @@ const CategoriesNavbar = () => {
     return window.innerWidth < categoriesList.current.clientWidth
   }
 
-  const touchStartHandler = (event: React.MouseEvent | React.TouchEvent) => {
+  const touchStartHandler = useCallback((event: React.MouseEvent | React.TouchEvent) => {
     if (!activateEvents()) {
       return
     }
@@ -31,9 +35,9 @@ const CategoriesNavbar = () => {
       position: theEvent(event).clientX,
       locked: true,
     }
-  }
+  }, [categoriesList.current, touchData.current])
 
-  const touchMoveHandler = (event: React.MouseEvent | React.TouchEvent | TouchEvent) => {
+  const touchMoveHandler = useCallback((event: React.MouseEvent | React.TouchEvent | TouchEvent) => {
     if (!activateEvents()) {
       return
     }
@@ -44,11 +48,13 @@ const CategoriesNavbar = () => {
     const { lastPosition, position, locked } = touchData.current
 
     if (locked) {
+      movedRef.current = true
+
       moveList(Math.round(clientX - position + lastPosition))
     }
-  }
+  }, [touchData.current])
 
-  const touchEndHandler = () => {
+  const touchEndHandler = useCallback(() => {
     if (!activateEvents()) {
       return
     }
@@ -77,6 +83,13 @@ const CategoriesNavbar = () => {
         locked: false,
       }
     }
+  }, [categoriesList.current, touchData.current])
+
+  const onCLickHandler = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (movedRef.current) {
+      event.preventDefault()
+      movedRef.current = false
+    }
   }
 
   useEffect(() => {
@@ -87,6 +100,7 @@ const CategoriesNavbar = () => {
 
       if (innerWidth > clientWidth) {
         parentElement?.classList.add('flex')
+        moveList(0)
       } else {
         parentElement?.classList.remove('flex')
       }
@@ -102,19 +116,28 @@ const CategoriesNavbar = () => {
     }
   }, [])
 
-  const anchor = ({ id, name }: CategoryItem) => (
-    <li key={id} className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemContainer, 'relative')}>
-      <a
-        href={`#${id}`}
-        className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItem, 'whitespace-nowrap flex items-center')}
-      >
-        <span className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemText)}>{name}</span>
-      </a>
-    </li>
-  )
+  const anchor = ({ id, name }: CategoryItem) => {
+    const [activeSection] = sections.slice(-1)
+
+    return (
+      <li key={id} className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemContainer, 'relative')}>
+        <a
+          href={`#${id}`}
+          className={classNames(
+            styles.categoriesNavbarContainer__categoriesNavbarItem,
+            { [styles.categoriesNavbarContainer__categoriesNavbarItem_active]: id === activeSection },
+            'whitespace-nowrap flex items-center'
+          )}
+          onClick={onCLickHandler}
+        >
+          <span className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemText)}>{name}</span>
+        </a>
+      </li>
+    )
+  }
 
   return (
-    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden')}>
+    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden sticky top-16 bg-white z-10 md:top-0')}>
       <nav className="h-full justify-center">
         <ul
           className="h-full flex list-none p-0 m-0 items-center w-max"
@@ -122,6 +145,7 @@ const CategoriesNavbar = () => {
           onTouchStart={touchStartHandler}
           onMouseDown={touchStartHandler}
           onMouseMove={touchMoveHandler}
+          onMouseLeave={touchEndHandler}
           onTouchEnd={touchEndHandler}
           onMouseUp={touchEndHandler}
         >

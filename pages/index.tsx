@@ -7,13 +7,16 @@ import Hero from '../src/components/Hero/Hero'
 import Layout from '../src/components/Layout/Layout'
 import Menu from '../src/components/Menu/Menu'
 import Slider from '../src/components/Slider/Slider'
+import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 
 const MainPage = () => (
   <Layout>
     <Hero />
     <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
-    <CategoriesNavbar />
-    <Menu />
+    <ActiveSectionContextProvider>
+      <CategoriesNavbar />
+      <Menu />
+    </ActiveSectionContextProvider>
     <BackToTopButton />
   </Layout>
 )
