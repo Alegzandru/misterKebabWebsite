@@ -2,25 +2,3 @@
   font-family: "Red Hat Display", sans-serif;
   font-size: 14px;
 }
-
-.languageButtonsContainer {
-  font-family: "Red Hat Display", sans-serif;
-  font-size: 15px;
-
-  &__button {
-    color: #58606e;
-
-    &_active {
-      color: #ffffff;
-    }
-
-    &:hover {
-      color: #ffffff;
-    }
-  }
-
-  &__verticalLine {
-    border-right: 1px solid #ffffff;
-    height: 16px;
-  }
-}

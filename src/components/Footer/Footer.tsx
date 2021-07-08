@@ -3,9 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import textLogo from '../../../public/images/logo-text.png'
+import textLogo from '../../../public/images/logos/logo-text.png'
 import { PAGES } from '../../constants'
-import LanguageButton from '../LanguageButton/LanguageButton'
 import LiraLogo from '../Svgs/LiraLogo/LiraLogo'
 import Socials from '../Svgs/Socials/Socials'
 import styles from './Footer.module.scss'
@@ -28,9 +27,8 @@ const Footer = () => {
           </ul>
         </nav>
         <div className="flex items-center flex-half md:flex-none md:h-16">
-          <div className="relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-10">
+          <div className="relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5">
             <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
-            <LanguageButton className="absolute -right-2/4 md:flex md:justify-center md:items-center md:inset-x-0 md:-bottom-10" />
           </div>
         </div>
         <Socials className="flex-half flex justify-end items-center md:flex-none" />

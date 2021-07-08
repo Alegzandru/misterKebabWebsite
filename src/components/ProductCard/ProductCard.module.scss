@@ -1,8 +1,13 @@
 .productCardContainer {
-  border: 1.5px solid #fab729;
+  border: 2px solid #fab729;
   box-shadow: 0px 9px 16px rgba(255, 184, 0, 0.06);
 
   font-family: "Red Hat Display", sans-serif;
+
+  &:hover {
+    border-color: #ff7979;
+    box-shadow: 0px 9px 16px rgba(255, 0, 0, 0.13);
+  }
 
   &__imageContainer {
     min-height: 128px;
