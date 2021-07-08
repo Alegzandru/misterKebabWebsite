@@ -73,7 +73,7 @@ const Hero = () => {
       </div>
       <img
         className={classNames(
-          styles.heroContainer__chooseButton__arrow,
+          styles.heroContainer__arrow,
           'hidden lg:block absolute z-20 inset-x-0 mx-auto animate-bounce'
         )}
         src="/images/scroll-arrow.png"
