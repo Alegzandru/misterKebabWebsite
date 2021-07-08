@@ -6,4 +6,45 @@
       background-color: #f4f4f6;
     }
   }
+
+  &__parallaxWrapper {
+    &.left {
+      width: 450px;
+      right: calc(50% + 640px);
+
+      .menuContainer__parallax {
+        background-image: url(/images/parallax/left.png);
+      }
+    }
+
+    &.right {
+      width: 600px;
+      left: calc(50% + 640px);
+
+      .menuContainer__parallax {
+        background-image: url(/images/parallax/right.png);
+      }
+    }
+
+    &.bottomLeft {
+      width: 700px;
+      right: calc(50% + 640px);
+      margin-top: 200px;
+
+      .menuContainer__parallax {
+        background-image: url(/images/parallax/coffee-beans.png);
+      }
+    }
+
+    &.bottomRight {
+      width: 710px;
+      margin-top: -200px;
+      left: calc(50% + 640px);
+
+      .menuContainer__parallax {
+        transform: scaleX(-1) rotate(-30deg);
+        background-image: url(/images/parallax/coffee-beans.png);
+      }
+    }
+  }
 }
