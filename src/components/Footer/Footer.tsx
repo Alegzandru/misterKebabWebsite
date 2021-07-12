@@ -4,7 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
-import { PAGES } from '../../constants'
+import { PAGES, THEMES } from '../../constants/common'
+import Locations from '../Locations/Locations'
 import LiraLogo from '../Svgs/LiraLogo/LiraLogo'
 import Socials from '../Svgs/Socials/Socials'
 import styles from './Footer.module.scss'
@@ -33,7 +34,8 @@ const Footer = () => {
         </div>
         <Socials className="flex-half flex justify-end items-center md:flex-none" />
       </div>
-      <div className="flex justify-center md:mt-22">
+      <Locations theme={THEMES.dark} />
+      <div className="flex justify-center md:mt-22 lg:mt-18">
         <a href="#" className={classNames(styles.footerContainer__credits, 'relative flex')}>
           Crafted by
           <span className={classNames(styles.footerContainer__companyName, 'ml-2 flex items-center')}>
