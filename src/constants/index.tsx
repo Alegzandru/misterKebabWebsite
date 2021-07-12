@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import ProductModal from '../components/Modal/ProductModal/ProductModal'
+
 export const PAGES = {
   home: { name: 'Principală', path: '/' },
   careers: { name: 'Cariere', path: '/careers' },
@@ -51,6 +53,17 @@ export const CATEGORIES = [
   { id: 'bauturi', name: 'Bauturi' },
 ]
 
+export const MODALS = {
+  product: 'product' as 'product',
+  checkOut: 'checkOut' as 'checkOut',
+}
+
+export const MODAL_COMPONENTS = {
+  product: ProductModal,
+  checkOut: () => null,
+}
+
+// temp:
 export const MENU = [
   {
     categoryName: 'Lavaș',

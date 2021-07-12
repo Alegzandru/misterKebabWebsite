@@ -19,14 +19,34 @@ export type MenuObject = {
   subCategories: {
     id: string
     name: string
-    items: {
-      name: string
-      price: number
-      weight: number
-      badges: string[]
-      image: string
-    }[]
+    items: Product[]
   }[]
+}
+
+export type Product = {
+  name: string
+  price: number
+  weight: number
+  badges: string[]
+  image: string
+  ingredients?: string
+  toppings?: Toppings
+}
+
+export type Toppings = {
+  topping: {
+    text: string
+    price: number
+  }[]
+  without: string[]
+}
+
+export type ToppingsManagerState = {
+  topping: Map<string, {
+    text: string
+    price: number
+  }>
+  without: Set<string>
 }
 
 export type AnyAction = {

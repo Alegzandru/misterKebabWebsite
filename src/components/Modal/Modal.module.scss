@@ -1,0 +1,14 @@
+.modalContainer {
+  opacity: 0;
+  background-color: #f4f4f6;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
