@@ -11,13 +11,17 @@ import styles from './Header.module.scss'
 
 const Header = () => {
   const [showMobileHeader, setShowMobileHeader] = useState(false)
-  const [transparent, setTransparent] = useState(false)
+  const [transparent, setTransparent] = useState(true)
 
   const router = useRouter()
 
   useEffect(() => {
     const checkScrollTop = () => {
-      setTransparent(window.pageYOffset < 200)
+      const { innerWidth, pageYOffset } = window
+
+      if (innerWidth < SIZES.md) {
+        setTransparent(pageYOffset < 200)
+      }
     }
 
     const onResizeHandler = () => {

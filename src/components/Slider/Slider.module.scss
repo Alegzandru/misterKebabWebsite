@@ -15,9 +15,10 @@
 
 @media only screen and (min-width: 1024px) {
   .sliderContainer {
-    height: 704px;
+    height: 576px;
+    top: 100vh;
     width: calc(100% - 80px);
-    margin: -385px 40px 0;
+    margin: 60px 40px 0;
   }
 }
 

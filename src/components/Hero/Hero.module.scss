@@ -185,6 +185,10 @@
       opacity: 0.9;
     }
 
+    &__contentContainer {
+      top: 12%;
+    }
+
     &__insignia {
       height: 92px;
       margin-bottom: 32px;
@@ -226,7 +230,7 @@
   }
 }
 
-@media only screen and (max-height: 500px) {
+@media only screen and (max-width: 1023px) and (max-height: 500px) {
   .heroContainer {
     &__contentContainer {
       margin-top: -16px;
@@ -249,6 +253,28 @@
     &__chooseButton {
       height: 42px;
       width: 224px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height: 680px) {
+  .heroContainer {
+    &__insignia {
+      margin-bottom: 0;
+    }
+
+    &__heading {
+      font-size: 64px;
+    }
+
+    &__buttonsContainer {
+      height: 120px;
+      margin: 32px 0 40px;
+    }
+
+    &__chooseButton {
+      height: 52px;
+      width: 256px;
     }
   }
 }
