@@ -24,12 +24,17 @@ const CategoryProducts = ({ id, name, items }: Props) => {
   const { ref, inView } = useInView({ rootMargin: '0px 0px -50% 0px' })
 
   useEffect(() => {
-    setSectionInView({ id, inView })
+    const scrollPosition = window.pageYOffset
+
+    setSectionInView({ id, inView, scrollPosition })
   }, [inView])
 
   return (
-    <section ref={ref} id={id}
-      className={classNames(styles.categoryProductsContainer, 'w-full max-w-screen')}>
+    <section
+      ref={ref}
+      id={id}
+      className={classNames(styles.categoryProductsContainer, 'w-full max-w-screen')}
+    >
       <h3 className={styles.categoryProductsContainer__heading}>{name}</h3>
       <hr className={styles.categoryProductsContainer__line} />
       <div className="grid grid-cols-2 gap-x-2 gap-y-4 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-5">

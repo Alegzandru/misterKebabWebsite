@@ -2,7 +2,8 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
-import { HERO_BUTTONS, SCREEN_TYPE, SIZES } from '../../constants'
+import { HERO_BUTTONS } from '../../constants'
+import { SCREEN_TYPE, SIZES } from '../../constants/common'
 import { HeroButton } from '../../types'
 import HallalInsignia from '../Svgs/HallalInsignia/HallalInsignia'
 import styles from './Hero.module.scss'

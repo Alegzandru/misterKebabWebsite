@@ -14,6 +14,12 @@ export type TouchData = {
   locked: boolean
 }
 
+export type SectionInView = {
+  id: string
+  inView: boolean
+  scrollPosition: number
+}
+
 export type MenuObject = {
   categoryName: string
   subCategories: {

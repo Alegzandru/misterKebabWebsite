@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
-import { PAGES, SIZES } from '../../constants'
+import { PAGES, SIZES } from '../../constants/common'
 import LanguageButton from '../LanguageButton/LanguageButton'
 import styles from './Header.module.scss'
 

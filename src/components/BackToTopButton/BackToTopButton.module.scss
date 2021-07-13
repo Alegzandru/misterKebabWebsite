@@ -1,16 +1,16 @@
 .backToTopContainer {
   width: 48px;
   height: 48px;
-  background-color: #eaeaea;
+  background-color: #f4f4f6;
   left: 48px;
   bottom: 48px;
-  border: 1px solid #ff0033;
+  border: 1px solid #fab72a;
 
   &__innerCircle {
     height: 0;
     width: 0;
     transition: all 0.3s;
-    background-color: #ff0033;
+    background-color: #fab72a;
   }
 
   &__arrowUp {
