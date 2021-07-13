@@ -16,18 +16,11 @@ module.exports = {
       zIndex: {
         '-10': '-10',
       },
-      width: {
+      spacing: {
         18: '4.5rem',
+        22: '5.5rem',
         38: '9.5rem',
         50: '12.5rem',
-      },
-      padding: {
-        18: '4.5rem',
-        22: '5.5rem',
-      },
-      margin: {
-        18: '4.5rem',
-        22: '5.5rem',
       },
       maxWidth: {
         screen: '1400px',
