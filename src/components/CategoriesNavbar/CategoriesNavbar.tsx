@@ -125,7 +125,7 @@ const CategoriesNavbar = () => {
           href={`#${id}`}
           className={classNames(
             styles.categoriesNavbarContainer__categoriesNavbarItem,
-            { [styles.categoriesNavbarContainer__categoriesNavbarItem_active]: id === activeSection },
+            { [styles.categoriesNavbarContainer__categoriesNavbarItem_active]: activeSection && id === activeSection.id },
             'whitespace-nowrap flex items-center'
           )}
           onClick={onCLickHandler}
@@ -137,7 +137,7 @@ const CategoriesNavbar = () => {
   }
 
   return (
-    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden sticky top-16 bg-white z-10 md:top-0')}>
+    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden sticky top-16 bg-white z-10 md:-top-px')}>
       <nav className="h-full justify-center">
         <ul
           className="h-full flex list-none p-0 m-0 items-center w-max"

@@ -25,8 +25,8 @@ const BackToTopButton = () => {
       show ? 'opacity-100' : 'opacity-0'
     )}>
       <div className={classNames(styles.backToTopContainer__innerCircle, 'rounded-full z-10')} />
-      <ArrowUp className={classNames(styles.backToTopContainer__arrowUp, 'absolute z-20')} />
-      <ArrowUp className={classNames(styles.backToTopContainer__arrowDown, 'absolute z-20')} />
+      <ArrowUp key="up" className={classNames(styles.backToTopContainer__arrowUp, 'absolute z-20')} stroke="#fab72a" />
+      <ArrowUp key="down" className={classNames(styles.backToTopContainer__arrowDown, 'absolute z-20')} stroke="#ffffff" />
     </a>
   )
 }

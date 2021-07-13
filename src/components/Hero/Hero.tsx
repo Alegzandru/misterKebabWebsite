@@ -2,7 +2,8 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
-import { HERO_BUTTONS, SCREEN_TYPE, SIZES } from '../../constants'
+import { HERO_BUTTONS } from '../../constants'
+import { SCREEN_TYPE, SIZES } from '../../constants/common'
 import { HeroButton } from '../../types'
 import HallalInsignia from '../Svgs/HallalInsignia/HallalInsignia'
 import styles from './Hero.module.scss'
@@ -56,7 +57,7 @@ const Hero = () => {
       <div
         className={classNames(
           styles.heroContainer__contentContainer,
-          'flex flex-col items-center z-20 text-center -mt-24 px-3 md:px-2 md:w-full md:-mt-1 lg:mt-0 lg:w-auto lg:absolute lg:top-48'
+          'flex flex-col items-center z-30 text-center -mt-24 px-3 md:px-2 md:w-full md:-mt-1 lg:mt-0 lg:w-auto lg:absolute lg:top-48'
         )}
       >
         <HallalInsignia className={styles.heroContainer__insignia} />

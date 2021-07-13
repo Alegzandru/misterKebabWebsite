@@ -1,3 +1,5 @@
+$containerPosition: calc(50% + 600px);
+
 .menuContainer {
   &__section {
     padding: 0 20px;
@@ -10,7 +12,7 @@
   &__parallaxWrapper {
     &.left {
       width: 450px;
-      right: calc(50% + 640px);
+      right: $containerPosition;
 
       .menuContainer__parallax {
         background-image: url(/images/parallax/left.png);
@@ -19,7 +21,7 @@
 
     &.right {
       width: 600px;
-      left: calc(50% + 640px);
+      left: $containerPosition;
 
       .menuContainer__parallax {
         background-image: url(/images/parallax/right.png);
@@ -28,7 +30,7 @@
 
     &.bottomLeft {
       width: 700px;
-      right: calc(50% + 640px);
+      right: $containerPosition;
       margin-top: 200px;
 
       .menuContainer__parallax {
@@ -39,7 +41,7 @@
     &.bottomRight {
       width: 710px;
       margin-top: -200px;
-      left: calc(50% + 640px);
+      left: $containerPosition;
 
       .menuContainer__parallax {
         transform: scaleX(-1) rotate(-30deg);
