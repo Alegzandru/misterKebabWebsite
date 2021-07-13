@@ -1,0 +1,45 @@
+.buttonContainer {
+  font-family: "Red Hat Display", sans-serif;
+  color: #08080b;
+  right: 26px;
+  bottom: 60px;
+  width: 170px;
+  height: 64px;
+  background-color: #fff5e9;
+  background-image: url(/images/svgs/bag.svg);
+  background-repeat: no-repeat;
+  background-position: 90% -2px;
+  border: 2.5px solid #fab729;
+  box-shadow: 0px 4px 24px rgba(240, 192, 69, 0.32);
+
+  &__counter {
+    right: -10px;
+    top: -8px;
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
+    background-color: #fab729;
+  }
+
+  &__logo {
+    height: 14px;
+    width: 44px;
+    bottom: 15px;
+    right: 27px;
+  }
+
+  &__text {
+    color: #08080b;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    line-height: 16px;
+  }
+
+  &__price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #c6823d;
+    line-height: 18px;
+    margin-top: 2px;
+  }
+}
