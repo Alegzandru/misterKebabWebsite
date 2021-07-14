@@ -3,11 +3,14 @@ import { useRef } from 'react'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { RECOMMENDED_SLIDER_ARROW_CLASS_NAME, RECOMMENDED_SLIDER_BREAKPOINTS, RECOMMENDED_SLIDER_PRODUCTS } from '../../constants'
+import { RECOMMENDED_SLIDER_BREAKPOINTS, RECOMMENDED_SLIDER_PRODUCTS } from '../../constants'
 import ProductCard from '../ProductCard/ProductCard'
 import styles from './Recommended.module.scss'
 
 SwiperCore.use([Navigation])
+
+const [leftArrowClassName, rightArrowClassName] = [['prev', 'left'], ['next', 'right']]
+  .map(([name, position]) => `swiper-button-${name} -${position}-8 hidden md:flex top-auto bottom-0 h-full`)
 
 type Props = {
   currentProductName: string
@@ -38,13 +41,13 @@ const Recommended = ({ currentProductName }: Props) => {
           ref={navigationPrevRef}
           className={classNames(
             styles.recommendedContainer__arrow,
-            RECOMMENDED_SLIDER_ARROW_CLASS_NAME[0]
+            leftArrowClassName
           )}></div>
         <div
           ref={navigationNextRef}
           className={classNames(
             styles.recommendedContainer__arrow,
-            RECOMMENDED_SLIDER_ARROW_CLASS_NAME[1]
+            rightArrowClassName
           )}></div>
       </div>
     </div>

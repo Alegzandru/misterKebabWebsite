@@ -81,9 +81,6 @@ export const RECOMMENDED_SLIDER_BREAKPOINTS = {
   },
 }
 
-export const RECOMMENDED_SLIDER_ARROW_CLASS_NAME = [['prev', 'left'], ['next', 'right']]
-  .map(([name, position]) => `swiper-button-${name} -${position}-8 hidden md:flex top-auto bottom-0 h-full`)
-
 // temp:
 
 export const TOPPINGS = {
