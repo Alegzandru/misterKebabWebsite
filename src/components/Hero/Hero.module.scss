@@ -40,7 +40,7 @@
     background-size: 150px;
     margin: 0 4px;
 
-    &.mrWrap {
+    &.mrLavas {
       background-image: url(/images/thumbnails/wrap.png);
       background-position: -80px -25px;
     }
@@ -96,7 +96,7 @@
 @media only screen and (min-width: 512px) {
   .heroContainer {
     &__button {
-      &.mrWrap {
+      &.mrLavas {
         background-position-x: -55px;
       }
 
@@ -137,7 +137,7 @@
     &__button {
       margin: 0 12px;
 
-      &.mrWrap {
+      &.mrLavas {
         background-position: -60px -35px;
         background-size: 200px;
       }

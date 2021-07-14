@@ -12,6 +12,8 @@ const Menu = () => {
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
 
+  const menu = MENU
+
   const onResizeHandler = () => {
     if (sectionRef.current) {
       const { offsetTop } = sectionRef.current
@@ -74,7 +76,7 @@ const Menu = () => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {MENU.map(category)}
+      {menu.map(category)}
     </div>
   )
 }

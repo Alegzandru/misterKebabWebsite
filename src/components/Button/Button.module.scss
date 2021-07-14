@@ -1,0 +1,17 @@
+.buttonContainer {
+  color: #ffffff;
+  background-color: #ff2828;
+  font-size: 15px;
+
+  &:hover {
+    background-color: #cd0000;
+  }
+
+  &:focus {
+    background-color: #08080b;
+  }
+
+  &:disabled {
+    background-color: #e1e1e1;
+  }
+}

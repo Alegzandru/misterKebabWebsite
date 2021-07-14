@@ -31,7 +31,7 @@ export const LOCATIONS = [
 ]
 
 export const HERO_BUTTONS = [
-  { name: 'Lavaș', id: 'mrWrap' },
+  { name: 'Lavaș', id: 'mrLavas' },
   { name: 'Burger', id: 'mrChicken' },
   { name: 'Pita', id: 'pita' },
 ]
@@ -66,7 +66,72 @@ export const MODAL_COMPONENTS = {
   checkOut: () => null,
 }
 
+export const RECOMMENDED_SLIDER_BREAKPOINTS = {
+  512: {
+    slidesPerView: 3,
+  },
+  816: {
+    slidesPerView: 4,
+  },
+  1024: {
+    slidesPerView: 3,
+  },
+  1440: {
+    slidesPerView: 4,
+  },
+}
+
+export const RECOMMENDED_SLIDER_ARROW_CLASS_NAME = [['prev', 'left'], ['next', 'right']]
+  .map(([name, position]) => `swiper-button-${name} -${position}-8 hidden md:flex top-auto bottom-0 h-full`)
+
 // temp:
+
+export const TOPPINGS = {
+  topping: [{
+    text: 'Carne 60 g', price: 15,
+  }, {
+    text: 'Masline 30 g', price: 7,
+  }, {
+    text: 'Cascaval mozzarella 75 g', price: 12,
+  }, {
+    text: 'Morcov 50 g', price: 7,
+  }, {
+    text: 'Sos iute ', price: 0,
+  }],
+  without: ['Varza', 'Morcov', 'Castraveti', 'Rosii', 'Cartofi'],
+}
+
+export const RECOMMENDED_SLIDER_PRODUCTS = [
+  {
+    name: 'Kebab pui mic',
+    price: 35,
+    weight: 350,
+    badges: ['kebab', 'chicken'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab pui mare',
+    price: 50,
+    weight: 450,
+    badges: ['kebab', 'chicken'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab Vita mic',
+    price: 38,
+    weight: 350,
+    badges: ['kebab', 'cow'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab Vita mare',
+    price: 45,
+    weight: 450,
+    badges: ['kebab', 'cow'],
+    image: 'product-image',
+  },
+]
+
 export const MENU = [
   {
     categoryName: 'Lavaș',

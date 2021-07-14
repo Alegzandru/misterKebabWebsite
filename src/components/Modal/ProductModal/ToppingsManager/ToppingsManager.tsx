@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
-import { Toppings, ToppingsManagerState } from '../../../../types'
-import Checkbox from '../../../Checkbox/Checkbox'
 
+import { Toppings, ToppingsManagerState } from '../../../../types'
+import Button from '../../../Button/Button'
+import Checkbox from '../../../Checkbox/Checkbox'
+import Bag from '../../../Svgs/Bag/Bag'
 import styles from './ToppingsManager.module.scss'
 
 type Props = {
@@ -32,6 +34,8 @@ const ToppingsManager = ({ toppings, count }: Props) => {
 
     setActiveTab(currentToppings.length)
   }
+
+  const onClickHandler = () => undefined
 
   const tab = (index: number) => (
     <button
@@ -79,7 +83,7 @@ const ToppingsManager = ({ toppings, count }: Props) => {
   }
 
   return (
-    <div className={classNames(styles.toppingsManagerContainer, 'w-full mt-8')}>
+    <div className={classNames(styles.toppingsManagerContainer, 'w-full mt-8 md:mt-14')}>
       <div className={classNames(styles.toppingsManagerContainer__tabContainer, 'flex items-end')}>
         {currentToppings.map((_, index) => tab(index))}
         <button
@@ -92,16 +96,24 @@ const ToppingsManager = ({ toppings, count }: Props) => {
           onClick={addTabHandler}
         >+</button>
       </div>
-      <form ref={formRef} className={classNames(styles.toppingsManagerContainer__toppingsContainer, 'w-full py-6 px-4 bg-white rounded')}>
-        <h3>Topping</h3>
-        <div className="flex flex-col mb-10">
-          {toppings.topping.map(toppingCheckbox)}
+      <form ref={formRef} className={classNames(styles.toppingsManagerContainer__toppingsContainer, 'w-full py-6 px-4 bg-white rounded md:flex')}>
+        <div className="flex-1 lg:pr-4">
+          <h3>Topping</h3>
+          <div className="flex flex-col mt-4 mb-10 md:mb-0">
+            {toppings.topping.map(toppingCheckbox)}
+          </div>
         </div>
-        <h3>Fără</h3>
-        <div className="flex flex-col">
-          {toppings.without.map(withoutToppingCheckbox)}
+        <div className="flex-1">
+          <h3>Fără</h3>
+          <div className="flex flex-col mt-4">
+            {toppings.without.map(withoutToppingCheckbox)}
+          </div>
         </div>
       </form>
+      <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
+        <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
+        Adaugă la comandă
+      </Button>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 .productCardContainer {
   border: 2px solid #fab729;
   box-shadow: 0px 9px 16px rgba(255, 184, 0, 0.06);
+  min-height: 232px;
 
   font-family: "Red Hat Display", sans-serif;
 
@@ -80,6 +81,7 @@
 
 @media only screen and (min-width: 1024px) {
   .productCardContainer {
+    min-height: 364px;
     box-shadow: none;
 
     &__imageContainer {
