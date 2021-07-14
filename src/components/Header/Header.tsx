@@ -19,9 +19,7 @@ const Header = () => {
     const checkScrollTop = () => {
       const { innerWidth, pageYOffset } = window
 
-      if (innerWidth < SIZES.md) {
-        setTransparent(pageYOffset < 200)
-      }
+      setTransparent(innerWidth < SIZES.md ? pageYOffset < 200 : true)
     }
 
     const onResizeHandler = () => {
