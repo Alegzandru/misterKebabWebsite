@@ -9,9 +9,6 @@ import styles from './Recommended.module.scss'
 
 SwiperCore.use([Navigation])
 
-const [leftArrowClassName, rightArrowClassName] = [['prev', 'left'], ['next', 'right']]
-  .map(([name, position]) => `swiper-button-${name} -${position}-8 hidden md:flex top-auto bottom-0 h-full`)
-
 type Props = {
   currentProductName: string
 }
@@ -21,6 +18,8 @@ const Recommended = ({ currentProductName }: Props) => {
   const navigationNextRef = useRef<HTMLDivElement>(null)
 
   const products = RECOMMENDED_SLIDER_PRODUCTS.filter((product) => product.name !== currentProductName)
+
+  const arrowClassName = 'hidden md:flex top-auto bottom-0 h-full'
 
   return (
     <div className={classNames(styles.recommendedContainer, 'relative mt-16 md:mt-20 md:px-7 lg:px-0')}>
@@ -41,13 +40,15 @@ const Recommended = ({ currentProductName }: Props) => {
           ref={navigationPrevRef}
           className={classNames(
             styles.recommendedContainer__arrow,
-            leftArrowClassName
+            'swiper-button-prev -left-8',
+            arrowClassName
           )}></div>
         <div
           ref={navigationNextRef}
           className={classNames(
             styles.recommendedContainer__arrow,
-            rightArrowClassName
+            'swiper-button-next -right-8',
+            arrowClassName
           )}></div>
       </div>
     </div>
