@@ -19,7 +19,7 @@ const ProductModal = () => {
 
   return (
     <div className={classNames(styles.productPopupContainer, 'w-full relative mx-auto')}>
-      <div className="flex">
+      <div className="lg:flex">
         <div>
           <HallalInsignia className={classNames(styles.productPopupContainer__insignia, 'absolute -left-4 -top-4 lg:-left-8 lg:-top-8')} />
           <img className="rounded w-full object-cover lg:min-h-150" src={`/images/food/${image}.png`} alt="Product image" />
