@@ -1,0 +1,42 @@
+.backToTopContainer {
+  width: 48px;
+  height: 48px;
+  background-color: #f4f4f6;
+  left: 48px;
+  bottom: 60px;
+  border: 1px solid #fab72a;
+  box-shadow: 0px 4px 24px rgba(240, 192, 69, 0.32);
+
+  &__innerCircle {
+    height: 0;
+    width: 0;
+    transition: all 0.3s;
+    background-color: #fab72a;
+  }
+
+  &__arrowUp {
+    transition: transform 0.3s;
+  }
+
+  &__arrowDown {
+    transition: transform 0.3s;
+    transform: translateY(30px);
+  }
+
+  &:hover {
+    .backToTopContainer {
+      &__innerCircle {
+        height: 48px;
+        width: 48px;
+      }
+
+      &__arrowUp {
+        transform: translateY(-30px);
+      }
+
+      &__arrowDown {
+        transform: translateY(0);
+      }
+    }
+  }
+}

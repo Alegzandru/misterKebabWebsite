@@ -1,0 +1,167 @@
+.headerContainer {
+  font-family: "Red Hat Display", sans-serif;
+
+  &_boxShadow {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  &__navbarMobile {
+    left: 0;
+    right: 0;
+    top: 56px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+
+    &_height {
+      height: 340px;
+    }
+  }
+
+  &__anchor {
+    font-size: 15px;
+    margin-top: 46px;
+    color: #08080b;
+
+    &:last-child {
+      margin-bottom: 46px;
+    }
+
+    &_active {
+      color: #fab729 !important;
+      font-weight: 600;
+    }
+  }
+
+  &__callNumber {
+    height: 72px;
+    background-color: #fff7f8;
+    border-radius: 4px;
+    border: 1.5px solid #ff2828;
+    color: #ff2828;
+    line-height: 24px;
+    font-size: 18px;
+  }
+
+  &__callNumberText {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    line-height: 100%;
+    color: #611220;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  &__showHeaderButton {
+    font-size: 13px;
+    color: #e1e1e1;
+    background-color: #bd1e2c;
+    border-radius: 4px;
+    line-height: 17px;
+
+    &_colors {
+      background-color: #fff7f8;
+      color: #611220;
+    }
+  }
+
+  &__hamburgerBox {
+    transition: all 0.1s;
+
+    &_margin {
+      margin-left: 14px;
+    }
+  }
+
+  &__hamburgerInner {
+    top: 50%;
+    margin-top: -1px;
+    transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    &,
+    &::after,
+    &::before {
+      width: 18px;
+      height: 2px;
+      background-color: #e1e1e1;
+      border-radius: 2px;
+      position: absolute;
+    }
+
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+    }
+
+    &::before {
+      top: -5px;
+      transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+    }
+
+    &::after {
+      bottom: -5px;
+      transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &_background {
+      &,
+      &::after,
+      &::before {
+        background-color: #611220;
+      }
+    }
+
+    .headerContainer__hamburgerBox_isActive & {
+      transform: rotate(225deg);
+      transition-delay: 0.12s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(-90deg);
+        transition: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .headerContainer {
+    height: 104px;
+
+    &_boxShadow {
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    &__navbarMobile {
+      box-shadow: none;
+    }
+
+    &__anchor {
+      margin-top: 0;
+      color: #d9d9ec;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      & a:hover {
+        color: #fff;
+      }
+    }
+
+    &__callNumber {
+      height: 56px;
+      color: #f9f9f9;
+    }
+
+    &__callNumberText {
+      color: #ffffff;
+    }
+  }
+}

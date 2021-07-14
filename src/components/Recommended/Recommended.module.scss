@@ -1,0 +1,22 @@
+.recommendedContainer {
+  &__heading {
+    color: #611220;
+    font-size: 32px;
+  }
+
+  &__arrow {
+    color: #000000;
+
+    &::after {
+      font-size: 21px;
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .recommendedContainer {
+    &__heading {
+      font-size: 38px;
+    }
+  }
+}

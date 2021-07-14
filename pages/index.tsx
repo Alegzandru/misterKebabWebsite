@@ -1,17 +1,26 @@
-import { people } from '../src/constants'
+import React from 'react'
+
+import banner from '../public/images/banners/banner.png'
+import BackToTopButton from '../src/components/BackToTopButton/BackToTopButton'
+import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavbar'
+import Hero from '../src/components/Hero/Hero'
+import Layout from '../src/components/Layout/Layout'
+import Menu from '../src/components/Menu/Menu'
+import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
+import Slider from '../src/components/Slider/Slider'
+import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 
 const MainPage = () => (
-  <ul className="divide-y divide-gray-200">
-    {people.map((person) => (
-      <li key={person.email} className="py-4 flex">
-        <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
-        <div className="ml-3">
-          <p className="text-sm font-medium text-gray-900">{person.name}</p>
-          <p className="text-sm text-gray-500">{person.email}</p>
-        </div>
-      </li>
-    ))}
-  </ul>
+  <Layout>
+    <Hero />
+    <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
+    <ActiveSectionContextProvider>
+      <CategoriesNavbar />
+      <Menu />
+    </ActiveSectionContextProvider>
+    <BackToTopButton />
+    <OpenCartButton />
+  </Layout>
 )
 
 export default MainPage
