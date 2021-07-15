@@ -3,15 +3,52 @@ import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'
 
-import { MENU } from '../../constants'
-import { MenuObject } from '../../types'
+// import { MENU } from '../../constants'
+import { Category, MenuObject } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
 import CategoryProducts from './CategoryProducts/CategoryProducts'
 import styles from './Menu.module.scss'
 
-const Menu = () => {
+// import {API_URL} from "../../utils/urls"
+
+type Props = {
+  products: any
+  categories: Category
+}
+
+const Menu = ({categories, products}: Props) => {
+
+  // console.log(categories)
+  // console.log(products)
+
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
+
+  const itemsRaw = products.filter((product: any) => product.subcategory.name === categories[9].name)
+  const items = itemsRaw.map((product: any) => {
+    const badges = product.ingredients.map((ingredient: any) => ingredient.name)
+    return(
+      {
+        name: product.name,
+        price: product.price,
+        weight: product.weight,
+        badges,
+        image: product.image.formats.medium.url,
+      }
+    )
+  }
+  )
+
+  const localCategory = {
+    categoryName: '',
+    subCategories: [
+      {
+        id: 'kebab',
+        name: categories[9].name,
+        items,
+      },
+    ],
+  }
 
   const onResizeHandler = () => {
     if (sectionRef.current) {
@@ -75,7 +112,12 @@ const Menu = () => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {MENU.map(category)}
+      {/* {
+        MENU.map(category)
+      } */}
+      {
+        category(localCategory, 0)
+      }
     </div>
   )
 }

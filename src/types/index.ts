@@ -39,3 +39,13 @@ export type AnyAction = {
   type: string
   payload: Record<string, any>
 }
+
+export type Category = {
+  name: string
+  products: any[]
+}
+
+export type Product = {
+  name: string
+  description: string
+}

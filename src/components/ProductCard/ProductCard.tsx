@@ -32,11 +32,14 @@ const ProductCardCount = () => {
 const ProductCard = memo(({ name, price, image, weight, badges }: Props) => (
   <div className={classNames(styles.productCardContainer, 'w-full relative rounded flex flex-col bg-white font-bold transition-all')}>
     <div className={classNames(styles.productCardContainer__imageContainer, 'relative w-full flex-1 transition-all duration-500')}>
-      <Image className="rounded-t" src={`/images/food/${image}.png`} alt="Product image" layout="fill" objectFit="cover" quality={80} />
+      {/* <Image className="rounded-t" src={`/images/food/${image}.png`} alt="Product image" layout="fill" objectFit="cover" quality={80} /> */}
+      <Image className="rounded-t" src={image} alt="Product image" layout="fill" objectFit="cover" quality={80} />
     </div>
     <div className={classNames(styles.productCardContainer__description, 'w-full rounded transition-all duration-500')}>
       <div className="flex">
-        <h4 className={classNames(styles.productCardContainer__title)}>{name}</h4>
+        <h4 className={classNames(styles.productCardContainer__title)}>
+          {name}
+        </h4>
         <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>{price} MDL</span>
       </div>
       <div className={classNames(styles.productCardContainer__badgesContainer, 'flex lg:mt-8 transition-opacity duration-300')}>
