@@ -81,6 +81,22 @@ export const RECOMMENDED_SLIDER_BREAKPOINTS = {
   },
 }
 
+export const CAREERS_SERVICES = ['Bucatar', 'Chelner', 'Casier Operator', 'Sofer de livrare', 'Handyman', 'Operator de livrare']
+export const CAREERS_OTHERS = [
+  {
+    heading: 'Cunosc limbile:',
+    values: ['Rusa', 'Romana', 'Engleza'],
+  },
+  {
+    heading: 'Doresc să lucrez la:',
+    values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râşcani'],
+  },
+  {
+    heading: 'Sunt dispus să lucrez:',
+    values: ['Full-time', 'Part-time'],
+  },
+]
+
 // temp:
 
 export const TOPPINGS = {

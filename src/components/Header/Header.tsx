@@ -28,9 +28,16 @@ const Header = () => {
       }
     }
 
-    checkScrollTop()
+    const numberSign = router.asPath[1]
 
-    window.addEventListener('scroll', checkScrollTop)
+    if (!numberSign || numberSign === '#') {
+      checkScrollTop()
+
+      window.addEventListener('scroll', checkScrollTop)
+    } else {
+      setTransparent(false)
+    }
+
     window.addEventListener('resize', onResizeHandler)
 
     return () => {

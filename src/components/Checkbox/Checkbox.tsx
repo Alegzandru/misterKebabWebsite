@@ -6,7 +6,7 @@ type Props = PropsWithChildren<{
   className?: string
   defaultChecked?: boolean
   checked?: boolean
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }>
 
 const Checkbox = ({ className, children, defaultChecked, checked, onChange }: Props) => (

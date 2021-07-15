@@ -1,0 +1,18 @@
+.inputContainer {
+  &__label {
+    font-size: 14px;
+    color: #58606e;
+    line-height: 19px;
+    margin-bottom: 6px;
+  }
+
+  &__input {
+    border: 2px solid #e1e1e1;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: #58606e;
+      font-size: 14px;
+    }
+  }
+}
