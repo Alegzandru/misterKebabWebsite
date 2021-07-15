@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'

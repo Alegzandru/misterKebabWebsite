@@ -1,5 +1,7 @@
 import '../public/fonts/fonts.css'
 import '../public/styles/global.css'
+import 'swiper/components/navigation/navigation.scss'
+import 'swiper/swiper.scss'
 import 'tailwindcss/tailwind.css'
 
 import { AppProps } from 'next/app'

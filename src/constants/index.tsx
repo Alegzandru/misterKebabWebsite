@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import ProductModal from '../components/Modal/ProductModal/ProductModal'
+
 export const SOCIALS_LINKS = [
   {
     href: '#facebook',
@@ -29,7 +31,7 @@ export const LOCATIONS = [
 ]
 
 export const HERO_BUTTONS = [
-  { name: 'Lavaș', id: 'mrWrap' },
+  { name: 'Lavaș', id: 'mrLavas' },
   { name: 'Burger', id: 'mrChicken' },
   { name: 'Pita', id: 'pita' },
 ]
@@ -56,6 +58,79 @@ export const HERO_BUTTONS = [
 
 export const CATEGORIES = [
   { id : 'kebab', name : 'Kebab'},
+]
+
+export const MODALS = {
+  product: 'product' as 'product',
+  checkOut: 'checkOut' as 'checkOut',
+}
+
+export const MODAL_COMPONENTS = {
+  product: ProductModal,
+  checkOut: () => null,
+}
+
+export const RECOMMENDED_SLIDER_BREAKPOINTS = {
+  512: {
+    slidesPerView: 3,
+  },
+  816: {
+    slidesPerView: 4,
+  },
+  1024: {
+    slidesPerView: 3,
+  },
+  1440: {
+    slidesPerView: 4,
+  },
+}
+
+// temp:
+
+export const TOPPINGS = {
+  topping: [{
+    text: 'Carne 60 g', price: 15,
+  }, {
+    text: 'Masline 30 g', price: 7,
+  }, {
+    text: 'Cascaval mozzarella 75 g', price: 12,
+  }, {
+    text: 'Morcov 50 g', price: 7,
+  }, {
+    text: 'Sos iute ', price: 0,
+  }],
+  without: ['Varza', 'Morcov', 'Castraveti', 'Rosii', 'Cartofi'],
+}
+
+export const RECOMMENDED_SLIDER_PRODUCTS = [
+  {
+    name: 'Kebab pui mic',
+    price: 35,
+    weight: 350,
+    badges: ['kebab', 'chicken'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab pui mare',
+    price: 50,
+    weight: 450,
+    badges: ['kebab', 'chicken'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab Vita mic',
+    price: 38,
+    weight: 350,
+    badges: ['kebab', 'cow'],
+    image: 'product-image',
+  },
+  {
+    name: 'Kebab Vita mare',
+    price: 45,
+    weight: 450,
+    badges: ['kebab', 'cow'],
+    image: 'product-image',
+  },
 ]
 
 export const MENU = [
