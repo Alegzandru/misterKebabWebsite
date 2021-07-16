@@ -11,6 +11,10 @@
     color: #ffffff;
   }
 
+  &__verticalLine {
+    border-left: 2px dashed #ffb80e;
+  }
+
   &__others {
     &:last-child {
       margin: 0;
@@ -28,6 +32,18 @@
 
     &_margin {
       margin-bottom: 16px;
+    }
+  }
+}
+
+@media only screen and (min-width: 512px) {
+  .careersHeroContainer {
+    &__others {
+      margin: 0;
+    }
+
+    &__checkbox {
+      margin-bottom: 16px !important;
     }
   }
 }

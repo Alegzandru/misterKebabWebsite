@@ -42,6 +42,12 @@ const Careers = () => {
     </div>
   )
 
+  const verticalLine = (
+    <div className="flex justify-center">
+      <div className={classNames(styles.careersHeroContainer__verticalLine, 'h-19 sm:h-26')} />
+    </div>
+  )
+
   return (
     <div className={classNames(styles.careersHeroContainer, 'w-full')}>
       <div className="h-16 md:h-26" />
@@ -51,15 +57,16 @@ const Careers = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CareersCategoryBlock heading="Date de contact">
-          <div className="mt-6">
+          <div className="mt-6 grid sm:grid-cols-2 gap-x-6">
             <Input className="mb-4" name="name" label="Nume Prenume" placeholder="Numele dvs" register={register} />
             <Input className="mb-6" name="age" label="Varsta" placeholder="18+" register={register} />
             <Input className="mb-4" name="tel" label="Numar de telefon" placeholder="+373 (__) ___ ___" register={register} />
             <Input name="email" label="E-mail" placeholder="exemplu@mail.com" register={register} />
           </div>
         </CareersCategoryBlock>
+        {verticalLine}
         <CareersCategoryBlock heading="Serviciu">
-          <div className="mt-8">
+          <div className="mt-8 grid sm:grid-cols-2">
             {CAREERS_SERVICES.map((service, index) => (
               <Checkbox
                 key={index}
@@ -72,11 +79,14 @@ const Careers = () => {
             ))}
           </div>
         </CareersCategoryBlock>
+        {verticalLine}
         <CareersCategoryBlock>
-          {CAREERS_OTHERS.map(othersBlock)}
+          <div className="grid sm:grid-cols-3">
+            {CAREERS_OTHERS.map(othersBlock)}
+          </div>
         </CareersCategoryBlock>
         <div className="px-5">
-          <Button className="mt-24 mb-19" type="submit">
+          <Button className="mt-24 mb-19 sm:mt-18" type="submit">
             Trimite
           </Button>
         </div>
