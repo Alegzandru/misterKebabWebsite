@@ -26,7 +26,9 @@ export type MenuObject = {
     id: string
     name: string
     items: Product[]
+    order: number
   }[]
+  order: number
 }
 
 export type Product = {
@@ -37,6 +39,7 @@ export type Product = {
   image: string
   ingredients?: string
   toppings?: Toppings
+  subcategory: string
 }
 
 export type Toppings = {
@@ -46,6 +49,47 @@ export type Toppings = {
   }[]
   without: string[]
 }
+
+// export type Excluding = {
+//   id: number
+//   name: string
+//   nameru: string
+//   // created_at: string
+//   // published_at: string
+//   // updated_at: string
+// }
+
+// export type Toppings = {
+//   topping: {
+//     text: string
+//     price: number
+//   }[]
+//   without: string[]
+// }
+
+// export type Ingredients = {
+//   created_at: string
+//   id: number
+//   name: string
+//   product?: Product
+//   published_at: string
+//   updated_at: string
+// }
+
+// export type Product = {
+//   name: string
+//   nameru: string
+//   price: number
+//   weight: number
+//   image: any
+//   ingredients?: string
+//   toppings?: Toppings
+//   description: string
+//   descriptionru: string
+//   subcategory: any
+//   id: number
+//   badges: string[]
+// }
 
 export type ToppingsManagerState = {
   topping: Map<string, {
@@ -60,12 +104,16 @@ export type AnyAction = {
   payload: Record<string, any>
 }
 
-export type Category = {
-  name: string
-  products: any[]
-}
+// export type Subcategory = {
+//   name: string
+//   nameru: string
+//   excludings: Excluding[]
+//   id: number
+//   order: number
+//   products: Product[]
+// }
 
-export type Product = {
-  name: string
-  description: string
-}
+// export type Category = {
+//   name: string
+//   subcategories: Subcategory[]
+// }

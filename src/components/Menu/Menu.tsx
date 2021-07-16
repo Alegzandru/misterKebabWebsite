@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'
 
 // import { MENU } from '../../constants'
-import { Category, MenuObject } from '../../types'
+import { MenuObject, Product } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
 import CategoryProducts from './CategoryProducts/CategoryProducts'
 import styles from './Menu.module.scss'
@@ -11,43 +11,21 @@ import styles from './Menu.module.scss'
 // import {API_URL} from "../../utils/urls"
 
 type Props = {
-  products: any
-  categories: Category
+  products: Product[]
+  categories: MenuObject[]
 }
 
 const Menu = ({categories, products}: Props) => {
 
-  // console.log(categories)
-  // console.log(products)
+  console.log(categories)
+  console.log(products)
+
+  categories.sort(function(a, b){
+    return a.order-b.order
+  })
 
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
-
-  const itemsRaw = products.filter((product: any) => product.subcategory.name === categories[9].name)
-  const items = itemsRaw.map((product: any) => {
-    const badges = product.ingredients.map((ingredient: any) => ingredient.name)
-    return(
-      {
-        name: product.name,
-        price: product.price,
-        weight: product.weight,
-        badges,
-        image: product.image.formats.medium.url,
-      }
-    )
-  }
-  )
-
-  const localCategory = {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'kebab',
-        name: categories[9].name,
-        items,
-      },
-    ],
-  }
 
   const onResizeHandler = () => {
     if (sectionRef.current) {
@@ -115,7 +93,23 @@ const Menu = ({categories, products}: Props) => {
         MENU.map(category)
       } */}
       {
-        category(localCategory, 0)
+        categories.map((categoryObj: MenuObject, index: number) => category(
+          {
+            categoryName : categoryObj.categoryName === 'Unfiltered' ? '' : categoryObj.categoryName,
+            subCategories : categoryObj.subCategories.map((subCategory) => ({
+              id: subCategory.name,
+              name: subCategory.name,
+              items: products.filter(
+                (product: Product) => product.subcategory === subCategory.name
+              ),
+              order: subCategory.order,
+            })).sort(function(a, b){
+              return a.order-b.order
+            }),
+            order: categoryObj.order,
+          },
+          index
+        ))
       }
     </div>
   )
