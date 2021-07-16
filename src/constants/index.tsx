@@ -81,18 +81,32 @@ export const RECOMMENDED_SLIDER_BREAKPOINTS = {
   },
 }
 
+export const CAREERS_FORM_INITIAL_DATA = {
+  name: '',
+  age: '',
+  tel: '',
+  email: '',
+  services: [] as string[],
+  languages: [] as string[],
+  locations: [] as string[],
+  workType: [] as string[],
+}
+
 export const CAREERS_SERVICES = ['Bucatar', 'Chelner', 'Casier Operator', 'Sofer de livrare', 'Handyman', 'Operator de livrare']
 export const CAREERS_OTHERS = [
   {
-    heading: 'Cunosc limbile:',
+    heading: 'Cunosc limbile',
+    name: 'languages',
     values: ['Rusa', 'Romana', 'Engleza'],
   },
   {
-    heading: 'Doresc să lucrez la:',
+    heading: 'Doresc să lucrez la',
+    name: 'locations',
     values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râşcani'],
   },
   {
-    heading: 'Sunt dispus să lucrez:',
+    heading: 'Sunt dispus să lucrez',
+    name: 'workType',
     values: ['Full-time', 'Part-time'],
   },
 ]
