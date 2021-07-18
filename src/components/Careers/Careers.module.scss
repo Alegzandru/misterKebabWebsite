@@ -38,6 +38,30 @@
 
 @media only screen and (min-width: 512px) {
   .careersHeroContainer {
+    &__hero {
+      height: 359px;
+    }
+
+    &__heading {
+      font-size: 52px;
+    }
+
+    &__others {
+      margin: 0;
+    }
+
+    &__checkbox {
+      margin-bottom: 16px !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .careersHeroContainer {
+    &__heading {
+      font-size: 52px;
+    }
+
     &__others {
       margin: 0;
     }

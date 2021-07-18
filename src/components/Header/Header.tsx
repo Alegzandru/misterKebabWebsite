@@ -46,13 +46,16 @@ const Header = () => {
     }
   }, [])
 
-  const link = ({ path, name }: typeof PAGES['home'], index: number) => (
-    <li key={index} className={classNames(
-      styles.headerContainer__anchor,
-      { [styles.headerContainer__anchor_active]: router.asPath === path },
-      'font-bold w-full md:font-normal md:mx-8',
-    )}>
-      <Link href={path}>
+  const link = ({ pathname, name }: typeof PAGES['home'], index: number) => (
+    <li
+      key={index}
+      style={router.asPath === pathname ? {
+        color: transparent ? '#fab729' : '#df2026',
+        fontWeight: 700,
+      } : undefined}
+      className={classNames(styles.headerContainer__anchor, 'font-bold w-full md:font-normal md:mx-8')}
+    >
+      <Link href={pathname}>
         <a>{name}</a>
       </Link>
     </li>
@@ -63,7 +66,7 @@ const Header = () => {
       styles.headerContainer__navbarMobile,
       showMobileHeader ? [styles.headerContainer__navbarMobile_height, 'pb-6'] : '',
       'absolute overflow-hidden bg-white px-4 transition-all h-0',
-      'md:static md:h-full md:flex md:items-center',
+      'md:static md:h-full md:flex md:items-center md:pr-0',
       { 'md:bg-transparent': transparent }
     )}>
       <nav className="md:absolute md:inset-x-0 md:mx-auto md:w-max">
@@ -71,7 +74,7 @@ const Header = () => {
           {Object.values(PAGES).map(link)}
         </ul>
       </nav>
-      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor="#611220" />
+      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'} />
       <a
         style={transparent && !showMobileHeader ? {
           backgroundColor: 'transparent',
@@ -116,6 +119,7 @@ const Header = () => {
       'py-2 px-4 fixed flex items-center z-50 w-full h-16 transition-colors md:absolute md:inset-x-0 md:mx-auto max-w-screen',
       {
         [styles.headerContainer_boxShadow]: !transparent,
+        [styles.headerContainer_transparent]: transparent,
         'bg-white': showMobileHeader || !transparent,
       }
     )}>
