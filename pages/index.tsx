@@ -92,10 +92,7 @@ export const getStaticProps: GetStaticProps = async () => {
   ))
 
   return {
-    props: JSON.parse(JSON.stringify({
-      products,
-      categories,
-    })),
+    props: { products, categories },
     revalidate: 10,
   }
 }
