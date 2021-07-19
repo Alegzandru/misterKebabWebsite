@@ -38,7 +38,7 @@ export type Product = {
   badges: string[]
   image: string
   ingredients?: string
-  toppings?: Toppings
+  toppings: Toppings
   subcategory: string
 }
 

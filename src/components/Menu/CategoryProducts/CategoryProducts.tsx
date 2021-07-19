@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import { ActiveSectionContext } from '../../../store/ActiveSection/ActiveSection.context'
 import ProductCard from '../../ProductCard/ProductCard'
 import styles from './CategoryProducts.module.scss'
+import {Toppings} from '../../../types'
 
 type Props = {
   id: string
@@ -15,6 +16,9 @@ type Props = {
     weight: number
     badges: string[]
     image: string
+    ingredients?: string
+    toppings: Toppings
+    subcategory: string
   }[]
 }
 

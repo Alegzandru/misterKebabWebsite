@@ -31,9 +31,9 @@ export const LOCATIONS = [
 ]
 
 export const HERO_BUTTONS = [
-  { name: 'Lavaș', id: 'mrLavas' },
-  { name: 'Burger', id: 'mrChicken' },
-  { name: 'Pita', id: 'pita' },
+  { name: 'Lavaș', id: 'mr-lavas' },
+  { name: 'Burger', id: 'mr-chicken-burger' },
+  { name: 'Pita', id: 'mr-pita' },
 ]
 
 // export const CATEGORIES = [
@@ -57,7 +57,23 @@ export const HERO_BUTTONS = [
 // ]
 
 export const CATEGORIES = [
-  { id : 'kebab', name : 'Kebab'},
+  { id : 'mr-kebab', name : 'Mr. Kebab'},
+  { id : 'saorma', name : 'Șaorma'},
+  { id : 'mr-lavas', name : 'Mr. Lavaș'},
+  { id : 'mr-wrap', name : 'Mr. Wrap'},
+  { id : 'mr-chicken-burger', name : 'Mr. Chicken Burger'},
+  { id : 'mr-beef-burger', name : 'Mr. Beef Burger'},
+  { id : 'mr-vegetarian-burger', name : 'Mr. Vegetarian Burger'},
+  { id : 'mr-kids-burger', name : 'Mr. Kids Burger'},
+  { id : 'mr-baghet', name : 'Mr. Baghet'},
+  { id : 'mr-pita', name : 'Mr. Pită'},
+  { id : 'supe', name : 'Supe'},
+  { id : 'salate', name : 'Salate'},
+  { id : 'la-farfurie', name : 'La Farfurie'},
+  { id : 'snacks', name : 'Snacks'},
+  { id : 'combo-menu', name : 'Combo Menu'},
+  { id : 'sosuri', name : 'Sosuri'},
+  { id : 'combo-kids', name : 'Combo Kids'},
 ]
 
 export const MODALS = {
@@ -109,6 +125,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
     weight: 350,
     badges: ['Doner', 'Pui'],
     image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    subcategory : 'Doner',
+    toppings: {
+      topping: [],
+      without: [],
+    },
   },
   {
     name: 'Kebab pui mare',
@@ -116,6 +137,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
     weight: 450,
     badges: ['Doner', 'Pui'],
     image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    subcategory : 'Doner',
+    toppings: {
+      topping: [],
+      without: [],
+    },
   },
   {
     name: 'Kebab Vita mic',
@@ -123,6 +149,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
     weight: 350,
     badges: ['Doner', 'Vită'],
     image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    subcategory : 'Doner',
+    toppings: {
+      topping: [],
+      without: [],
+    },
   },
   {
     name: 'Kebab Vita mare',
@@ -130,6 +161,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
     weight: 450,
     badges: ['Doner', 'Vită'],
     image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    subcategory : 'Doner',
+    toppings: {
+      topping: [],
+      without: [],
+    },
   },
 ]
 

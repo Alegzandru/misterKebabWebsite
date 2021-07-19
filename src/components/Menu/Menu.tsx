@@ -15,10 +15,7 @@ type Props = {
   categories: MenuObject[]
 }
 
-const Menu = ({categories, products}: Props) => {
-
-  console.log(categories)
-  console.log(products)
+const Menu = ({categories}: Props) => {
 
   categories.sort(function(a, b){
     return a.order-b.order
@@ -96,16 +93,7 @@ const Menu = ({categories, products}: Props) => {
         categories.map((categoryObj: MenuObject, index: number) => category(
           {
             categoryName : categoryObj.categoryName === 'Unfiltered' ? '' : categoryObj.categoryName,
-            subCategories : categoryObj.subCategories.map((subCategory) => ({
-              id: subCategory.name,
-              name: subCategory.name,
-              items: products.filter(
-                (product: Product) => product.subcategory === subCategory.name
-              ),
-              order: subCategory.order,
-            })).sort(function(a, b){
-              return a.order-b.order
-            }),
+            subCategories : categoryObj.subCategories.sort((a, b) => a.order-b.order),
             order: categoryObj.order,
           },
           index

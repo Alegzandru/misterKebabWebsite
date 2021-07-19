@@ -100,9 +100,11 @@ const ToppingsManager = ({ toppings, count }: Props) => {
         <div className="flex-1 lg:pr-4">
           <h3>Topping</h3>
           <div className="flex flex-col mt-4 mb-10 md:mb-0">
+            {/* {toppings.topping !== undefined ? toppings.topping.map(toppingCheckbox) : ''} */}
             {toppings.topping.map(toppingCheckbox)}
           </div>
         </div>
+
         <div className="flex-1">
           <h3>Fără</h3>
           <div className="flex flex-col mt-4">
