@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { DeepMap, FieldError, FieldValues, Message, RegisterOptions, UseFormRegister } from 'react-hook-form'
+import { DeepMap, FieldError, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 import styles from './Input.module.scss'
 
