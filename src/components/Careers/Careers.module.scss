@@ -34,6 +34,10 @@
       margin-bottom: 16px;
     }
   }
+
+  &__button {
+    max-width: 720px;
+  }
 }
 
 @media only screen and (min-width: 512px) {
@@ -59,7 +63,15 @@
 @media only screen and (min-width: 816px) {
   .careersHeroContainer {
     &__heading {
-      font-size: 52px;
+      font-size: 69px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .careersHeroContainer {
+    &__hero {
+      height: 544px;
     }
 
     &__others {

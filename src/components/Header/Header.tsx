@@ -52,8 +52,8 @@ const Header = () => {
       style={router.asPath === pathname ? {
         color: transparent ? '#fab729' : '#df2026',
         fontWeight: 700,
-      } : undefined}
-      className={classNames(styles.headerContainer__anchor, 'font-bold w-full md:font-normal md:mx-8')}
+      } : { color: !transparent ? '#58606E' : undefined }}
+      className={classNames(styles.headerContainer__anchor, 'font-bold w-full md:font-medium md:mx-8')}
     >
       <Link href={pathname}>
         <a>{name}</a>
@@ -80,7 +80,7 @@ const Header = () => {
           backgroundColor: 'transparent',
           border: 'none',
         } : undefined}
-        className={classNames(styles.headerContainer__callNumber, 'w-full flex justify-center items-center flex-col font-bold md:items-end')}
+        className={classNames(styles.headerContainer__callNumber, 'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2')}
         href="tel:+37367559999"
       >
         <span className={styles.headerContainer__callNumberText}>Serviciu de Livrare</span>

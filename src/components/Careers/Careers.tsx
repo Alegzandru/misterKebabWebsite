@@ -24,7 +24,7 @@ const Careers = () => {
   }
 
   const othersBlock = ({ heading, values }: CareerOthersBlock, count: number) => (
-    <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14')}>
+    <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14 sm:justify-self-center')}>
       <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{heading}:</h3>
       {values.map((value, index) => (
         <Checkbox
@@ -49,7 +49,7 @@ const Careers = () => {
   )
 
   return (
-    <div className={classNames(styles.careersHeroContainer, 'w-full')}>
+    <div className={classNames(styles.careersHeroContainer, 'w-full pb-19')}>
       <div className="h-16 md:h-26" />
       <div className={classNames(styles.careersHeroContainer__hero, 'w-full relative flex justify-center items-center')}>
         <Image src={careersHero} alt="Hero" layout="fill" objectFit="cover" />
@@ -86,7 +86,7 @@ const Careers = () => {
           </div>
         </CareersCategoryBlock>
         <div className="px-5">
-          <Button className="mt-24 mb-19 sm:mt-18" type="submit">
+          <Button className={classNames(styles.careersHeroContainer__button, 'mt-24 mx-auto sm:mt-18')} type="submit">
             Trimite
           </Button>
         </div>
