@@ -2,7 +2,6 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
-// import { TOPPINGS } from '../../../constants'
 import { ModalContext } from '../../../store/Modal/Modal.context'
 import Badges from '../../Badges/Badges'
 import Recommended from '../../Recommended/Recommended'
@@ -13,7 +12,7 @@ import ToppingsManager from './ToppingsManager/ToppingsManager'
 const ProductModal = () => {
   const {
     state: {
-      product: { name, image, badges, weight, price, ingredients, toppings }, // ingredients, toppings },
+      product: { name, image, badges, weight, price, ingredients, toppings },
     },
   } = useContext(ModalContext)
 
@@ -32,7 +31,6 @@ const ProductModal = () => {
             <span className={styles.productPopupContainer__weight}>{weight} g</span>
             <br />
             {ingredients}
-            {/* carne pui, varză, morcov, castraveți, roșii, cartofi, sos de usturoi marca Mr Kebab, sos ketchup */}
           </p>
           {
             toppings.topping.length === 0 && toppings.without.length === 0 ?

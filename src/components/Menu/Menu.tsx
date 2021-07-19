@@ -2,24 +2,18 @@ import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'
 
-// import { MENU } from '../../constants'
 import { MenuObject, Product } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
 import CategoryProducts from './CategoryProducts/CategoryProducts'
 import styles from './Menu.module.scss'
-
-// import {API_URL} from "../../utils/urls"
 
 type Props = {
   products: Product[]
   categories: MenuObject[]
 }
 
-const Menu = ({categories}: Props) => {
-
-  categories.sort(function(a, b){
-    return a.order-b.order
-  })
+const Menu = ({ categories }: Props) => {
+  categories.sort((first, second) => first.order - second.order)
 
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
@@ -86,19 +80,11 @@ const Menu = ({categories}: Props) => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {/* {
-        MENU.map(category)
-      } */}
-      {
-        categories.map((categoryObj: MenuObject, index: number) => category(
-          {
-            categoryName : categoryObj.categoryName === 'Unfiltered' ? '' : categoryObj.categoryName,
-            subCategories : categoryObj.subCategories.sort((a, b) => a.order-b.order),
-            order: categoryObj.order,
-          },
-          index
-        ))
-      }
+      {categories.map(({ categoryName, subCategories, order }: MenuObject, index: number) => category({
+        categoryName: categoryName === 'Unfiltered' ? '' : categoryName,
+        subCategories: subCategories.sort((first, second) => first.order - second.order),
+        order,
+      }, index))}
     </div>
   )
 }

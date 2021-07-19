@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import React from 'react'
 
 import banner from '../public/images/banners/banner.png'
@@ -9,39 +10,34 @@ import Menu from '../src/components/Menu/Menu'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
-import {API_URL} from '../src/utils/urls'
-import {MenuObject, Product} from '../src/types'
+import { MenuObject, Product } from '../src/types'
+import { API_URL } from '../src/utils/urls'
 
 type Props = {
   products: Product[]
   categories: MenuObject[]
 }
 
-const MainPage = ({products, categories}: Props) =>
-// console.log(products)
-// console.log(categories)
-
-  (
-    <Layout>
-      <Hero />
-      <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
-      <ActiveSectionContextProvider>
-        <CategoriesNavbar/>
-        <Menu categories={categories} products={products}/>
-      </ActiveSectionContextProvider>
-      <BackToTopButton />
-      <OpenCartButton />
-    </Layout>
-  )
+const MainPage = ({ products, categories }: Props) => (
+  <Layout>
+    <Hero />
+    <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
+    <ActiveSectionContextProvider>
+      <CategoriesNavbar />
+      <Menu categories={categories} products={products} />
+    </ActiveSectionContextProvider>
+    <BackToTopButton />
+    <OpenCartButton />
+  </Layout>
+)
 
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
+  const subcategoriesRes = await fetch(`${API_URL}/categories`)
+  const subcategories = await subcategoriesRes.json()
 
-  const subcategories_res = await fetch(`${API_URL}/categories`)
-  const subcategories = await subcategories_res.json()
-
-  const products_res = await fetch(`${API_URL}/products`)
-  const productsRaw = await products_res.json()
+  const productsRes = await fetch(`${API_URL}/products`)
+  const productsRaw = await productsRes.json()
   const products = productsRaw.filter((product: any) =>
     product.image.formats.medium !== undefined &&
     product.price !== null &&
@@ -49,24 +45,19 @@ export async function getStaticProps() {
     product.name !== null &&
     product.ingredients !== [])
     .map((product: any) => {
-      const topping = product.toppings.length !== 0 ?
-        product.toppings.map((toppingSing: any) => ({
-          text : toppingSing.name, price: toppingSing.price,
+      const topping = product.toppings.length !== 0
+        ? product.toppings.map((toppingSing: any) => ({
+          text: toppingSing.name, price: toppingSing.price,
         }))
-        :
-        []
+        : []
 
-      const excludings = product.excludings.length !== 0 ?
-        product.excludings.map((excluding: any) => excluding.name)
-        :
-        subcategories.filter((category: any) => category.name === product.subcategory.name)[0].excludings.map((excluding: any) => excluding.name)
+      const without = product.excludings.length !== 0
+        ? product.excludings.map((excluding: any) => excluding.name)
+        : subcategories.filter((category: any) => category.name === product.subcategory.name)[0].excludings.map((excluding: any) => excluding.name)
 
-      const toppingsObj = {
-        topping,
-        without: excludings,
-      }
+      const toppingsObj = { topping, without }
 
-      return(
+      return (
         {
           name: product.name,
           price: product.price,
@@ -80,17 +71,18 @@ export async function getStaticProps() {
       )
     })
 
-  const categories_res = await fetch(`${API_URL}/big-categories`)
-  const categoriesRaw = await categories_res.json()
+  const categoriesRes = await fetch(`${API_URL}/big-categories`)
+  const categoriesRaw = await categoriesRes.json()
+
   const categories = categoriesRaw.map((category: any) => (
     {
-      categoryName : category.name,
-      subCategories : category.subcategories.map((subcategory: any) => (
+      categoryName: category.name,
+      subCategories: category.subcategories.map((subcategory: any) => (
         {
           id: subcategory.slug,
           name: subcategory.name,
           items: products.filter(
-            (product: Product) => product.subcategory === subcategory.name
+            (product: any) => product.subcategory === subcategory.name
           ),
           order: subcategory.order,
         }
@@ -100,11 +92,11 @@ export async function getStaticProps() {
   ))
 
   return {
-    props : JSON.parse(JSON.stringify({
+    props: JSON.parse(JSON.stringify({
       products,
       categories,
     })),
-    revalidate : 10,
+    revalidate: 10,
   }
 }
 
