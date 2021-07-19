@@ -9,6 +9,12 @@ export const DEFAULT_STATE: State = {
       name: '',
       price: 0,
       weight: 0,
+      ingredients: '',
+      toppings: {
+        topping: [],
+        without: [],
+      },
+      subcategory: '',
     },
   },
 }

@@ -28,7 +28,9 @@ export type MenuObject = {
     id: string
     name: string
     items: Product[]
+    order: number
   }[]
+  order: number
 }
 
 export type Product = {
@@ -38,7 +40,8 @@ export type Product = {
   badges: string[]
   image: string
   ingredients?: string
-  toppings?: Toppings
+  toppings: Toppings
+  subcategory: string
 }
 
 export type Toppings = {

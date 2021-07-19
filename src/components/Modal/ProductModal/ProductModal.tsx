@@ -2,7 +2,6 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
-import { TOPPINGS } from '../../../constants'
 import { ModalContext } from '../../../store/Modal/Modal.context'
 import Badges from '../../Badges/Badges'
 import Recommended from '../../Recommended/Recommended'
@@ -13,7 +12,7 @@ import ToppingsManager from './ToppingsManager/ToppingsManager'
 const ProductModal = () => {
   const {
     state: {
-      product: { name, image, badges, weight, price }, // ingredients, toppings },
+      product: { name, image, badges, weight, price, ingredients, toppings },
     },
   } = useContext(ModalContext)
 
@@ -22,7 +21,7 @@ const ProductModal = () => {
       <div className="lg:flex">
         <div>
           <HallalInsignia className={classNames(styles.productPopupContainer__insignia, 'absolute -left-4 -top-4 lg:-left-8 lg:-top-8')} />
-          <img className="rounded w-full object-cover lg:min-h-150" src={`/images/food/${image}.png`} alt="Product image" />
+          <img className="rounded w-full object-cover lg:min-h-150" src={image} alt="Product image" />
         </div>
         <div className="mt-6 font-bold md:mt-13 lg:w-130 lg:min-w-130 lg:ml-10 lg:mt-0 xl:w-140 xl:min-w-140">
           <Badges className={styles.productPopupContainer__badges} type="big" badges={badges} />
@@ -31,14 +30,17 @@ const ProductModal = () => {
           <p className={classNames(styles.productPopupContainer__description, 'font-normal mt-4')}>
             <span className={styles.productPopupContainer__weight}>{weight} g</span>
             <br />
-            {/* {ingredients} */}
-            carne pui, varză, morcov, castraveți, roșii, cartofi, sos de usturoi marca Mr Kebab, sos ketchup
+            {ingredients}
           </p>
-          {/* <ToppingsHandler toppings={toppings} /> */}
-          <ToppingsManager
-            toppings={TOPPINGS}
-            count={2}
-          />
+          {
+            toppings.topping.length === 0 && toppings.without.length === 0 ?
+              <div></div>
+              :
+              <ToppingsManager
+                toppings={toppings}
+                count={2}
+              ></ToppingsManager>
+          }
         </div>
       </div>
       <Recommended currentProductName={name} />

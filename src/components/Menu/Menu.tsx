@@ -2,17 +2,21 @@ import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'
 
-import { MENU } from '../../constants'
-import { MenuObject } from '../../types'
+import { MenuObject, Product } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
 import CategoryProducts from './CategoryProducts/CategoryProducts'
 import styles from './Menu.module.scss'
 
-const Menu = () => {
+type Props = {
+  products: Product[]
+  categories: MenuObject[]
+}
+
+const Menu = ({ categories }: Props) => {
+  categories.sort((first, second) => first.order - second.order)
+
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
-
-  const menu = MENU
 
   const onResizeHandler = () => {
     if (sectionRef.current) {
@@ -76,7 +80,11 @@ const Menu = () => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {menu.map(category)}
+      {categories.map(({ categoryName, subCategories, order }: MenuObject, index: number) => category({
+        categoryName: categoryName === 'Unfiltered' ? '' : categoryName,
+        subCategories: subCategories.sort((first, second) => first.order - second.order),
+        order,
+      }, index))}
     </div>
   )
 }

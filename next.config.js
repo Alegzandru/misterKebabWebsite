@@ -3,4 +3,10 @@ module.exports = {
   eslint: {
     dirs: ['pages', 'src/components'],
   },
+  images: {
+    domains: [
+      'res.cloudinary.com',
+      'localhost'
+    ],
+  },
 }
