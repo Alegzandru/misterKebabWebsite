@@ -87,7 +87,6 @@ const Careers = () => {
         <CareersCategoryBlock heading="Date de contact">
           <div className="mt-6 grid sm:grid-cols-2 gap-x-6">
             <Input
-              value="Aurel"
               className="mb-4"
               name="name"
               label="Nume Prenume"
@@ -97,7 +96,6 @@ const Careers = () => {
               {...VALIDATIONS.name}
             />
             <Input
-              value={20}
               className="mb-6"
               type="number"
               name="age"
@@ -108,7 +106,6 @@ const Careers = () => {
               {...VALIDATIONS.age}
             />
             <Input
-              value={+37360770071}
               className="mb-4"
               name="tel"
               label="Numar de telefon"
@@ -118,7 +115,6 @@ const Careers = () => {
               {...VALIDATIONS.tel}
             />
             <Input
-              value="dodon.aurel@gmail.com"
               name="email"
               label="E-mail"
               placeholder="exemplu@mail.com"
