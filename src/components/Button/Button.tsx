@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 type Props = PropsWithChildren<{
-  type: ButtonHTMLAttributes<HTMLButtonElement>['type']
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
   className?: string
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }>

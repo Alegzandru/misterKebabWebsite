@@ -1,3 +1,5 @@
+import { CAREERS_CHECKBOXES_CATEGORY } from '../constants'
+
 export type HeroButton = {
   name: string
   id: string
@@ -57,8 +59,11 @@ export type ToppingsManagerState = {
 
 export type CareerOthersBlock = {
   heading: string
+  name: string
   values: string[]
 }
+
+export type CareerCheckboxesCategory = keyof typeof CAREERS_CHECKBOXES_CATEGORY | ''
 
 export type AnyAction = {
   type: string

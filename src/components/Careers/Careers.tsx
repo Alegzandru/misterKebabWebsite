@@ -1,10 +1,12 @@
 import classNames from 'classnames'
 import Image from 'next/image'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import careersHero from '../../../public/images/careers-hero.png'
-import { CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
-import { CareerOthersBlock } from '../../types'
+import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
+import { VALIDATIONS } from '../../constants/forms'
+import { CareerCheckboxesCategory, CareerOthersBlock } from '../../types'
 import { careerFormDataHandler } from '../../utils/forms'
 import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
@@ -14,17 +16,41 @@ import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
 
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
 
-  // eslint-disable-next-line no-console
   const onSubmit = (data: Record<string, string | boolean>) => {
     const newData = careerFormDataHandler(data)
+
+    const checkboxCategories = Object.keys(CAREERS_CHECKBOXES_CATEGORY) as CareerCheckboxesCategory[]
+    const newCheckboxesErrors = new Set<CareerCheckboxesCategory>(checkboxCategories)
+
+    checkboxCategories.forEach((category) => {
+      if (newData[category].length) {
+        newCheckboxesErrors.delete(category)
+      }
+    })
+
+    if (newCheckboxesErrors.size) {
+      return setCheckboxesErrors(new Set(newCheckboxesErrors))
+    }
 
     // eslint-disable-next-line no-console
     console.table(newData)
   }
 
-  const othersBlock = ({ heading, values }: CareerOthersBlock, count: number) => (
-    <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14 sm:justify-self-center')}>
+  const checkboxHandler = (value: CareerCheckboxesCategory) => {
+    if (checkboxesErrors.has(value)) {
+      checkboxesErrors.delete(value)
+
+      setCheckboxesErrors(new Set(checkboxesErrors))
+    }
+  }
+
+  const errorBlock = (category: CareerCheckboxesCategory) => checkboxesErrors.has(category)
+    && <p className={styles.careersHeroContainer__error}>*Bifați cel puțin o opțiune!</p>
+
+  const othersBlock = ({ heading, values, name }: CareerOthersBlock, count: number) => (
+    <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14')}>
       <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{heading}:</h3>
       {values.map((value, index) => (
         <Checkbox
@@ -35,10 +61,12 @@ const Careers = () => {
           )}
           name={value}
           register={register}
+          onChange={() => checkboxHandler(name as CareerCheckboxesCategory)}
         >
           {value}
         </Checkbox>
       ))}
+      {errorBlock(name as CareerCheckboxesCategory)}
     </div>
   )
 
@@ -58,10 +86,46 @@ const Careers = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CareersCategoryBlock heading="Date de contact">
           <div className="mt-6 grid sm:grid-cols-2 gap-x-6">
-            <Input className="mb-4" name="name" label="Nume Prenume" placeholder="Numele dvs" register={register} />
-            <Input className="mb-6" name="age" label="Varsta" placeholder="18+" register={register} />
-            <Input className="mb-4" name="tel" label="Numar de telefon" placeholder="+373 (__) ___ ___" register={register} />
-            <Input name="email" label="E-mail" placeholder="exemplu@mail.com" register={register} />
+            <Input
+              value="Aurel"
+              className="mb-4"
+              name="name"
+              label="Nume Prenume"
+              placeholder="Numele dvs"
+              register={register}
+              errors={errors}
+              {...VALIDATIONS.name}
+            />
+            <Input
+              value={20}
+              className="mb-6"
+              type="number"
+              name="age"
+              label="Varsta"
+              placeholder="18+"
+              register={register}
+              errors={errors}
+              {...VALIDATIONS.age}
+            />
+            <Input
+              value={+37360770071}
+              className="mb-4"
+              name="tel"
+              label="Numar de telefon"
+              placeholder="+373 (__) ___ ___"
+              register={register}
+              errors={errors}
+              {...VALIDATIONS.tel}
+            />
+            <Input
+              value="dodon.aurel@gmail.com"
+              name="email"
+              label="E-mail"
+              placeholder="exemplu@mail.com"
+              register={register}
+              errors={errors}
+              {...VALIDATIONS.email}
+            />
           </div>
         </CareersCategoryBlock>
         {verticalLine}
@@ -73,10 +137,12 @@ const Careers = () => {
                 className={styles.careersHeroContainer__checkbox}
                 name={service}
                 register={register}
+                onChange={() => checkboxHandler(CAREERS_CHECKBOXES_CATEGORY.services)}
               >
                 {service}
               </Checkbox>
             ))}
+            {errorBlock(CAREERS_CHECKBOXES_CATEGORY.services)}
           </div>
         </CareersCategoryBlock>
         {verticalLine}

@@ -1,7 +1,7 @@
 .inputContainer {
   &__label {
     font-size: 14px;
-    color: #58606e;
+    color: #08080b;
     line-height: 19px;
     margin-bottom: 6px;
   }
@@ -10,9 +10,24 @@
     border: 2px solid #e1e1e1;
     border-radius: 4px;
 
+    &_border {
+      border-color: #df2026;
+    }
+
     &::placeholder {
       color: #58606e;
       font-size: 14px;
     }
+
+    &:focus {
+      border-color: #ffb80e;
+    }
+  }
+
+  &__error {
+    color: #df2026;
+    font-size: 12px;
+    line-height: 13px;
+    margin-top: 8px;
   }
 }

@@ -92,6 +92,13 @@ export const CAREERS_FORM_INITIAL_DATA = {
   workType: [] as string[],
 }
 
+export const CAREERS_CHECKBOXES_CATEGORY = {
+  services: 'services' as 'services',
+  languages: 'languages' as 'languages',
+  locations: 'locations' as 'locations',
+  workType: 'workType' as 'workType',
+}
+
 export const CAREERS_SERVICES = ['Bucatar', 'Chelner', 'Casier Operator', 'Sofer de livrare', 'Handyman', 'Operator de livrare']
 export const CAREERS_OTHERS = [
   {

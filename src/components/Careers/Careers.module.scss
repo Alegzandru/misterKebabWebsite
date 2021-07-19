@@ -35,6 +35,13 @@
     }
   }
 
+  &__error {
+    color: #df2026;
+    font-size: 12px;
+    line-height: 13px;
+    margin-top: 8px;
+  }
+
   &__button {
     max-width: 720px;
   }
@@ -52,6 +59,15 @@
 
     &__others {
       margin: 0;
+      justify-self: center;
+
+      &:first-child {
+        justify-self: left;
+      }
+
+      &:last-child {
+        justify-self: right;
+      }
     }
 
     &__checkbox {
@@ -72,14 +88,6 @@
   .careersHeroContainer {
     &__hero {
       height: 544px;
-    }
-
-    &__others {
-      margin: 0;
-    }
-
-    &__checkbox {
-      margin-bottom: 16px !important;
     }
   }
 }

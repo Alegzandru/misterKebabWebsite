@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { ChangeEvent, PropsWithChildren } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 import styles from './Checkbox.module.scss'
 
@@ -11,9 +11,9 @@ type Props = PropsWithChildren<{
   checked?: boolean
   register?: UseFormRegister<FieldValues>
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-}>
+}> & RegisterOptions
 
-const Checkbox = ({ className, name, children, defaultChecked, checked, register, onChange }: Props) => (
+const Checkbox = ({ className, name, children, defaultChecked, checked, register, onChange, ...registerOptions }: Props) => (
   <label
     className={classNames(
       styles.checkboxContainer, className,
@@ -25,7 +25,8 @@ const Checkbox = ({ className, name, children, defaultChecked, checked, register
       type="checkbox"
       defaultChecked={defaultChecked}
       checked={checked}
-      {...(register ? register(name as string) : { name, onChange })}
+      {...(register ? register(name as string, registerOptions) : { name })}
+      onChange={onChange}
     />
     <span className={classNames(styles.checkboxContainer__checkMark, 'absolute left-px h-4 w-4')} />
     {children}
