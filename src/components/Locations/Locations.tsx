@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { LOCATIONS } from '../../constants'
-import { THEMES } from '../../constants/common'
+import { PAGES, THEMES } from '../../constants/common'
 import ExternalLink from '../Svgs/ExternalLink/ExternalLink'
 import styles from './Locations.module.scss'
 
@@ -17,7 +17,7 @@ const Locations = ({ }: Props) => {
       <h5 className={styles.locationsContainer__heading}>{name}</h5>
       <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-6')}>{address}</p>
       <Link href={{
-        pathname: '/location',
+        pathname: PAGES.locations.pathname,
         query: { address },
       }}>
         <a className={classNames(styles.locationsContainer__anchor, 'flex items-center')}>

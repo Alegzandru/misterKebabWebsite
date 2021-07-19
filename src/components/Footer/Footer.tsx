@@ -11,9 +11,9 @@ import Socials from '../Svgs/Socials/Socials'
 import styles from './Footer.module.scss'
 
 const Footer = () => {
-  const link = ({ path, name }: typeof PAGES['home'], index: number) => (
+  const link = ({ pathname, name }: typeof PAGES['home'], index: number) => (
     <li key={index} className={classNames(styles.footerContainer__anchor, 'my-10 md:my-0 md:mr-10 transition-all')}>
-      <Link href={path}>
+      <Link href={pathname}>
         <a>{name}</a>
       </Link>
     </li>

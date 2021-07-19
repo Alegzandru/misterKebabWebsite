@@ -1,14 +1,16 @@
 import classNames from 'classnames'
-import { PropsWithChildren } from 'react'
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 type Props = PropsWithChildren<{
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
   className?: string
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }>
 
-const Button = ({ className, onClick, children }: Props) => (
+const Button = ({ type, className, onClick, children }: Props) => (
   <button
+    type={type}
     className={classNames(
       styles.buttonContainer, className,
       'flex justify-center items-center font-medium w-full rounded h-13 transition-colors'

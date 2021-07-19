@@ -1,0 +1,93 @@
+.careersHeroContainer {
+  font-family: "Red Hat Display";
+  background-color: #f4f4f6;
+
+  &__hero {
+    height: 320px;
+  }
+
+  &__heading {
+    font-size: 44px;
+    color: #ffffff;
+  }
+
+  &__verticalLine {
+    border-left: 2px dashed #ffb80e;
+  }
+
+  &__others {
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  &__othersHeading {
+    color: #08080b;
+    line-height: 18px;
+    font-size: 14px;
+  }
+
+  &__checkbox {
+    font-size: 14px;
+
+    &_margin {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__error {
+    color: #df2026;
+    font-size: 12px;
+    line-height: 13px;
+    margin-top: 8px;
+  }
+
+  &__button {
+    max-width: 720px;
+  }
+}
+
+@media only screen and (min-width: 512px) {
+  .careersHeroContainer {
+    &__hero {
+      height: 359px;
+    }
+
+    &__heading {
+      font-size: 52px;
+    }
+
+    &__others {
+      margin: 0;
+      justify-self: center;
+
+      &:first-child {
+        justify-self: left;
+      }
+
+      &:last-child {
+        justify-self: right;
+      }
+    }
+
+    &__checkbox {
+      margin-bottom: 16px !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .careersHeroContainer {
+    &__heading {
+      font-size: 69px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .careersHeroContainer {
+    &__hero {
+      height: 544px;
+    }
+  }
+}

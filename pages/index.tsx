@@ -1,6 +1,7 @@
 import React from 'react'
 
 import banner from '../public/images/banners/banner.png'
+import banner2 from '../public/images/banners/banner2.png'
 import BackToTopButton from '../src/components/BackToTopButton/BackToTopButton'
 import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavbar'
 import Hero from '../src/components/Hero/Hero'
@@ -13,7 +14,7 @@ import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveS
 const MainPage = () => (
   <Layout>
     <Hero />
-    <Slider slides={[banner, banner, banner, banner]} autoPlayInterval={3500} />
+    <Slider slides={[banner2, banner]} autoPlayInterval={3500} />
     <ActiveSectionContextProvider>
       <CategoriesNavbar />
       <Menu />

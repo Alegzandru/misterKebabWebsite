@@ -16,7 +16,7 @@ const Pagination = ({ slides, activeSlide, onClick }: Props) => (
         className={classNames(
           styles.paginationContainer__button,
           { [styles.paginationContainer__button_active]: activeSlide === index },
-          'w-full flex-1 transition-colors duration-1000'
+          'w-full h-full flex-1 transition-colors duration-1000'
         )}
         title="Change slide"
         aria-label="Change slide"
