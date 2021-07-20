@@ -50,7 +50,7 @@ const Header = () => {
     <li
       key={index}
       style={router.asPath === pathname ? {
-        color: transparent ? '#fab729' : '#df2026',
+        color: transparent || showMobileHeader ? '#fab729' : '#df2026',
         fontWeight: 700,
       } : { color: !transparent ? '#58606E' : undefined }}
       className={classNames(styles.headerContainer__anchor, 'font-bold w-full md:font-medium md:mx-8')}
@@ -114,22 +114,28 @@ const Header = () => {
   )
 
   return (
-    <header className={classNames(
-      styles.headerContainer,
-      'py-2 px-4 fixed flex items-center z-50 w-full h-16 transition-colors md:absolute md:inset-x-0 md:mx-auto max-w-screen',
-      {
-        [styles.headerContainer_boxShadow]: !transparent,
-        [styles.headerContainer_transparent]: transparent,
-        'bg-white': showMobileHeader || !transparent,
-      }
-    )}>
-      <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
-        <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
-      </div>
-      {navbar}
-      <div className="flex md:hidden">
-        <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
-        {mobileButton}
+    <header
+      className={classNames(
+        'fixed w-full z-50 transition-colors md:absolute',
+        {
+          [styles.headerContainer_boxShadow]: !transparent,
+          [styles.headerContainer_transparent]: transparent,
+          'bg-white': showMobileHeader || !transparent,
+        }
+      )}
+    >
+      <div className={classNames(
+        styles.headerContainer,
+        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen'
+      )}>
+        <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
+          <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+        </div>
+        {navbar}
+        <div className="flex md:hidden">
+          <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+          {mobileButton}
+        </div>
       </div>
     </header>
   )

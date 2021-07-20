@@ -34,11 +34,18 @@ const MainPage = ({ products, categories }: Props) => (
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const subcategoriesRes = await fetch(`${API_URL}/categories`)
-  const subcategories = await subcategoriesRes.json()
+  const [subcategoriesRes, productsRes, categoriesRes] = await Promise.all([
+    fetch(`${API_URL}/categories`),
+    fetch(`${API_URL}/products`),
+    fetch(`${API_URL}/big-categories`),
+  ])
 
-  const productsRes = await fetch(`${API_URL}/products`)
-  const productsRaw = await productsRes.json()
+  const [subcategories, productsRaw, categoriesRaw] = await Promise.all([
+    subcategoriesRes.json(),
+    productsRes.json(),
+    categoriesRes.json(),
+  ])
+
   const products = productsRaw.filter((product: any) =>
     product.image.formats.medium !== undefined &&
     product.price !== null &&
@@ -71,9 +78,6 @@ export const getStaticProps: GetStaticProps = async () => {
         }
       )
     })
-
-  const categoriesRes = await fetch(`${API_URL}/big-categories`)
-  const categoriesRaw = await categoriesRes.json()
 
   const categories = categoriesRaw.map((category: any) => (
     {

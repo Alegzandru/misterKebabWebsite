@@ -5,7 +5,7 @@ import React from 'react'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
 import { PAGES, THEMES } from '../../constants/common'
-import Locations from '../Locations/Locations'
+import LocationsLinks from '../LocationsLinks/LocationsLinks'
 import LiraLogo from '../Svgs/LiraLogo/LiraLogo'
 import Socials from '../Svgs/Socials/Socials'
 import styles from './Footer.module.scss'
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <Socials className="flex-half flex justify-end items-center md:flex-none" />
       </div>
-      <Locations theme={THEMES.dark} />
+      <LocationsLinks theme={THEMES.dark} />
       <div className="flex justify-center md:mt-22 lg:mt-18">
         <a href="#" className={classNames(styles.footerContainer__credits, 'relative flex')}>
           Crafted by

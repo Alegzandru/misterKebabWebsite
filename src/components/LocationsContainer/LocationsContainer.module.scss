@@ -1,0 +1,23 @@
+.locationsContainer {
+  font-family: "Red Hat Display", sans-serif;
+
+  &__heading {
+    font-size: 42px;
+    color: #611220;
+  }
+
+  &__placeholder {
+    height: 350px;
+    background-color: #f4f4f6;
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .locationsContainer {
+    padding-top: 170px;
+
+    &__heading {
+      font-size: 64px;
+    }
+  }
+}

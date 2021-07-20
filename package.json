@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@googlemaps/js-api-loader": "1.12.1",
     "classnames": "2.3.1",
     "lodash.debounce": "4.0.8",
     "lodash.throttle": "4.1.1",
@@ -24,6 +25,7 @@
     "swiper": "6.7.5"
   },
   "devDependencies": {
+    "@types/google.maps": "3.45.6",
     "@types/lodash.debounce": "4.0.6",
     "@types/lodash.throttle": "4.1.6",
     "@types/react": "17.0.11",

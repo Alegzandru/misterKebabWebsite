@@ -11,7 +11,7 @@ export const SCREEN_TYPE = {
 }
 
 export const THEMES = {
-  white: 'white' as 'white',
+  light: 'light' as 'light',
   dark: 'dark' as 'dark',
 }
 
