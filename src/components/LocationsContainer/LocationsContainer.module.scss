@@ -10,6 +10,33 @@
     height: 350px;
     background-color: #f4f4f6;
   }
+
+  .meat {
+    top: 0;
+    left: -90px;
+
+    .locationsContainer__parallax {
+      height: 280px;
+      width: 330px;
+      background-image: url(/images/parallax/meat.png);
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .tomato {
+    .locationsContainer__parallax {
+      height: 330px;
+      width: 330px;
+      background-image: url(/images/parallax/tomato.png);
+    }
+  }
+
+  .salad {
+    .locationsContainer__parallax {
+      background-image: url(/images/parallax/salad.png);
+    }
+  }
 }
 
 @media only screen and (min-width: 816px) {

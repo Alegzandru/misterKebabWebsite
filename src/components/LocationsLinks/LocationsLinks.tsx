@@ -41,8 +41,8 @@ const LocationsLinks = ({ theme }: Props) => {
     <div className={classNames(
       styles.locationsContainer,
       styles[theme],
-      isLight ? 'gap-4' : 'gap-2',
-      'grid grid-cols-1 mt-6 mb-16 w-full sm:grid-cols-2 lg:grid-cols-4 lg:mt-11 lg:mb-0',
+      isLight ? 'gap-4' : 'gap-2 mb-16 lg:mb-0',
+      'grid grid-cols-1 mt-6 w-full sm:grid-cols-2 lg:grid-cols-4 lg:mt-11',
     )}>
       {LOCATIONS.map(block)}
     </div>

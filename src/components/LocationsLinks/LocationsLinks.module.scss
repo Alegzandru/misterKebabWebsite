@@ -59,57 +59,23 @@
   }
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media only screen and (min-width: 816px) {
   .locationsContainer {
-    font-family: "Red Hat Display", sans-serif;
-
-    &__heading {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    &__anchor {
-      font-size: 14px;
-    }
-
-    &.dark {
-      .locationsContainer {
-        &__wrapper {
-          background-color: #040404;
-        }
-
-        &__heading {
-          color: #fab729;
-        }
-
-        &__address {
-          color: #e1e1e1;
-        }
-
-        &__anchor {
-          color: #ffffff;
-        }
-      }
-    }
-
     &.light {
-      .locationsContainer {
-        &__wrapper {
-          background-color: #fff7f8;
-        }
-
-        &__heading {
-          color: #08080b;
-        }
-
-        &__address {
-          color: #08080b;
-        }
-
-        &__anchor {
-          color: #df2026;
-        }
-      }
+      margin-bottom: 140px;
     }
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  .locationsContainer {
+    &.light {
+      margin-bottom: 180px;
+    }
+  }
+}
+
+// @media (hover: hover) and (pointer: fine) {
+//   .locationsContainer {
+//   }
+// }
