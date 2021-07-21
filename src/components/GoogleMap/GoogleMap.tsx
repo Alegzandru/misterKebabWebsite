@@ -33,10 +33,15 @@ const GoogleMap = () => {
       const locations = LOCATIONS.map(({ position }) => new google.maps.LatLng(position))
 
       locations.forEach((position) => {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
           position,
           icon: pointer.src,
           map: mapRef.current,
+        })
+
+        marker.addListener('click', () => {
+          mapRef.current?.setZoom(16)
+          mapRef.current?.panTo(marker.getPosition() as google.maps.LatLng)
         })
       })
     })()
@@ -48,8 +53,12 @@ const GoogleMap = () => {
     const position = LOCATIONS.find(({ address }) => address === router.query.address)?.position
 
     if (position) {
-      mapRef.current?.setCenter(position)
-      mapRef.current?.setZoom(15)
+      mapRef.current?.setZoom(14)
+
+      setTimeout(() => {
+        mapRef.current?.panTo(position)
+        mapRef.current?.setZoom(16)
+      }, 1000)
     }
   }, [router.query])
 
