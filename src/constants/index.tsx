@@ -15,18 +15,22 @@ export const LOCATIONS = [
   {
     name: 'Malina Mică',
     address: 'Strada Nicolae Testemiţanu 17/6',
+    position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
     address: 'Strada Vladimir Korolenko 12',
+    position: { lat: 46.995146, lng: 28.825689 },
   },
   {
     name: 'Râşcani',
     address: 'Bd. Moscova 10/1',
+    position: { lat: 47.04887, lng: 28.86357 },
   },
   {
     name: 'Botanica',
     address: 'Strada Independenţei 4/3',
+    position: { lat: 46.98538, lng: 28.84468 },
   },
 ]
 

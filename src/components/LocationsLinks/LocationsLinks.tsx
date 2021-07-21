@@ -17,11 +17,7 @@ const LocationsLinks = ({ theme }: Props) => {
   const block = ({ name, address }: typeof LOCATIONS[0], index: number) => (
     <div
       key={index}
-      className={classNames(
-        styles.locationsContainer__wrapper,
-        isLight ? 'px-8 py-6' : 'p-8',
-        'p-8 sm:my-0'
-      )}
+      className={classNames(styles.locationsContainer__wrapper, 'transition-all p-6 sm:my-0')}
     >
       <h5 className={styles.locationsContainer__heading}>{name}</h5>
       <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-6')}>{address}</p>
@@ -29,7 +25,7 @@ const LocationsLinks = ({ theme }: Props) => {
         pathname: PAGES.locations.pathname,
         query: { address },
       }}>
-        <a className={classNames(styles.locationsContainer__anchor, 'flex items-center font-medium')}>
+        <a className={classNames(styles.locationsContainer__anchor, 'flex items-center relative w-max font-medium transition-all')}>
           Deschide pe hartă
           <ExternalLink className="ml-2" />
         </a>
@@ -42,7 +38,7 @@ const LocationsLinks = ({ theme }: Props) => {
       styles.locationsContainer,
       styles[theme],
       isLight ? 'gap-4' : 'gap-2 mb-16 lg:mb-0',
-      'grid grid-cols-1 mt-6 w-full max-w-screen sm:grid-cols-2 lg:grid-cols-4 lg:mt-11',
+      'grid grid-cols-1 mt-6 mx-auto w-full max-w-screen sm:grid-cols-2 lg:grid-cols-4 lg:mt-11',
     )}>
       {LOCATIONS.map(block)}
     </div>
