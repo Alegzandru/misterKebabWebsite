@@ -9,7 +9,7 @@ type Props = PropsWithChildren<unknown>
 const LocationsContainer = ({ children }: Props) => {
   const parallaxBackgroundImage = (image: string) => (
     <div className={classNames(styles[image], 'hidden md:block absolute pointer-events-none z-10')} >
-      <Parallax y={[0, 20]}>
+      <Parallax y={[-20, 30]}>
         <div className={styles.locationsContainer__parallax} />
       </Parallax>
     </div>

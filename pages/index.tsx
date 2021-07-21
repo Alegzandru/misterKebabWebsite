@@ -22,7 +22,7 @@ type Props = {
 const MainPage = ({ products, categories }: Props) => (
   <Layout>
     <Hero />
-    <Slider slides={[banner2, banner]} autoPlayInterval={3500} />
+    <Slider slides={[banner2, banner]} autoPlayInterval={4000} />
     <ActiveSectionContextProvider>
       <CategoriesNavbar />
       <Menu categories={categories} products={products} />

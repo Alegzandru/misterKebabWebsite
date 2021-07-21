@@ -42,7 +42,7 @@ const LocationsLinks = ({ theme }: Props) => {
       styles.locationsContainer,
       styles[theme],
       isLight ? 'gap-4' : 'gap-2 mb-16 lg:mb-0',
-      'grid grid-cols-1 mt-6 w-full sm:grid-cols-2 lg:grid-cols-4 lg:mt-11',
+      'grid grid-cols-1 mt-6 w-full max-w-screen sm:grid-cols-2 lg:grid-cols-4 lg:mt-11',
     )}>
       {LOCATIONS.map(block)}
     </div>
