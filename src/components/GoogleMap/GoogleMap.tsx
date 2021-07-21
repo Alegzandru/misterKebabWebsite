@@ -55,8 +55,12 @@ const GoogleMap = () => {
     if (position) {
       mapContainerRef.current?.scrollIntoView(true)
 
-      mapRef.current?.panTo(position)
-      mapRef.current?.setZoom(16)
+      mapRef.current?.setZoom(12)
+
+      setTimeout(() => {
+        mapRef.current?.panTo(position)
+        mapRef.current?.setZoom(16)
+      }, 500)
     }
   }, [router.query])
 
