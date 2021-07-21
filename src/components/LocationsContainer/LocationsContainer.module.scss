@@ -1,0 +1,99 @@
+.locationsContainer {
+  font-family: "Red Hat Display", sans-serif;
+
+  &__heading {
+    font-size: 42px;
+    color: #611220;
+  }
+
+  &__placeholder {
+    height: 350px;
+    background-color: #f4f4f6;
+  }
+
+  &__parallax {
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .meat {
+    top: 0;
+    right: calc(50% + 170px);
+
+    .locationsContainer__parallax {
+      height: 280px;
+      width: 330px;
+      background-image: url(/images/parallax/meat.png);
+    }
+  }
+
+  .tomato {
+    top: 100px;
+    left: calc(50% + 250px);
+
+    .locationsContainer__parallax {
+      height: 330px;
+      width: 330px;
+      background-image: url(/images/parallax/tomato.png);
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .locationsContainer {
+    padding-top: 170px;
+
+    &__heading {
+      font-size: 64px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .locationsContainer {
+    .meat {
+      top: -50px;
+      right: calc(50% + 200px);
+
+      .locationsContainer__parallax {
+        height: 300px;
+        width: 500px;
+      }
+    }
+
+    .tomato {
+      top: 40px;
+      left: calc(50% + 300px);
+
+      .locationsContainer__parallax {
+        height: 740px;
+        width: 760px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .locationsContainer {
+    padding-top: 186px;
+
+    .meat {
+      top: 0px;
+      right: calc(50% + 450px);
+    }
+
+    .tomato {
+      left: calc(50% + 470px);
+    }
+
+    .salad {
+      right: calc(50% + 600px);
+
+      .locationsContainer__parallax {
+        height: 440px;
+        width: 460px;
+        background-image: url(/images/parallax/salad.png);
+      }
+    }
+  }
+}

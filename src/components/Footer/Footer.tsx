@@ -1,16 +1,19 @@
 import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
 import { PAGES, THEMES } from '../../constants/common'
-import Locations from '../Locations/Locations'
+import LocationsLinks from '../LocationsLinks/LocationsLinks'
 import LiraLogo from '../Svgs/LiraLogo/LiraLogo'
 import Socials from '../Svgs/Socials/Socials'
 import styles from './Footer.module.scss'
 
 const Footer = () => {
+  const router = useRouter()
+
   const link = ({ pathname, name }: typeof PAGES['home'], index: number) => (
     <li key={index} className={classNames(styles.footerContainer__anchor, 'my-10 md:my-0 md:mr-10 transition-all')}>
       <Link href={pathname}>
@@ -34,7 +37,7 @@ const Footer = () => {
         </div>
         <Socials className="flex-half flex justify-end items-center md:flex-none" />
       </div>
-      <Locations theme={THEMES.dark} />
+      {router.pathname !== PAGES.locations.pathname && <LocationsLinks theme={THEMES.dark} />}
       <div className="flex justify-center md:mt-22 lg:mt-18">
         <a href="#" className={classNames(styles.footerContainer__credits, 'relative flex')}>
           Crafted by
