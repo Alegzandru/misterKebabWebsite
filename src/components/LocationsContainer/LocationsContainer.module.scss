@@ -63,7 +63,9 @@
 
     .tomato {
       top: 40px;
-      left: calc(50% + 300px);
+      right: -540px;
+
+      left: auto;
 
       .locationsContainer__parallax {
         height: 740px;
@@ -79,6 +81,7 @@
 
     .meat {
       top: 0px;
+      left: auto;
       right: calc(50% + 450px);
     }
 
