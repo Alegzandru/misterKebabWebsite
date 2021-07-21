@@ -7,6 +7,21 @@
   opacity: 0;
   background-color: #f4f4f6;
   animation: fadeIn 0.5s ease forwards;
+
+  &_cart {
+    max-width: 372px;
+  }
+}
+
+@media only screen and (min-width: 373px) {
+  .modalContainer {
+    &_cart {
+      border-radius: 16px;
+      top: 16px;
+      bottom: 16px;
+      padding: 64px 16px 32px;
+    }
+  }
 }
 
 @media only screen and (min-width: 1024px) {

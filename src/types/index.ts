@@ -1,4 +1,10 @@
-import { CAREERS_CHECKBOXES_CATEGORY } from '../constants'
+import { CAREERS_CHECKBOXES_CATEGORY, CART_FORM_BLOCKS, MODALS } from '../constants'
+import { THEMES } from '../constants/common'
+
+export type AnyAction = {
+  type: string
+  payload: Record<string, any>
+}
 
 export type HeroButton = {
   name: string
@@ -67,8 +73,6 @@ export type CareerOthersBlock = {
 }
 
 export type CareerCheckboxesCategory = keyof typeof CAREERS_CHECKBOXES_CATEGORY | ''
-
-export type AnyAction = {
-  type: string
-  payload: Record<string, any>
-}
+export type OrderType = keyof typeof CART_FORM_BLOCKS | ''
+export type Modals = keyof typeof MODALS | ''
+export type Themes = keyof typeof THEMES

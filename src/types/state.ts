@@ -1,11 +1,10 @@
-import { Product } from '.'
-import { MODALS } from '../constants'
+import { Modals, Product } from '.'
 
 export type State = {
   modal: ModalState
 }
 
 export type ModalState = {
-  show: keyof typeof MODALS | ''
+  show: Modals
   product: Product
 }

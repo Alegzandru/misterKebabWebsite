@@ -90,7 +90,7 @@ const Careers = () => {
               className="mb-4"
               name="name"
               label="Nume Prenume"
-              placeholder="Numele dvs"
+              placeholder="Numele dvs."
               register={register}
               errors={errors}
               {...VALIDATIONS.name}
