@@ -9,6 +9,8 @@ import styles from './GoogleMap.module.scss'
 
 const GoogleMap = () => {
   const googleMapRef = useRef<HTMLDivElement>(null)
+  const mapContainerRef = useRef<HTMLDivElement>(null)
+
   const mapRef = useRef<google.maps.Map>()
 
   const router = useRouter()
@@ -48,22 +50,18 @@ const GoogleMap = () => {
   }, [])
 
   useEffect(() => {
-    googleMapRef.current?.scrollIntoView()
-
     const position = LOCATIONS.find(({ address }) => address === router.query.address)?.position
 
     if (position) {
-      mapRef.current?.setZoom(14)
+      mapContainerRef.current?.scrollIntoView(true)
 
-      setTimeout(() => {
-        mapRef.current?.panTo(position)
-        mapRef.current?.setZoom(16)
-      }, 1000)
+      mapRef.current?.panTo(position)
+      mapRef.current?.setZoom(16)
     }
   }, [router.query])
 
   return (
-    <div className={classNames(styles.mapContainer, 'w-full max-w-screen')}>
+    <div ref={mapContainerRef} className={classNames(styles.mapContainer, 'w-full pt-16 max-w-screen')}>
       <div id="map" ref={googleMapRef} className="h-full" />
     </div>
   )
