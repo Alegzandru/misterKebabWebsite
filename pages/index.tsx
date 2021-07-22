@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import banner from '../public/images/banners/banner.png'
 import banner2 from '../public/images/banners/banner2.png'
@@ -32,8 +33,7 @@ const MainPage = ({ products, categories }: Props) => (
   </Layout>
 )
 
-
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({locale}) => {
   const [subcategoriesRes, productsRes, categoriesRes] = await Promise.all([
     fetch(`${API_URL}/categories`),
     fetch(`${API_URL}/products`),
@@ -47,11 +47,13 @@ export const getStaticProps: GetStaticProps = async () => {
   ])
 
   const products = productsRaw.filter((product: any) =>
+    product.image !== null &&
+    product.image !== undefined &&
     product.image.formats.medium !== undefined &&
     product.price !== null &&
     product.weight !== null &&
-    product.name !== null &&
-    product.ingredients !== [])
+    product.name !== null
+  )
     .map((product: any) => {
       const topping = product.toppings.length !== 0
         ? product.toppings.map((toppingSing: any) => ({
@@ -68,12 +70,14 @@ export const getStaticProps: GetStaticProps = async () => {
       return (
         {
           name: product.name,
+          nameru: product.nameru,
           price: product.price,
           weight: product.weight,
           badges: product.ingredients.map((ingredient: any) => (ingredient.name)),
-          image: product.image.formats.medium.url,
+          image: product.image.formats.medium === undefined ? '/images/food/product-image.png' : product.image.formats.medium.url,
           subcategory: product.subcategory.name,
           ingredients: product.description,
+          ingredientsru: product.descriptionru,
           toppings: toppingsObj,
         }
       )
@@ -82,10 +86,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const categories = categoriesRaw.map((category: any) => (
     {
       categoryName: category.name,
+      categoryNameRu: category.nameru,
       subCategories: category.subcategories.map((subcategory: any) => (
         {
           id: subcategory.slug,
           name: subcategory.name,
+          nameru: subcategory.nameru,
           items: products.filter(
             (product: any) => product.subcategory === subcategory.name
           ),
@@ -97,7 +103,11 @@ export const getStaticProps: GetStaticProps = async () => {
   ))
 
   return {
-    props: { products, categories },
+    props: {
+      products,
+      categories,
+      ...(await serverSideTranslations(locale as string, ['header', 'hero', 'popup'])),
+    },
     revalidate: 10,
   }
 }

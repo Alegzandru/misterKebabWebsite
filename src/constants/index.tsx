@@ -14,22 +14,30 @@ export const SOCIALS_LINKS = [
 export const LOCATIONS = [
   {
     name: 'Malina Mică',
+    nameru: 'Малая Малина',
     address: 'Strada Nicolae Testemiţanu 17/6',
+    addressru: 'Улица Nicolae Testemiţanu 17/6',
     position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
+    nameru: 'Телецентр',
     address: 'Strada Vladimir Korolenko 12',
+    addressru: 'Улица Vladimir Korolenko 12',
     position: { lat: 46.995146, lng: 28.825689 },
   },
   {
     name: 'Râşcani',
+    nameru: 'Рышкановка',
     address: 'Bd. Moscova 10/1',
+    addressru: 'Бв. Moscova 10/1',
     position: { lat: 47.04887, lng: 28.86357 },
   },
   {
     name: 'Botanica',
+    nameru: 'Ботаника',
     address: 'Strada Independenţei 4/3',
+    addressru: 'Улица Independenţei 4/3',
     position: { lat: 46.98538, lng: 28.84468 },
   },
 ]
@@ -41,23 +49,27 @@ export const HERO_BUTTONS = [
 ]
 
 export const CATEGORIES = [
-  { id: 'mr-kebab', name: 'Mr. Kebab' },
-  { id: 'saorma', name: 'Șaorma' },
-  { id: 'mr-lavas', name: 'Mr. Lavaș' },
-  { id: 'mr-wrap', name: 'Mr. Wrap' },
-  { id: 'mr-chicken-burger', name: 'Mr. Chicken Burger' },
-  { id: 'mr-beef-burger', name: 'Mr. Beef Burger' },
-  { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger' },
-  { id: 'mr-kids-burger', name: 'Mr. Kids Burger' },
-  { id: 'mr-baghet', name: 'Mr. Baghet' },
-  { id: 'mr-pita', name: 'Mr. Pită' },
-  { id: 'supe', name: 'Supe' },
-  { id: 'salate', name: 'Salate' },
-  { id: 'la-farfurie', name: 'La Farfurie' },
-  { id: 'snacks', name: 'Snacks' },
-  { id: 'combo-menu', name: 'Combo Menu' },
-  { id: 'sosuri', name: 'Sosuri' },
-  { id: 'combo-kids', name: 'Combo Kids' },
+  { id: 'mr-kebab', name: 'Mr. Kebab', nameru: 'Mr. Kebab' },
+  { id: 'saorma', name: 'Șaorma', nameru: 'Шаурма Mr. Лаваш' },
+  { id: 'mr-wrap', name: 'Mr. Wrap', nameru: 'Mr. Wrap' },
+  { id: 'mr-lavas', name: 'Mr. Lavaș', nameru: 'Mr. Лаваш' },
+  { id: 'mr-chicken-burger', name: 'Mr. Chicken Burger', nameru:'Mr. Chicken Burger' },
+  { id: 'mr-beef-burger', name: 'Mr. Beef Burger', nameru: 'Mr. Beef Burger' },
+  { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger', nameru: 'Mr. Vegetarian Burger' },
+  { id: 'mr-kids-burger', name: 'Mr. Kids Burger', nameru: 'Mr. Kids Burger' },
+  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет'},
+  { id: 'mr-pita', name: 'Mr. Pită', nameru: 'Mr. Пита' },
+  { id: 'supe', name: 'Supe', nameru: 'Cупы' },
+  { id: 'snacks', name: 'Snacks', nameru: 'Закуски' },
+  { id: 'la-farfurie', name: 'La Farfurie', nameru: 'В Тарелке' },
+  { id: 'salate', name: 'Salate', nameru: 'Салаты' },
+  { id: 'combo-menu', name: 'Combo Menu', nameru: 'Сеты' },
+  { id: 'combo-kids', name: 'Combo Kids', nameru: 'Сеты для Детей' },
+  { id: 'sosuri', name: 'Sosuri', nameru: 'Соусы' },
+  { id: 'cold-drinks', name: 'Cold Drinks', nameru: 'Холодные напитки'},
+  { id: 'bauturi-dulci', name: 'Băuturi dulci', nameru: 'Сладкие напитки'},
+  { id: 'hot-drinks', name: 'Hot Drinks', nameru: 'Горячие напитки'},
+  { id: 'deserturi', name: 'Deserturi', nameru: 'Десерты'},
 ]
 
 export const MODALS = {
@@ -142,10 +154,11 @@ export const TOPPINGS = {
 export const RECOMMENDED_SLIDER_PRODUCTS = [
   {
     name: 'Kebab pui mic',
+    nameru: 'Kebab pui mic',
     price: 35,
     weight: 350,
     badges: ['Doner', 'Pui'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
     subcategory: 'Doner',
     toppings: {
       topping: [],
@@ -154,10 +167,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
   },
   {
     name: 'Kebab pui mare',
+    nameru: 'Kebab pui mic',
     price: 50,
     weight: 450,
     badges: ['Doner', 'Pui'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
     subcategory: 'Doner',
     toppings: {
       topping: [],
@@ -166,10 +180,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
   },
   {
     name: 'Kebab Vita mic',
+    nameru: 'Kebab pui mic',
     price: 38,
     weight: 350,
     badges: ['Doner', 'Vită'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
     subcategory: 'Doner',
     toppings: {
       topping: [],
@@ -178,10 +193,11 @@ export const RECOMMENDED_SLIDER_PRODUCTS = [
   },
   {
     name: 'Kebab Vita mare',
+    nameru: 'Kebab pui mic',
     price: 45,
     weight: 450,
     badges: ['Doner', 'Vită'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/q_80/v1626263628/large_saorma_Mr_lavas_de_Vita_1_b123480d72.jpg',
+    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
     subcategory: 'Doner',
     toppings: {
       topping: [],

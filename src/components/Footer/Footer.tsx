@@ -13,11 +13,12 @@ import styles from './Footer.module.scss'
 
 const Footer = () => {
   const router = useRouter()
+  const ro = router.locale === 'ro'
 
-  const link = ({ pathname, name }: typeof PAGES['home'], index: number) => (
+  const link = ({ pathname, name, nameru }: typeof PAGES['home'], index: number) => (
     <li key={index} className={classNames(styles.footerContainer__anchor, 'my-10 md:my-0 md:mr-10 transition-all')}>
       <Link href={pathname}>
-        <a>{name}</a>
+        <a>{ro ? name : nameru}</a>
       </Link>
     </li>
   )

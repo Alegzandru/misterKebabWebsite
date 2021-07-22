@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { useContext, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useRouter } from 'next/router'
 
 import { ActiveSectionContext } from '../../../store/ActiveSection/ActiveSection.context'
 import ProductCard from '../../ProductCard/ProductCard'
@@ -10,8 +11,10 @@ import {Toppings} from '../../../types'
 type Props = {
   id: string
   name: string
+  nameru: string
   items: {
     name: string
+    nameru: string
     price: number
     weight: number
     badges: string[]
@@ -22,10 +25,13 @@ type Props = {
   }[]
 }
 
-const CategoryProducts = ({ id, name, items }: Props) => {
+const CategoryProducts = ({ id, name, items, nameru }: Props) => {
   const { setSectionInView } = useContext(ActiveSectionContext)
 
   const { ref, inView } = useInView({ rootMargin: '0px 0px -50% 0px' })
+
+  const router = useRouter()
+  const ro = router.locale === 'ro'
 
   useEffect(() => {
     const scrollPosition = window.pageYOffset
@@ -39,7 +45,7 @@ const CategoryProducts = ({ id, name, items }: Props) => {
       id={id}
       className={classNames(styles.categoryProductsContainer, 'w-full max-w-screen')}
     >
-      <h3 className={styles.categoryProductsContainer__heading}>{name}</h3>
+      <h3 className={styles.categoryProductsContainer__heading}>{ro ? name : nameru}</h3>
       <hr className={styles.categoryProductsContainer__line} />
       <div className="grid grid-cols-2 gap-x-2 gap-y-4 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-5">
         {items.map((product, index) => <ProductCard key={index} {...product} />)}

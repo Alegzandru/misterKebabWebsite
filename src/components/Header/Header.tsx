@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
 import { PAGES, SIZES } from '../../constants/common'
@@ -14,6 +15,8 @@ const Header = () => {
   const [transparent, setTransparent] = useState(true)
 
   const router = useRouter()
+  const ro = router.locale === 'ro'
+  const { t } = useTranslation('header')
 
   useEffect(() => {
     const checkScrollTop = () => {
@@ -56,7 +59,7 @@ const Header = () => {
       className={classNames(styles.headerContainer__anchor, 'font-bold w-full md:font-medium md:mx-8')}
     >
       <Link href={pathname}>
-        <a>{name}</a>
+        <a>{t(name)}</a>
       </Link>
     </li>
   )
@@ -74,7 +77,11 @@ const Header = () => {
           {Object.values(PAGES).map(link)}
         </ul>
       </nav>
-      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'} />
+      <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
+        <a>
+          <LanguageButton text={ro?'Ру':'Ro'} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'}/>
+        </a>
+      </Link>
       <a
         style={transparent && !showMobileHeader ? {
           backgroundColor: 'transparent',
@@ -83,7 +90,7 @@ const Header = () => {
         className={classNames(styles.headerContainer__callNumber, 'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2')}
         href="tel:+37367559999"
       >
-        <span className={styles.headerContainer__callNumberText}>Serviciu de Livrare</span>
+        <span className={styles.headerContainer__callNumberText}>{t('Serviciu de Livrare')}</span>
         +373 (67) 559 999
       </a>
     </div>
@@ -99,7 +106,7 @@ const Header = () => {
       )}
       onClick={() => setShowMobileHeader(!showMobileHeader)}
     >
-      <span className={classNames('overflow-hidden transition-all', showMobileHeader ? 'w-0' : '')}>Meniu</span>
+      <span className={classNames('overflow-hidden transition-all', showMobileHeader ? 'w-0' : '')}>{t('Meniu')}</span>
       <div className={classNames(
         styles.headerContainer__hamburgerBox,
         showMobileHeader ? styles.headerContainer__hamburgerBox_isActive : styles.headerContainer__hamburgerBox_margin,
@@ -133,7 +140,11 @@ const Header = () => {
         </div>
         {navbar}
         <div className="flex md:hidden">
-          <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+          <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
+            <a>
+              <LanguageButton text={ro?'Ру':'Ro'} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+            </a>
+          </Link>
           {mobileButton}
         </div>
       </div>

@@ -16,7 +16,7 @@ export const THEMES = {
 }
 
 export const PAGES = {
-  home: { name: 'Principală', pathname: '/' },
-  careers: { name: 'Cariere', pathname: '/careers' },
-  locations: { name: 'Locații', pathname: '/locations' },
+  home: { name: 'Principală', pathname: '/', nameru: 'Главная' },
+  careers: { name: 'Cariere', pathname: '/careers', nameru: 'Кариеры' },
+  locations: { name: 'Locații', pathname: '/locations', nameru: 'Локации' },
 }

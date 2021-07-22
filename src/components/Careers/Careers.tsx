@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 import careersHero from '../../../public/images/careers-hero.png'
 import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
@@ -17,6 +18,8 @@ import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
+
+  const { t } = useTranslation('careers')
 
   const onSubmit = (data: Record<string, string | boolean>) => {
     const newData = careerFormDataHandler(data)
@@ -47,11 +50,11 @@ const Careers = () => {
   }
 
   const errorBlock = (category: CareerCheckboxesCategory) => checkboxesErrors.has(category)
-    && <p className={styles.careersHeroContainer__error}>*Bifați cel puțin o opțiune!</p>
+    && <p className={styles.careersHeroContainer__error}>{t('*Bifați cel puțin o opțiune!')}</p>
 
   const othersBlock = ({ heading, values, name }: CareerOthersBlock, count: number) => (
     <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14')}>
-      <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{heading}:</h3>
+      <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{t(heading)}:</h3>
       {values.map((value, index) => (
         <Checkbox
           key={index}
@@ -63,7 +66,7 @@ const Careers = () => {
           register={register}
           onChange={() => checkboxHandler(name as CareerCheckboxesCategory)}
         >
-          {value}
+          {t(value)}
         </Checkbox>
       ))}
       {errorBlock(name as CareerCheckboxesCategory)}
@@ -81,16 +84,16 @@ const Careers = () => {
       <div className="h-16 md:h-26" />
       <div className={classNames(styles.careersHeroContainer__hero, 'w-full relative flex justify-center items-center')}>
         <Image src={careersHero} alt="Hero" layout="fill" objectFit="cover" />
-        <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>Cariere</h1>
+        <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>{t('Cariere')}</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CareersCategoryBlock heading="Date de contact">
+        <CareersCategoryBlock heading={t('Date de contact')}>
           <div className="mt-6 grid sm:grid-cols-2 gap-x-6">
             <Input
               className="mb-4"
               name="name"
-              label="Nume Prenume"
-              placeholder="Numele dvs"
+              label={t('Nume Prenume')}
+              placeholder={t('Numele dvs')}
               register={register}
               errors={errors}
               {...VALIDATIONS.name}
@@ -99,7 +102,7 @@ const Careers = () => {
               className="mb-6"
               type="number"
               name="age"
-              label="Varsta"
+              label={t('Varsta')}
               placeholder="18+"
               register={register}
               errors={errors}
@@ -108,7 +111,7 @@ const Careers = () => {
             <Input
               className="mb-4"
               name="tel"
-              label="Numar de telefon"
+              label={t('Numar de telefon')}
               placeholder="+373 (__) ___ ___"
               register={register}
               errors={errors}
@@ -116,7 +119,7 @@ const Careers = () => {
             />
             <Input
               name="email"
-              label="E-mail"
+              label={t('E-mail')}
               placeholder="exemplu@mail.com"
               register={register}
               errors={errors}
@@ -125,7 +128,7 @@ const Careers = () => {
           </div>
         </CareersCategoryBlock>
         {verticalLine}
-        <CareersCategoryBlock heading="Serviciu">
+        <CareersCategoryBlock heading={t('Serviciu')}>
           <div className="mt-8 grid sm:grid-cols-2">
             {CAREERS_SERVICES.map((service, index) => (
               <Checkbox
@@ -135,7 +138,7 @@ const Careers = () => {
                 register={register}
                 onChange={() => checkboxHandler(CAREERS_CHECKBOXES_CATEGORY.services)}
               >
-                {service}
+                {t(service)}
               </Checkbox>
             ))}
             {errorBlock(CAREERS_CHECKBOXES_CATEGORY.services)}
@@ -149,7 +152,7 @@ const Careers = () => {
         </CareersCategoryBlock>
         <div className="px-5">
           <Button className={classNames(styles.careersHeroContainer__button, 'mt-24 mx-auto sm:mt-18')} type="submit">
-            Trimite
+            {t('Trimite')}
           </Button>
         </div>
       </form>
