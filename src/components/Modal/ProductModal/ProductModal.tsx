@@ -21,7 +21,7 @@ const ProductModal = () => {
       <div className="lg:flex">
         <div>
           <HallalInsignia className={classNames(styles.productModalContainer__insignia, 'absolute -left-4 -top-4 lg:-left-8 lg:-top-8')} />
-          <img className="rounded w-full object-cover lg:min-h-150" src={image} alt="Product image" />
+          <img className="rounded w-full object-cover" src={image} alt="Product image" />
         </div>
         <div className="mt-6 font-bold md:mt-13 lg:w-130 lg:min-w-130 lg:ml-10 lg:mt-0 xl:w-140 xl:min-w-140">
           <Badges className={styles.productModalContainer__badges} type="big" badges={badges} />
