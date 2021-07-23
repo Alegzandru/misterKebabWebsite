@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { LANGUAGES } from '../../constants'
 import { ModalContextProvider } from '../../store/Modal/Modal.context'
 
 import Footer from '../Footer/Footer'
@@ -7,8 +8,12 @@ import Modal from '../Modal/Modal'
 
 type Props = PropsWithChildren<unknown>
 
-const Layout = (props: Props) => {
-  const { children } = props
+const Layout = ({ children }: Props) => {
+  const [currentMainLanguage] = useState(LANGUAGES.redHatDisplay)
+
+  useEffect(() => {
+    document.body.style.fontFamily = currentMainLanguage
+  }, [])
 
   return (
     <ModalContextProvider>
