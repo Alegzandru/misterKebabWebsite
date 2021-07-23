@@ -4,21 +4,20 @@ import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useTranslation } from 'next-i18next'
 
-import { RECOMMENDED_SLIDER_BREAKPOINTS, RECOMMENDED_SLIDER_PRODUCTS } from '../../constants'
+import { RECOMMENDED_SLIDER_BREAKPOINTS } from '../../constants'
 import ProductCard from '../ProductCard/ProductCard'
 import styles from './Recommended.module.scss'
+import { Product } from '../../types'
 
 SwiperCore.use([Navigation])
 
 type Props = {
-  currentProductName: string
+  products: Product[]
 }
 
-const Recommended = ({ currentProductName }: Props) => {
+const Recommended = ({ products }: Props) => {
   const navigationPrevRef = useRef<HTMLDivElement>(null)
   const navigationNextRef = useRef<HTMLDivElement>(null)
-
-  const products = RECOMMENDED_SLIDER_PRODUCTS.filter((product) => product.name !== currentProductName)
 
   const arrowClassName = 'hidden md:flex top-auto bottom-0 h-full'
 

@@ -14,6 +14,7 @@ import Slider from '../src/components/Slider/Slider'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 import { MenuObject, Product } from '../src/types'
 import { API_URL } from '../src/utils/urls'
+import {getTsProduct} from '../src/components/Modal/GetTsProduct'
 
 type Props = {
   products: Product[]
@@ -47,41 +48,12 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
   ])
 
   const products = productsRaw.filter((product: any) =>
-    product.image !== null &&
-    product.image !== undefined &&
-    product.image.formats.medium !== undefined &&
+    product.image &&
+    product.image.formats.medium &&
     product.price !== null &&
-    product.weight !== null &&
     product.name !== null
   )
-    .map((product: any) => {
-      const topping = product.toppings.length !== 0
-        ? product.toppings.map((toppingSing: any) => ({
-          text: toppingSing.name, price: toppingSing.price,
-        }))
-        : []
-
-      const without = product.excludings.length !== 0
-        ? product.excludings.map((excluding: any) => excluding.name)
-        : subcategories.filter((category: any) => category.name === product.subcategory.name)[0].excludings.map((excluding: any) => excluding.name)
-
-      const toppingsObj = { topping, without }
-
-      return (
-        {
-          name: product.name,
-          nameru: product.nameru,
-          price: product.price,
-          weight: product.weight,
-          badges: product.ingredients.map((ingredient: any) => (ingredient.name)),
-          image: product.image.formats.medium === undefined ? '/images/food/product-image.png' : product.image.formats.medium.url,
-          subcategory: product.subcategory.name,
-          ingredients: product.description,
-          ingredientsru: product.descriptionru,
-          toppings: toppingsObj,
-        }
-      )
-    })
+    .map((product: any) => getTsProduct(product, subcategories))
 
   const categories = categoriesRaw.map((category: any) => (
     {
@@ -94,7 +66,15 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
           nameru: subcategory.nameru,
           items: products.filter(
             (product: any) => product.subcategory === subcategory.name
-          ),
+          ).sort((first: Product, second: Product) => (
+            first.name < second.name ?
+              -1
+              :
+              first.name > second.name ?
+                1
+                :
+                0
+          )),
           order: subcategory.order,
         }
       )),
@@ -106,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
     props: {
       products,
       categories,
-      ...(await serverSideTranslations(locale as string, ['header', 'hero', 'popup'])),
+      ...(await serverSideTranslations(locale as string, ['header', 'hero', 'popup', 'common'])),
     },
     revalidate: 10,
   }

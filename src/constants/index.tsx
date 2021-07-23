@@ -125,7 +125,7 @@ export const CAREERS_OTHERS = [
   {
     heading: 'Doresc să lucrez la',
     name: 'locations',
-    values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râşcani'],
+    values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râșcani'],
   },
   {
     heading: 'Sunt dispus să lucrez',
@@ -139,58 +139,3 @@ export const LANGUAGES = {
   b612: '"B612", sans-serif',
   montserrat: '"Montserrat", sans-serif',
 }
-
-export const RECOMMENDED_SLIDER_PRODUCTS = [
-  {
-    name: 'Kebab pui mic',
-    nameru: 'Kebab pui mic',
-    price: 35,
-    weight: 350,
-    badges: ['Doner', 'Pui'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
-    subcategory: 'Doner',
-    toppings: {
-      topping: [],
-      without: [],
-    },
-  },
-  {
-    name: 'Kebab pui mare',
-    nameru: 'Kebab pui mic',
-    price: 50,
-    weight: 450,
-    badges: ['Doner', 'Pui'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
-    subcategory: 'Doner',
-    toppings: {
-      topping: [],
-      without: [],
-    },
-  },
-  {
-    name: 'Kebab Vita mic',
-    nameru: 'Kebab pui mic',
-    price: 38,
-    weight: 350,
-    badges: ['Doner', 'Vită'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
-    subcategory: 'Doner',
-    toppings: {
-      topping: [],
-      without: [],
-    },
-  },
-  {
-    name: 'Kebab Vita mare',
-    nameru: 'Kebab pui mic',
-    price: 45,
-    weight: 450,
-    badges: ['Doner', 'Vită'],
-    image: 'https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg',
-    subcategory: 'Doner',
-    toppings: {
-      topping: [],
-      without: [],
-    },
-  },
-]

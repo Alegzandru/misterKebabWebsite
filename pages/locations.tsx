@@ -20,7 +20,7 @@ const LocationsPage = () => (
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['locations', 'header'])),
+    ...(await serverSideTranslations(locale as string, ['locations', 'header', 'common'])),
   },
 })
 

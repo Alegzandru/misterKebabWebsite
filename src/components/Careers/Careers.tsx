@@ -92,8 +92,8 @@ const Careers = () => {
             <Input
               className="mb-4"
               name="name"
-              label={t('Nume Prenume')}
-              placeholder={t('Numele dvs')}
+              label="Nume Prenume"
+              placeholder="Numele dvs"
               register={register}
               errors={errors}
               {...VALIDATIONS.name}
@@ -102,7 +102,7 @@ const Careers = () => {
               className="mb-6"
               type="number"
               name="age"
-              label={t('Varsta')}
+              label="Varsta"
               placeholder="18+"
               register={register}
               errors={errors}
@@ -111,7 +111,7 @@ const Careers = () => {
             <Input
               className="mb-4"
               name="tel"
-              label={t('Numar de telefon')}
+              label="Numar de telefon"
               placeholder="+373 (__) ___ ___"
               register={register}
               errors={errors}
@@ -119,7 +119,7 @@ const Careers = () => {
             />
             <Input
               name="email"
-              label={t('E-mail')}
+              label="E-mail"
               placeholder="exemplu@mail.com"
               register={register}
               errors={errors}

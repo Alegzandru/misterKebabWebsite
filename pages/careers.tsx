@@ -14,7 +14,7 @@ const CareersPage = () => (
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['careers', 'header'])),
+    ...(await serverSideTranslations(locale as string, ['careers', 'header', 'common'])),
   },
 })
 

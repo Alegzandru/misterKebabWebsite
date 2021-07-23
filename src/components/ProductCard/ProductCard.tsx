@@ -4,6 +4,7 @@ import React, { memo, useContext } from 'react'
 import { ModalContext } from '../../store/Modal/Modal.context'
 import { Product } from '../../types'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import Badges from '../Badges/Badges'
 import Bag from '../Svgs/Bag/Bag'
@@ -13,10 +14,11 @@ import ProductCardCount from './ProductCardCount/ProductCardCount'
 type Props = Product
 
 const ProductCard = memo((props: Props) => {
-  const { name, nameru, price, image, weight, badges } = props
+  const { name, nameru, price, image, weight, badges, subcategory } = props
 
   const router = useRouter()
   const ro = router.locale === 'ro'
+  const { t } = useTranslation('common')
 
   const { actions: { showProductModal } } = useContext(ModalContext)
 
@@ -35,7 +37,7 @@ const ProductCard = memo((props: Props) => {
             {ro ? name : nameru}
           </h4>
           <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>
-            {price} {ro? 'MDL' : 'МДЛ'}
+            {price} {t('MDL')}
           </span>
         </div>
         <div className={classNames(styles.productCardContainer__badgesContainer, 'flex lg:mt-8 transition-opacity duration-300')}>
@@ -43,7 +45,7 @@ const ProductCard = memo((props: Props) => {
             styles.productCardContainer__weight,
             'hidden lg:flex items-center whitespace-nowrap mr-auto pr-2'
           )}
-          >{weight}{ro?'g' : 'г'}</span>
+          >{weight}{weight?subcategory==='Cold Drinks'||subcategory==='Băuturi Dulci'||subcategory==='Hot Drinks'?t('ml'):t('g'):''}</span>
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
         <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
