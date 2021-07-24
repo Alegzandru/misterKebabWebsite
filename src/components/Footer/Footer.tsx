@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useTranslation } from 'next-i18next'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
 import { PAGES, THEMES } from '../../constants/common'
@@ -13,11 +14,12 @@ import styles from './Footer.module.scss'
 
 const Footer = () => {
   const router = useRouter()
+  const { t } = useTranslation('header')
 
   const link = ({ pathname, name }: typeof PAGES['home'], index: number) => (
     <li key={index} className={classNames(styles.footerContainer__anchor, 'my-10 md:my-0 md:mr-10 transition-all')}>
       <Link href={pathname}>
-        <a>{name}</a>
+        <a>{t(name)}</a>
       </Link>
     </li>
   )

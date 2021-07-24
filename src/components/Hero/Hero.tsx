@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 
 import { HERO_BUTTONS } from '../../constants'
 import { SCREEN_TYPE, SIZES } from '../../constants/common'
@@ -10,6 +11,7 @@ import styles from './Hero.module.scss'
 
 const Hero = () => {
   const [currentBackgroundImageType, setCurrentBackgroundImageType] = useState(SCREEN_TYPE.mobile)
+  const { t } = useTranslation('hero')
 
   useEffect(() => {
     const onResizeHandler = () => {
@@ -42,7 +44,7 @@ const Hero = () => {
         'h-full flex-1 overflow-hidden relative rounded bg-no-repeat transition-transform'
       )}
     >
-      <span className={classNames(styles.heroContainer__buttonText, 'absolute transition-colors font-bold')}>{name}</span>
+      <span className={classNames(styles.heroContainer__buttonText, 'absolute transition-colors font-bold')}>{t(name)}</span>
     </a>
   )
 
@@ -61,7 +63,7 @@ const Hero = () => {
         )}
       >
         <HallalInsignia className={styles.heroContainer__insignia} />
-        <h1 className={classNames(styles.heroContainer__heading, 'font-bold my-0 mx-1')}>Ce vei comanda astăzi?</h1>
+        <h1 className={classNames(styles.heroContainer__heading, 'font-bold my-0 mx-1')}>{t('Ce vei comanda astăzi?')}</h1>
         <div className={classNames(styles.heroContainer__buttonsContainer, 'flex flex-nowrap w-full')}>
           {HERO_BUTTONS.map(heroButton)}
         </div>
@@ -69,7 +71,7 @@ const Hero = () => {
           href="#categories"
           className={classNames(styles.heroContainer__chooseButton, 'flex items-center justify-center rounded font-bold transition-all')}
         >
-          alege altceva
+          {t('alege altceva')}
         </a>
       </div>
       <img

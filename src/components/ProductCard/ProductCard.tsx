@@ -1,6 +1,9 @@
 import classNames from 'classnames'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { memo, useContext } from 'react'
+import { DRINKS, WEIGHT_TYPE } from '../../constants'
 
 import { SIZES } from '../../constants/common'
 import { ModalContext } from '../../store/Modal/Modal.context'
@@ -13,7 +16,11 @@ import styles from './ProductCard.module.scss'
 type Props = Product
 
 const ProductCard = memo((props: Props) => {
-  const { name, price, image, weight, badges } = props
+  const { name, nameru, price, image, weight, badges, subcategory } = props
+
+  const router = useRouter()
+  const ro = router.locale === 'ro'
+  const { t } = useTranslation('common')
 
   const { actions: { showProductModal } } = useContext(ModalContext)
 
@@ -28,15 +35,21 @@ const ProductCard = memo((props: Props) => {
       </div>
       <div className={classNames(styles.productCardContainer__description, 'w-full rounded transition-all duration-500')}>
         <div className="flex">
-          <h4 className={classNames(styles.productCardContainer__title)}>{name}</h4>
-          <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>{price} MDL</span>
+          <h4 className={classNames(styles.productCardContainer__title)}>
+            {ro ? name : nameru}
+          </h4>
+          <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>
+            {price} {t('MDL')}
+          </span>
         </div>
         <div className={classNames(styles.productCardContainer__badgesContainer, 'flex lg:mt-8 transition-opacity duration-300')}>
           <span className={classNames(
             styles.productCardContainer__weight,
             'hidden lg:flex items-center whitespace-nowrap mr-auto pr-2'
           )}
-          >{weight}g</span>
+          >
+            {weight && `${weight} ${t(DRINKS.includes(subcategory) ? WEIGHT_TYPE.milliliters : WEIGHT_TYPE.grams)}`}
+          </span>
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
         <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
@@ -48,7 +61,7 @@ const ProductCard = memo((props: Props) => {
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            în coș
+            {t('în coș')}
             <Bag className={classNames(styles.productCardContainer__bag, 'ml-2 transition-all duration-300')} />
           </button>
         </div>

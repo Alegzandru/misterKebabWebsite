@@ -7,9 +7,11 @@ export const DEFAULT_STATE: State = {
       badges: [],
       image: '',
       name: '',
+      nameru: '',
       price: 0,
       weight: 0,
       ingredients: '',
+      ingredientsru: '',
       toppings: {
         topping: [],
         without: [],
