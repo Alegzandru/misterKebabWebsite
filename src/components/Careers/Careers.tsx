@@ -66,7 +66,7 @@ const Careers = () => {
           register={register}
           onChange={() => checkboxHandler(name as CareerCheckboxesCategory)}
         >
-          {t(value)}
+          {value}
         </Checkbox>
       ))}
       {errorBlock(name as CareerCheckboxesCategory)}
@@ -87,7 +87,7 @@ const Careers = () => {
         <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>{t('Cariere')}</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CareersCategoryBlock heading={t('Date de contact')}>
+        <CareersCategoryBlock heading="Date de contact">
           <div className="mt-6 grid sm:grid-cols-2 gap-x-6">
             <Input
               className="mb-4"
@@ -128,7 +128,7 @@ const Careers = () => {
           </div>
         </CareersCategoryBlock>
         {verticalLine}
-        <CareersCategoryBlock heading={t('Serviciu')}>
+        <CareersCategoryBlock heading="Serviciu">
           <div className="mt-8 grid sm:grid-cols-2">
             {CAREERS_SERVICES.map((service, index) => (
               <Checkbox
@@ -138,7 +138,7 @@ const Careers = () => {
                 register={register}
                 onChange={() => checkboxHandler(CAREERS_CHECKBOXES_CATEGORY.services)}
               >
-                {t(service)}
+                {service}
               </Checkbox>
             ))}
             {errorBlock(CAREERS_CHECKBOXES_CATEGORY.services)}
@@ -152,7 +152,7 @@ const Careers = () => {
         </CareersCategoryBlock>
         <div className="px-5">
           <Button className={classNames(styles.careersHeroContainer__button, 'mt-24 mx-auto sm:mt-18')} type="submit">
-            {t('Trimite')}
+            Trimite
           </Button>
         </div>
       </form>

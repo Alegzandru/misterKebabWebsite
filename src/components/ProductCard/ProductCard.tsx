@@ -57,7 +57,7 @@ const ProductCard = memo((props: Props) => {
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            {ro ? 'în coș' : 'в корзину'}
+            {t('în coș')}
             <Bag className={classNames(styles.productCardContainer__bag, 'ml-2 transition-all duration-300')} />
           </button>
         </div>

@@ -79,7 +79,7 @@ const Header = () => {
       </nav>
       <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
         <a>
-          <LanguageButton text={ro?'Ру':'Ro'} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'}/>
+          <LanguageButton text={t('Ру')} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'}/>
         </a>
       </Link>
       <a
@@ -142,7 +142,7 @@ const Header = () => {
         <div className="flex md:hidden">
           <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
             <a>
-              <LanguageButton text={ro?'Ру':'Ro'} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+              <LanguageButton text={t('Ру')} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
             </a>
           </Link>
           {mobileButton}

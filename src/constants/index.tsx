@@ -14,30 +14,22 @@ export const SOCIALS_LINKS = [
 export const LOCATIONS = [
   {
     name: 'Malina Mică',
-    nameru: 'Малая Малина',
     address: 'Strada Nicolae Testemiţanu 17/6',
-    addressru: 'Улица Nicolae Testemiţanu 17/6',
     position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
-    nameru: 'Телецентр',
     address: 'Strada Vladimir Korolenko 12',
-    addressru: 'Улица Vladimir Korolenko 12',
     position: { lat: 46.995146, lng: 28.825689 },
   },
   {
     name: 'Râşcani',
-    nameru: 'Рышкановка',
     address: 'Bd. Moscova 10/1',
-    addressru: 'Бв. Moscova 10/1',
     position: { lat: 47.04887, lng: 28.86357 },
   },
   {
     name: 'Botanica',
-    nameru: 'Ботаника',
     address: 'Strada Independenţei 4/3',
-    addressru: 'Улица Independenţei 4/3',
     position: { lat: 46.98538, lng: 28.84468 },
   },
 ]
