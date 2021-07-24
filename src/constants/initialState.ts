@@ -19,4 +19,9 @@ export const DEFAULT_STATE: State = {
       subcategory: '',
     },
   },
+  cart: {
+    products: {},
+    menuProducts: [],
+    price: 0,
+  },
 }

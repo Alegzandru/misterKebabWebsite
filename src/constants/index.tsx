@@ -46,11 +46,11 @@ export const CATEGORIES = [
   { id: 'saorma', name: 'Șaorma', nameru: 'Шаурма Mr. Лаваш' },
   { id: 'mr-wrap', name: 'Mr. Wrap', nameru: 'Mr. Wrap' },
   { id: 'mr-lavas', name: 'Mr. Lavaș', nameru: 'Mr. Лаваш' },
-  { id: 'mr-chicken-burger', name: 'Mr. Chicken Burger', nameru:'Mr. Chicken Burger' },
+  { id: 'mr-chicken-burger', name: 'Mr. Chicken Burger', nameru: 'Mr. Chicken Burger' },
   { id: 'mr-beef-burger', name: 'Mr. Beef Burger', nameru: 'Mr. Beef Burger' },
   { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger', nameru: 'Mr. Vegetarian Burger' },
   { id: 'mr-kids-burger', name: 'Mr. Kids Burger', nameru: 'Mr. Kids Burger' },
-  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет'},
+  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет' },
   { id: 'mr-pita', name: 'Mr. Pită', nameru: 'Mr. Пита' },
   { id: 'supe', name: 'Supe', nameru: 'Cупы' },
   { id: 'snacks', name: 'Snacks', nameru: 'Закуски' },
@@ -59,11 +59,22 @@ export const CATEGORIES = [
   { id: 'combo-menu', name: 'Combo Menu', nameru: 'Сеты' },
   { id: 'combo-kids', name: 'Combo Kids', nameru: 'Сеты для Детей' },
   { id: 'sosuri', name: 'Sosuri', nameru: 'Соусы' },
-  { id: 'cold-drinks', name: 'Cold Drinks', nameru: 'Холодные напитки'},
-  { id: 'bauturi-dulci', name: 'Băuturi dulci', nameru: 'Сладкие напитки'},
-  { id: 'hot-drinks', name: 'Hot Drinks', nameru: 'Горячие напитки'},
-  { id: 'deserturi', name: 'Deserturi', nameru: 'Десерты'},
+  { id: 'cold-drinks', name: 'Cold Drinks', nameru: 'Холодные напитки' },
+  { id: 'bauturi-dulci', name: 'Băuturi dulci', nameru: 'Сладкие напитки' },
+  { id: 'hot-drinks', name: 'Hot Drinks', nameru: 'Горячие напитки' },
+  { id: 'deserturi', name: 'Deserturi', nameru: 'Десерты' },
 ]
+
+export const DRINKS = [
+  'Cold Drinks',
+  'Băuturi Dulci',
+  'Hot Drinks',
+]
+
+export const WEIGHT_TYPE = {
+  grams: 'g',
+  milliliters: 'ml',
+}
 
 export const MODALS = {
   product: 'product' as 'product',

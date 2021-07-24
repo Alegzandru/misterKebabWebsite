@@ -152,7 +152,7 @@ const Careers = () => {
         </CareersCategoryBlock>
         <div className="px-5">
           <Button className={classNames(styles.careersHeroContainer__button, 'mt-24 mx-auto sm:mt-18')} type="submit">
-            Trimite
+            {t('Trimite')}
           </Button>
         </div>
       </form>
