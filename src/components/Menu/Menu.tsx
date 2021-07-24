@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax } from 'react-scroll-parallax'
+import { useRouter } from 'next/router'
 
 import { MenuObject, Product } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
@@ -17,6 +18,9 @@ const Menu = ({ categories }: Props) => {
 
   const [parallaxHeight, setParallaxHeight] = useState<string>()
   const sectionRef = useRef<HTMLElement>(null)
+
+  const router = useRouter()
+  const ro = router.locale === 'ro'
 
   const onResizeHandler = () => {
     if (sectionRef.current) {
@@ -64,7 +68,7 @@ const Menu = ({ categories }: Props) => {
     </>
   )
 
-  const category = ({ categoryName, subCategories }: MenuObject, index: number) => (
+  const category = ({ categoryName, subCategories, categoryNameRu }: MenuObject, index: number) => (
     <section
       key={index}
       ref={sectionRef}
@@ -72,7 +76,7 @@ const Menu = ({ categories }: Props) => {
     >
       {parallaxHeight && categoryName === 'Băuturi' ? bottomParallaxElements : null}
       <hr className="invisible" />
-      {categoryName ? <CategoryHeading name={categoryName} /> : null}
+      {categoryName ? <CategoryHeading name={ro ? categoryName : categoryNameRu} /> : null}
       {subCategories.map((subCategory, subCategoryIndex) => <CategoryProducts key={subCategoryIndex} {...subCategory} />)}
     </section>
   )
@@ -80,8 +84,9 @@ const Menu = ({ categories }: Props) => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {categories.map(({ categoryName, subCategories, order }: MenuObject, index: number) => category({
+      {categories.map(({ categoryNameRu, categoryName, subCategories, order }: MenuObject, index: number) => category({
         categoryName: categoryName === 'Unfiltered' ? '' : categoryName,
+        categoryNameRu,
         subCategories: subCategories.sort((first, second) => first.order - second.order),
         order,
       }, index))}

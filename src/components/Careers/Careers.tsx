@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 import careersHero from '../../../public/images/careers-hero.png'
 import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
@@ -17,6 +18,8 @@ import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
+
+  const { t } = useTranslation('careers')
 
   const onSubmit = (data: Record<string, string | boolean>) => {
     const newData = careerFormDataHandler(data)
@@ -47,11 +50,11 @@ const Careers = () => {
   }
 
   const errorBlock = (category: CareerCheckboxesCategory) => checkboxesErrors.has(category)
-    && <p className={styles.careersHeroContainer__error}>*Bifați cel puțin o opțiune!</p>
+    && <p className={styles.careersHeroContainer__error}>{t('*Bifați cel puțin o opțiune!')}</p>
 
   const othersBlock = ({ heading, values, name }: CareerOthersBlock, count: number) => (
     <div key={count} className={classNames(styles.careersHeroContainer__others, 'mb-14')}>
-      <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{heading}:</h3>
+      <h3 className={classNames(styles.careersHeroContainer__othersHeading, 'font-bold mb-4')}>{t(heading)}:</h3>
       {values.map((value, index) => (
         <Checkbox
           key={index}
@@ -81,7 +84,7 @@ const Careers = () => {
       <div className="h-16 md:h-26" />
       <div className={classNames(styles.careersHeroContainer__hero, 'w-full relative flex justify-center items-center')}>
         <Image src={careersHero} alt="Hero" layout="fill" objectFit="cover" />
-        <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>Cariere</h1>
+        <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>{t('Cariere')}</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CareersCategoryBlock heading="Date de contact">

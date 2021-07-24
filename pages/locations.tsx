@@ -1,5 +1,7 @@
 import React from 'react'
 import GoogleMap from '../src/components/GoogleMap/GoogleMap'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import Layout from '../src/components/Layout/Layout'
 import LocationsContainer from '../src/components/LocationsContainer/LocationsContainer'
@@ -15,5 +17,11 @@ const LocationsPage = () => (
     </LocationsContainer>
   </Layout>
 )
+
+export const getStaticProps: GetStaticProps = async ({locale}) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['locations', 'header', 'common'])),
+  },
+})
 
 export default LocationsPage

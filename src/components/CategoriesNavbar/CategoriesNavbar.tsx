@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React, { useCallback, useContext, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 
 import { CATEGORIES } from '../../constants'
 import { ActiveSectionContext } from '../../store/ActiveSection/ActiveSection.context'
@@ -12,6 +13,9 @@ const CategoriesNavbar = () => {
   const touchData = useRef<TouchData>({ lastPosition: 0, position: 0, locked: false })
   const categoriesList = useRef<HTMLUListElement>(null)
   const movedRef = useRef<boolean>(false)
+
+  const router = useRouter()
+  const ro = router.locale === 'ro'
 
   const theEvent = (event: React.MouseEvent | React.TouchEvent | TouchEvent) => 'changedTouches' in event ? event.changedTouches[0] : event
   const moveList = (value: number) => categoriesList.current ? categoriesList.current.style.transform = `translateX(${value}px` : null
@@ -116,7 +120,7 @@ const CategoriesNavbar = () => {
     }
   }, [])
 
-  const anchor = ({ id, name }: CategoryItem) => {
+  const anchor = ({ id, name, nameru }: CategoryItem) => {
     const [activeSection] = sections.slice(-1)
 
     return (
@@ -130,7 +134,7 @@ const CategoriesNavbar = () => {
           )}
           onClick={onCLickHandler}
         >
-          <span className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemText)}>{name}</span>
+          <span className={classNames(styles.categoriesNavbarContainer__categoriesNavbarItemText)}>{ro ? name : nameru}</span>
         </a>
       </li>
     )

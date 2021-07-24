@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 
 import { Toppings, ToppingsManagerState } from '../../../../types'
 import Button from '../../../Button/Button'
@@ -20,6 +21,8 @@ const ToppingsManager = ({ toppings, count }: Props) => {
 
   const currentToppingsRef = useRef<ToppingsManagerState[]>([...new Array(count)].map(() => ({ topping: new Map(), without: new Set() })))
   const { current: currentToppings } = currentToppingsRef
+
+  const { t } = useTranslation('popup')
 
   useEffect(() => {
     formRef.current?.reset()
@@ -98,13 +101,13 @@ const ToppingsManager = ({ toppings, count }: Props) => {
       </div>
       <form ref={formRef} className={classNames(styles.toppingsManagerContainer__toppingsContainer, 'w-full py-6 px-4 bg-white rounded md:flex')}>
         <div className="flex-1 lg:pr-4">
-          <h3>Topping</h3>
+          <h3>{t('Topping')}</h3>
           <div className="flex flex-col mt-4 mb-10 md:mb-0">
             {toppings.topping.map(toppingCheckbox)}
           </div>
         </div>
         <div className="flex-1">
-          <h3>Fără</h3>
+          <h3>{t('Fără')}</h3>
           <div className="flex flex-col mt-4">
             {toppings.without.map(withoutToppingCheckbox)}
           </div>
@@ -112,7 +115,7 @@ const ToppingsManager = ({ toppings, count }: Props) => {
       </form>
       <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
         <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
-        Adaugă la comandă
+        {t('Adaugă la comandă')}
       </Button>
     </div>
   )

@@ -3,6 +3,7 @@ import '../public/styles/global.css'
 import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss'
 import 'tailwindcss/tailwind.css'
+import { appWithTranslation } from 'next-i18next'
 
 import { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -18,4 +19,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
   </ParallaxProvider>
 )
 
-export default MyApp
+export default appWithTranslation(MyApp)

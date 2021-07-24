@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { DeepMap, FieldError, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 import styles from './Input.module.scss'
 
@@ -15,10 +16,11 @@ type Props = {
 
 const Input = ({ label, name, type, placeholder, className, errors, register, ...registerOptions }: Props) => {
   const errorBlock = errors && errors[name] && <p className={styles.inputContainer__error}>*{errors[name].message}</p>
+  const { t } = useTranslation('careers')
 
   return (
     <div className={classNames(styles.inputContainer, className, 'flex flex-col')}>
-      <label className={classNames(styles.inputContainer__label, 'font-medium')}>{label}</label>
+      <label className={classNames(styles.inputContainer__label, 'font-medium')}>{t(label)}</label>
       <input
         className={classNames(
           styles.inputContainer__input,
@@ -26,7 +28,7 @@ const Input = ({ label, name, type, placeholder, className, errors, register, ..
           'h-12 w-full px-4'
         )}
         type={type || 'text'}
-        placeholder={placeholder}
+        placeholder={t(placeholder || '')}
         {...register(name, registerOptions)}
       />
       {errorBlock}

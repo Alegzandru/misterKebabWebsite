@@ -6,12 +6,14 @@ import { LOCATIONS } from '../../constants'
 import { PAGES, THEMES } from '../../constants/common'
 import ExternalLink from '../Svgs/ExternalLink/ExternalLink'
 import styles from './LocationsLinks.module.scss'
+import { useTranslation } from 'next-i18next'
 
 type Props = {
   theme: keyof typeof THEMES
 }
 
 const LocationsLinks = ({ theme }: Props) => {
+  const { t } = useTranslation('common')
   const isLight = theme === THEMES.light
 
   const block = ({ name, address }: typeof LOCATIONS[0], index: number) => (
@@ -19,14 +21,14 @@ const LocationsLinks = ({ theme }: Props) => {
       key={index}
       className={classNames(styles.locationsContainer__wrapper, 'transition-all p-6 sm:my-0')}
     >
-      <h5 className={styles.locationsContainer__heading}>{name}</h5>
-      <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-6')}>{address}</p>
+      <h5 className={styles.locationsContainer__heading}>{t(name)}</h5>
+      <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-6')}>{t(address)}</p>
       <Link href={{
         pathname: PAGES.locations.pathname,
         query: { address },
       }}>
         <a className={classNames(styles.locationsContainer__anchor, 'flex items-center relative w-max font-medium transition-all')}>
-          Deschide pe hartă
+          {t('Deschide pe hartă')}
           <ExternalLink className="ml-2" />
         </a>
       </Link>

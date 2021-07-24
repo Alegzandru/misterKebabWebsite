@@ -7,6 +7,7 @@ export type HeroButton = {
 
 export type CategoryItem = {
   name: string
+  nameru: string
   id: string
 }
 
@@ -24,9 +25,11 @@ export type SectionInView = {
 
 export type MenuObject = {
   categoryName: string
+  categoryNameRu: string
   subCategories: {
     id: string
     name: string
+    nameru: string
     items: Product[]
     order: number
   }[]
@@ -35,11 +38,13 @@ export type MenuObject = {
 
 export type Product = {
   name: string
+  nameru: string
   price: number
   weight: number
   badges: string[]
   image: string
   ingredients?: string
+  ingredientsru?: string
   toppings: Toppings
   subcategory: string
 }

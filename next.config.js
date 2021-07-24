@@ -9,4 +9,8 @@ module.exports = {
       'localhost',
     ],
   },
+  i18n: {
+    defaultLocale: 'ro',
+    locales: ['ro', 'ru'],
+  },
 }
