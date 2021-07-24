@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useContext } from 'react'
+import { SIZES } from '../../../constants/common'
 
 import { ModalContext } from '../../../store/Modal/Modal.context'
 import Badges from '../../Badges/Badges'
+import ProductCount from '../../ProductCount/ProductCount'
 import Recommended from '../../Recommended/Recommended'
 import HallalInsignia from '../../Svgs/HallalInsignia/HallalInsignia'
 import styles from './ProductModal.module.scss'
@@ -16,6 +18,8 @@ const ProductModal = () => {
     },
   } = useContext(ModalContext)
 
+  const noToppings = toppings.topping.length === 0 && toppings.without.length === 0
+
   return (
     <div className={classNames(styles.productModalContainer, 'w-full relative mx-auto')}>
       <div className="lg:flex">
@@ -27,20 +31,13 @@ const ProductModal = () => {
           <Badges className={styles.productModalContainer__badges} type="big" badges={badges} />
           <h1 className={classNames(styles.productModalContainer__name, 'mt-2 lg:mt-0')}>{name}</h1>
           <h2 className={styles.productModalContainer__price}>{price} MDL</h2>
+          {noToppings && <ProductCount className="my-6" background="gray" size={SIZES.md} />}
           <p className={classNames(styles.productModalContainer__description, 'font-normal mt-4')}>
             <span className={styles.productModalContainer__weight}>{weight} g</span>
             <br />
             {ingredients}
           </p>
-          {
-            toppings.topping.length === 0 && toppings.without.length === 0 ?
-              <div></div>
-              :
-              <ToppingsManager
-                toppings={toppings}
-                count={2}
-              ></ToppingsManager>
-          }
+          {!noToppings && <ToppingsManager toppings={toppings} count={2} />}
         </div>
       </div>
       <Recommended currentProductName={name} />

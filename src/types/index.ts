@@ -1,5 +1,6 @@
-import { CAREERS_CHECKBOXES_CATEGORY, CART_FORM_BLOCKS, MODALS } from '../constants'
+import { CAREERS_CHECKBOXES_CATEGORY, MODALS } from '../constants'
 import { THEMES } from '../constants/common'
+import { CART_FORM_COMPONENTS } from '../constants/forms'
 
 export type AnyAction = {
   type: string
@@ -73,6 +74,6 @@ export type CareerOthersBlock = {
 }
 
 export type CareerCheckboxesCategory = keyof typeof CAREERS_CHECKBOXES_CATEGORY | ''
-export type OrderType = keyof typeof CART_FORM_BLOCKS | ''
+export type OrderType = keyof typeof CART_FORM_COMPONENTS | ''
 export type Modals = keyof typeof MODALS | ''
 export type Themes = keyof typeof THEMES

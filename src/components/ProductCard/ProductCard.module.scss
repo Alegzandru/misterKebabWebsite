@@ -38,25 +38,6 @@
     }
   }
 
-  &__changeCountButton {
-    height: 36px;
-    width: 36px;
-    background-color: #f4f4f6;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: #fff7f8;
-      color: #ff2828;
-    }
-  }
-
-  &__count {
-    margin: 0 9px;
-    font-size: 14px;
-    width: 18px;
-    text-align: center;
-  }
-
   &__addToCartButton {
     background-color: #fff7f8;
     border: 2px solid #ff2828;

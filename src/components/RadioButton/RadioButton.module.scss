@@ -1,0 +1,11 @@
+.radioButtonContainer {
+  border: 2px solid #e1e1e1;
+  background-color: #f4f4f6;
+  border-radius: 4px;
+  font-size: 14px;
+
+  &_active {
+    border-color: #ffb80e;
+    color: #c6823d;
+  }
+}

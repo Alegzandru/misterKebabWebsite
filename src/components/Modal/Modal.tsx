@@ -40,13 +40,18 @@ const Modal = () => {
         className={classNames(
           styles.modalContainer,
           { [styles.modalContainer_cart]: show === MODALS.cart },
-          'z-100 fixed inset-0 overflow-y-auto mx-auto py-18 px-4 md:py-24 md:px-5 lg:inset-5 lg:px-12',
+          'z-100 fixed inset-0 overflow-y-auto mx-auto py-18 px-3 md:py-24 md:px-5 lg:inset-5 lg:px-12',
           show ? 'block' : 'hidden',
         )}
       >
         {CurrentModal && <CurrentModal />}
         <button
-          className="absolute flex justify-center items-center w-10 h-10 top-4 right-4 md:top-6 md:right-6"
+          aria-label="Close button"
+          className={classNames(
+            styles.modalContainer__close,
+            show === MODALS.product ? 'md:top-6 md:right-6 lg:top-10 lg:right-10' : '',
+            'fixed flex justify-center items-center w-10 h-10 top-4 right-4 rounded-full'
+          )}
           onClick={closeModal}
         >
           <Close />

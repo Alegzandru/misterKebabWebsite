@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { memo, useContext } from 'react'
+
+import { SIZES } from '../../constants/common'
 import { ModalContext } from '../../store/Modal/Modal.context'
 import { Product } from '../../types'
-
 import Badges from '../Badges/Badges'
+import ProductCount from '../ProductCount/ProductCount'
 import Bag from '../Svgs/Bag/Bag'
 import styles from './ProductCard.module.scss'
-import ProductCardCount from './ProductCardCount/ProductCardCount'
 
 type Props = Product
 
@@ -39,7 +40,7 @@ const ProductCard = memo((props: Props) => {
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
         <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
-          <ProductCardCount styles={styles} />
+          <ProductCount className="hidden lg:flex" background="white" size={SIZES.md} />
           <button
             className={classNames(
               styles.productCardContainer__addToCartButton,

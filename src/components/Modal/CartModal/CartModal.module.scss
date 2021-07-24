@@ -1,2 +1,8 @@
 .cartModalContainer {
+  &__heading {
+    font-size: 32px;
+    line-height: 48px;
+    color: #cc6700;
+    text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
+  }
 }

@@ -1,3 +1,6 @@
+import DeliveryBlock from '../components/Modal/CartModal/DeliveryBlock/DeliveryBlock'
+import TakeawayBlock from '../components/Modal/CartModal/TakeawayBlock/TakeawayBlock'
+
 export const VALIDATIONS = {
   name: {
     required: 'Câmpul este obligatoriu!',
@@ -31,4 +34,60 @@ export const VALIDATIONS = {
       message: 'Adresa de email nu este validă',
     },
   },
+}
+
+export const ORDER_TYPE = {
+  delivery: 'delivery' as 'delivery',
+  takeaway: 'takeaway' as 'takeaway',
+}
+
+export const ORDER_TYPE_BUTTONS = [
+  {
+    text: 'Livrare prin curier',
+    type: ORDER_TYPE.delivery,
+  },
+  {
+    text: 'Ridicare din local',
+    type: ORDER_TYPE.takeaway,
+  },
+]
+
+export const CART_FORM_COMPONENTS = {
+  delivery: DeliveryBlock,
+  takeaway: TakeawayBlock,
+}
+
+export const DROPDOWN_DATA = {
+  delivery: {
+    label: 'Unde livram',
+    items: [
+      'Chisinau',
+      'Aeroport',
+      'Bacioi',
+      'Colonita',
+      'Costiujeni',
+      'Durlesti',
+      'Ialoveni',
+      'Schinoasa',
+      'Stauceni',
+      'Tohatin',
+    ],
+  },
+  takeaway: {
+    label: 'Alegeți de unde ridicați comanda',
+    items: [
+      'Malina Mică',
+      'Telecentru',
+      'Râşcani',
+      'Botanica',
+    ],
+  },
+}
+
+export const LOCATIONS_INPUTS = {
+  street: { name: 'street', placeholder: 'street' },
+  block: { name: 'block', placeholder: 'block' },
+  stair: { name: 'stair', placeholder: 'stair' },
+  floor: { name: 'floor', placeholder: 'floor' },
+  flat: { name: 'flat', placeholder: 'flat' },
 }

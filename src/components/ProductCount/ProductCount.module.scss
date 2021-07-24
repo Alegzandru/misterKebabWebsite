@@ -1,0 +1,62 @@
+.productCountContainer {
+  color: #08080b;
+
+  &.white {
+    .productCountContainer {
+      &__changeCountButton {
+        &:hover {
+          background-color: #fff7f8;
+          color: #ff2828;
+        }
+      }
+    }
+  }
+
+  &.gray {
+    .productCountContainer {
+      &__changeCountButton {
+        border: 1px solid #e1e1e1;
+
+        &:hover {
+          background-color: #fff7f8;
+          color: #ff2828;
+        }
+      }
+
+      &__count {
+        background-color: #ffffff;
+      }
+    }
+  }
+
+  &__changeCountButton {
+    background-color: #f4f4f6;
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+  }
+
+  &__count {
+    margin: 0 2px;
+    font-size: 14px;
+    width: 34px;
+    border-radius: 4px;
+  }
+
+  &_small {
+    .productCountContainer {
+      &__changeCountButton {
+        font-weight: 400;
+        width: 24px;
+        height: 24px;
+      }
+
+      &__count {
+        font-weight: 400;
+        font-size: 12px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

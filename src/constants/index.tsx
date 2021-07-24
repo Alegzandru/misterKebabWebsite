@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
 import CartModal from '../components/Modal/CartModal/CartModal'
-import DeliveryBlock from '../components/Modal/CartModal/DeliveryBlock/DeliveryBlock'
-import Takeaway from '../components/Modal/CartModal/Takeaway/Takeaway'
 import ProductModal from '../components/Modal/ProductModal/ProductModal'
 
 export const SOCIALS_LINKS = [
@@ -71,22 +69,6 @@ export const MODALS = {
 export const MODAL_COMPONENTS = {
   product: ProductModal,
   cart: CartModal,
-}
-
-export const ORDER_TYPE = {
-  delivery: 'delivery' as 'delivery',
-  takeaway: 'takeaway' as 'takeaway',
-}
-
-export const CART_FORM_BLOCKS = {
-  delivery: {
-    heading: 'Detaliile livrării',
-    component: DeliveryBlock,
-  },
-  takeaway: {
-    heading: 'Punctul de primire',
-    component: Takeaway,
-  },
 }
 
 export const RECOMMENDED_SLIDER_BREAKPOINTS = {
