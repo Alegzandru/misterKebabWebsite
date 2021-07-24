@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
-import React from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import React from 'react'
 
 import banner from '../public/images/banners/banner.png'
 import banner2 from '../public/images/banners/banner2.png'
@@ -9,12 +9,12 @@ import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavba
 import Hero from '../src/components/Hero/Hero'
 import Layout from '../src/components/Layout/Layout'
 import Menu from '../src/components/Menu/Menu'
+import { getTsProduct } from '../src/components/Modal/GetTsProduct'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 import { MenuObject, Product } from '../src/types'
 import { API_URL } from '../src/utils/urls'
-import {getTsProduct} from '../src/components/Modal/GetTsProduct'
 
 type Props = {
   products: Product[]
@@ -34,7 +34,7 @@ const MainPage = ({ products, categories }: Props) => (
   </Layout>
 )
 
-export const getStaticProps: GetStaticProps = async ({locale}) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [subcategoriesRes, productsRes, categoriesRes] = await Promise.all([
     fetch(`${API_URL}/categories`),
     fetch(`${API_URL}/products`),
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
     categoriesRes.json(),
   ])
 
-  const products = productsRaw.filter((product: any) =>
+  const products: Product[] = productsRaw.filter((product: any) =>
     product.image &&
     product.image.formats.medium &&
     product.price !== null &&
@@ -66,15 +66,17 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
           nameru: subcategory.nameru,
           items: products.filter(
             (product: any) => product.subcategory === subcategory.name
-          ).sort((first: Product, second: Product) => (
-            first.name < second.name ?
-              -1
-              :
-              first.name > second.name ?
-                1
-                :
-                0
-          )),
+          ).sort((first, second) => {
+            if (first.name < second.name) {
+              return -1
+            }
+
+            if (first.name > second.name) {
+              return 1
+            }
+
+            return 0
+          }),
           order: subcategory.order,
         }
       )),
