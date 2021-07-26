@@ -136,7 +136,11 @@ const Header = () => {
         'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen'
       )}>
         <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
-          <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+          <Link href="/">
+            <a>
+              <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+            </a>
+          </Link>
         </div>
         {navbar}
         <div className="flex md:hidden">
