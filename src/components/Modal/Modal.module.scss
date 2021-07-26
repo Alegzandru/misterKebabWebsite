@@ -7,6 +7,47 @@
   opacity: 0;
   background-color: #f4f4f6;
   animation: fadeIn 0.5s ease forwards;
+  border: 8px solid #f4f4f6;
+  border-right-width: 4px;
+  border-left-width: 4px;
+
+  &_cart {
+    max-width: 372px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ff7979;
+    border-radius: 4px;
+  }
+
+  &__close {
+    background-color: #f4f4f6c0;
+  }
+}
+
+@media only screen and (min-width: 373px) {
+  .modalContainer {
+    &_cart {
+      border-radius: 16px;
+      top: 16px;
+      bottom: 16px;
+      padding: 56px 12px 32px;
+
+      .modalContainer__close {
+        top: 32px;
+        right: auto;
+        left: calc(50% + 130px);
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 1024px) {

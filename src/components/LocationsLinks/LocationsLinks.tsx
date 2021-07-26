@@ -4,12 +4,13 @@ import React from 'react'
 
 import { LOCATIONS } from '../../constants'
 import { PAGES, THEMES } from '../../constants/common'
+import { Themes } from '../../types'
 import ExternalLink from '../Svgs/ExternalLink/ExternalLink'
 import styles from './LocationsLinks.module.scss'
 import { useTranslation } from 'next-i18next'
 
 type Props = {
-  theme: keyof typeof THEMES
+  theme: Themes
 }
 
 const LocationsLinks = ({ theme }: Props) => {

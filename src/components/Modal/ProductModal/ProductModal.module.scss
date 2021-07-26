@@ -1,4 +1,4 @@
-.productPopupContainer {
+.productModalContainer {
   background-color: #f4f4f6;
 
   &__insignia {
@@ -34,7 +34,7 @@
 }
 
 @media only screen and (min-width: 816px) {
-  .productPopupContainer {
+  .productModalContainer {
     &__name {
       font-size: 64px;
     }
@@ -52,7 +52,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .productPopupContainer {
+  .productModalContainer {
     &__name {
       font-size: 69px;
       line-height: 115%;
@@ -61,7 +61,7 @@
 }
 
 @media only screen and (min-width: 1440px) {
-  .productPopupContainer {
+  .productModalContainer {
     max-width: 1496px;
   }
 }

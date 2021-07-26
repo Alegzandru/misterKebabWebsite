@@ -1,0 +1,19 @@
+.selectedProductContainer {
+  &__description {
+    color: #58606e;
+    font-size: 14px;
+  }
+
+  &__toppings {
+    color: #000000;
+  }
+
+  &__price {
+    font-size: 14px;
+    color: #611220;
+  }
+
+  &__button {
+    border: 1px solid #e1e1e1;
+  }
+}

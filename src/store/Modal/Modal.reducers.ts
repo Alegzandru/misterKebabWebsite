@@ -9,6 +9,11 @@ const showProductModal = (state: ModalState, payload: Record<string, any>): Moda
   ...payload,
 })
 
+const showCartModal = (state: ModalState): ModalState => ({
+  ...state,
+  show: MODALS.cart,
+})
+
 const closeModal = (state: ModalState): ModalState => ({
   ...state,
   show: '',
@@ -18,6 +23,9 @@ const modalReducer = (state: ModalState, { type, payload }: AnyAction) => {
   switch (type) {
     case ACTIONS.showProductModal:
       return showProductModal(state, payload)
+
+    case ACTIONS.showCartModal:
+      return showCartModal(state)
 
     case ACTIONS.closeModal:
       return closeModal(state)

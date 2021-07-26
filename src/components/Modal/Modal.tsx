@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { useContext, useEffect } from 'react'
 
-import { MODAL_COMPONENTS } from '../../constants'
+import { MODALS, MODAL_COMPONENTS } from '../../constants'
 import { ModalContext } from '../../store/Modal/Modal.context'
 import Close from '../Svgs/Close/Close'
 import styles from './Modal.module.scss'
@@ -27,21 +27,31 @@ const Modal = () => {
     return () => document.removeEventListener('keydown', onKeyDownHandler)
   }, [show])
 
-  const CurrentModal = MODAL_COMPONENTS[show] as () => JSX.Element
+  const CurrentModal = MODAL_COMPONENTS[show]
 
   return (
     <>
-      <div className={classNames(styles.modalContainerBackground, 'z-90 fixed inset-0 bg-black', show ? 'block' : 'hidden')} />
+      <div className={classNames(
+        styles.modalContainerBackground,
+        'z-90 fixed inset-0 bg-black',
+        show ? 'block' : 'hidden'
+      )} />
       <div
         className={classNames(
           styles.modalContainer,
-          'z-100 fixed inset-0 py-18 px-4 overflow-y-auto md:py-24 md:px-5 lg:inset-5 lg:px-12',
-          show ? 'block' : 'hidden'
+          { [styles.modalContainer_cart]: show === MODALS.cart },
+          'z-100 fixed inset-0 overflow-y-auto mx-auto py-18 px-3 md:py-24 md:px-5 lg:inset-5 lg:px-12',
+          show ? 'block' : 'hidden',
         )}
       >
-        {CurrentModal ? <CurrentModal /> : null}
+        {CurrentModal && <CurrentModal />}
         <button
-          className="absolute flex justify-center items-center w-10 h-10 top-4 right-4 md:top-6 md:right-6"
+          aria-label="Close button"
+          className={classNames(
+            styles.modalContainer__close,
+            show === MODALS.product ? 'md:top-6 md:right-6 lg:top-10 lg:right-10' : '',
+            'fixed flex justify-center items-center w-10 h-10 top-4 right-4 rounded-full'
+          )}
           onClick={closeModal}
         >
           <Close />

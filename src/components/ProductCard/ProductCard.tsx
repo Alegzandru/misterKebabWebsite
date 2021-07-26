@@ -1,15 +1,17 @@
 import classNames from 'classnames'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { memo, useContext } from 'react'
+import { DRINKS, WEIGHT_TYPE } from '../../constants'
+
+import { SIZES } from '../../constants/common'
 import { ModalContext } from '../../store/Modal/Modal.context'
 import { Product } from '../../types'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
-
 import Badges from '../Badges/Badges'
+import ProductCount from '../ProductCount/ProductCount'
 import Bag from '../Svgs/Bag/Bag'
 import styles from './ProductCard.module.scss'
-import ProductCardCount from './ProductCardCount/ProductCardCount'
 
 type Props = Product
 
@@ -45,11 +47,13 @@ const ProductCard = memo((props: Props) => {
             styles.productCardContainer__weight,
             'hidden lg:flex items-center whitespace-nowrap mr-auto pr-2'
           )}
-          >{weight}{weight?subcategory==='Cold Drinks'||subcategory==='Băuturi Dulci'||subcategory==='Hot Drinks'?t('ml'):t('g'):''}</span>
+          >
+            {weight && `${weight} ${t(DRINKS.includes(subcategory) ? WEIGHT_TYPE.milliliters : WEIGHT_TYPE.grams)}`}
+          </span>
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
         <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
-          <ProductCardCount styles={styles} />
+          <ProductCount className="hidden lg:flex" background="white" size={SIZES.md} />
           <button
             className={classNames(
               styles.productCardContainer__addToCartButton,
