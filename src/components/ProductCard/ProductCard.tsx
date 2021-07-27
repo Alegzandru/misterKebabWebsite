@@ -20,7 +20,7 @@ const ProductCard = memo((props: Props) => {
   const { name, nameru, price, image, weight, badges, subcategory } = props
 
   const { actions: { showProductModal } } = useContext(ModalContext)
-  const { actions: { addProduct } } = useContext(CartContext)
+  const { actions: { addProducts } } = useContext(CartContext)
 
   const [count, setCount] = useState(1)
 
@@ -32,7 +32,7 @@ const ProductCard = memo((props: Props) => {
   const addToCartHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation()
 
-    addProduct(name, count)
+    addProducts(name, count)
     setCount(1)
   }
 

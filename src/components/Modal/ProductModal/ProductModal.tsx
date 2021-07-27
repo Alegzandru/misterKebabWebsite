@@ -22,9 +22,9 @@ import styles from './ProductModal.module.scss'
 import ToppingsManager from './ToppingsManager/ToppingsManager'
 
 const ProductModal = () => {
-  const { actions: { addProduct } } = useContext(CartContext)
+  const { actions: { addProducts } } = useContext(CartContext)
   const {
-    state: { count },
+    state: { count, toppings: currentToppings },
     actions: { setCurrentProduct, setCount },
   } = useContext(ProductToppingsContext)
   const {
@@ -32,6 +32,7 @@ const ProductModal = () => {
       show,
       product: { name, image, badges, weight, price, ingredients, toppings, nameru, ingredientsru, subcategory },
     },
+    actions: { closeModal },
   } = useContext(ModalContext)
 
   const router = useRouter()
@@ -60,9 +61,9 @@ const ProductModal = () => {
   }, [show])
 
   const onClickHandler = () => {
-    if (!withToppings) {
-      addProduct(name, count)
-    }
+    addProducts(name, count, withToppings ? currentToppings : [])
+
+    closeModal()
   }
 
   return (

@@ -15,7 +15,7 @@ const useLogger = <T>(reducer: (state: T, { type, payload }: AnyAction) => T) =>
   const reducerWithLogger = useCallback((state, action) => {
     const next = reducer(state, action)
 
-    console.group(
+    console.groupCollapsed(
       `%cAction: %c${action.type} %cat ${getCurrentTimeFormatted()}`,
       'color: lightgreen; font-weight: bold;', 'color: white; font-weight: bold;',
       'color: lightblue; font-weight: lighter;'

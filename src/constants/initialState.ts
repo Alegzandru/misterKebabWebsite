@@ -22,6 +22,7 @@ export const DEFAULT_STATE: State = {
   cart: {
     products: [],
     menuProducts: [],
+    groupedByToppingsProducts: [],
     price: 0,
     count: 0,
   },

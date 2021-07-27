@@ -1,5 +1,4 @@
 import { ACTIONS } from '../../constants/actions'
-import { DEFAULT_STATE } from '../../constants/initialState'
 import { AnyAction, Product, Topping, Toppings } from '../../types'
 import { ProductToppingsState } from '../../types/state'
 
@@ -8,7 +7,7 @@ const setCurrentProduct = (state: ProductToppingsState, payload: Record<string, 
 
   const { name: currentName } = state
 
-  return name === currentName ? state : ({ ...state, ...DEFAULT_STATE.productToppings, name })
+  return name === currentName ? state : ({ ...state, name, toppings: [{ topping: [], without: [] }], count: 1 })
 }
 
 const setCount = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {

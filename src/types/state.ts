@@ -13,7 +13,8 @@ export type ModalState = {
 
 export type CartState = {
   menuProducts: Product[]
-  products: CartProduct[]
+  products: (CartProduct & { allProductsToppings: Toppings[] })[]
+  groupedByToppingsProducts: (CartProduct & { toppings: Toppings; count: number })[]
   price: number
   count: number
 }

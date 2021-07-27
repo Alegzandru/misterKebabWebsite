@@ -1,4 +1,5 @@
 import { API_URL } from '../constants/urls'
+import { Toppings } from '../types'
 
 export const productFilter = (product: any, subcategories: any[]) => {
   const topping = product.toppings.length !== 0
@@ -62,3 +63,5 @@ export const fetcher = async (query: string) => {
 
   return { ok: true, data: filteredProducts }
 }
+
+export const productToppingsPrice = (toppings: Toppings) => toppings.topping.reduce((accumulator, { price }) => accumulator + price, 0)

@@ -1,4 +1,6 @@
 .selectedProductContainer {
+  grid-template-columns: 1fr auto auto;
+
   &__description {
     color: #58606e;
     font-size: 14px;

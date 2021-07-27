@@ -18,7 +18,7 @@ const ToppingsManager = ({ toppings }: Props) => {
     actions: { setCount, setToppings },
   } = useContext(ProductToppingsContext)
 
-  const [activeTab, setActiveTab] = useState(count - 1)
+  const [activeTab, setActiveTab] = useState(0)
 
   const formRef = useRef<HTMLFormElement>(null)
 

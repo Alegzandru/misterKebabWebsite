@@ -16,7 +16,7 @@ import FormBlock from './FormBlock/FormBlock'
 const CartModal = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const { state: { price } } = useContext(CartContext)
+  const { state: { price, groupedByToppingsProducts } } = useContext(CartContext)
 
   const [orderType, setOrderType] = useState<OrderType>('')
 
@@ -36,12 +36,7 @@ const CartModal = () => {
     <div className={classNames(styles.cartModalContainer, 'w-full relative mx-auto')}>
       <h1 className={classNames(styles.cartModalContainer__heading, 'font-bold')}>Comanda dvs.</h1>
       <div className="mt-10">
-        <SelectedProduct
-          name="Pita de Vita"
-          price={90}
-          toppings={{ topping: [{ text: 'vita', price: 0 }], without: ['sos'] }}
-          image="https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg"
-        />
+        {groupedByToppingsProducts.map((product, index) => <SelectedProduct key={index} {...product} />)}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormBlock heading="Date de contact" >

@@ -61,7 +61,7 @@ export type Product = {
   subcategory: string
 }
 
-export type CartProduct = Pick<Product, 'name' | 'price' | 'image'> & { allProductsToppings: Toppings[] }
+export type CartProduct = Pick<Product, 'name' | 'price' | 'image'>
 
 export type Toppings = {
   topping: Topping[]

@@ -1,7 +1,9 @@
 import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
-import { AnyAction, Product } from '../../types'
+import { AnyAction, Product, Toppings } from '../../types'
 import { CartState } from '../../types/state'
+import { equals } from 'ramda'
+import { productToppingsPrice } from '../../utils/products'
 
 const addMenuProducts = (state: CartState, payload: Record<string, any>): CartState => {
   const { menuProducts } = payload as { menuProducts: Product[] }
@@ -9,8 +11,40 @@ const addMenuProducts = (state: CartState, payload: Record<string, any>): CartSt
   return ({ ...state, menuProducts })
 }
 
+const groupByToppings = (state: CartState): CartState => {
+  const { products } = state
+
+  const groupedByToppingsProducts = products.reduce<CartState['groupedByToppingsProducts']>((accumulator, { allProductsToppings, ...product }) => {
+    const [firstProductToppings, ...restToppings] = allProductsToppings
+
+    return [...accumulator, ...restToppings.reduce((acc, currentTopping) => {
+      const sameToppingIndex = acc.findIndex(({ toppings }) => equals(toppings, currentTopping))
+
+      if (sameToppingIndex === -1) {
+        const price = productToppingsPrice(currentTopping) + product.price
+
+        return [...acc, { ...product, toppings: currentTopping, price, count: 1 }]
+      }
+
+      const { count, price: oldPrice } = acc[sameToppingIndex]
+
+      acc[sameToppingIndex].count = count + 1
+      acc[sameToppingIndex].price = oldPrice + oldPrice / count
+
+      return acc
+    }, [{
+      ...product,
+      toppings: firstProductToppings,
+      price: productToppingsPrice(firstProductToppings) + product.price,
+      count: 1,
+    }])]
+  }, [])
+
+  return { ...state, groupedByToppingsProducts }
+}
+
 const addProducts = (state: CartState, payload: Record<string, any>): CartState => {
-  const { name, count } = payload as { name: string; count: number }
+  const { name, count, toppings } = payload as { name: string; count: number; toppings: Toppings[] }
 
   const {
     products,
@@ -19,25 +53,34 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
     count: totalCount,
   } = state
 
-  const newToppings = [...new Array(count)].map(() => ({ ...INITIAL_TOPPINGS }))
+  const newToppings = toppings.length ? toppings : [...new Array(count)].map(() => ({ ...INITIAL_TOPPINGS }))
+
+  const newToppingsPrice = newToppings.reduce(
+    (accumulator, toppingsToCalculate) => accumulator + productToppingsPrice(toppingsToCalculate),
+    0
+  )
 
   const currentProductIndex = products.findIndex((product) => product.name === name)
   const { image, price } = menuProducts.find((product) => product.name === name) as Product
 
+  const commonData = {
+    price: totalPrice + price * count + newToppingsPrice,
+    count: totalCount + count,
+  }
+
   if (currentProductIndex === -1) {
     return ({
       ...state,
+      ...commonData,
       products: [
         ...products,
         {
           name,
           image,
           price,
-          allProductsToppings: newToppings,
+          allProductsToppings: newToppings.sort((first, second) => first.topping.length - second.topping.length),
         },
       ],
-      price: price * count,
-      count: totalCount + count,
     })
   }
 
@@ -45,12 +88,12 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
   const newProducts = [...products]
 
   newProducts[currentProductIndex].allProductsToppings = [...allProductsToppings, ...newToppings]
+    .sort((first, second) => first.topping.length - second.topping.length)
 
   return ({
     ...state,
+    ...commonData,
     products: newProducts,
-    price: totalPrice + price * count,
-    count: totalCount + count,
   })
 }
 
@@ -60,7 +103,7 @@ const cartReducer = (state: CartState, { type, payload }: AnyAction) => {
       return addMenuProducts(state, payload)
 
     case ACTIONS.addProducts:
-      return addProducts(state, payload)
+      return groupByToppings(addProducts(state, payload))
 
     default:
       return state
