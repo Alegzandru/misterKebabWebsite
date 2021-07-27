@@ -14,9 +14,9 @@ const Header = () => {
   const [showMobileHeader, setShowMobileHeader] = useState(false)
   const [transparent, setTransparent] = useState(true)
 
-  const router = useRouter()
-  const ro = router.locale === 'ro'
   const { t } = useTranslation('header')
+
+  const router = useRouter()
 
   useEffect(() => {
     const checkScrollTop = () => {
@@ -77,11 +77,7 @@ const Header = () => {
           {Object.values(PAGES).map(link)}
         </ul>
       </nav>
-      <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
-        <a>
-          <LanguageButton text={t('Ру')} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'}/>
-        </a>
-      </Link>
+      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'} />
       <a
         style={transparent && !showMobileHeader ? {
           backgroundColor: 'transparent',
@@ -140,11 +136,7 @@ const Header = () => {
         </div>
         {navbar}
         <div className="flex md:hidden">
-          <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
-            <a>
-              <LanguageButton text={t('Ру')} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
-            </a>
-          </Link>
+          <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
           {mobileButton}
         </div>
       </div>

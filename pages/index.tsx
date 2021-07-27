@@ -9,42 +9,50 @@ import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavba
 import Hero from '../src/components/Hero/Hero'
 import Layout from '../src/components/Layout/Layout'
 import Menu from '../src/components/Menu/Menu'
-import { getTsProduct } from '../src/components/Modal/GetTsProduct'
+import Modal from '../src/components/Modal/Modal'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
+import { API_URL } from '../src/constants/urls'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
-import { MenuObject, Product } from '../src/types'
-import { API_URL } from '../src/utils/urls'
+import { CartContextProvider } from '../src/store/Cart/Cart.context'
+import { ProductToppingsContextProvider } from '../src/store/ProductToppings/ProductToppings.context'
+import { MenuList, Product } from '../src/types'
+import { productFilter } from '../src/utils/products'
 
 type Props = {
   products: Product[]
-  categories: MenuObject[]
+  menu: MenuList
 }
 
-const MainPage = ({ products, categories }: Props) => (
+const MainPage = ({ products, menu }: Props) => (
   <Layout>
-    <Hero />
-    <Slider slides={[banner2, banner]} autoPlayInterval={4000} />
-    <ActiveSectionContextProvider>
-      <CategoriesNavbar />
-      <Menu categories={categories} products={products} />
-    </ActiveSectionContextProvider>
-    <BackToTopButton />
-    <OpenCartButton />
+    <CartContextProvider>
+      <ProductToppingsContextProvider>
+        <Hero />
+        <Slider slides={[banner2, banner]} autoPlayInterval={4000} />
+        <ActiveSectionContextProvider>
+          <CategoriesNavbar />
+          <Menu menu={menu} products={products} />
+        </ActiveSectionContextProvider>
+        <BackToTopButton />
+        <OpenCartButton />
+        <Modal />
+      </ProductToppingsContextProvider>
+    </CartContextProvider>
   </Layout>
 )
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [subcategoriesRes, productsRes, categoriesRes] = await Promise.all([
+  const [subcategoriesRes, productsRes, menuRes] = await Promise.all([
     fetch(`${API_URL}/categories`),
     fetch(`${API_URL}/products`),
     fetch(`${API_URL}/big-categories`),
   ])
 
-  const [subcategories, productsRaw, categoriesRaw] = await Promise.all([
+  const [subcategories, productsRaw, menuRaw] = await Promise.all([
     subcategoriesRes.json(),
     productsRes.json(),
-    categoriesRes.json(),
+    menuRes.json(),
   ])
 
   const products: Product[] = productsRaw.filter((product: any) =>
@@ -53,41 +61,42 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     product.price !== null &&
     product.name !== null
   )
-    .map((product: any) => getTsProduct(product, subcategories))
+    .map((product: any) => productFilter(product, subcategories))
 
-  const categories = categoriesRaw.map((category: any) => (
-    {
-      categoryName: category.name,
-      categoryNameRu: category.nameru,
-      subCategories: category.subcategories.map((subcategory: any) => (
-        {
-          id: subcategory.slug,
-          name: subcategory.name,
-          nameru: subcategory.nameru,
-          items: products.filter(
-            (product: any) => product.subcategory === subcategory.name
-          ).sort((first, second) => {
-            if (first.name < second.name) {
-              return -1
-            }
+  const menu = menuRaw
+    .map((category: any) => (
+      {
+        categoryName: category.name,
+        categoryNameRu: category.nameru,
+        subCategories: category.subcategories.map((subcategory: any) => (
+          {
+            id: subcategory.slug,
+            name: subcategory.name,
+            nameru: subcategory.nameru,
+            items: products.filter(
+              (product: any) => product.subcategory === subcategory.name
+            ).sort((first, second) => {
+              if (first.name < second.name) {
+                return -1
+              }
 
-            if (first.name > second.name) {
-              return 1
-            }
+              if (first.name > second.name) {
+                return 1
+              }
 
-            return 0
-          }),
-          order: subcategory.order,
-        }
-      )),
-      order: category.order,
-    }
-  ))
+              return 0
+            }),
+            order: subcategory.order,
+          }
+        )),
+        order: category.order,
+      }
+    ))
 
   return {
     props: {
       products,
-      categories,
+      menu,
       ...(await serverSideTranslations(locale as string, ['header', 'hero', 'popup', 'common'])),
     },
     revalidate: 10,

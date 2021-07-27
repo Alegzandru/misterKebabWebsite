@@ -16,7 +16,8 @@ type Props = PropsWithChildren<{
 
 const Checkbox = ({ className, name, children, defaultChecked, checked, register, onChange, ...registerOptions }: Props) => {
   const { t } = useTranslation('careers')
-  return(
+
+  return (
     <label
       className={classNames(
         styles.checkboxContainer, className,
@@ -27,8 +28,8 @@ const Checkbox = ({ className, name, children, defaultChecked, checked, register
         className="absolute opacity-0 h-0 w-0"
         type="checkbox"
         defaultChecked={defaultChecked}
-        checked={checked}
         {...(register ? register(name as string, registerOptions) : { name })}
+        checked={checked}
         onChange={onChange}
       />
       <span className={classNames(styles.checkboxContainer__checkMark, 'absolute left-px h-4 w-4')} />

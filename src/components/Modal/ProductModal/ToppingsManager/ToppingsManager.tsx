@@ -1,26 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'next-i18next'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
-import { Toppings, ToppingsManagerState } from '../../../../types'
-import Button from '../../../Button/Button'
+import { ProductToppingsContext } from '../../../../store/ProductToppings/ProductToppings.context'
+import { Toppings } from '../../../../types'
 import Checkbox from '../../../Checkbox/Checkbox'
-import Bag from '../../../Svgs/Bag/Bag'
 import styles from './ToppingsManager.module.scss'
 
 type Props = {
   toppings: Toppings
-  count: number
 }
 
-const ToppingsManager = ({ toppings, count }: Props) => {
+const ToppingsManager = ({ toppings }: Props) => {
+  const {
+    state: { count, toppings: currentToppings },
+    actions: { setCount, setToppings },
+  } = useContext(ProductToppingsContext)
+
   const [activeTab, setActiveTab] = useState(0)
 
   const formRef = useRef<HTMLFormElement>(null)
-
-  const currentToppingsRef = useRef<ToppingsManagerState[]>([...new Array(count)].map(() => ({ topping: new Map(), without: new Set() })))
-  const { current: currentToppings } = currentToppingsRef
 
   const { t } = useTranslation('popup')
 
@@ -29,16 +29,14 @@ const ToppingsManager = ({ toppings, count }: Props) => {
   }, [activeTab])
 
   const addTabHandler = () => {
-    if (currentToppings.length >= 10) {
+    if (currentToppings.length >= 20) {
       return
     }
 
-    currentToppingsRef.current = [...currentToppings, { topping: new Map(), without: new Set() }]
+    setCount(count + 1)
 
     setActiveTab(currentToppings.length)
   }
-
-  const onClickHandler = () => undefined
 
   const tab = (index: number) => (
     <button
@@ -54,15 +52,27 @@ const ToppingsManager = ({ toppings, count }: Props) => {
 
   const toppingCheckbox = ({ text, price }: Toppings['topping'][0]) => {
     const label = `${text}- ` + (price ? `${price} MDL` : 'gratis')
+
     const { topping } = currentToppings[activeTab]
+
+    const toppingIndex = topping.findIndex((value) => value.text === text)
+    const checked = toppingIndex !== -1
+
+    const onChangeHandler = () => {
+      setToppings(
+        checked
+          ? topping.filter((value) => value.text !== text)
+          : [...topping, { text, price }],
+        'topping',
+        activeTab
+      )
+    }
 
     return (
       <Checkbox
-        key={text}
-        defaultChecked={topping.has(label)}
-        onChange={({ target: { checked } }) => checked
-          ? topping.set(label, { text, price })
-          : topping.delete(label)}
+        key={label + activeTab}
+        checked={checked}
+        onChange={onChangeHandler}
       >
         {label}
       </Checkbox>
@@ -72,13 +82,24 @@ const ToppingsManager = ({ toppings, count }: Props) => {
   const withoutToppingCheckbox = (value: string) => {
     const { without } = currentToppings[activeTab]
 
+    const withoutIndex = without.findIndex((text) => text === value)
+    const checked = withoutIndex !== -1
+
+    const onChangeHandler = () => {
+      setToppings(
+        checked
+          ? without.filter((text) => text !== value)
+          : [...without, value],
+        'without',
+        activeTab
+      )
+    }
+
     return (
       <Checkbox
-        key={value}
-        defaultChecked={without.has(value)}
-        onChange={({ target: { checked } }) => checked
-          ? without.add(value)
-          : without.delete(value)}
+        key={value + activeTab}
+        checked={checked}
+        onChange={onChangeHandler}
       >
         {value}
       </Checkbox>
@@ -113,10 +134,6 @@ const ToppingsManager = ({ toppings, count }: Props) => {
           </div>
         </div>
       </form>
-      <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
-        <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
-        {t('Adaugă la comandă')}
-      </Button>
     </div>
   )
 }

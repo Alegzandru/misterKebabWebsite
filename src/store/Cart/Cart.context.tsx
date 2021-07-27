@@ -1,5 +1,6 @@
 import { createContext, PropsWithChildren, useReducer } from 'react'
 import { DEFAULT_STATE } from '../../constants/initialState'
+import useLogger from '../../utils/logger'
 import useActions from './Cart.actions'
 import cartReducer from './Cart.reducers'
 
@@ -9,7 +10,7 @@ export const CartContext = createContext({
 })
 
 export const CartContextProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [state, dispatch] = useReducer(cartReducer, DEFAULT_STATE.cart)
+  const [state, dispatch] = useReducer(useLogger(cartReducer), DEFAULT_STATE.cart)
 
   const actions = useActions(dispatch)
 
