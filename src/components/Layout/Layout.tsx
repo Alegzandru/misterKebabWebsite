@@ -1,15 +1,14 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { LANGUAGES } from '../../constants'
-import { ModalContextProvider } from '../../store/Modal/Modal.context'
 
+import { FONT } from '../../constants/common'
+import { ModalContextProvider } from '../../store/Modal/Modal.context'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
-import Modal from '../Modal/Modal'
 
 type Props = PropsWithChildren<unknown>
 
 const Layout = ({ children }: Props) => {
-  const [currentMainLanguage] = useState(LANGUAGES.redHatDisplay)
+  const [currentMainLanguage] = useState(FONT.redHatDisplay)
 
   useEffect(() => {
     document.body.style.fontFamily = currentMainLanguage
@@ -22,7 +21,6 @@ const Layout = ({ children }: Props) => {
         {children}
       </main>
       <Footer />
-      <Modal />
     </ModalContextProvider>
   )
 }

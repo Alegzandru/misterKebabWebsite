@@ -20,8 +20,14 @@ export const DEFAULT_STATE: State = {
     },
   },
   cart: {
-    products: {},
+    products: [],
     menuProducts: [],
     price: 0,
+    count: 0,
+  },
+  productToppings: {
+    name: '',
+    toppings: [{ topping: [], without: [] }],
+    count: 1,
   },
 }

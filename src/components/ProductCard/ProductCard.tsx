@@ -2,10 +2,11 @@ import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { memo, useContext } from 'react'
-import { DRINKS, WEIGHT_TYPE } from '../../constants'
+import React, { memo, useContext, useState } from 'react'
 
-import { SIZES } from '../../constants/common'
+import { DRINKS, WEIGHT_TYPE } from '../../constants'
+import { LANGUAGES, SIZES } from '../../constants/common'
+import { CartContext } from '../../store/Cart/Cart.context'
 import { ModalContext } from '../../store/Modal/Modal.context'
 import { Product } from '../../types'
 import Badges from '../Badges/Badges'
@@ -18,11 +19,22 @@ type Props = Product
 const ProductCard = memo((props: Props) => {
   const { name, nameru, price, image, weight, badges, subcategory } = props
 
-  const router = useRouter()
-  const ro = router.locale === 'ro'
+  const { actions: { showProductModal } } = useContext(ModalContext)
+  const { actions: { addProduct } } = useContext(CartContext)
+
+  const [count, setCount] = useState(1)
+
   const { t } = useTranslation('common')
 
-  const { actions: { showProductModal } } = useContext(ModalContext)
+  const router = useRouter()
+  const isRo = router.locale === LANGUAGES.ro
+
+  const addToCartHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation()
+
+    addProduct(name, count)
+    setCount(1)
+  }
 
   return (
     <div
@@ -36,7 +48,7 @@ const ProductCard = memo((props: Props) => {
       <div className={classNames(styles.productCardContainer__description, 'w-full rounded transition-all duration-500')}>
         <div className="flex">
           <h4 className={classNames(styles.productCardContainer__title)}>
-            {ro ? name : nameru}
+            {isRo ? name : nameru}
           </h4>
           <span className={classNames(styles.productCardContainer__price, 'flex items-center whitespace-nowrap ml-auto pl-2')}>
             {price} {t('MDL')}
@@ -48,18 +60,18 @@ const ProductCard = memo((props: Props) => {
             'hidden lg:flex items-center whitespace-nowrap mr-auto pr-2'
           )}
           >
-            {weight && `${weight} ${t(DRINKS.includes(subcategory) ? WEIGHT_TYPE.milliliters : WEIGHT_TYPE.grams)}`}
+            {weight ? `${weight} ${t(DRINKS.includes(subcategory) ? WEIGHT_TYPE.milliliters : WEIGHT_TYPE.grams)}` : null}
           </span>
           <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
         </div>
         <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
-          <ProductCount className="hidden lg:flex" background="white" size={SIZES.md} />
+          <ProductCount className="hidden lg:flex" background="white" size={SIZES.md} value={count} onChange={setCount} />
           <button
             className={classNames(
               styles.productCardContainer__addToCartButton,
               'flex w-full justify-center items-center font-bold transition-colors duration-300'
             )}
-            onClick={(event) => event.stopPropagation()}
+            onClick={addToCartHandler}
           >
             {t('în coș')}
             <Bag className={classNames(styles.productCardContainer__bag, 'ml-2 transition-all duration-300')} />

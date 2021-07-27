@@ -4,68 +4,66 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 
-import { SIZES } from '../../../constants/common'
+import { DRINKS, MODALS, WEIGHT_TYPE } from '../../../constants'
+import { LANGUAGES, SIZES } from '../../../constants/common'
+import { CartContext } from '../../../store/Cart/Cart.context'
 import { ModalContext } from '../../../store/Modal/Modal.context'
-import { API_URL } from '../../../utils/urls'
+import { ProductToppingsContext } from '../../../store/ProductToppings/ProductToppings.context'
+import { Product, Response } from '../../../types'
+import { cancelablePromise } from '../../../utils'
+import { fetcher } from '../../../utils/products'
 import Badges from '../../Badges/Badges'
+import Button from '../../Button/Button'
 import ProductCount from '../../ProductCount/ProductCount'
 import Recommended from '../../Recommended/Recommended'
+import Bag from '../../Svgs/Bag/Bag'
 import HallalInsignia from '../../Svgs/HallalInsignia/HallalInsignia'
-import { getTsProduct } from '../GetTsProduct'
 import styles from './ProductModal.module.scss'
 import ToppingsManager from './ToppingsManager/ToppingsManager'
 
-const fetcher = async (url: string) => {
-  const resCategory = await fetch(url)
-  const category = await resCategory.json()
-
-  const resCategories = await fetch('https://mr-kebab-admin.herokuapp.com/categories')
-  const subcategories = await resCategories.json()
-
-  const resProducts = await fetch('https://mr-kebab-admin.herokuapp.com/products')
-  const productsFetch = await resProducts.json()
-
-  if (category.length === 0 || subcategories.length === 0 || productsFetch.length === 0 || category[0].recomended_subcategories.length === 0) {
-    return ['no products']
-  } else {
-    const filteredProducts = category[0].recomended_subcategories.map((recommendedSub: any) => {
-      const subcategoryProducts = productsFetch.filter((productFilter: any) =>
-        productFilter.subcategory.name === recommendedSub.name &&
-        productFilter.image &&
-        productFilter.price !== null &&
-        productFilter.name !== null
-      )
-      const random = Math.floor(Math.random() * subcategoryProducts.length)
-      const product = subcategoryProducts[random]
-
-      return getTsProduct(product, subcategories)
-    })
-
-    return filteredProducts
-  }
-}
-
 const ProductModal = () => {
-  const router = useRouter()
-  const ro = router.locale === 'ro'
-  const { t } = useTranslation('common')
-
-  const [data, setData] = useState([])
-
+  const { actions: { addProduct } } = useContext(CartContext)
+  const {
+    state: { count },
+    actions: { setCurrentProduct, setCount },
+  } = useContext(ProductToppingsContext)
   const {
     state: {
+      show,
       product: { name, image, badges, weight, price, ingredients, toppings, nameru, ingredientsru, subcategory },
     },
   } = useContext(ModalContext)
 
-  const noToppings = toppings.topping.length === 0 && toppings.without.length === 0
+  const router = useRouter()
+  const isRo = router.locale === LANGUAGES.ro
+
+  const { t } = useTranslation('common')
+
+  const [{ ok, data }, setData] = useState<Response<Product[]>>({ ok: true, data: [] })
+
+  const withToppings = !!(toppings.topping.length || toppings.without.length)
 
   useEffect(() => {
-    (async () => {
-      const dataEffect = await fetcher(`${API_URL}/categories?name_eq=${subcategory}`)
-      setData(dataEffect)
-    })()
+    const { promise, cancel } = cancelablePromise<Response<Product[]>>(fetcher(`?name_eq=${subcategory}`))
+
+    promise.then((recommendedData) => {
+      setData(recommendedData)
+    })
+
+    return cancel
   }, [name])
+
+  useEffect(() => {
+    if (show === MODALS.product) {
+      setCurrentProduct(name)
+    }
+  }, [show])
+
+  const onClickHandler = () => {
+    if (!withToppings) {
+      addProduct(name, count)
+    }
+  }
 
   return (
     <div className={classNames(styles.productModalContainer, 'w-full relative mx-auto')}>
@@ -76,28 +74,34 @@ const ProductModal = () => {
         </div>
         <div className="mt-6 font-bold md:mt-13 lg:w-130 lg:min-w-130 lg:ml-10 lg:mt-0 xl:w-140 xl:min-w-140">
           <Badges className={styles.productModalContainer__badges} type="big" badges={badges} />
-          <h1 className={classNames(styles.productModalContainer__name, 'mt-2 lg:mt-0')}>{ro ? name : nameru}</h1>
+          <h1 className={classNames(styles.productModalContainer__name, 'mt-2 lg:mt-0')}>{isRo ? name : nameru}</h1>
           <h2 className={styles.productModalContainer__price}>{price} {t('MDL')}</h2>
-          {noToppings && <ProductCount className="my-6" background="gray" size={SIZES.md} />}
+          {!withToppings && (
+            <ProductCount className="my-6" background="gray" size={SIZES.md} value={count} onChange={setCount} />
+          )}
           <p className={classNames(styles.productModalContainer__description, 'font-normal mt-4')}>
-            <span className={styles.productModalContainer__weight}>
-              {weight}
-              {weight ? subcategory === 'Cold Drinks' || subcategory === 'Băuturi Dulci' || subcategory === 'Hot Drinks' ? t('ml') : t('g') : ''}
-            </span>
-            <br />
-            {ro ? ingredients : ingredientsru}
+            {
+              weight ? <>
+                <span className={styles.productModalContainer__weight}>
+                  {weight}
+                  {t(DRINKS.includes(subcategory) ? WEIGHT_TYPE.milliliters : WEIGHT_TYPE.grams)}
+                </span>
+                <br />
+              </> : null
+            }
+            {isRo ? ingredients : ingredientsru}
           </p>
-          {!noToppings && <ToppingsManager toppings={toppings} count={2} />}
+          {withToppings && <ToppingsManager toppings={toppings} />}
+          <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
+            <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
+            {t('Adaugă la comandă')}
+          </Button>
         </div>
       </div>
       {
-        data[0] === 'no products' ?
-          ''
-          :
-          data.length === 0 ?
-            'Loading...'
-            :
-            <Recommended products={data} />
+        ok
+          ? data.length ? <Recommended products={data as Product[]} /> : 'Loading...'
+          : null
       }
     </div>
   )

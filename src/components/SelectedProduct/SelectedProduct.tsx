@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import { SIZES } from '../../constants/common'
 import { Toppings } from '../../types'
@@ -15,6 +16,8 @@ type Props = {
 }
 
 const SelectedProduct = ({ name, image, price, toppings: { topping, without } }: Props) => {
+  const [count, setCount] = useState(1)
+
   const toppingBlock = (text: string, index: number) =>
     <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{text}</span>
 
@@ -34,7 +37,7 @@ const SelectedProduct = ({ name, image, price, toppings: { topping, without } }:
               fara: {without.map(toppingBlock)}
             </p>}
           </div>
-          <ProductCount background="gray" size={SIZES.sm} />
+          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={setCount} />
         </div>
       </div>
       <p className={classNames(styles.selectedProductContainer__price, 'flex font-medium')}>{price} MDL</p>

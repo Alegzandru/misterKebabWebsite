@@ -1,3 +1,4 @@
+import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
 import { AnyAction, Product } from '../../types'
 import { CartState } from '../../types/state'
@@ -11,22 +12,45 @@ const addMenuProducts = (state: CartState, payload: Record<string, any>): CartSt
 const addProducts = (state: CartState, payload: Record<string, any>): CartState => {
   const { name, count } = payload as { name: string; count: number }
 
-  // eslint-disable-next-line no-console
-  console.log(name, count)
+  const {
+    products,
+    menuProducts,
+    price: totalPrice,
+    count: totalCount,
+  } = state
 
-  // const { products, menuProducts } = state
-  // const currentProduct = products[name]
+  const newToppings = [...new Array(count)].map(() => ({ ...INITIAL_TOPPINGS }))
 
-  // products: {
-  //   ...products,
-  //   [name]: currentProduct ? {
-  //     // add product
-  //   } : {
-  //     // add product with names and other fields
-  //   }
-  // },
+  const currentProductIndex = products.findIndex((product) => product.name === name)
+  const { image, price } = menuProducts.find((product) => product.name === name) as Product
+
+  if (currentProductIndex === -1) {
+    return ({
+      ...state,
+      products: [
+        ...products,
+        {
+          name,
+          image,
+          price,
+          allProductsToppings: newToppings,
+        },
+      ],
+      price: price * count,
+      count: totalCount + count,
+    })
+  }
+
+  const { allProductsToppings } = products[currentProductIndex]
+  const newProducts = [...products]
+
+  newProducts[currentProductIndex].allProductsToppings = [...allProductsToppings, ...newToppings]
+
   return ({
     ...state,
+    products: newProducts,
+    price: totalPrice + price * count,
+    count: totalCount + count,
   })
 }
 
