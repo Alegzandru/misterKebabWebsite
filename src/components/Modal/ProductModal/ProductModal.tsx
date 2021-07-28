@@ -2,7 +2,8 @@
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+import lottie from 'lottie-web'
 
 import { SIZES } from '../../../constants/common'
 import { ModalContext } from '../../../store/Modal/Modal.context'
@@ -14,6 +15,29 @@ import HallalInsignia from '../../Svgs/HallalInsignia/HallalInsignia'
 import { getTsProduct } from '../GetTsProduct'
 import styles from './ProductModal.module.scss'
 import ToppingsManager from './ToppingsManager/ToppingsManager'
+
+const SortToppings = (first: {text: string; textru: string; price?: number}, second: {text: string; textru: string; price?: number}) => {
+  const router = useRouter()
+  const ro = router.locale === 'ro'
+
+  if(ro){
+    if (first.text < second.text) {
+      return -1
+    }
+    if (first.text > second.text) {
+      return 1
+    }
+    return 0
+  } else{
+    if (first.textru < second.textru) {
+      return -1
+    }
+    if (first.textru > second.textru) {
+      return 1
+    }
+    return 0
+  }
+}
 
 const fetcher = async (url: string) => {
   const resCategory = await fetch(url)
@@ -67,6 +91,24 @@ const ProductModal = () => {
     })()
   }, [name])
 
+  const lottieRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    (
+      async () => {
+        const lottieJson = await import('../../../../public/lottie/loader2.json')
+
+        lottie.loadAnimation({
+          container: lottieRef.current as HTMLDivElement,
+          animationData: lottieJson,
+          renderer: 'svg', // "canvas", "html"
+          loop: true, // boolean
+          autoplay: true, // boolean
+        })
+
+      }
+    )()
+  }, [])
+
   return (
     <div className={classNames(styles.productModalContainer, 'w-full relative mx-auto')}>
       <div className="lg:flex">
@@ -87,7 +129,14 @@ const ProductModal = () => {
             <br />
             {ro ? ingredients : ingredientsru}
           </p>
-          {!noToppings && <ToppingsManager toppings={toppings} count={2} />}
+          {!noToppings &&
+          <ToppingsManager
+            toppings={{
+              topping: toppings.topping.sort(SortToppings),
+              without: toppings.without.sort(SortToppings),
+            }}
+            count={2}
+          />}
         </div>
       </div>
       {
@@ -95,7 +144,7 @@ const ProductModal = () => {
           ''
           :
           data.length === 0 ?
-            'Loading...'
+            <div ref={lottieRef} id="lottie" className="mx-auto w-40 md:w-130"/>
             :
             <Recommended products={data} />
       }

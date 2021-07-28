@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { Toppings, ToppingsManagerState } from '../../../../types'
@@ -19,10 +20,12 @@ const ToppingsManager = ({ toppings, count }: Props) => {
 
   const formRef = useRef<HTMLFormElement>(null)
 
-  const currentToppingsRef = useRef<ToppingsManagerState[]>([...new Array(count)].map(() => ({ topping: new Map(), without: new Set() })))
+  const currentToppingsRef = useRef<ToppingsManagerState[]>([...new Array(count)].map(() => ({ topping: new Map(), without: new Map() })))
   const { current: currentToppings } = currentToppingsRef
 
   const { t } = useTranslation('popup')
+  const router = useRouter()
+  const ro = router.locale === 'ro'
 
   useEffect(() => {
     formRef.current?.reset()
@@ -33,7 +36,7 @@ const ToppingsManager = ({ toppings, count }: Props) => {
       return
     }
 
-    currentToppingsRef.current = [...currentToppings, { topping: new Map(), without: new Set() }]
+    currentToppingsRef.current = [...currentToppings, { topping: new Map(), without: new Map() }]
 
     setActiveTab(currentToppings.length)
   }
@@ -52,8 +55,8 @@ const ToppingsManager = ({ toppings, count }: Props) => {
     >{index + 1}</button>
   )
 
-  const toppingCheckbox = ({ text, price }: Toppings['topping'][0]) => {
-    const label = `${text}- ` + (price ? `${price} MDL` : 'gratis')
+  const toppingCheckbox = ({ text, textru, price }: Toppings['topping'][0]) => {
+    const label = `${ro ? text : textru}- ` + (price ? ro ? `${price} MDL` : `${price} МДЛ` : ro ? 'gratis' : 'бесплатно')
     const { topping } = currentToppings[activeTab]
 
     return (
@@ -61,7 +64,7 @@ const ToppingsManager = ({ toppings, count }: Props) => {
         key={text}
         defaultChecked={topping.has(label)}
         onChange={({ target: { checked } }) => checked
-          ? topping.set(label, { text, price })
+          ? topping.set(label, { text, textru, price })
           : topping.delete(label)}
       >
         {label}
@@ -69,18 +72,18 @@ const ToppingsManager = ({ toppings, count }: Props) => {
     )
   }
 
-  const withoutToppingCheckbox = (value: string) => {
+  const withoutToppingCheckbox = (text: string, textru: string) => {
     const { without } = currentToppings[activeTab]
 
     return (
       <Checkbox
-        key={value}
-        defaultChecked={without.has(value)}
+        key={text}
+        defaultChecked={without.has(text)}
         onChange={({ target: { checked } }) => checked
-          ? without.add(value)
-          : without.delete(value)}
+          ? without.set(text, {text, textru})
+          : without.delete(text)}
       >
-        {value}
+        {text}
       </Checkbox>
     )
   }
@@ -109,7 +112,7 @@ const ToppingsManager = ({ toppings, count }: Props) => {
         <div className="flex-1">
           <h3>{t('Fără')}</h3>
           <div className="flex flex-col mt-4">
-            {toppings.without.map(withoutToppingCheckbox)}
+            {toppings.without.map((withoutSing) => withoutToppingCheckbox(withoutSing.text, withoutSing.textru))}
           </div>
         </div>
       </form>

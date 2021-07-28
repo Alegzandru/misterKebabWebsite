@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'next-i18next'
 
 import careersHero from '../../../public/images/careers-hero.png'
-import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
+import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES, CAREERS_FORM_INITIAL_DATA } from '../../constants'
 import { VALIDATIONS } from '../../constants/forms'
 import { CareerCheckboxesCategory, CareerOthersBlock } from '../../types'
 import { careerFormDataHandler } from '../../utils/forms'
@@ -15,6 +15,17 @@ import Input from '../Input/Input'
 import styles from './Careers.module.scss'
 import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
 
+const sendMail = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
+  try {
+    await fetch('/api/careers', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+  } catch(error){
+    return 0
+  }
+}
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
@@ -39,6 +50,8 @@ const Careers = () => {
 
     // eslint-disable-next-line no-console
     console.table(newData)
+
+    sendMail(newData)
   }
 
   const checkboxHandler = (value: CareerCheckboxesCategory) => {

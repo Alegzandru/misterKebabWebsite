@@ -79,7 +79,11 @@ const Header = () => {
       </nav>
       <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
         <a>
-          <LanguageButton text={t('Ру')} className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'}/>
+          <LanguageButton
+            text={t('Ру')}
+            className="hidden md:flex mr-6"
+            transparent={transparent}
+          />
         </a>
       </Link>
       <a
@@ -87,11 +91,12 @@ const Header = () => {
           backgroundColor: 'transparent',
           border: 'none',
         } : undefined}
-        className={classNames(styles.headerContainer__callNumber, 'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2')}
+        className={classNames(styles.headerContainer__callNumber,
+          'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2 group')}
         href="tel:+37367559999"
       >
         <span className={styles.headerContainer__callNumberText}>{t('Serviciu de Livrare')}</span>
-        +373 (67) 559 999
+        <span className={transparent && !showMobileHeader ? 'group-hover:text-yellow transition duration-300' : ''}>+373 (67) 559 999</span>
       </a>
     </div>
   )
@@ -146,7 +151,11 @@ const Header = () => {
         <div className="flex md:hidden">
           <Link href={router.pathname} locale={ro? 'ru' : 'ro'}>
             <a>
-              <LanguageButton text={t('Ру')} className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+              <LanguageButton
+                text={t('Ру')}
+                className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })}
+                transparent={transparent}
+              />
             </a>
           </Link>
           {mobileButton}

@@ -33,10 +33,11 @@ const Footer = () => {
           </ul>
         </nav>
         <div className="flex items-center flex-half md:flex-none md:h-16">
-          <div className="relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5">
+          <div className={classNames(styles.footerContainer__logoContainerShadow ,
+            'relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5 overflow-visible')}>
             <Link href="/">
-              <a>
-                <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+              <a className="overflow-visible">
+                <Image className={styles.footerContainer__logoShadow} src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain"/>
               </a>
             </Link>
           </div>

@@ -31,7 +31,7 @@ const SelectedProduct = ({ name, image, price, toppings: { topping, without } }:
               topping: {topping.map(({ text }, index) => toppingBlock(text, index))}
             </p>}
             {without.length && <p className={classNames(styles.selectedProductContainer__description)}>
-              fara: {without.map(toppingBlock)}
+              fara: {without.map((withoutSing, index) => toppingBlock(withoutSing.text, index))}
             </p>}
           </div>
           <ProductCount background="gray" size={SIZES.sm} />

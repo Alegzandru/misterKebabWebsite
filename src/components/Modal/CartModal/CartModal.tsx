@@ -36,7 +36,7 @@ const CartModal = () => {
         <SelectedProduct
           name="Pita de Vita"
           price={90}
-          toppings={{ topping: [{ text: 'vita', price: 0 }], without: ['sos'] }}
+          toppings={{ topping: [{ text: 'vita', textru: 'говядина', price: 0 }], without: [{text:'sos', textru: 'соус'}] }}
           image="https://res.cloudinary.com/dbh1vgas3/image/upload/v1626611878/large_pita_Vita_1_6112919154.jpg"
         />
       </div>

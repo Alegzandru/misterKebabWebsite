@@ -64,19 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
           id: subcategory.slug,
           name: subcategory.name,
           nameru: subcategory.nameru,
-          items: products.filter(
-            (product: any) => product.subcategory === subcategory.name
-          ).sort((first, second) => {
-            if (first.name < second.name) {
-              return -1
-            }
-
-            if (first.name > second.name) {
-              return 1
-            }
-
-            return 0
-          }),
+          items: products.filter((product: Product) => product.subcategory === subcategory.name),
           order: subcategory.order,
         }
       )),

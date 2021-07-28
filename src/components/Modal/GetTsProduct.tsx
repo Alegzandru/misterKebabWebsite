@@ -1,13 +1,14 @@
 export const getTsProduct = (product: any, subcategories: any[]) => {
   const topping = product.toppings.length !== 0
     ? product.toppings.map((toppingSing: any) => ({
-      text: toppingSing.name, price: toppingSing.price,
+      text: toppingSing.name, textru:toppingSing.nameru, price: toppingSing.price,
     }))
     : []
 
   const without = product.excludings.length !== 0
-    ? product.excludings.map((excluding: any) => excluding.name)
-    : subcategories.filter((category: any) => category.name === product.subcategory.name)[0].excludings.map((excluding: any) => excluding.name)
+    ? product.excludings.map((excluding: any) => ({text: excluding.name, textru: excluding.nameru}))
+    : subcategories.filter((category: any) =>category.name === product.subcategory.name)[0].excludings
+      .map((excluding: any) => ({text: excluding.name, textru: excluding.nameru}))
 
   const toppingsObj = { topping, without }
 

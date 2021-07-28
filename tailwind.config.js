@@ -13,6 +13,11 @@ module.exports = {
       full: '9999px',
     },
     extend: {
+      colors: {
+        yellow: '#FFB80E',
+        red: '#DF2026',
+        darkRed: '#611220',
+      },
       zIndex: {
         '-10': '-10',
         '90': '90',

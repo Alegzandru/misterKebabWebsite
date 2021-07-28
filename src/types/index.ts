@@ -61,17 +61,25 @@ export type CartProduct = Pick<Product, 'name' | 'price' | 'image'> & { allProdu
 export type Toppings = {
   topping: {
     text: string
+    textru: string
     price: number
   }[]
-  without: string[]
+  without: {
+    text: string
+    textru: string
+  }[]
 }
 
 export type ToppingsManagerState = {
   topping: Map<string, {
     text: string
+    textru: string
     price: number
   }>
-  without: Set<string>
+  without: Map<string, {
+    text: string
+    textru: string
+  }>
 }
 
 export type CareerOthersBlock = {

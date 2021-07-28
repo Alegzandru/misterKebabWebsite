@@ -7,6 +7,7 @@ import { ActiveSectionContext } from '../../../store/ActiveSection/ActiveSection
 import ProductCard from '../../ProductCard/ProductCard'
 import styles from './CategoryProducts.module.scss'
 import {Toppings} from '../../../types'
+import {Product} from '../../../types'
 
 type Props = {
   id: string
@@ -23,6 +24,29 @@ type Props = {
     toppings: Toppings
     subcategory: string
   }[]
+}
+
+const SortProducts = (first: Product, second: Product) => {
+  const router = useRouter()
+  const ro = router.locale === 'ro'
+
+  if(ro){
+    if (first.name < second.name) {
+      return -1
+    }
+    if (first.name > second.name) {
+      return 1
+    }
+    return 0
+  } else{
+    if (first.nameru < second.nameru) {
+      return -1
+    }
+    if (first.nameru > second.nameru) {
+      return 1
+    }
+    return 0
+  }
 }
 
 const CategoryProducts = ({ id, name, items, nameru }: Props) => {
@@ -48,7 +72,7 @@ const CategoryProducts = ({ id, name, items, nameru }: Props) => {
       <h3 className={styles.categoryProductsContainer__heading}>{ro ? name : nameru}</h3>
       <hr className={styles.categoryProductsContainer__line} />
       <div className="grid grid-cols-2 gap-x-2 gap-y-4 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-5">
-        {items.map((product, index) => <ProductCard key={index} {...product} />)}
+        {items.sort(SortProducts).map((product, index) => <ProductCard key={index} {...product} />)}
       </div>
     </section>
   )
