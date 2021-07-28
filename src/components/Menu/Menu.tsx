@@ -1,22 +1,25 @@
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
-import { Parallax } from 'react-scroll-parallax'
 import { useRouter } from 'next/router'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Parallax } from 'react-scroll-parallax'
 
-import { MenuObject, Product } from '../../types'
+import { CartContext } from '../../store/Cart/Cart.context'
+import { MenuList, Product } from '../../types'
 import CategoryHeading from './CategoryHeading/CategoryHeading'
 import CategoryProducts from './CategoryProducts/CategoryProducts'
 import styles from './Menu.module.scss'
 
 type Props = {
   products: Product[]
-  categories: MenuObject[]
+  menu: MenuList
 }
 
-const Menu = ({ categories }: Props) => {
-  categories.sort((first, second) => first.order - second.order)
+const Menu = ({ menu: initialMenu, products }: Props) => {
+  const { actions: { addMenuProducts } } = useContext(CartContext)
 
   const [parallaxHeight, setParallaxHeight] = useState<string>()
+  const [menu, setMenu] = useState(initialMenu)
+
   const sectionRef = useRef<HTMLElement>(null)
 
   const router = useRouter()
@@ -31,8 +34,14 @@ const Menu = ({ categories }: Props) => {
   }
 
   useEffect(() => {
+    setMenu(menu.sort((first, second) => first.order - second.order))
+  }, [menu, router.locale])
+
+  useEffect(() => {
     onResizeHandler()
     window.addEventListener('resize', onResizeHandler)
+
+    addMenuProducts(products)
 
     return () => window.removeEventListener('resize', onResizeHandler)
   }, [])
@@ -68,7 +77,7 @@ const Menu = ({ categories }: Props) => {
     </>
   )
 
-  const category = ({ categoryName, subCategories, categoryNameRu }: MenuObject, index: number) => (
+  const category = ({ categoryName, subCategories, categoryNameRu }: MenuList[0], index: number) => (
     <section
       key={index}
       ref={sectionRef}
@@ -84,7 +93,7 @@ const Menu = ({ categories }: Props) => {
   return (
     <div className={classNames(styles.menuContainer, 'relative overflow-hidden')}>
       {parallaxHeight ? mainParallaxElements : null}
-      {categories.map(({ categoryNameRu, categoryName, subCategories, order }: MenuObject, index: number) => category({
+      {menu.map(({ categoryNameRu, categoryName, subCategories, order }: MenuList[0], index: number) => category({
         categoryName: categoryName === 'Unfiltered' ? '' : categoryName,
         categoryNameRu,
         subCategories: subCategories.sort((first, second) => first.order - second.order),

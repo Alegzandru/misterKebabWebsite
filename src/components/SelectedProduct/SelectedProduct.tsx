@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import { SIZES } from '../../constants/common'
+import { LANGUAGES, SIZES } from '../../constants/common'
 import { Toppings } from '../../types'
 import ProductCount from '../ProductCount/ProductCount'
 import Close from '../Svgs/Close/Close'
@@ -12,29 +13,34 @@ type Props = {
   image: string
   toppings: Toppings
   price: number
+  count: number
 }
 
-const SelectedProduct = ({ name, image, price, toppings: { topping, without } }: Props) => {
+const SelectedProduct = ({ name, image, price, count, toppings: { topping, without } }: Props) => {
+  const router = useRouter()
+
+  const isRo = router.locale === LANGUAGES.ro
+
   const toppingBlock = (text: string, index: number) =>
     <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{text}</span>
 
   return (
     <div className={classNames(styles.selectedProductContainer, 'w-full grid grid-flow-col gap-4 items-center mb-4')}>
-      <div className="grid gap-2 grid-flow-col">
+      <div className="grid gap-2 grid-flow-col mr-auto">
         <div className="relative w-20 h-18">
           <Image className="rounded" src={image} alt="Product image" layout="fill" objectFit="cover" quality={80} />
         </div>
         <div className="self-center">
           <h3 className="font-bold">{name}</h3>
           <div className="mb-2">
-            {topping.length && <p className={classNames(styles.selectedProductContainer__description)}>
+            {topping.length ? <p className={classNames(styles.selectedProductContainer__description)}>
               topping: {topping.map(({ text }, index) => toppingBlock(text, index))}
-            </p>}
-            {without.length && <p className={classNames(styles.selectedProductContainer__description)}>
-              fara: {without.map((withoutSing, index) => toppingBlock(withoutSing.text, index))}
-            </p>}
+            </p> : null}
+            {without.length ? <p className={classNames(styles.selectedProductContainer__description)}>
+              fara: {without.map(({ text, textru }, index) => toppingBlock(isRo ? text : textru, index))}
+            </p> : null}
           </div>
-          <ProductCount background="gray" size={SIZES.sm} />
+          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={() => null} />
         </div>
       </div>
       <p className={classNames(styles.selectedProductContainer__price, 'flex font-medium')}>{price} MDL</p>

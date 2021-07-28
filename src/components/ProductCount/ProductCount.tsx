@@ -1,21 +1,21 @@
 import classNames from 'classnames'
-import { useState } from 'react'
-import { SIZES } from '../../constants/common'
 
+import { SIZES } from '../../constants/common'
 import styles from './ProductCount.module.scss'
 
 type Props = {
   className?: string
   background: 'white' | 'gray'
   size?: number
+  value: number
+  onChange: (value: number) => void
 }
 
-const ProductCount = ({ className, background, size }: Props) => {
-  const [count, setCount] = useState(1)
-
+const ProductCount = ({ className, background, size, value: count, onChange }: Props) => {
   const onClickHandler = (value: number) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation()
-    setCount(value)
+
+    onChange(value)
   }
 
   const changeCountButton = (sign: string, onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) =>

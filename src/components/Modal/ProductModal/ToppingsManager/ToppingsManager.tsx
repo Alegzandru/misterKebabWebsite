@@ -1,47 +1,46 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
-import { Toppings, ToppingsManagerState } from '../../../../types'
-import Button from '../../../Button/Button'
+import { LANGUAGES } from '../../../../constants/common'
+import { ProductToppingsContext } from '../../../../store/ProductToppings/ProductToppings.context'
+import { Toppings } from '../../../../types'
 import Checkbox from '../../../Checkbox/Checkbox'
-import Bag from '../../../Svgs/Bag/Bag'
 import styles from './ToppingsManager.module.scss'
 
 type Props = {
   toppings: Toppings
-  count: number
 }
 
-const ToppingsManager = ({ toppings, count }: Props) => {
+const ToppingsManager = ({ toppings }: Props) => {
+  const {
+    state: { count, toppings: currentToppings },
+    actions: { setCount, setToppings },
+  } = useContext(ProductToppingsContext)
+
   const [activeTab, setActiveTab] = useState(0)
 
   const formRef = useRef<HTMLFormElement>(null)
 
-  const currentToppingsRef = useRef<ToppingsManagerState[]>([...new Array(count)].map(() => ({ topping: new Map(), without: new Map() })))
-  const { current: currentToppings } = currentToppingsRef
-
-  const { t } = useTranslation('popup')
+  const { t } = useTranslation('common')
   const router = useRouter()
-  const ro = router.locale === 'ro'
+  const isRo = router.locale === LANGUAGES.ro
 
   useEffect(() => {
     formRef.current?.reset()
   }, [activeTab])
 
   const addTabHandler = () => {
-    if (currentToppings.length >= 10) {
+    if (currentToppings.length >= 20) {
       return
     }
 
-    currentToppingsRef.current = [...currentToppings, { topping: new Map(), without: new Map() }]
+    setCount(count + 1)
 
     setActiveTab(currentToppings.length)
   }
-
-  const onClickHandler = () => undefined
 
   const tab = (index: number) => (
     <button
@@ -56,16 +55,27 @@ const ToppingsManager = ({ toppings, count }: Props) => {
   )
 
   const toppingCheckbox = ({ text, textru, price }: Toppings['topping'][0]) => {
-    const label = `${ro ? text : textru}- ` + (price ? ro ? `${price} MDL` : `${price} МДЛ` : ro ? 'gratis' : 'бесплатно')
+    const label = `${isRo ? text : textru}- ` + (price ? `${price} ${t('MDL')}` : t('gratis'))
     const { topping } = currentToppings[activeTab]
+
+    const toppingIndex = topping.findIndex((value) => value.text === text)
+    const checked = toppingIndex !== -1
+
+    const onChangeHandler = () => {
+      setToppings(
+        checked
+          ? topping.filter((value) => value.text !== text)
+          : [...topping, { text, textru, price }],
+        'topping',
+        activeTab
+      )
+    }
 
     return (
       <Checkbox
-        key={text}
-        defaultChecked={topping.has(label)}
-        onChange={({ target: { checked } }) => checked
-          ? topping.set(label, { text, textru, price })
-          : topping.delete(label)}
+        key={label + activeTab}
+        checked={checked}
+        onChange={onChangeHandler}
       >
         {label}
       </Checkbox>
@@ -75,15 +85,26 @@ const ToppingsManager = ({ toppings, count }: Props) => {
   const withoutToppingCheckbox = (text: string, textru: string) => {
     const { without } = currentToppings[activeTab]
 
+    const withoutIndex = without.findIndex((value) => value.text === text)
+    const checked = withoutIndex !== -1
+
+    const onChangeHandler = () => {
+      setToppings(
+        checked
+          ? without.filter((value) => value.text !== text)
+          : [...without, { text, textru }],
+        'without',
+        activeTab
+      )
+    }
+
     return (
       <Checkbox
-        key={text}
-        defaultChecked={without.has(text)}
-        onChange={({ target: { checked } }) => checked
-          ? without.set(text, {text, textru})
-          : without.delete(text)}
+        key={text + activeTab}
+        checked={checked}
+        onChange={onChangeHandler}
       >
-        {text}
+        {isRo ? text : textru}
       </Checkbox>
     )
   }
@@ -116,10 +137,6 @@ const ToppingsManager = ({ toppings, count }: Props) => {
           </div>
         </div>
       </form>
-      <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
-        <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
-        {t('Adaugă la comandă')}
-      </Button>
     </div>
   )
 }

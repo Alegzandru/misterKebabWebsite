@@ -1,7 +1,11 @@
 export const ACTIONS = {
-  showProductModal: 'SHOW_PRODUCT_MODAL',
-  showCartModal: 'SHOW_CART_MODAL',
-  closeModal: 'CLOSE_MODAL',
-  addProducts: 'ADD_PRODUCTS',
   addMenuProducts: 'ADD_MENU_PRODUCTS',
+  addProducts: 'ADD_PRODUCTS',
+  addTopping: 'ADD_PRODUCTS',
+  closeModal: 'CLOSE_MODAL',
+  setCount: 'SET_COUNT',
+  setCurrentProduct: 'SET_CURRENT_PRODUCT',
+  setToppings: 'SET_TOPPINGS',
+  showCartModal: 'SHOW_CART_MODAL',
+  showProductModal: 'SHOW_PRODUCT_MODAL',
 }

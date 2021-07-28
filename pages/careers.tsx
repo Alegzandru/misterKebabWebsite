@@ -12,7 +12,7 @@ const CareersPage = () => (
   </Layout>
 )
 
-export const getStaticProps: GetStaticProps = async ({locale}) => ({
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale as string, ['careers', 'header', 'common'])),
   },

@@ -7,6 +7,11 @@ export type AnyAction = {
   payload: Record<string, any>
 }
 
+export type Response<T> = {
+  ok: boolean
+  data: T
+}
+
 export type HeroButton = {
   name: string
   id: string
@@ -30,7 +35,7 @@ export type SectionInView = {
   scrollPosition: number
 }
 
-export type MenuObject = {
+export type MenuList = {
   categoryName: string
   categoryNameRu: string
   subCategories: {
@@ -41,7 +46,7 @@ export type MenuObject = {
     order: number
   }[]
   order: number
-}
+}[]
 
 export type Product = {
   name: string
@@ -56,18 +61,23 @@ export type Product = {
   subcategory: string
 }
 
-export type CartProduct = Pick<Product, 'name' | 'price' | 'image'> & { allProductsToppings: Toppings[] }
+export type CartProduct = Pick<Product, 'name' | 'price' | 'image'>
 
 export type Toppings = {
-  topping: {
-    text: string
-    textru: string
-    price: number
-  }[]
-  without: {
-    text: string
-    textru: string
-  }[]
+  topping: Topping[]
+  without: Without[]
+  drinks?: string[]
+}
+
+export type Topping = {
+  text: string
+  textru: string
+  price: number
+}
+
+export type Without = {
+  text: string
+  textru: string
 }
 
 export type ToppingsManagerState = {

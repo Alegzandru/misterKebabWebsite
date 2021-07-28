@@ -31,11 +31,14 @@ const Modal = () => {
 
   return (
     <>
-      <div className={classNames(
-        styles.modalContainerBackground,
-        'z-90 fixed inset-0 bg-black',
-        show ? 'block' : 'hidden'
-      )} />
+      <div
+        className={classNames(
+          styles.modalContainerBackground,
+          'z-90 fixed inset-0 bg-black',
+          show ? 'block' : 'hidden'
+        )}
+        onClick={closeModal}
+      />
       <div
         className={classNames(
           styles.modalContainer,
