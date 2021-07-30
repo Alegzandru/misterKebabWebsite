@@ -1,9 +1,13 @@
 .checkboxContainer {
-  color: #58606e;
   cursor: pointer;
+  color: #08080b;
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  &_active {
+    color: #611220;
   }
 
   &__checkMark {
@@ -20,6 +24,19 @@
       left: 1px;
       top: 2px;
     }
+
+    &_asRadio {
+      border-radius: 50%;
+      height: 18px;
+      width: 18px;
+
+      &::after {
+        background: #df2026;
+        height: 10px;
+        border-radius: 50%;
+        left: 2px;
+      }
+    }
   }
 
   & input:checked ~ &__checkMark {
@@ -31,6 +48,6 @@
   }
 
   &:hover {
-    color: #08080b;
+    color: #58606e;
   }
 }

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Image from 'next/image'
 
 import { SIZES } from '../../constants/common'
-import { Toppings } from '../../types'
+import { Additive, Drinks, Toppings } from '../../types'
 import ProductCount from '../ProductCount/ProductCount'
 import Close from '../Svgs/Close/Close'
 import styles from './SelectedProduct.module.scss'
@@ -15,9 +15,15 @@ type Props = {
   count: number
 }
 
-const SelectedProduct = ({ name, image, price, count, toppings: { topping, without } }: Props) => {
-  const toppingBlock = (text: string, index: number) =>
+const SelectedProduct = ({ name, image, price, count, toppings: { topping, without, drinks } }: Props) => {
+  const toppingBlock = ({ text }: Additive, index: number) =>
     <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{text}</span>
+
+  const description = (additive: Additive[], text: string) => additive.length ? (
+    <p key={text} className={classNames(styles.selectedProductContainer__description)}>
+      {text}: {additive.map(toppingBlock)}
+    </p>
+  ) : null
 
   return (
     <div className={classNames(styles.selectedProductContainer, 'w-full grid grid-flow-col gap-4 items-center mb-4')}>
@@ -28,12 +34,9 @@ const SelectedProduct = ({ name, image, price, count, toppings: { topping, witho
         <div className="self-center">
           <h3 className="font-bold">{name}</h3>
           <div className="mb-2">
-            {topping.length ? <p className={classNames(styles.selectedProductContainer__description)}>
-              topping: {topping.map(({ text }, index) => toppingBlock(text, index))}
-            </p> : null}
-            {without.length ? <p className={classNames(styles.selectedProductContainer__description)}>
-              fara: {without.map(toppingBlock)}
-            </p> : null}
+            {description(topping, 'topping')}
+            {description(without, 'fara')}
+            {description(drinks as Drinks[], 'bautura')}
           </div>
           <ProductCount background="gray" size={SIZES.sm} value={count} onChange={() => null} />
         </div>

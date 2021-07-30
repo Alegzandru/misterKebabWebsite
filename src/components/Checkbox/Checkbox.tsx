@@ -8,32 +8,39 @@ import styles from './Checkbox.module.scss'
 type Props = PropsWithChildren<{
   className?: string
   name?: string
+  asRadio?: boolean
   defaultChecked?: boolean
   checked?: boolean
   register?: UseFormRegister<FieldValues>
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }> & RegisterOptions
 
-const Checkbox = ({ className, name, children, defaultChecked, checked, register, onChange, ...registerOptions }: Props) => {
+const Checkbox = ({ className, name, children, asRadio, defaultChecked, checked, register, onChange, ...registerOptions }: Props) => {
   const { t } = useTranslation('careers')
 
   return (
     <label
       className={classNames(
-        styles.checkboxContainer, className,
-        'relative flex items-center font-medium select-none pl-7 mb-6 md:mb-4'
+        styles.checkboxContainer,
+        checked ? styles.checkboxContainer_active : '',
+        className,
+        'relative flex items-center font-medium select-none h-5 pl-7 mb-4'
       )}
     >
       <input
         className="absolute opacity-0 h-0 w-0"
-        type="checkbox"
+        type={asRadio ? 'radio' : 'checkbox'}
         defaultChecked={defaultChecked}
         {...(register ? register(name as string, registerOptions) : { name })}
         checked={checked}
         onChange={onChange}
       />
-      <span className={classNames(styles.checkboxContainer__checkMark, 'absolute left-px h-4 w-4')} />
-      {t(children as string)}
+      <span className={classNames(
+        styles.checkboxContainer__checkMark,
+        asRadio ? styles.checkboxContainer__checkMark_asRadio : '',
+        'absolute left-px h-4 w-4 '
+      )} />
+      <span className="leading-none">{t(children as string)}</span>
     </label>
   )
 }
