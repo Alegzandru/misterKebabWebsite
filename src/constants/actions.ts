@@ -5,7 +5,7 @@ export const ACTIONS = {
   closeModal: 'CLOSE_MODAL',
   setCount: 'SET_COUNT',
   setCurrentProduct: 'SET_CURRENT_PRODUCT',
-  setToppings: 'SET_TOPPINGS',
+  setAdditive: 'SET_ADDITIVE',
   showCartModal: 'SHOW_CART_MODAL',
   showProductModal: 'SHOW_PRODUCT_MODAL',
 }

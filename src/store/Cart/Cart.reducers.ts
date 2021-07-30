@@ -1,8 +1,9 @@
+import { clone, equals } from 'ramda'
+
 import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
 import { AnyAction, Product, Toppings } from '../../types'
 import { CartState } from '../../types/state'
-import { equals } from 'ramda'
 import { productToppingsPrice } from '../../utils/products'
 
 const addMenuProducts = (state: CartState, payload: Record<string, any>): CartState => {
@@ -53,7 +54,7 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
     count: totalCount,
   } = state
 
-  const newToppings = toppings.length ? toppings : [...new Array(count)].map(() => ({ ...INITIAL_TOPPINGS }))
+  const newToppings = toppings.length ? toppings : [...new Array(count)].map(() => (clone(INITIAL_TOPPINGS)))
 
   const newToppingsPrice = newToppings.reduce(
     (accumulator, toppingsToCalculate) => accumulator + productToppingsPrice(toppingsToCalculate),

@@ -63,22 +63,26 @@ export type Product = {
 
 export type CartProduct = Pick<Product, 'name' | 'price' | 'image' | 'nameru'>
 
+export type WithText = {
+  text: string
+  textru: string
+}
+
 export type Toppings = {
   topping: Topping[]
   without: Without[]
-  drinks?: string[]
+  drinks?: Drinks[]
 }
 
 export type Topping = {
-  text: string
-  textru: string
   price: number
-}
+} & WithText
 
-export type Without = {
-  text: string
-  textru: string
-}
+export type Without = WithText
+
+export type Drinks = WithText
+
+export type Additive = Topping | Without | Drinks
 
 export type ToppingsManagerState = {
   topping: Map<string, {
