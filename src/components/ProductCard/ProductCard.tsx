@@ -32,7 +32,7 @@ const ProductCard = memo((props: Props) => {
   const addToCartHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation()
 
-    addProducts(name, count)
+    addProducts(name, nameru, count)
     setCount(1)
   }
 

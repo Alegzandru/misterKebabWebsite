@@ -61,16 +61,46 @@ export const DROPDOWN_DATA = {
   delivery: {
     label: 'Unde livram',
     items: [
-      'Chisinau',
-      'Aeroport',
-      'Bacioi',
-      'Colonita',
-      'Costiujeni',
-      'Durlesti',
-      'Ialoveni',
-      'Schinoasa',
-      'Stauceni',
-      'Tohatin',
+      {
+        name: 'Chisinau',
+        price: 10,
+      },
+      {
+        name: 'Aeroport',
+        price: 15,
+      },
+      {
+        name: 'Bacioi',
+        price: 15,
+      },
+      {
+        name: 'Colonita',
+        price: 15,
+      },
+      {
+        name: 'Costiujeni',
+        price: 15,
+      },
+      {
+        name: 'Durlesti',
+        price: 15,
+      },
+      {
+        name: 'Ialoveni',
+        price: 15,
+      },
+      {
+        name: 'Schinoasa',
+        price: 15,
+      },
+      {
+        name: 'Stauceni',
+        price: 15,
+      },
+      {
+        name: 'Tohatin',
+        price: 15,
+      },
     ],
   },
   takeaway: {

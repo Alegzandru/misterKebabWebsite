@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useTranslation } from 'next-i18next'
 
 import styles from './RadioButton.module.scss'
 
@@ -15,6 +16,8 @@ const RadioButton = ({ selected, text, onChange }: Props) => {
     }
   }
 
+  const { t } = useTranslation('cart')
+
   return (
     <button
       type="button"
@@ -25,7 +28,7 @@ const RadioButton = ({ selected, text, onChange }: Props) => {
       )}
       onClick={onClickHandler}
     >
-      {text}
+      {t(text)}
     </button >
   )
 }

@@ -15,7 +15,7 @@ import Input from '../Input/Input'
 import styles from './Careers.module.scss'
 import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
 
-const sendMail = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
+const sendMailCareers = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
   try {
     await fetch('/api/careers', {
       method: 'POST',
@@ -26,6 +26,7 @@ const sendMail = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
     return 0
   }
 }
+
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
@@ -51,7 +52,7 @@ const Careers = () => {
     // eslint-disable-next-line no-console
     console.table(newData)
 
-    sendMail(newData)
+    sendMailCareers(newData)
   }
 
   const checkboxHandler = (value: CareerCheckboxesCategory) => {

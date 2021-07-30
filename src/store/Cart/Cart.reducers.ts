@@ -44,7 +44,7 @@ const groupByToppings = (state: CartState): CartState => {
 }
 
 const addProducts = (state: CartState, payload: Record<string, any>): CartState => {
-  const { name, count, toppings } = payload as { name: string; count: number; toppings: Toppings[] }
+  const { name, count, toppings, nameru } = payload as { name: string; nameru: string; count: number; toppings: Toppings[] }
 
   const {
     products,
@@ -76,6 +76,7 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
         ...products,
         {
           name,
+          nameru,
           image,
           price,
           allProductsToppings: newToppings.sort((first, second) => first.topping.length - second.topping.length),

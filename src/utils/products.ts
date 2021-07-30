@@ -1,6 +1,6 @@
 import { LANGUAGES } from '../constants/common'
 import { API_URL } from '../constants/urls'
-import { Toppings } from '../types'
+import { CartProduct, Toppings } from '../types'
 
 export const productFilter = (product: any, subcategories: any[]) => {
   const topping = product.toppings.length !== 0
@@ -95,3 +95,57 @@ export const sortToppings = <T extends {text: string; textru: string}>(language:
 
   return 0
 }
+
+export const sendProductsToCMS =
+  async ( products: (CartProduct & { toppings: Toppings; count: number })[], data: Record<string, string | boolean> ) => {
+    const orders = await Promise.all(products.map(async (product) => {
+
+      const toppings = await Promise.all(product.toppings.topping.map( async (topping) => {
+        const toppingRes = await fetch(`https://mr-kebab-admin.herokuapp.com/toppings?name_eq=${topping.text}`)
+        const toppingCMS = await toppingRes.json()
+        return (toppingCMS[0])
+      }))
+
+      const excludings = await Promise.all(product.toppings.without.map( async (excluding) => {
+        const excludingRes = await fetch(`https://mr-kebab-admin.herokuapp.com/excludings?name_eq=${excluding.text}`)
+        const excludingCMS = await excludingRes.json()
+        return (excludingCMS[0])
+      }))
+
+      const productRes = await fetch(`https://mr-kebab-admin.herokuapp.com/products?name_eq=${product.name}`)
+      const productCMS = await productRes.json()
+
+      const requestOptionsOrder = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product : productCMS[0],
+          toppings,
+          excludings,
+          price: product.price,
+        }),
+      }
+
+      const orderRes = await fetch('https://mr-kebab-admin.herokuapp.com/orders', requestOptionsOrder)
+      const orderCMS = await orderRes.json()
+
+      return (orderCMS)
+    }))
+
+    const {name, tel, email} = data
+    const requestOptionsClient = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        phone: tel,
+        email,
+        orders,
+      }),
+    }
+
+    const clientRes = await fetch('https://mr-kebab-admin.herokuapp.com/clients', requestOptionsClient)
+    const client = await clientRes.json()
+
+    console.log(client)
+  }

@@ -80,7 +80,7 @@ const ProductModal = () => {
   }, [show])
 
   const onClickHandler = () => {
-    addProducts(name, count, withToppings ? currentToppings : [])
+    addProducts(name, nameru, count, withToppings ? currentToppings : [])
 
     closeModal()
   }
@@ -123,7 +123,7 @@ const ProductModal = () => {
       </div>
       {
         ok
-          ? data.length ? <Recommended products={data as Product[]} /> : <div ref={lottieRef} id="lottie" className="mx-auto w-40 md:w-130"/>
+          ? data.length ? <Recommended products={data as Product[]} /> : <div ref={lottieRef} id="lottie" className="mx-auto w-40 md:w-80"/>
           : null
       }
     </div>
