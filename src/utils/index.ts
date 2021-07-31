@@ -15,3 +15,13 @@ export const cancelablePromise = <T>(promise: Promise<T>) => {
     },
   }
 }
+
+export const removeProperties = (object: Record<string, any>, propertiesToRemove: string[]) => Object
+  .keys(object)
+  .reduce((accumulator, currentKey) => {
+    if (propertiesToRemove.includes(currentKey)) {
+      return accumulator
+    }
+
+    return { ...accumulator, [currentKey]: object[currentKey] }
+  }, {})

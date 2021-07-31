@@ -61,6 +61,7 @@ const ProductModal = () => {
   }, [show])
 
   const onClickHandler = () => {
+    setCurrentProduct('')
     addProducts(name, count, withToppings ? currentToppings : [])
 
     closeModal()
