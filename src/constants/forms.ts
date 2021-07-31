@@ -106,10 +106,18 @@ export const DROPDOWN_DATA = {
   takeaway: {
     label: 'Alegeți de unde ridicați comanda',
     items: [
-      'Malina Mică',
-      'Telecentru',
-      'Râşcani',
-      'Botanica',
+      {
+        name: 'Malina Mică',
+      },
+      {
+        name: 'Telecentru',
+      },
+      {
+        name: 'Râşcani',
+      },
+      {
+        name: 'Botanica',
+      },
     ],
   },
 }

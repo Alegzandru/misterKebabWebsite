@@ -42,11 +42,7 @@ const CartModal = () => {
   const { t } = useTranslation('cart')
 
   const onSubmit = (data: Record<string, string | boolean>) => {
-    // eslint-disable-next-line no-console
-    console.log(data)
-    // eslint-disable-next-line no-console
-    console.log(groupedByToppingsProducts)
-    // eslint-disable-next-line no-console
+
     sendProductsToCMS(groupedByToppingsProducts, data)
 
     sendMailOrder(data, groupedByToppingsProducts)

@@ -20,14 +20,13 @@ const ToppingsManager = ({ toppings }: Props) => {
     actions: { setCount, setAdditive },
   } = useContext(ProductToppingsContext)
 
-  const router = useRouter()
-  const isRo = router.locale === LANGUAGES.ro
-
   const [activeTab, setActiveTab] = useState(0)
 
   const formRef = useRef<HTMLFormElement>(null)
 
   const { t } = useTranslation('common')
+  const router = useRouter()
+  const isRo = router.locale === LANGUAGES.ro
 
   useEffect(() => {
     formRef.current?.reset()
@@ -68,7 +67,7 @@ const ToppingsManager = ({ toppings }: Props) => {
         checked
           ? additive.filter((value) => value.text !== text)
           : [...additive, topping],
-        'topping',
+        type,
         activeTab
       )
     }
@@ -85,14 +84,14 @@ const ToppingsManager = ({ toppings }: Props) => {
   }
 
   const toppingCheckbox = (topping: Topping) => {
-    const { text, price } = topping
+    const { text, textru, price } = topping
 
-    const label = `${text}- ` + (price ? `${price} MDL` : 'gratis')
+    const label = `${isRo ? text : textru}- ` + (price ? `${price} ${t('MDL')}` : t('gratis'))
 
     return renderCheckbox('topping', label, topping)
   }
 
-  const withoutToppingCheckbox = (without: Without) => renderCheckbox('without', without.text, without)
+  const withoutToppingCheckbox = (without: Without) => renderCheckbox('without', isRo ? without.text : without.textru, without)
 
   const drinksRadioButton = ({ text, textru }: Drinks) => {
     const { drinks } = currentToppings[activeTab]
@@ -112,6 +111,7 @@ const ToppingsManager = ({ toppings }: Props) => {
     return (
       <Checkbox
         key={text + activeTab}
+        checked={checked}
         name="drink"
         asRadio={true}
         defaultChecked={checked}
@@ -155,8 +155,7 @@ const ToppingsManager = ({ toppings }: Props) => {
         )}
       >
         {additiveBlock('Topping', toppings.topping, toppingCheckbox)}
-        {/* {additiveBlock('Fără', toppings.without, withoutToppingCheckbox)} */}
-        {additiveBlock('Fără', (toppings.without as unknown as string[]).map((value) => ({ text: value, textru: value })), withoutToppingCheckbox)}
+        {additiveBlock('Fără', toppings.without, withoutToppingCheckbox)}
         {toppings.drinks && additiveBlock('Băutura', toppings.drinks, drinksRadioButton)}
       </form>
     </div>

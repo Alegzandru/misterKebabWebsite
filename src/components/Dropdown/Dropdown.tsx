@@ -8,7 +8,7 @@ type Props = {
   label: string
   items: {
     name: string
-    price: number
+    price?: number
   }[]
   onChange: UseAutocompleteProps<string, undefined, undefined, undefined>['onChange']
 }

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 
 import { ACTIONS } from '../../constants/actions'
-import { Additive, AnyAction } from '../../types'
+import { AnyAction, Additive } from '../../types'
 
 const useActions = (dispatch: Dispatch<AnyAction>) => ({
   setCurrentProduct: (name: string) => dispatch({ type: ACTIONS.setCurrentProduct, payload: { name } }),

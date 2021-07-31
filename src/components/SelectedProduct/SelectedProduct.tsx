@@ -23,12 +23,12 @@ const SelectedProduct = ({ name, nameru, image, price, count, toppings: { toppin
   const isRo = router.locale === LANGUAGES.ro
   const { t } = useTranslation('cart')
 
-  const toppingBlock = ({ text }: Additive, index: number) =>
-    <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{text}</span>
+  const toppingBlock = ({ text , textru }: Additive, index: number) =>
+    <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{isRo ? text : textru}</span>
 
   const description = (additive: Additive[], text: string) => additive.length ? (
     <p key={text} className={classNames(styles.selectedProductContainer__description)}>
-      {t(text)}: {additive.map(toppingBlock)}
+      {text}: {additive.map(toppingBlock)}
     </p>
   ) : null
 
@@ -41,9 +41,9 @@ const SelectedProduct = ({ name, nameru, image, price, count, toppings: { toppin
         <div className="self-center">
           <h3 className="font-bold">{isRo? name : nameru}</h3>
           <div className="mb-2">
-            {description(topping, 'topping')}
-            {description(without, 'fara')}
-            {description(drinks as Drinks[], 'bautura')}
+            {description(topping, t('topping'))}
+            {description(without, t('fara'))}
+            {description(drinks as Drinks[], t('bautura'))}
           </div>
           <ProductCount background="gray" size={SIZES.sm} value={count} onChange={() => null} />
         </div>

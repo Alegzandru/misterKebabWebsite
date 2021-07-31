@@ -19,7 +19,7 @@ const sendMail = async (req, res) => {
           name,
           tel,
           address: 'strada Mirros 20',
-          comentary: 'Vrau kebab',
+          comentary: 'Vreau kebab',
           orders: products.map((product) => ({
             name: product.name,
             toppings: product.toppings.topping.map((topping) => topping.text),

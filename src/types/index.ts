@@ -84,6 +84,11 @@ export type Drinks = WithText
 
 export type Additive = Topping | Without | Drinks
 
+// export type Without = {
+//   text: string
+//   textru: string
+// }
+
 export type ToppingsManagerState = {
   topping: Map<string, {
     text: string
