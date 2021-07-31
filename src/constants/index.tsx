@@ -140,3 +140,6 @@ export const CAREERS_OTHERS = [
     values: ['Full-time', 'Part-time'],
   },
 ]
+
+// temp:
+export const DELIVERY_PRICE = 35

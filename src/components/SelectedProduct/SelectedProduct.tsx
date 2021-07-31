@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import Image from 'next/image'
+import { useContext } from 'react'
 
 import { SIZES } from '../../constants/common'
+import { CartContext } from '../../store/Cart/Cart.context'
 import { Additive, Drinks, Toppings } from '../../types'
 import ProductCount from '../ProductCount/ProductCount'
 import Close from '../Svgs/Close/Close'
@@ -13,11 +15,14 @@ type Props = {
   toppings: Toppings
   price: number
   count: number
+  index: number
 }
 
-const SelectedProduct = ({ name, image, price, count, toppings: { topping, without, drinks } }: Props) => {
-  const toppingBlock = ({ text }: Additive, index: number) =>
-    <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{text}</span>
+const SelectedProduct = ({ name, image, price, count, toppings: { topping, without, drinks }, index }: Props) => {
+  const { actions: { changeCount, removeProduct } } = useContext(CartContext)
+
+  const toppingBlock = ({ text }: Additive, blockIndex: number) =>
+    <span key={blockIndex} className={styles.selectedProductContainer__toppings}>{blockIndex !== 0 ? ', ' : ''}{text}</span>
 
   const description = (additive: Additive[], text: string) => additive.length ? (
     <p key={text} className={classNames(styles.selectedProductContainer__description)}>
@@ -38,11 +43,15 @@ const SelectedProduct = ({ name, image, price, count, toppings: { topping, witho
             {description(without, 'fara')}
             {description(drinks as Drinks[], 'bautura')}
           </div>
-          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={() => null} />
+          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={(value) => changeCount(index, value)} />
         </div>
       </div>
       <p className={classNames(styles.selectedProductContainer__price, 'flex font-medium')}>{price} MDL</p>
-      <button className={classNames(styles.selectedProductContainer__button, 'w-6 h-6 rounded-full flex justify-center items-center')}>
+      <button
+        className={classNames(styles.selectedProductContainer__button, 'w-6 h-6 rounded-full flex justify-center items-center')}
+        aria-label="Remove product"
+        onClick={() => removeProduct(index)}
+      >
         <Close className="w-2 h-2" fill="#08080B" />
       </button>
     </div>

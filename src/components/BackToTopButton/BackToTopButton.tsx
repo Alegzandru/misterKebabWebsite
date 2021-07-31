@@ -23,7 +23,7 @@ const BackToTopButton = () => {
       href="#"
       className={classNames(
         styles.backToTopContainer,
-        'overflow-hidden rounded-full fixed justify-center items-center transition-opacity hidden md:flex z-50',
+        'h-12 w-12 fixed left-12 bottom-14 overflow-hidden rounded-full justify-center items-center transition-opacity hidden z-50 md:flex',
         show ? 'opacity-100' : 'opacity-0'
       )}
       aria-label="Back to top button"
