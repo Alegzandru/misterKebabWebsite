@@ -58,10 +58,7 @@ const Careers = () => {
       {values.map((value, index) => (
         <Checkbox
           key={index}
-          className={classNames(
-            styles.careersHeroContainer__checkbox,
-            styles.careersHeroContainer__checkbox_margin,
-          )}
+          className={classNames(styles.careersHeroContainer__checkbox)}
           name={value}
           register={register}
           onChange={() => checkboxHandler(name as CareerCheckboxesCategory)}
@@ -133,7 +130,7 @@ const Careers = () => {
             {CAREERS_SERVICES.map((service, index) => (
               <Checkbox
                 key={index}
-                className={styles.careersHeroContainer__checkbox}
+                className={classNames(styles.careersHeroContainer__checkbox, 'mb-6 md:mb-4')}
                 name={service}
                 register={register}
                 onChange={() => checkboxHandler(CAREERS_CHECKBOXES_CATEGORY.services)}

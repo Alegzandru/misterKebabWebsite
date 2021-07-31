@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 
+import { LANGUAGES } from '../../../../constants/common'
 import { ProductToppingsContext } from '../../../../store/ProductToppings/ProductToppings.context'
-import { Toppings } from '../../../../types'
+import { Drinks, Topping, Toppings, Without } from '../../../../types'
 import Checkbox from '../../../Checkbox/Checkbox'
 import styles from './ToppingsManager.module.scss'
 
@@ -15,8 +17,11 @@ type Props = {
 const ToppingsManager = ({ toppings }: Props) => {
   const {
     state: { count, toppings: currentToppings },
-    actions: { setCount, setToppings },
+    actions: { setCount, setAdditive },
   } = useContext(ProductToppingsContext)
+
+  const router = useRouter()
+  const isRo = router.locale === LANGUAGES.ro
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -50,19 +55,19 @@ const ToppingsManager = ({ toppings }: Props) => {
     >{index + 1}</button>
   )
 
-  const toppingCheckbox = ({ text, price }: Toppings['topping'][0]) => {
-    const label = `${text}- ` + (price ? `${price} MDL` : 'gratis')
+  const renderCheckbox = (type: string, label: string, topping: Topping | Without) => {
+    const additive: Topping[] | Without[] = currentToppings[activeTab][type]
 
-    const { topping } = currentToppings[activeTab]
+    const { text } = topping
 
-    const toppingIndex = topping.findIndex((value) => value.text === text)
-    const checked = toppingIndex !== -1
+    const additiveIndex = additive.findIndex((value) => value.text === text)
+    const checked = additiveIndex !== -1
 
     const onChangeHandler = () => {
-      setToppings(
+      setAdditive(
         checked
-          ? topping.filter((value) => value.text !== text)
-          : [...topping, { text, price }],
+          ? additive.filter((value) => value.text !== text)
+          : [...additive, topping],
         'topping',
         activeTab
       )
@@ -79,32 +84,53 @@ const ToppingsManager = ({ toppings }: Props) => {
     )
   }
 
-  const withoutToppingCheckbox = (value: string) => {
-    const { without } = currentToppings[activeTab]
+  const toppingCheckbox = (topping: Topping) => {
+    const { text, price } = topping
 
-    const withoutIndex = without.findIndex((text) => text === value)
-    const checked = withoutIndex !== -1
+    const label = `${text}- ` + (price ? `${price} MDL` : 'gratis')
+
+    return renderCheckbox('topping', label, topping)
+  }
+
+  const withoutToppingCheckbox = (without: Without) => renderCheckbox('without', without.text, without)
+
+  const drinksRadioButton = ({ text, textru }: Drinks) => {
+    const { drinks } = currentToppings[activeTab]
+
+    if (!drinks) {
+      return null as unknown as JSX.Element
+    }
+
+    const checked = !!drinks[0] && drinks[0].text === text
 
     const onChangeHandler = () => {
-      setToppings(
-        checked
-          ? without.filter((text) => text !== value)
-          : [...without, value],
-        'without',
-        activeTab
-      )
+      if (!checked) {
+        setAdditive([{ text, textru }], 'drinks', activeTab)
+      }
     }
 
     return (
       <Checkbox
-        key={value + activeTab}
-        checked={checked}
+        key={text + activeTab}
+        name="drink"
+        asRadio={true}
+        defaultChecked={checked}
         onChange={onChangeHandler}
       >
-        {value}
+        {isRo ? text : textru}
       </Checkbox>
     )
   }
+
+  const additiveBlock = <T extends unknown>(text: string, additive: T[], renderFunction: (value: T) => JSX.Element) =>
+    additive.length ? (
+      <div key={text + activeTab}>
+        <h3>{t(text)}</h3>
+        <div className="flex flex-col mt-4">
+          {additive.map(renderFunction)}
+        </div>
+      </div>
+    ) : null
 
   return (
     <div className={classNames(styles.toppingsManagerContainer, 'w-full mt-8 md:mt-14')}>
@@ -120,19 +146,18 @@ const ToppingsManager = ({ toppings }: Props) => {
           onClick={addTabHandler}
         >+</button>
       </div>
-      <form ref={formRef} className={classNames(styles.toppingsManagerContainer__toppingsContainer, 'w-full py-6 px-4 bg-white rounded md:flex')}>
-        <div className="flex-1 lg:pr-4">
-          <h3>{t('Topping')}</h3>
-          <div className="flex flex-col mt-4 mb-10 md:mb-0">
-            {toppings.topping.map(toppingCheckbox)}
-          </div>
-        </div>
-        <div className="flex-1">
-          <h3>{t('Fără')}</h3>
-          <div className="flex flex-col mt-4">
-            {toppings.without.map(withoutToppingCheckbox)}
-          </div>
-        </div>
+      <form
+        ref={formRef}
+        className={classNames(
+          styles.toppingsManagerContainer__additiveContainer,
+          toppings.drinks ? 'md:grid-cols-3' : '',
+          'w-full py-6 px-4 bg-white rounded grid gap-x-4 gap-y-10 grid-cols-1 sm:grid-cols-2'
+        )}
+      >
+        {additiveBlock('Topping', toppings.topping, toppingCheckbox)}
+        {/* {additiveBlock('Fără', toppings.without, withoutToppingCheckbox)} */}
+        {additiveBlock('Fără', (toppings.without as unknown as string[]).map((value) => ({ text: value, textru: value })), withoutToppingCheckbox)}
+        {toppings.drinks && additiveBlock('Băutura', toppings.drinks, drinksRadioButton)}
       </form>
     </div>
   )

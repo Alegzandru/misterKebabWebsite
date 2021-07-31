@@ -28,7 +28,7 @@ export const DEFAULT_STATE: State = {
   },
   productToppings: {
     name: '',
-    toppings: [{ topping: [], without: [] }],
+    toppings: [{ topping: [], without: [], drinks: [] }],
     count: 1,
   },
 }

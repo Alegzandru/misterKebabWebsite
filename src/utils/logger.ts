@@ -12,7 +12,7 @@ const getCurrentTimeFormatted = () => {
 }
 
 const useLogger = <T>(reducer: (state: T, { type, payload }: AnyAction) => T) => {
-  const reducerWithLogger = useCallback((state, action) => {
+  const reducerWithLogger = useCallback<typeof reducer>((state, action) => {
     const next = reducer(state, action)
 
     console.groupCollapsed(

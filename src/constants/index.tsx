@@ -3,7 +3,7 @@ import CartModal from '../components/Modal/CartModal/CartModal'
 import ProductModal from '../components/Modal/ProductModal/ProductModal'
 import { Toppings } from '../types'
 
-export const INITIAL_TOPPINGS: Toppings = { topping: [], without: [] }
+export const INITIAL_TOPPINGS: Toppings = { topping: [], without: [], drinks: [] }
 
 export const SOCIALS_LINKS = [
   {
@@ -140,3 +140,6 @@ export const CAREERS_OTHERS = [
     values: ['Full-time', 'Part-time'],
   },
 ]
+
+// temp:
+export const DELIVERY_PRICE = 35

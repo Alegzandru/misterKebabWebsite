@@ -3,9 +3,15 @@
   background-color: #f4f4f6;
   border-radius: 4px;
   font-size: 14px;
+  color: #08080b;
 
   &_active {
     border-color: #ffb80e;
     color: #c6823d;
+  }
+
+  &:hover {
+    border-color: #ffb80e;
+    color: #08080b;
   }
 }

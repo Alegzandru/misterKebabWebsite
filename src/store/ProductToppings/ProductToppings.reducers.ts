@@ -1,5 +1,7 @@
+import { clone } from 'ramda'
+import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
-import { AnyAction, Product, Topping, Toppings } from '../../types'
+import { Additive, AnyAction, Product, Toppings } from '../../types'
 import { ProductToppingsState } from '../../types/state'
 
 const setCurrentProduct = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
@@ -7,7 +9,7 @@ const setCurrentProduct = (state: ProductToppingsState, payload: Record<string, 
 
   const { name: currentName } = state
 
-  return name === currentName ? state : ({ ...state, name, toppings: [{ topping: [], without: [] }], count: 1 })
+  return name === currentName ? state : ({ ...state, name, toppings: [clone(INITIAL_TOPPINGS)], count: 1 })
 }
 
 const setCount = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
@@ -16,7 +18,7 @@ const setCount = (state: ProductToppingsState, payload: Record<string, any>): Pr
   const { count: previousCount, toppings } = state
 
   const newToppings: Toppings[] = count > previousCount
-    ? [...toppings, { topping: [], without: [] }]
+    ? [...toppings, clone(INITIAL_TOPPINGS)]
     : toppings.slice(0, -1)
 
   return ({
@@ -26,12 +28,12 @@ const setCount = (state: ProductToppingsState, payload: Record<string, any>): Pr
   })
 }
 
-const setToppings = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
-  const { toppings, index, type } = payload as { toppings: Topping[] | string[]; type: string; index: number }
+const setAdditive = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
+  const { additive, index, type } = payload as { additive: Additive[]; type: string; index: number }
 
   const newToppings = [...state.toppings]
 
-  newToppings[index][type] = toppings
+  newToppings[index][type] = additive
 
   return ({
     ...state,
@@ -47,8 +49,8 @@ const productToppingsReducer = (state: ProductToppingsState, { type, payload }: 
     case ACTIONS.setCount:
       return setCount(state, payload)
 
-    case ACTIONS.setToppings:
-      return setToppings(state, payload)
+    case ACTIONS.setAdditive:
+      return setAdditive(state, payload)
 
     default:
       return state

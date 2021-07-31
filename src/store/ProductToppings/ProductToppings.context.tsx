@@ -1,5 +1,6 @@
 import { createContext, PropsWithChildren, useReducer } from 'react'
 import { DEFAULT_STATE } from '../../constants/initialState'
+import useCookiePersist from '../../utils/cookiePersist'
 import useLogger from '../../utils/logger'
 import useActions from './ProductToppings.actions'
 import productToppingsReducer from './ProductToppings.reducers'
@@ -10,7 +11,9 @@ export const ProductToppingsContext = createContext({
 })
 
 export const ProductToppingsContextProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [state, dispatch] = useReducer(useLogger(productToppingsReducer), DEFAULT_STATE.productToppings)
+  const { reducer, initialState } = useCookiePersist(useLogger(productToppingsReducer), 'productToppings')
+
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const actions = useActions(dispatch)
 
