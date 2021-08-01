@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import React, { useContext, useEffect } from 'react'
 
-import { MODALS, MODAL_COMPONENTS } from '../../constants'
+import { MODAL_COMPONENTS, MODALS } from '../../constants'
 import { ModalContext } from '../../store/Modal/Modal.context'
-import Close from '../Svgs/Close/Close'
+import CloseButton from '../CloseButton/CloseButton'
 import styles from './Modal.module.scss'
 
 const Modal = () => {
@@ -48,17 +48,14 @@ const Modal = () => {
         )}
       >
         {CurrentModal && <CurrentModal />}
-        <button
-          aria-label="Close button"
+        <CloseButton
           className={classNames(
             styles.modalContainer__close,
             show === MODALS.product ? 'md:top-6 md:right-6 lg:top-10 lg:right-10' : '',
-            'fixed flex justify-center items-center w-10 h-10 top-4 right-4 rounded-full'
+            'fixed top-4 right-4'
           )}
           onClick={closeModal}
-        >
-          <Close />
-        </button>
+        />
       </div>
     </>
   )

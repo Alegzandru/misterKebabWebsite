@@ -1,5 +1,4 @@
-import { useCallback, useRef } from 'react'
-import Cookies from 'universal-cookie'
+import { useCallback } from 'react'
 
 import { removeProperties } from '.'
 import { DAY } from '../constants/common'
@@ -16,27 +15,30 @@ type Options = {
   exclude: string[]
 }
 
-const useCookiePersist = <T, K extends keyof State>(
+const usePersist = <T, K extends keyof State>(
   reducer: (state: T, { type, payload }: AnyAction) => T,
   key: K,
   options: Partial<Options> = {}
 ): ReturnType<T, K> => {
   const { exclude }: Options = { exclude: [], ...options }
 
-  const cookiesRef = useRef<Cookies>(new Cookies())
-
   const updateCookie = useCallback<typeof reducer>((state, action) => {
     const next = reducer(state, action)
 
-    cookiesRef.current.set(key, exclude ? removeProperties(next, exclude) : next, { maxAge: DAY })
+    const objectToSave = { ...next, timestamp: Date.now() }
+
+    localStorage.setItem(key, JSON.stringify(exclude ? removeProperties(objectToSave, exclude) : objectToSave))
 
     return next
   }, [reducer])
 
-  return ({
-    reducer: updateCookie,
-    initialState: cookiesRef.current.get(key) || DEFAULT_STATE[key],
-  })
+  const { timestamp, ...data } = JSON.parse(localStorage.getItem(key) || 'null') || {}
+
+  const isRelatable = timestamp && Date.now() - timestamp < DAY
+
+  const initialState = isRelatable ? data : DEFAULT_STATE[key]
+
+  return ({ reducer: updateCookie, initialState })
 }
 
-export default useCookiePersist
+export default usePersist
