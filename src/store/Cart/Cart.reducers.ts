@@ -87,7 +87,7 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
   }
 
   const { allProductsToppings } = products[currentProductIndex]
-  const newProducts = [...products]
+  const newProducts = clone(products)
 
   newProducts[currentProductIndex].allProductsToppings = [...allProductsToppings, ...newToppings]
     .sort((first, second) => first.topping.length - second.topping.length)
@@ -99,6 +99,42 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
   })
 }
 
+const changeCount = (state: CartState, { index, count }: Record<string, any>): CartState => {
+  const { groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
+
+  const newProducts = clone(groupedByToppingsProducts)
+
+  const { count: oldCount, price: oldPrice } = newProducts[index]
+
+  const oneUnitPrice = oldPrice / oldCount
+  const newPrice = count * oneUnitPrice
+
+  newProducts[index].count = count
+  newProducts[index].price = newPrice
+
+  return ({
+    ...state,
+    groupedByToppingsProducts: newProducts,
+    price: totalPrice + newPrice - oldPrice,
+    count: totalCount + count - oldCount,
+  })
+}
+
+const removeProduct = (state: CartState, { index }: Record<string, any>): CartState => {
+  const { groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
+
+  const newProducts = clone(groupedByToppingsProducts)
+
+  const [{ count, price }] = newProducts.splice(index, 1)
+
+  return ({
+    ...state,
+    groupedByToppingsProducts: newProducts,
+    price: totalPrice - price,
+    count: totalCount - count,
+  })
+}
+
 const cartReducer = (state: CartState, { type, payload }: AnyAction) => {
   switch (type) {
     case ACTIONS.addMenuProducts:
@@ -106,6 +142,12 @@ const cartReducer = (state: CartState, { type, payload }: AnyAction) => {
 
     case ACTIONS.addProducts:
       return groupByToppings(addProducts(state, payload))
+
+    case ACTIONS.changeCount:
+      return changeCount(state, payload)
+
+    case ACTIONS.removeProduct:
+      return removeProduct(state, payload)
 
     default:
       return state

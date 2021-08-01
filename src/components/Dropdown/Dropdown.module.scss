@@ -1,10 +1,13 @@
 .dropdownContainer {
-  border: 2px solid #e1e1e1;
-  background-color: #f4f4f6;
+  background: #ffffff;
   border-radius: 4px;
 
-  &_active {
-    border-color: #ffb80e;
-    color: #c6823d;
+  fieldset {
+    border-color: #e1e1e1;
+    border-width: 2px;
+  }
+
+  label {
+    color: #58606e;
   }
 }

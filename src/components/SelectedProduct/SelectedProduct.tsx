@@ -1,9 +1,11 @@
 import classNames from 'classnames'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
+import { useContext } from 'react'
 
 import { LANGUAGES, SIZES } from '../../constants/common'
+import { CartContext } from '../../store/Cart/Cart.context'
 import { Additive, Drinks, Toppings } from '../../types'
 import ProductCount from '../ProductCount/ProductCount'
 import Close from '../Svgs/Close/Close'
@@ -16,15 +18,18 @@ type Props = {
   toppings: Toppings
   price: number
   count: number
+  index: number
 }
 
-const SelectedProduct = ({ name, nameru, image, price, count, toppings: { topping, without, drinks } }: Props) => {
+const SelectedProduct = ({ name, nameru, image, price, count, toppings: { topping, without, drinks }, index }: Props) => {
   const router = useRouter()
   const isRo = router.locale === LANGUAGES.ro
   const { t } = useTranslation('cart')
 
-  const toppingBlock = ({ text , textru }: Additive, index: number) =>
-    <span key={index} className={styles.selectedProductContainer__toppings}>{index !== 0 ? ', ' : ''}{isRo ? text : textru}</span>
+  const { actions: { changeCount, removeProduct } } = useContext(CartContext)
+
+  const toppingBlock = ({ text, textru }: Additive, blockIndex: number) =>
+    <span key={blockIndex} className={styles.selectedProductContainer__toppings}>{blockIndex !== 0 ? ', ' : ''}{isRo ? text : textru}</span>
 
   const description = (additive: Additive[], text: string) => additive.length ? (
     <p key={text} className={classNames(styles.selectedProductContainer__description)}>
@@ -45,11 +50,15 @@ const SelectedProduct = ({ name, nameru, image, price, count, toppings: { toppin
             {description(without, t('fara'))}
             {description(drinks as Drinks[], t('bautura'))}
           </div>
-          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={() => null} />
+          <ProductCount background="gray" size={SIZES.sm} value={count} onChange={(value) => changeCount(index, value)} />
         </div>
       </div>
       <p className={classNames(styles.selectedProductContainer__price, 'flex font-medium')}>{price} {t('MDL')}</p>
-      <button className={classNames(styles.selectedProductContainer__button, 'w-6 h-6 rounded-full flex justify-center items-center')}>
+      <button
+        className={classNames(styles.selectedProductContainer__button, 'w-6 h-6 rounded-full flex justify-center items-center')}
+        aria-label="Remove product"
+        onClick={() => removeProduct(index)}
+      >
         <Close className="w-2 h-2" fill="#08080B" />
       </button>
     </div>

@@ -17,5 +17,9 @@
 
   &__button {
     border: 1px solid #e1e1e1;
+
+    &:hover {
+      border-color: #08080b;
+    }
   }
 }

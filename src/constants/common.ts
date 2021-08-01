@@ -31,3 +31,5 @@ export const PAGES = {
   careers: { name: 'Cariere', pathname: '/careers' },
   locations: { name: 'Locații', pathname: '/locations' },
 }
+
+export const DAY = 24 * 60 * 60 * 1000

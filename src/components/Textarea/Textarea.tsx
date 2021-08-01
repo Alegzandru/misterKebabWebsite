@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
+import styles from './Textarea.module.scss'
 
 type Props = {
   placeholder: string
@@ -7,9 +8,10 @@ type Props = {
 
 const Textarea = ({ placeholder }: Props) => {
   const { t } = useTranslation('cart')
+
   return(
     <textarea
-      className={classNames('w-full')}
+      className={classNames(styles.textarea, 'w-full p-4')}
       placeholder={t(placeholder)}
     />
   )

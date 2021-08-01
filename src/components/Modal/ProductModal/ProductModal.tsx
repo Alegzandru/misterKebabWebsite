@@ -80,6 +80,7 @@ const ProductModal = () => {
   }, [show])
 
   const onClickHandler = () => {
+    setCurrentProduct('')
     addProducts(name, nameru, count, withToppings ? currentToppings : [])
 
     closeModal()
