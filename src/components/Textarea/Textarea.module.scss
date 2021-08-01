@@ -1,0 +1,9 @@
+.textarea {
+  border: 2px solid #e1e1e1;
+  border-radius: 4px;
+  min-height: 80px;
+
+  &::placeholder {
+    color: #58606e;
+  }
+}

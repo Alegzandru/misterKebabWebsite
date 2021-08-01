@@ -1,0 +1,67 @@
+.productModalContainer {
+  background-color: #f4f4f6;
+
+  &__insignia {
+    height: 88px;
+    width: 78px;
+  }
+
+  &__badges {
+    img {
+      margin-right: 8px;
+    }
+  }
+
+  &__name {
+    font-size: 42px;
+  }
+
+  &__price {
+    font-size: 24px;
+    line-height: 38px;
+    color: #ff2828;
+  }
+
+  &__description {
+    color: #58606e;
+  }
+
+  &__weight {
+    font-size: 14px;
+    color: #08080b;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .productModalContainer {
+    &__name {
+      font-size: 64px;
+    }
+
+    &__price {
+      font-size: 28px;
+    }
+
+    &__weight {
+      font-size: 14px;
+      color: #08080b;
+      font-weight: bold;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .productModalContainer {
+    &__name {
+      font-size: 60px;
+      line-height: 115%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .productModalContainer {
+    max-width: 1496px;
+  }
+}

@@ -1,0 +1,157 @@
+.locationsContainer {
+  &__heading {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__anchor {
+    font-size: 14px;
+  }
+
+  &.dark {
+    .locationsContainer {
+      &__wrapper {
+        background-color: #040404;
+      }
+
+      &__heading {
+        color: #fab729;
+      }
+
+      &__address {
+        color: #e1e1e1;
+      }
+
+      &__anchor {
+        color: #ffffff;
+
+        svg {
+          stroke: #ffffff;
+        }
+      }
+    }
+  }
+
+  &.light {
+    .locationsContainer {
+      &__wrapper {
+        background-color: #fff7f8;
+      }
+
+      &__heading {
+        color: #08080b;
+      }
+
+      &__address {
+        color: #08080b;
+      }
+
+      &__anchor {
+        color: #df2026;
+
+        svg {
+          stroke: #df2026;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 816px) {
+  .locationsContainer {
+    &.light {
+      margin-bottom: 76px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .locationsContainer {
+    &.light {
+      margin-bottom: 116px;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .locationsContainer {
+    &__wrapper {
+      background-color: transparent !important;
+
+      &:hover {
+        padding-left: 32px;
+      }
+    }
+
+    &__anchor {
+      opacity: 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        transition: width 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:hover::after {
+        width: 100%;
+        bottom: 0;
+      }
+    }
+
+    &.light {
+      .locationsContainer__wrapper:hover {
+        background-color: #fff7f8 !important;
+
+        .locationsContainer__anchor {
+          opacity: 1;
+          color: #df2026;
+
+          svg {
+            stroke: #df2026;
+          }
+
+          &:hover {
+            color: #08080b;
+
+            svg {
+              stroke: #08080b;
+            }
+
+            &::after {
+              background-color: #08080b;
+            }
+          }
+        }
+      }
+    }
+
+    &.dark {
+      .locationsContainer__wrapper:hover {
+        background-color: #040404 !important;
+
+        .locationsContainer__anchor {
+          opacity: 1;
+          color: #ffffff;
+
+          svg {
+            stroke: #ffffff;
+          }
+
+          &:hover {
+            color: #ffb80e;
+
+            svg {
+              stroke: #ffb80e;
+            }
+
+            &::after {
+              background-color: #ffb80e;
+            }
+          }
+        }
+      }
+    }
+  }
+}

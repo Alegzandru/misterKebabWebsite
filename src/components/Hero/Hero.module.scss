@@ -23,7 +23,6 @@
   }
 
   &__heading {
-    font-family: "Red Hat Display", sans-serif;
     font-size: 42px;
     color: #f9eac5;
     text-shadow: 0px 0px 10px rgba(255, 193, 71, 0.69);
@@ -40,17 +39,17 @@
     background-size: 150px;
     margin: 0 4px;
 
-    &.mrWrap {
+    &.mr-lavas {
       background-image: url(/images/thumbnails/wrap.png);
       background-position: -80px -25px;
     }
 
-    &.mrChicken {
+    &.mr-chicken-burger {
       background-image: url(/images/thumbnails/burger.png);
       background-position: -90px -10px;
     }
 
-    &.pita {
+    &.mr-pita {
       background-image: url(/images/thumbnails/pita.png);
       background-position: -65px -30px;
     }
@@ -76,7 +75,7 @@
     height: 52px;
     width: 272px;
     color: #ffffff;
-    background: #611220;
+    background-color: #611220;
 
     &:hover {
       color: #ff2828;
@@ -96,16 +95,16 @@
 @media only screen and (min-width: 512px) {
   .heroContainer {
     &__button {
-      &.mrWrap {
+      &.mr-lavas {
         background-position-x: -55px;
       }
 
-      &.mrChicken {
+      &.mr-chicken-burger {
         background-position: -75px -18px;
         background-size: 160px;
       }
 
-      &.pita {
+      &.mr-pita {
         background-position: -35px -20px;
         background-size: 140px;
       }
@@ -137,17 +136,17 @@
     &__button {
       margin: 0 12px;
 
-      &.mrWrap {
+      &.mr-lavas {
         background-position: -60px -35px;
         background-size: 200px;
       }
 
-      &.mrChicken {
+      &.mr-chicken-burger {
         background-position: -100px -30px;
         background-size: 260px;
       }
 
-      &.pita {
+      &.mr-pita {
         background-position: -30px -35px;
         background-size: 215px;
       }

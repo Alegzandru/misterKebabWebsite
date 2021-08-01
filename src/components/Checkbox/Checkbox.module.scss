@@ -1,0 +1,53 @@
+.checkboxContainer {
+  cursor: pointer;
+  color: #08080b;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &_active {
+    color: #611220;
+  }
+
+  &__checkMark {
+    border-radius: 4px;
+    border: 2px solid #08080b;
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      background-image: url(/images/svgs/checkmark.svg);
+      height: 8px;
+      width: 10px;
+      left: 1px;
+      top: 2px;
+    }
+
+    &_asRadio {
+      border-radius: 50%;
+      height: 18px;
+      width: 18px;
+
+      &::after {
+        background: #df2026;
+        height: 10px;
+        border-radius: 50%;
+        left: 2px;
+      }
+    }
+  }
+
+  & input:checked ~ &__checkMark {
+    border-color: #ff2828;
+
+    &::after {
+      display: block;
+    }
+  }
+
+  &:hover {
+    color: #58606e;
+  }
+}

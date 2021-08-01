@@ -11,12 +11,25 @@ export const SCREEN_TYPE = {
 }
 
 export const THEMES = {
-  white: 'white' as 'white',
+  light: 'light' as 'light',
   dark: 'dark' as 'dark',
 }
 
-export const PAGES = {
-  home: { name: 'Principală', path: '/' },
-  careers: { name: 'Cariere', path: '/careers' },
-  locations: { name: 'Locații', path: '/locations' },
+export const FONT = {
+  redHatDisplay: '"Red Hat Display", sans-serif',
+  b612: '"B612", sans-serif',
+  montserrat: '"Montserrat", sans-serif',
 }
+
+export const LANGUAGES = {
+  ro: 'ro',
+  ru: 'ru',
+}
+
+export const PAGES = {
+  home: { name: 'Principală', pathname: '/' },
+  careers: { name: 'Cariere', pathname: '/careers' },
+  locations: { name: 'Locații', pathname: '/locations' },
+}
+
+export const DAY = 24 * 60 * 60 * 1000

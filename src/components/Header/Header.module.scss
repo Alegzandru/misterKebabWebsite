@@ -1,6 +1,4 @@
 .headerContainer {
-  font-family: "Red Hat Display", sans-serif;
-
   &_boxShadow {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   }
@@ -23,11 +21,6 @@
 
     &:last-child {
       margin-bottom: 46px;
-    }
-
-    &_active {
-      color: #fab729 !important;
-      font-weight: 600;
     }
   }
 
@@ -138,30 +131,47 @@
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
     }
 
+    &_transparent {
+      .headerContainer {
+        &__anchor {
+          color: #d9d9ec;
+
+          & a:hover {
+            color: #fff;
+          }
+        }
+
+        &__callNumber {
+          color: #f9f9f9;
+        }
+
+        &__callNumberText {
+          color: #ffffff;
+        }
+      }
+    }
+
     &__navbarMobile {
       box-shadow: none;
     }
 
     &__anchor {
       margin-top: 0;
-      color: #d9d9ec;
 
       &:last-child {
         margin-bottom: 0;
-      }
-
-      & a:hover {
-        color: #fff;
       }
     }
 
     &__callNumber {
       height: 56px;
-      color: #f9f9f9;
+      border: none;
     }
+  }
+}
 
-    &__callNumberText {
-      color: #ffffff;
-    }
+@media only screen and (min-width: 850px) {
+  .headerContainer__callNumber {
+    padding: 0 16px;
   }
 }

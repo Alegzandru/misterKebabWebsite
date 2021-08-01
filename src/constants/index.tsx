@@ -1,4 +1,10 @@
 /* eslint-disable max-len */
+import CartModal from '../components/Modal/CartModal/CartModal'
+import ProductModal from '../components/Modal/ProductModal/ProductModal'
+import { Toppings } from '../types'
+
+export const INITIAL_TOPPINGS: Toppings = { topping: [], without: [], drinks: [] }
+
 export const SOCIALS_LINKS = [
   {
     href: '#facebook',
@@ -13,810 +19,127 @@ export const LOCATIONS = [
   {
     name: 'Malina Mică',
     address: 'Strada Nicolae Testemiţanu 17/6',
+    position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
     address: 'Strada Vladimir Korolenko 12',
+    position: { lat: 46.995146, lng: 28.825689 },
   },
   {
     name: 'Râşcani',
     address: 'Bd. Moscova 10/1',
+    position: { lat: 47.04887, lng: 28.86357 },
   },
   {
     name: 'Botanica',
     address: 'Strada Independenţei 4/3',
+    position: { lat: 46.98538, lng: 28.84468 },
   },
 ]
 
 export const HERO_BUTTONS = [
-  { name: 'Lavaș', id: 'mrWrap' },
-  { name: 'Burger', id: 'mrChicken' },
-  { name: 'Pita', id: 'pita' },
+  { name: 'Lavaș', id: 'mr-lavas' },
+  { name: 'Burger', id: 'mr-chicken-burger' },
+  { name: 'Pita', id: 'mr-pita' },
 ]
 
 export const CATEGORIES = [
-  { id: 'kebab', name: 'Kebab' },
-  { id: 'saorma', name: 'Șaorma' },
-  { id: 'mrWrap', name: 'Mr Wrap' },
-  { id: 'mrLavas', name: 'Mr Lavaș' },
-  { id: 'mrChicken', name: 'Mr Chicken' },
-  { id: 'mrBeef', name: 'Mr Beef' },
-  { id: 'mrVegetarian', name: 'Mr Vegetarian' },
-  { id: 'baghet', name: 'Baghet' },
-  { id: 'pita', name: 'Pita' },
-  { id: 'supa', name: 'Supă' },
-  { id: 'salata', name: 'Salată' },
-  { id: 'snacks', name: 'Snacks' },
-  { id: 'combo', name: 'Combo' },
-  { id: 'menuKids', name: 'Menu Kids' },
-  { id: 'sosuri', name: 'Sosuri' },
-  { id: 'deserturi', name: 'Deserturi' },
-  { id: 'bauturi', name: 'Bauturi' },
+  { id: 'mr-kebab', name: 'Mr. Kebab', nameru: 'Mr. Kebab' },
+  { id: 'saorma', name: 'Șaorma', nameru: 'Шаурма Mr. Лаваш' },
+  { id: 'mr-wrap', name: 'Mr. Wrap', nameru: 'Mr. Wrap' },
+  { id: 'mr-lavas', name: 'Mr. Lavaș', nameru: 'Mr. Лаваш' },
+  { id: 'mr-chicken-burger', name: 'Mr. Chicken Burger', nameru: 'Mr. Chicken Burger' },
+  { id: 'mr-beef-burger', name: 'Mr. Beef Burger', nameru: 'Mr. Beef Burger' },
+  { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger', nameru: 'Mr. Vegetarian Burger' },
+  { id: 'mr-kids-burger', name: 'Mr. Kids Burger', nameru: 'Mr. Kids Burger' },
+  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет' },
+  { id: 'mr-pita', name: 'Mr. Pită', nameru: 'Mr. Пита' },
+  { id: 'supe', name: 'Supe', nameru: 'Cупы' },
+  { id: 'snacks', name: 'Snacks', nameru: 'Закуски' },
+  { id: 'la-farfurie', name: 'La Farfurie', nameru: 'В Тарелке' },
+  { id: 'salate', name: 'Salate', nameru: 'Салаты' },
+  { id: 'combo-menu', name: 'Combo Menu', nameru: 'Сеты' },
+  { id: 'combo-kids', name: 'Combo Kids', nameru: 'Сеты для Детей' },
+  { id: 'sosuri', name: 'Sosuri', nameru: 'Соусы' },
+  { id: 'cold-drinks', name: 'Cold Drinks', nameru: 'Холодные напитки' },
+  { id: 'bauturi-dulci', name: 'Băuturi dulci', nameru: 'Сладкие напитки' },
+  { id: 'hot-drinks', name: 'Hot Drinks', nameru: 'Горячие напитки' },
+  { id: 'deserturi', name: 'Deserturi', nameru: 'Десерты' },
 ]
 
-export const MENU = [
+export const DRINKS = [
+  'Cold Drinks',
+  'Băuturi Dulci',
+  'Hot Drinks',
+]
+
+export const WEIGHT_TYPE = {
+  grams: 'g',
+  milliliters: 'ml',
+}
+
+export const MODALS = {
+  product: 'product' as 'product',
+  cart: 'cart' as 'cart',
+}
+
+export const MODAL_COMPONENTS = {
+  product: ProductModal,
+  cart: CartModal,
+}
+
+export const RECOMMENDED_SLIDER_BREAKPOINTS = {
+  512: {
+    slidesPerView: 3,
+  },
+  816: {
+    slidesPerView: 4,
+  },
+  1024: {
+    slidesPerView: 3,
+  },
+  1440: {
+    slidesPerView: 4,
+  },
+}
+
+export const CAREERS_FORM_INITIAL_DATA = {
+  name: '',
+  age: '',
+  tel: '',
+  email: '',
+  services: [] as string[],
+  languages: [] as string[],
+  locations: [] as string[],
+  workType: [] as string[],
+}
+
+export const CAREERS_CHECKBOXES_CATEGORY = {
+  services: 'services' as 'services',
+  languages: 'languages' as 'languages',
+  locations: 'locations' as 'locations',
+  workType: 'workType' as 'workType',
+}
+
+export const CAREERS_SERVICES = ['Bucatar', 'Chelner', 'Casier Operator', 'Sofer de livrare', 'Handyman', 'Operator de livrare']
+export const CAREERS_OTHERS = [
   {
-    categoryName: 'Lavaș',
-    subCategories: [
-      {
-        id: 'kebab',
-        name: 'Mr Kebab',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'saorma',
-        name: 'Șaorma',
-        items: [
-          {
-            name: 'Șaorma Mr Lavaș',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Șaorma Vita',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Șaorma Amestec',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow', 'chicken'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'mrWrap',
-        name: 'Mr. Wrap',
-        items: [
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'mrLavas',
-        name: 'Mr. Lavaș',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
+    heading: 'Cunosc limbile',
+    name: 'languages',
+    values: ['Rusa', 'Romana', 'Engleza'],
   },
   {
-    categoryName: 'Burger',
-    subCategories: [
-      {
-        id: 'mrChicken',
-        name: 'Mr Chicken Burger',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'mrBeef',
-        name: 'Mr Beef Burger',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'mrVegetarian',
-        name: 'Mr Vegetarian',
-        items: [
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
+    heading: 'Doresc să lucrez la',
+    name: 'locations',
+    values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râșcani'],
   },
   {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'baghet',
-        name: 'Baghet',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'pita',
-        name: 'Pita',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'supa',
-        name: 'Supă',
-        items: [
-          {
-            name: 'Supa',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Supa',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'salata',
-        name: 'Salată',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'snacks',
-        name: 'Snacks',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'combo',
-        name: 'Combo',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: 'menuKids',
-        name: 'Combo Kids',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'sosuri',
-        name: 'Sosuri',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: '',
-    subCategories: [
-      {
-        id: 'deserturi',
-        name: 'Deserturi',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    categoryName: 'Băuturi',
-    subCategories: [
-      {
-        id: 'bauturi',
-        name: 'Cafea',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: '',
-        name: 'Ceai',
-        items: [
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-      {
-        id: '',
-        name: 'Băuturi dulci',
-        items: [
-          {
-            name: 'Kebab pui mic',
-            price: 35,
-            weight: 350,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab pui mare',
-            price: 50,
-            weight: 450,
-            badges: ['kebab', 'chicken'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mic',
-            price: 38,
-            weight: 350,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-          {
-            name: 'Kebab Vita mare',
-            price: 45,
-            weight: 450,
-            badges: ['kebab', 'cow'],
-            image: 'product-image',
-          },
-        ],
-      },
-    ],
+    heading: 'Sunt dispus să lucrez',
+    name: 'workType',
+    values: ['Full-time', 'Part-time'],
   },
 ]
+
+// temp:
+export const DELIVERY_PRICE = 35

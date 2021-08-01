@@ -1,0 +1,13 @@
+.loaderContainer {
+  height: 100vh;
+  width: 100wh;
+
+  &__wrapper {
+    background-color: #fab729;
+    border: 5px solid #442331;
+  }
+
+  &__logo {
+    bottom: -30px;
+  }
+}

@@ -1,16 +1,18 @@
 .buttonContainer {
-  font-family: "Red Hat Display", sans-serif;
   color: #08080b;
   right: 26px;
-  bottom: 60px;
   width: 170px;
-  height: 64px;
   background-color: #fff5e9;
   background-image: url(/images/svgs/bag.svg);
   background-repeat: no-repeat;
   background-position: 90% -2px;
-  border: 2.5px solid #fab729;
+  border: 2px solid #fab729;
   box-shadow: 0px 4px 24px rgba(240, 192, 69, 0.32);
+  animation: fadeIn 0.5s ease forwards;
+
+  &:hover {
+    transform: translateY(-8px);
+  }
 
   &__counter {
     right: -10px;
@@ -41,5 +43,14 @@
     color: #c6823d;
     line-height: 18px;
     margin-top: 2px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

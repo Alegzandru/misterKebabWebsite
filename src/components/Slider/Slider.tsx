@@ -92,10 +92,11 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
     <div key={index} className="flex-1 relative">
       <Image
         src={image}
+        placeholder="blur"
         alt="Banner"
         layout="fill"
         objectFit="cover"
-        quality={80}
+        quality={90}
       />
     </div>
   )
