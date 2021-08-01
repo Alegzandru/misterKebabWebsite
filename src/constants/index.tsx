@@ -89,21 +89,6 @@ export const MODAL_COMPONENTS = {
   cart: CartModal,
 }
 
-export const RECOMMENDED_SLIDER_BREAKPOINTS = {
-  512: {
-    slidesPerView: 3,
-  },
-  816: {
-    slidesPerView: 4,
-  },
-  1024: {
-    slidesPerView: 3,
-  },
-  1440: {
-    slidesPerView: 4,
-  },
-}
-
 export const CAREERS_FORM_INITIAL_DATA = {
   name: '',
   age: '',

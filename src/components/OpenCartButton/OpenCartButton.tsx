@@ -30,7 +30,7 @@ const OpenCartButton = () => {
       className={classNames(
         styles.buttonContainer,
         scale ? 'scale-110' : '',
-        'h-16 fixed flex items-center z-50 rounded px-4 transition-all transform bottom-8 md:bottom-14'
+        'h-16 fixed flex items-center z-50 rounded px-4 transition-all transform animate-fadeIn bottom-8 md:bottom-14'
       )}
       onTransitionEnd={onTransitionEndHandler}
       onAnimationEnd={onTransitionEndHandler}

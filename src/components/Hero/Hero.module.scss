@@ -229,6 +229,28 @@
   }
 }
 
+@media only screen and (max-width: 370px) and (max-height: 600px) {
+  .heroContainer {
+    &__contentContainer {
+      margin-top: -50px;
+    }
+
+    &__insignia {
+      margin-bottom: 8px;
+    }
+
+    &__buttonsContainer {
+      height: 72px;
+      margin: 20px 0 38px;
+    }
+
+    &__chooseButton {
+      height: 42px;
+      width: 224px;
+    }
+  }
+}
+
 @media only screen and (max-width: 1023px) and (max-height: 500px) {
   .heroContainer {
     &__contentContainer {

@@ -11,10 +11,14 @@ type Props = {
 }
 
 const Slider = ({ slides, autoPlayInterval }: Props) => {
+  // temp:
+  // const [enableAutoPlay, setEnableAutoPlay] = useState(!!autoPlayInterval)
+  const [enableAutoPlay] = useState(!!autoPlayInterval)
   const [state, setState] = useState({
     activeSlide: 0,
     translate: 0,
   })
+
   const { translate, activeSlide } = state
 
   const autoPlayRef = useRef<() => void>()
@@ -45,7 +49,7 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
   }
 
   const resetAutoPlayInterval = () => {
-    if (autoPlayInterval) {
+    if (enableAutoPlay) {
       clearInterval(autoPlayIntervalRef.current as NodeJS.Timeout)
       setAutoPlayInterval()
     }
@@ -67,7 +71,7 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
 
     window.addEventListener('resize', onResizeHandler)
 
-    if (autoPlayInterval) {
+    if (enableAutoPlay) {
       setAutoPlayInterval()
 
       return () => {
@@ -97,6 +101,8 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
         layout="fill"
         objectFit="cover"
         quality={90}
+      // temp:
+      // onLoadingComplete={(() => index === 0 && setEnableAutoPlay(true))}
       />
     </div>
   )

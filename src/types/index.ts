@@ -23,12 +23,6 @@ export type CategoryItem = {
   id: string
 }
 
-export type TouchData = {
-  lastPosition: number
-  position: number
-  locked: boolean
-}
-
 export type SectionInView = {
   id: string
   inView: boolean
