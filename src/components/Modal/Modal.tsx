@@ -43,7 +43,7 @@ const Modal = () => {
         className={classNames(
           styles.modalContainer,
           { [styles.modalContainer_cart]: show === MODALS.cart },
-          'z-100 fixed inset-0 overflow-y-auto mx-auto py-18 px-3 md:py-24 md:px-5 lg:inset-5 lg:px-12',
+          'z-100 fixed inset-0 overflow-y-auto animate-fadeIn mx-auto py-18 px-3 md:py-24 md:px-5 lg:inset-5 lg:px-12',
           show ? 'block' : 'hidden',
         )}
       >

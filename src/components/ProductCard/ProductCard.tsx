@@ -46,7 +46,7 @@ const ProductCard = memo((props: Props) => {
         <Image className="rounded-t" src={image} alt="Product image" layout="fill" objectFit="cover" quality={80} />
       </div>
       <div className={classNames(styles.productCardContainer__description, 'flex flex-col h-full w-full rounded transition-all duration-500')}>
-        <div className="flex lg:mb-2">
+        <div className="flex mb-5 lg:mb-2">
           <h4 className={classNames(styles.productCardContainer__title)}>
             {isRo ? name : nameru}
           </h4>
@@ -66,7 +66,10 @@ const ProductCard = memo((props: Props) => {
             <Badges className={classNames(styles.productCardContainer__badges, 'absolute lg:static')} badges={badges} type="small" />
           </div>
         </div>
-        <div className={classNames(styles.productCardContainer__addToCart, 'flex w-full mt-5 lg:absolute lg:opacity-0 transition-all duration-500')}>
+        <div className={classNames(
+          styles.productCardContainer__addToCart,
+          'flex w-full mt-auto lg:absolute lg:opacity-0 transition-all duration-500')
+        }>
           <ProductCount className="hidden lg:flex" background="white" size={SIZES.md} value={count} onChange={setCount} />
           <button
             className={classNames(

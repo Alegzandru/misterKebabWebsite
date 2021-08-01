@@ -1,12 +1,11 @@
 .modalContainerBackground {
   opacity: 0;
-  animation: backgroundFadeIn 0.4s ease forwards;
+  animation: backgroundFadeIn 0.3s ease forwards;
 }
 
 .modalContainer {
   opacity: 0;
   background-color: #f4f4f6;
-  animation: fadeIn 0.5s ease forwards;
   border: 8px solid #f4f4f6;
   border-right-width: 4px;
   border-left-width: 4px;
@@ -62,14 +61,5 @@
   }
   to {
     opacity: 0.8;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

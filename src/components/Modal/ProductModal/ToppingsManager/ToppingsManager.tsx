@@ -163,7 +163,7 @@ const ToppingsManager = ({ toppings }: Props) => {
           'relative w-full py-6 px-4 bg-white rounded grid gap-x-4 gap-y-10 grid-cols-1 sm:grid-cols-2'
         )}
       >
-        {currentToppings.length > 1 && <CloseButton className="absolute right-4 top-4" onClick={removeToppingsHandler} />}
+        {currentToppings.length > 1 && <CloseButton className="absolute right-4 top-4 animate-fadeIn" onClick={removeToppingsHandler} />}
         {additiveBlock('Topping', toppings.topping, toppingCheckbox)}
         {/* {additiveBlock('Fără', toppings.without, withoutToppingCheckbox)} */}
         {additiveBlock('Fără', (toppings.without as unknown as string[]).map((value) => ({ text: value, textru: value })), withoutToppingCheckbox)}
