@@ -50,6 +50,15 @@ module.exports = {
       flex: {
         half: '1 1 50%',
       },
+      animation: {
+        fadeIn: 'fadeIn 0.5s ease forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+      },
     },
   },
   variants: {

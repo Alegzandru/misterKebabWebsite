@@ -1,0 +1,9 @@
+.closeButtonContainer {
+  &__sign {
+    fill: #58606e;
+  }
+
+  &:hover .closeButtonContainer__sign {
+    fill: #08080b;
+  }
+}

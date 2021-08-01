@@ -30,8 +30,7 @@
     "react-hook-form": "7.11.1",
     "react-intersection-observer": "8.32.0",
     "react-scroll-parallax": "2.4.0",
-    "swiper": "6.7.5",
-    "universal-cookie": "4.0.4"
+    "swiper": "6.7.5"
   },
   "devDependencies": {
     "@types/google.maps": "3.45.6",

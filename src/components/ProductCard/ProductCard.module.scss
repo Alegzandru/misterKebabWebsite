@@ -110,6 +110,10 @@
           margin-top: -15px;
         }
 
+        &__badgesContainerWrapper {
+          transform: translateY(-15px);
+        }
+
         &__badgesContainer {
           opacity: 0;
         }

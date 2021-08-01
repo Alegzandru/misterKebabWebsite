@@ -121,15 +121,29 @@ const changeCount = (state: CartState, { index, count }: Record<string, any>): C
 }
 
 const removeProduct = (state: CartState, { index }: Record<string, any>): CartState => {
-  const { groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
+  const { products, groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
 
-  const newProducts = clone(groupedByToppingsProducts)
+  const newGroupedProducts = clone(groupedByToppingsProducts)
 
-  const [{ count, price }] = newProducts.splice(index, 1)
+  const [{ count, price, name, toppings }] = newGroupedProducts.splice(index, 1)
+
+  const newProducts = clone(products)
+
+  const currentProduct = products.findIndex((value) => value.name === name)
+  const { allProductsToppings } = newProducts[currentProduct]
+
+  const newToppings = allProductsToppings.filter((topping) => !equals(topping, toppings))
+
+  if (newToppings.length) {
+    newProducts[currentProduct].allProductsToppings = newToppings
+  } else {
+    newProducts.splice(currentProduct, 1)
+  }
 
   return ({
     ...state,
-    groupedByToppingsProducts: newProducts,
+    products: newProducts,
+    groupedByToppingsProducts: newGroupedProducts,
     price: totalPrice - price,
     count: totalCount - count,
   })

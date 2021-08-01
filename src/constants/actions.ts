@@ -5,6 +5,7 @@ export const ACTIONS = {
   changeCount: 'CHANGE_COUNT',
   closeModal: 'CLOSE_MODAL',
   removeProduct: 'REMOVE_PRODUCT',
+  removeToppings: 'REMOVE_TOPPINGS',
   setAdditive: 'SET_ADDITIVE',
   setCount: 'SET_COUNT',
   setCurrentProduct: 'SET_CURRENT_PRODUCT',

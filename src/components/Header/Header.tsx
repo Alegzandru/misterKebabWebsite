@@ -26,6 +26,8 @@ const Header = () => {
     }
 
     const onResizeHandler = () => {
+      checkScrollTop()
+
       if (window.innerWidth >= SIZES.md) {
         setShowMobileHeader(false)
       }
