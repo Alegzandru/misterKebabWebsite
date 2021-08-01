@@ -4,11 +4,33 @@
   touch-action: none;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
 
-  &__categoriesNavbarItemContainer {
-    margin: 0 16px;
+  &__navbar {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      pointer-events: none;
+      width: 0;
+      height: 100%;
+      transition: width 0.5s;
+    }
+
+    &_fadingLeft::before {
+      width: 100px;
+      left: 0;
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+    }
+
+    &_fadingRight::after {
+      width: 100px;
+      right: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+    }
   }
 
-  &__categoriesNavbarItem {
+  &__item {
     font-weight: 500;
     font-size: 15px;
     line-height: 20px;
@@ -18,11 +40,11 @@
     &::before {
       content: "";
       position: absolute;
-      width: 100%;
+      width: calc(100% - 32px);
       height: 1px;
       background-color: #ff2828;
-      top: 195%;
-      left: 0;
+      left: 16px;
+      bottom: 2px;
       pointer-events: none;
       transform-origin: 50% 100%;
       transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
@@ -39,14 +61,14 @@
     }
   }
 
-  &__categoriesNavbarItemText {
+  &__itemText {
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .categoriesNavbarContainer__categoriesNavbarItem {
+  .categoriesNavbarContainer__item {
     &:hover {
       color: #ff2828;
     }
