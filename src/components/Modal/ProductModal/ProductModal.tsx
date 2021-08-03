@@ -117,6 +117,7 @@ const ProductModal = () => {
           {withToppings && <ToppingsManager toppings={{
             topping: toppings.topping.sort(sortToppings(router.locale || LANGUAGES.ro)),
             without: toppings.without.sort(sortToppings(router.locale || LANGUAGES.ro)),
+            drinks: toppings.drinks ? toppings.drinks.sort(sortToppings(router.locale || LANGUAGES.ro)) : [],
           }} />}
           <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
             <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />

@@ -1,6 +1,7 @@
+import { COMBO_DRINKS } from '../constants'
 import { LANGUAGES } from '../constants/common'
 import { API_URL } from '../constants/urls'
-import { CartProduct, Toppings } from '../types'
+import { CartProduct, Toppings, WithText } from '../types'
 
 export const productFilter = (product: any, subcategories: any[]) => {
   const topping = product.toppings.length !== 0
@@ -14,7 +15,11 @@ export const productFilter = (product: any, subcategories: any[]) => {
     : subcategories.filter((category: any) =>category.name === product.subcategory.name)[0].excludings
       .map((excluding: any) => ({text: excluding.name, textru: excluding.nameru}))
 
-  const toppingsObj = { topping, without }
+  const drinks = product.combo_drinks.length !== 0
+    ? product.combo_drinks.map((drink: any) => ({text: drink.name, textru: drink.nameru}))
+    : []
+
+  const toppingsObj = { topping, without, drinks }
 
   return (
     {
@@ -97,7 +102,7 @@ export const sortToppings = <T extends {text: string; textru: string}>(language:
 }
 
 export const sendProductsToCMS =
-  async ( products: (CartProduct & { toppings: Toppings; count: number })[], data: Record<string, string | boolean> ) => {
+  async ( products: (CartProduct & { toppings: Toppings; count: number })[], data: Record<string, string | boolean>, price: number ) => {
     const orders = await Promise.all(products.map(async (product) => {
 
       const toppings = await Promise.all(product.toppings.topping.map( async (topping) => {
@@ -112,6 +117,13 @@ export const sendProductsToCMS =
         return (excludingCMS[0])
       }))
 
+      const drinkArray = product.toppings.drinks ? await Promise.all(product.toppings.drinks.map( async (drinkSingular) => {
+        const drinkRes = await fetch(`https://mr-kebab-admin.herokuapp.com/products?name_eq=${drinkSingular.text}`)
+        const drinkCMS = await drinkRes.json()
+        return (drinkCMS[0])
+      })) : []
+      const drink = drinkArray ? drinkArray[0] : null
+
       const productRes = await fetch(`https://mr-kebab-admin.herokuapp.com/products?name_eq=${product.name}`)
       const productCMS = await productRes.json()
 
@@ -123,6 +135,8 @@ export const sendProductsToCMS =
           toppings,
           excludings,
           price: product.price,
+          combo_drink: drink ? drink : null,
+          count: product.count,
         }),
       }
 
@@ -133,6 +147,10 @@ export const sendProductsToCMS =
     }))
 
     const {name, tel, email} = data
+    const {commentary} = data || {commentary: ''}
+    const {masa} = data || {masa: ''}
+    const {orderPayment} = data || {orderPayment: ''}
+    const {orderType} = data || {orderType: ''}
     const requestOptionsClient = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -141,11 +159,41 @@ export const sendProductsToCMS =
         phone: tel,
         email,
         orders,
+        price,
+        commentary,
+        masa: parseInt(masa as string, 10),
+        mod_de_livrare: getTipulComenzii(orderType as string),
+        mod_de_plata: orderPayment as string,
       }),
     }
 
-    const clientRes = await fetch('https://mr-kebab-admin.herokuapp.com/clients', requestOptionsClient)
-    const client = await clientRes.json()
-
-    console.log(client)
+    await fetch('https://mr-kebab-admin.herokuapp.com/clients', requestOptionsClient)
   }
+
+
+export const defaultDrinks = (drinks: WithText[]) => {
+  const defaultDrink = drinks.findIndex((drink) => drink.text === COMBO_DRINKS.pepsi)
+  return [drinks[defaultDrink > -1 ? defaultDrink : 0]]
+}
+
+export const getTipulComenzii = (payment: string) => {
+  switch(payment){
+    case 'takeaway' :
+      return 'preluare_din_local'
+    case 'delivery' :
+      return 'livrare'
+    default:
+      return 'in_local'
+  }
+}
+
+export const getTipulComenziiMail = (payment: string) => {
+  switch(payment){
+    case 'takeaway' :
+      return 'Preluare din local'
+    case 'delivery' :
+      return 'Livrare'
+    default:
+      return 'În local'
+  }
+}

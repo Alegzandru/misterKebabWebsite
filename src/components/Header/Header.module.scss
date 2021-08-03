@@ -58,6 +58,21 @@
       color: #611220;
     }
   }
+  
+  &__navbarHeight{
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    height: auto;
+
+    &__narrow{
+      max-height: 64px;
+    }
+
+    &__wide{
+      max-height: 160px;
+    }
+
+  }
 
   &__hamburgerBox {
     transition: all 0.1s;

@@ -46,7 +46,7 @@ const Footer = () => {
       </div>
       {router.pathname !== PAGES.locations.pathname && <LocationsLinks theme={THEMES.dark} />}
       <div className="flex justify-center md:mt-22 lg:mt-18">
-        <a href="#" className={classNames(styles.footerContainer__credits, 'relative flex')}>
+        <a href="https://www.lira.md/" target="blank" className={classNames(styles.footerContainer__credits, 'relative flex')} rel="noreferrer">
           Crafted by
           <span className={classNames(styles.footerContainer__companyName, 'ml-2 flex items-center')}>
             <LiraLogo className="mr-1" /> Lira

@@ -4,7 +4,7 @@ import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
 import { AnyAction, Product, Toppings } from '../../types'
 import { CartState } from '../../types/state'
-import { productToppingsPrice } from '../../utils/products'
+import { defaultDrinks, productToppingsPrice } from '../../utils/products'
 
 const addMenuProducts = (state: CartState, payload: Record<string, any>): CartState => {
   const { menuProducts } = payload as { menuProducts: Product[] }
@@ -62,7 +62,15 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
   )
 
   const currentProductIndex = products.findIndex((product) => product.name === name)
-  const { image, price } = menuProducts.find((product) => product.name === name) as Product
+  const { image, price, toppings: { drinks } } = menuProducts.find((product) => product.name === name) as Product
+
+  if (drinks && drinks.length !== 0) {
+    newToppings.forEach((newTopping, index) => {
+      if (!newTopping.drinks?.length) {
+        newToppings[index].drinks = defaultDrinks(drinks)
+      }
+    })
+  }
 
   const commonData = {
     price: totalPrice + price * count + newToppingsPrice,

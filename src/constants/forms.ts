@@ -1,5 +1,7 @@
 import DeliveryBlock from '../components/Modal/CartModal/DeliveryBlock/DeliveryBlock'
 import TakeawayBlock from '../components/Modal/CartModal/TakeawayBlock/TakeawayBlock'
+import {InRestaurantInput, InRestaurantForm} from '../components/Modal/CartModal/InRestaurantBlock/InRestaurantBlock'
+import {OutOfRestaurantInput, OutOfRestaurantForm} from '../components/Modal/CartModal/OutOfRestaurantBlock/OutOfRestaurantBlock'
 
 export const VALIDATIONS = {
   name: {
@@ -34,6 +36,19 @@ export const VALIDATIONS = {
       message: 'Adresa de email nu este validă',
     },
   },
+  takeawayLocation: {
+    required: 'Câmpul este obligatoriu!',
+  },
+  masa: {
+    required: 'Câmpul este obligatoriu!',
+    max: {
+      value: 100,
+      message: 'Nu avem atâtea mese!',
+    },
+  },
+  payment: {
+    required: 'Câmpul este obligatoriu!',
+  },
 }
 
 export const ORDER_TYPE = {
@@ -41,20 +56,51 @@ export const ORDER_TYPE = {
   takeaway: 'takeaway' as 'takeaway',
 }
 
-export const ORDER_TYPE_BUTTONS = [
+export const ORDER_PAYMENT_METHODS = {
+  cash : 'cash' as 'cash',
+  card : 'card' as 'card',
+}
+
+export const ORDER_PAYMENT_BUTTONS = [
   {
-    text: 'Livrare prin curier',
-    type: ORDER_TYPE.delivery,
+    text: 'Cash',
+    type: ORDER_PAYMENT_METHODS.cash,
   },
+  {
+    text: 'Card',
+    type: ORDER_PAYMENT_METHODS.card,
+  },
+]
+
+export const ORDER_TYPE_BUTTONS = [
+  // {
+  //   text: 'Livrare prin curier',
+  //   type: ORDER_TYPE.delivery,
+  // },
   {
     text: 'Ridicare din local',
     type: ORDER_TYPE.takeaway,
   },
 ]
 
+export const ORDER_FROM = {
+  local: 'local' as 'local',
+  in_afara_localului : 'in_afara_localului' as 'in_afara_localului',
+}
+
 export const CART_FORM_COMPONENTS = {
   delivery: DeliveryBlock,
   takeaway: TakeawayBlock,
+}
+
+export const ORDER_FROM_INPUTS = {
+  local: InRestaurantInput,
+  in_afara_localului: OutOfRestaurantInput,
+}
+
+export const ORDER_FROM_FORMS = {
+  local: InRestaurantForm,
+  in_afara_localului: OutOfRestaurantForm,
 }
 
 export const DROPDOWN_DATA = {

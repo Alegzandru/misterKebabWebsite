@@ -20,9 +20,9 @@ const Header = () => {
 
   useEffect(() => {
     const checkScrollTop = () => {
-      const { innerWidth, pageYOffset } = window
+      const { pageYOffset } = window
 
-      setTransparent(innerWidth < SIZES.md ? pageYOffset < 200 : true)
+      setTransparent(pageYOffset < 200)
     }
 
     const onResizeHandler = () => {
@@ -122,7 +122,7 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        'fixed w-full z-50 transition-colors md:absolute',
+        'fixed w-full z-50 transition-colors',
         {
           [styles.headerContainer_boxShadow]: !transparent,
           [styles.headerContainer_transparent]: transparent,
@@ -132,7 +132,11 @@ const Header = () => {
     >
       <div className={classNames(
         styles.headerContainer,
-        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen'
+        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen',
+        styles.headerContainer__navbarHeight ,
+        router.asPath[1] && router.asPath[1] !== '#' ? styles.headerContainer__navbarHeight__wide
+          :
+          !transparent ? styles.headerContainer__navbarHeight__narrow : styles.headerContainer__navbarHeight__wide
       )}>
         <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
           <Link href="/">

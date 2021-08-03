@@ -3,29 +3,43 @@ import { useTranslation } from 'next-i18next'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { DELIVERY_PRICE, MODALS } from '../../../constants'
-import { CART_FORM_COMPONENTS, ORDER_TYPE, ORDER_TYPE_BUTTONS, VALIDATIONS } from '../../../constants/forms'
+import { DELIVERY_PRICE, MODALS, VALID_LOCALS } from '../../../constants'
+import {
+  CART_FORM_COMPONENTS,
+  ORDER_FROM,
+  ORDER_FROM_FORMS,
+  ORDER_FROM_INPUTS,
+  ORDER_TYPE,
+  VALIDATIONS,
+} from '../../../constants/forms'
 import { CartContext } from '../../../store/Cart/Cart.context'
 import { ModalContext } from '../../../store/Modal/Modal.context'
-import { OrderType } from '../../../types'
+import { OrderPayment, OrderType } from '../../../types'
 import { sendProductsToCMS } from '../../../utils/products'
 import Button from '../../Button/Button'
 import Input from '../../Input/Input'
-import RadioButton from '../../RadioButton/RadioButton'
 import SelectedProduct from '../../SelectedProduct/SelectedProduct'
 import Bag from '../../Svgs/Bag/Bag'
 import styles from './CartModal.module.scss'
 import FormBlock from './FormBlock/FormBlock'
 import { CartState } from '../../../types/state'
 
-const sendMailOrder = async (data: Record<string, string | boolean>, products: CartState['groupedByToppingsProducts'] ) => {
+const sendMailOrder = async (
+  data: Record<string, string | boolean>,
+  products: CartState['groupedByToppingsProducts'],
+  price: number,
+  submitLocal: string,
+  isValidLocal: boolean
+) => {
   try {
     await fetch('/api/order', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        data,
+        data: {...data, price},
         products,
+        submitLocal,
+        isValidLocal,
       }),
     })
   } catch(error){
@@ -35,28 +49,49 @@ const sendMailOrder = async (data: Record<string, string | boolean>, products: C
 
 const CartModal = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm()
 
   const { state: { show }, actions: { closeModal } } = useContext(ModalContext)
   const { state: { price, groupedByToppingsProducts } } = useContext(CartContext)
 
-  const [orderType, setOrderType] = useState<OrderType>('')
+  const local = window.location.host.split('.')[0]
+  const isValidLocal = local === VALID_LOCALS.botanica || local === VALID_LOCALS.rascanovca
+  const inputValidations = isValidLocal ? VALIDATIONS.masa : VALIDATIONS.email
+
+  const [orderType, setOrderType] = useState<OrderType>('takeaway')
+  const [orderPayment, setOrderPayment] = useState<OrderPayment>('')
 
   const { t } = useTranslation('cart')
 
   const onSubmit = (data: Record<string, string | boolean>) => {
 
-    sendProductsToCMS(groupedByToppingsProducts, data)
+    const getTakeawayLocation = (location: string) => {
+      switch (location){
+        case 'Telecentru' :
+          return 'manager.mister.'
+        case 'Malina Mică' :
+          return 'manager.mister.'
+        case 'Râșcani' :
+          return 'rascanovca.mr.'
+        case 'Botanica' :
+          return 'botanica.mr.'
+        default :
+          return 'manager.mister.'
+      }
+    }
 
-    sendMailOrder(data, groupedByToppingsProducts)
+    sendProductsToCMS(groupedByToppingsProducts, data, price)
+
+    const submitLocal = isValidLocal ? `${local}.mr.` : getTakeawayLocation(data.takeawayLocation as string)
+
+    sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
   }
 
   const isThroughDelivery = orderType === ORDER_TYPE.delivery
 
-  const CurrentShowedBlock = orderType ? CART_FORM_COMPONENTS[orderType] : null
-
-  const orderTypeRadio = ({ text, type }: typeof ORDER_TYPE_BUTTONS[0], index: number) =>
-    <RadioButton key={index} text={text} selected={orderType === type} onChange={() => setOrderType(type)} />
+  const CurrentShowedBlock = isValidLocal ? null : orderType ? CART_FORM_COMPONENTS[orderType] : null
+  const CurrentShowedInput = isValidLocal ? ORDER_FROM_INPUTS[ORDER_FROM.local] : ORDER_FROM_INPUTS[ORDER_FROM.in_afara_localului]
+  const CurrentShowedForm = isValidLocal ? ORDER_FROM_FORMS[ORDER_FROM.local] : ORDER_FROM_FORMS[ORDER_FROM.in_afara_localului]
 
   useEffect(() => {
     if (show === MODALS.cart && !groupedByToppingsProducts.length) {
@@ -90,21 +125,21 @@ const CartModal = () => {
             errors={errors}
             {...VALIDATIONS.tel}
           />
-          <Input
-            name="email"
-            label="E-mail"
-            placeholder="exemplu@mail.com"
-            register={register}
-            errors={errors}
-            {...VALIDATIONS.email}
-          />
+          <CurrentShowedInput register={register} errors={errors} {...inputValidations}/>
         </FormBlock>
-        <FormBlock heading="Primirea comenzii">
-          <div className="grid grid-flow-col gap-2">
-            {ORDER_TYPE_BUTTONS.map(orderTypeRadio)}
-          </div>
-        </FormBlock>
-        {CurrentShowedBlock && <CurrentShowedBlock register={register} />}
+        {CurrentShowedForm &&
+        <CurrentShowedForm
+          orderType={orderType}
+          setOrderType={setOrderType}
+          orderPayment={orderPayment}
+          setOrderPayment={setOrderPayment}
+          register={register}
+          errors={errors}
+          {...VALIDATIONS.payment}
+          setValue={setValue}
+        />}
+        {CurrentShowedBlock &&
+        <CurrentShowedBlock register={register} errors={errors} setValue={setValue} {...VALIDATIONS.takeawayLocation}/>}
         <div className="flex flex-col items-end mt-18">
           <p className={styles.cartModalContainer__subtotal}>{t('Subtotal')}: {price} {t('MDL')}</p>
           {orderType === ORDER_TYPE.delivery && <p className={styles.cartModalContainer__subtotal}>{t('Livrare')}: {DELIVERY_PRICE} {t('MDL')}</p>}

@@ -7,6 +7,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { LANGUAGES } from '../../../../constants/common'
 import { ProductToppingsContext } from '../../../../store/ProductToppings/ProductToppings.context'
 import { Drinks, Topping, Toppings, Without } from '../../../../types'
+import { defaultDrinks } from '../../../../utils/products'
 import Checkbox from '../../../Checkbox/Checkbox'
 import CloseButton from '../../../CloseButton/CloseButton'
 import styles from './ToppingsManager.module.scss'
@@ -17,7 +18,7 @@ type Props = {
 
 const ToppingsManager = ({ toppings }: Props) => {
   const {
-    state: { count, toppings: currentToppings },
+    state: { name, count, toppings: currentToppings },
     actions: { setCount, setAdditive, removeToppings },
   } = useContext(ProductToppingsContext)
 
@@ -32,6 +33,14 @@ const ToppingsManager = ({ toppings }: Props) => {
   useEffect(() => {
     formRef.current?.reset()
   }, [activeTab])
+
+  useEffect(() => {
+    const { drinks } = toppings
+
+    if (drinks && drinks.length !== 0) {
+      setAdditive(defaultDrinks(drinks), 'drinks', activeTab)
+    }
+  }, [name, count])
 
   const addTabHandler = () => {
     if (currentToppings.length >= 20) {
@@ -95,6 +104,7 @@ const ToppingsManager = ({ toppings }: Props) => {
   const withoutToppingCheckbox = (without: Without) => renderCheckbox('without', isRo ? without.text : without.textru, without)
 
   const drinksRadioButton = ({ text, textru }: Drinks) => {
+
     const { drinks } = currentToppings[activeTab]
 
     if (!drinks) {
@@ -115,7 +125,7 @@ const ToppingsManager = ({ toppings }: Props) => {
         checked={checked}
         name="drink"
         asRadio={true}
-        defaultChecked={checked}
+        defaultChecked={text === 'Pepsi' ? true : checked}
         onChange={onChangeHandler}
       >
         {isRo ? text : textru}
