@@ -6,51 +6,17 @@ import styles from './BackToTopButton.module.scss'
 
 const BackToTopButton = () => {
   const [show, setShow] = useState(false)
-  const [isScrollingUp, setIsScrollingUp] = useState(false)
-
-  const scrollDirectionHandler = () => {
-    if (isScrollingUp) {
-      setShow(true)
-    } else if (!isScrollingUp) {
-      setShow(false)
-    }
-  }
 
   useEffect(() => {
-    const threshold = 0
-    let lastScrollY = window.pageYOffset
-    let ticking = false
-
-    const updateScrollDir = () => {
-      const scrollY = window.pageYOffset
-
-      if(window.pageYOffset < 200){
-        setIsScrollingUp(false)
-        ticking = false
-        return
-      } else if (Math.abs(scrollY - lastScrollY) < threshold) {
-        ticking = false
-        return
-      }
-
-      setIsScrollingUp(!(scrollY > lastScrollY))
-      lastScrollY = scrollY > 0 ? scrollY : 0
-      ticking = false
-    }
-
     const onScrollHandler = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScrollDir)
-        ticking = true
-      }
+      setShow(window.pageYOffset > 200)
     }
 
-    scrollDirectionHandler()
-
+    onScrollHandler()
     window.addEventListener('scroll', onScrollHandler)
 
     return () => window.removeEventListener('scroll', onScrollHandler)
-  }, [isScrollingUp])
+  }, [])
 
   return (
     <a

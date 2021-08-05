@@ -41,7 +41,7 @@ const SelectedProduct = ({ name, nameru, image, price, count, toppings: { toppin
     <div className={classNames(styles.selectedProductContainer, 'w-full grid grid-flow-col gap-4 items-center mb-4')}>
       <div className="grid gap-2 grid-flow-col mr-auto">
         <div className="relative w-20 h-18">
-          <Image className="rounded" src={image} alt="Product image" layout="fill" objectFit="cover" quality={80} />
+          <Image className="rounded" src={image} alt={name} layout="fill" objectFit="cover" quality={80} />
         </div>
         <div className="self-center">
           <h3 className="font-bold">{isRo? name : nameru}</h3>

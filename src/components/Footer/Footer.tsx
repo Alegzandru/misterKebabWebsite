@@ -37,7 +37,14 @@ const Footer = () => {
             'relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5 overflow-visible')}>
             <Link href="/">
               <a className="overflow-visible">
-                <Image className={styles.footerContainer__logoShadow} src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain"/>
+                <Image
+                  className={styles.footerContainer__logoShadow}
+                  src={textLogo}
+                  quality={100}
+                  alt="Logo footer Mr. Kebab"
+                  layout="fill"
+                  objectFit="contain"
+                />
               </a>
             </Link>
           </div>

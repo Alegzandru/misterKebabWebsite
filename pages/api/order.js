@@ -6,29 +6,26 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_EMAIL_API_KEY2)
 const sendMail = async (req, res) => {
 
   const { data, products, submitLocal, isValidLocal } = req.body
-  const {name, tel, price} = data
-  const {commentary} = data || {commentary: ''}
-  const {masa} = data || {masa: ''}
-  const {orderPayment} = data || {orderPayment: ''}
-  const {orderType} = data || {orderType: ''}
-  const {address} = data || {address: ''}
+  const {name, tel, price, commentary, masa, orderPayment, orderType, address} =
+  {commentary: '', masa: '', orderPayment: '', orderType: '', address: '', ...data}
 
   const today = new Date()
 
-  const dd = String(today.getDate()).padStart(2, '0')
-  const mm = String(today.getMonth() + 1).padStart(2, '0')
+  const paddedString = (value) => String(value).padStart(2, '0')
+
+  const dd = paddedString(today.getDate())
+  const mm = paddedString(today.getMonth() + 1)
   const yyyy = today.getFullYear()
   const date = dd + ' ' + mm + ' ' + yyyy
 
-  const sec = String(today.getSeconds()).padStart(2, '0')
-  const min = String(today.getMinutes()).padStart(2, '0')
-  const hours = String(today.getHours()).padStart(2, '0')
+  const sec = paddedString(today.getSeconds())
+  const min = paddedString(today.getMinutes())
+  const hours = paddedString(today.getHours())
   const time = hours + ':' + min + ':' + sec
 
-  const subject = isValidLocal ?
-    `Masa #${masa}, ${orderPayment}`
-    :
-    `Comanda nouă la ${data.takeawayLocation}`
+  const subject = isValidLocal
+    ? `Masa #${masa}, ${orderPayment}`
+    : `Comanda nouă la ${data.takeawayLocation}`
 
   const templateData = {
     subject,

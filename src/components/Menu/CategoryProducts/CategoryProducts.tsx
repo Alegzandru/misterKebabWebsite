@@ -30,23 +30,15 @@ const SortProducts = (first: Product, second: Product) => {
   const router = useRouter()
   const ro = router.locale === 'ro'
 
-  if(ro){
-    if (first.name < second.name) {
-      return -1
-    }
-    if (first.name > second.name) {
-      return 1
-    }
-    return 0
-  } else{
-    if (first.nameru < second.nameru) {
-      return -1
-    }
-    if (first.nameru > second.nameru) {
-      return 1
-    }
-    return 0
+  const getName = (product: Product) => product[ro ? 'name' : 'nameru']
+
+  if (getName(first) < getName(second)) {
+    return -1
   }
+  if (getName(first) > getName(second)) {
+    return 1
+  }
+  return 0
 }
 
 const CategoryProducts = ({ id, name, items, nameru }: Props) => {

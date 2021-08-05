@@ -5,27 +5,15 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'next-i18next'
 
 import careersHero from '../../../public/images/careers-hero.png'
-import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES, CAREERS_FORM_INITIAL_DATA } from '../../constants'
+import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
 import { VALIDATIONS } from '../../constants/forms'
 import { CareerCheckboxesCategory, CareerOthersBlock } from '../../types'
-import { careerFormDataHandler } from '../../utils/forms'
+import { careerFormDataHandler, sendMailCareers } from '../../utils/forms'
 import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import styles from './Careers.module.scss'
 import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
-
-const sendMailCareers = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
-  try {
-    await fetch('/api/careers', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-  } catch(error){
-    return 0
-  }
-}
 
 const Careers = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -48,9 +36,6 @@ const Careers = () => {
     if (newCheckboxesErrors.size) {
       return setCheckboxesErrors(new Set(newCheckboxesErrors))
     }
-
-    // eslint-disable-next-line no-console
-    console.table(newData)
 
     sendMailCareers(newData)
   }
@@ -94,7 +79,7 @@ const Careers = () => {
     <div className={classNames(styles.careersHeroContainer, 'w-full pb-19')}>
       <div className="h-16 md:h-26" />
       <div className={classNames(styles.careersHeroContainer__hero, 'w-full relative flex justify-center items-center')}>
-        <Image src={careersHero} alt="Hero" layout="fill" objectFit="cover" />
+        <Image src={careersHero} alt="Fundal cariere Mr. Kebab" layout="fill" objectFit="cover" />
         <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>{t('Cariere')}</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>

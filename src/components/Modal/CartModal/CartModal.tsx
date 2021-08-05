@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { DELIVERY_PRICE, MODALS, VALID_LOCALS } from '../../../constants'
+import { DELIVERY_PRICE, MODALS, TAKEAWAY_LOCATIONS, VALID_LOCALS } from '../../../constants'
 import {
   CART_FORM_COMPONENTS,
   ORDER_FROM,
@@ -54,8 +54,8 @@ const CartModal = () => {
   const { state: { show }, actions: { closeModal } } = useContext(ModalContext)
   const { state: { price, groupedByToppingsProducts } } = useContext(CartContext)
 
-  const local = window.location.host.split('.')[0]
-  const isValidLocal = local === VALID_LOCALS.botanica || local === VALID_LOCALS.rascanovca
+  const localName = window.location.host.split('.')[0]
+  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca
   const inputValidations = isValidLocal ? VALIDATIONS.masa : VALIDATIONS.email
 
   const [orderType, setOrderType] = useState<OrderType>('takeaway')
@@ -65,24 +65,9 @@ const CartModal = () => {
 
   const onSubmit = (data: Record<string, string | boolean>) => {
 
-    const getTakeawayLocation = (location: string) => {
-      switch (location){
-        case 'Telecentru' :
-          return 'manager.mister.'
-        case 'Malina Mică' :
-          return 'manager.mister.'
-        case 'Râșcani' :
-          return 'rascanovca.mr.'
-        case 'Botanica' :
-          return 'botanica.mr.'
-        default :
-          return 'manager.mister.'
-      }
-    }
-
     sendProductsToCMS(groupedByToppingsProducts, data, price)
 
-    const submitLocal = isValidLocal ? `${local}.mr.` : getTakeawayLocation(data.takeawayLocation as string)
+    const submitLocal = isValidLocal ? `${localName}.mr.` : TAKEAWAY_LOCATIONS[data.takeawayLocation as string]
 
     sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
   }
@@ -90,8 +75,10 @@ const CartModal = () => {
   const isThroughDelivery = orderType === ORDER_TYPE.delivery
 
   const CurrentShowedBlock = isValidLocal ? null : orderType ? CART_FORM_COMPONENTS[orderType] : null
-  const CurrentShowedInput = isValidLocal ? ORDER_FROM_INPUTS[ORDER_FROM.local] : ORDER_FROM_INPUTS[ORDER_FROM.in_afara_localului]
-  const CurrentShowedForm = isValidLocal ? ORDER_FROM_FORMS[ORDER_FROM.local] : ORDER_FROM_FORMS[ORDER_FROM.in_afara_localului]
+
+  const {local, in_afara_localului} = ORDER_FROM
+  const CurrentShowedInput = ORDER_FROM_INPUTS[isValidLocal ?  local : in_afara_localului]
+  const CurrentShowedForm = ORDER_FROM_FORMS[isValidLocal ? local : in_afara_localului]
 
   useEffect(() => {
     if (show === MODALS.cart && !groupedByToppingsProducts.length) {

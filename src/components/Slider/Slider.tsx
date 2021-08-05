@@ -12,8 +12,6 @@ type Props = {
 }
 
 const Slider = ({ slides, autoPlayInterval }: Props) => {
-  // temp:
-  // const [enableAutoPlay, setEnableAutoPlay] = useState(!!autoPlayInterval)
   const [enableAutoPlay] = useState(!!autoPlayInterval)
   const [state, setState] = useState({
     activeSlide: 0,
@@ -99,12 +97,10 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
         src={image}
         placeholder="blur"
         blurDataURL={BANNER_PLACEHOLDER}
-        alt="Banner"
+        alt="Banner promoție Mr. Kebab"
         layout="fill"
         objectFit="cover"
         quality={90}
-      // temp:
-      // onLoadingComplete={(() => index === 0 && setEnableAutoPlay(true))}
       />
     </div>
   )

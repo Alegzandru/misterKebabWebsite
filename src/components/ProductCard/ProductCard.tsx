@@ -43,7 +43,7 @@ const ProductCard = memo((props: Props) => {
       onClick={() => showProductModal(props)}
     >
       <div className={classNames(styles.productCardContainer__imageContainer, 'relative w-full flex-1 transition-all duration-500')}>
-        <Image className="rounded-t" src={image} alt="Product image" layout="fill" objectFit="cover" quality={80} />
+        <Image className="rounded-t" src={image} alt={name} layout="fill" objectFit="cover" quality={80} />
       </div>
       <div className={classNames(styles.productCardContainer__description, 'flex flex-col h-full w-full rounded transition-all duration-500')}>
         <div className="flex mb-5 lg:mb-2">

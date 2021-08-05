@@ -141,7 +141,7 @@ const Header = () => {
         <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
           <Link href="/">
             <a>
-              <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+              <Image src={textLogo} quality={100} alt="Logo header Mr. Kebab" layout="fill" objectFit="contain" />
             </a>
           </Link>
         </div>

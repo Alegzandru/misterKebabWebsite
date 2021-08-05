@@ -19,6 +19,7 @@ import { MenuList, Product } from '../src/types'
 import { productFilter } from '../src/utils/products'
 import { SIZES } from '../src/constants/common'
 import { useState } from 'react'
+import Head from 'next/head'
 
 type Props = {
   products: Product[]
@@ -35,11 +36,7 @@ const MainPage = ({ products, menu, sliders }: Props) => {
 
   useEffect(() => {
     const onResizeHandler = () => {
-      if (window.innerWidth >= SIZES.md) {
-        setShowBanner('Desktop')
-      } else{
-        setShowBanner('Mobile')
-      }
+      setShowBanner(window.innerWidth >= SIZES.md ? 'Desktop' : 'Mobile')
     }
 
     onResizeHandler()
@@ -51,6 +48,26 @@ const MainPage = ({ products, menu, sliders }: Props) => {
 
   return(
     <Layout>
+      <Head>
+        <title>Mr. Kebab</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
+        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!"/>
+        <meta name="robots" content="index, follow"/>
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Mr. Kebab" />
+        <meta property="og:description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
+        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!" />
+        <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
+        <meta property="og:url" content="PERMALINK" />
+        <meta property="og:site_name" content="Mr. Kebab" />
+
+        <meta name="twitter:title" content="Mr. Kebab"/>
+        <meta name="twitter:description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
+        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!"/>
+        <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
+      </Head>
       <CartContextProvider>
         <ProductToppingsContextProvider>
           <Hero />

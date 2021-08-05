@@ -74,28 +74,15 @@ export const fetcher = async (query: string) => {
 export const productToppingsPrice = (toppings: Toppings) => toppings.topping.reduce((accumulator, { price }) => accumulator + price, 0)
 
 export const sortToppings = <T extends {text: string; textru: string}>(language: string) => (first: T, second: T): number=> {
-  switch(language){
-    case LANGUAGES.ro :
-      if (first.text < second.text) {
-        return -1
-      }
 
-      if (first.text > second.text) {
-        return 1
-      }
+  const getText = (product: T) => product[language === LANGUAGES.ro ? 'text' : 'textru']
 
-      return 0
+  if (getText(first) < getText(second)) {
+    return -1
+  }
 
-    case LANGUAGES.ru :
-      if (first.textru < second.textru) {
-        return -1
-      }
-
-      if (first.textru > second.textru) {
-        return 1
-      }
-
-      return 0
+  if (getText(first) > getText(second)) {
+    return 1
   }
 
   return 0
@@ -147,10 +134,8 @@ export const sendProductsToCMS =
     }))
 
     const {name, tel, email} = data
-    const {commentary} = data || {commentary: ''}
-    const {masa} = data || {masa: ''}
-    const {orderPayment} = data || {orderPayment: ''}
-    const {orderType} = data || {orderType: ''}
+    const {commentary, masa, orderPayment, orderType} = {commentary: '', masa: '', orderPayment: 'cash', orderType: '', ...data}
+
     const requestOptionsClient = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
