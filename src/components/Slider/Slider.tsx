@@ -4,15 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import Pagination from './Pagination/Pagination'
 import styles from './Slider.module.scss'
+import {BANNER_PLACEHOLDER} from '../../constants'
 
 type Props = {
-  slides: StaticImageData[]
+  slides: string[]
   autoPlayInterval?: number
 }
 
 const Slider = ({ slides, autoPlayInterval }: Props) => {
-  // temp:
-  // const [enableAutoPlay, setEnableAutoPlay] = useState(!!autoPlayInterval)
   const [enableAutoPlay] = useState(!!autoPlayInterval)
   const [state, setState] = useState({
     activeSlide: 0,
@@ -92,17 +91,16 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
     })
   }
 
-  const slide = (image: StaticImageData, index: number) => (
+  const slide = (image: string, index: number) => (
     <div key={index} className="flex-1 relative">
       <Image
         src={image}
         placeholder="blur"
-        alt="Banner"
+        blurDataURL={BANNER_PLACEHOLDER}
+        alt="Banner promoție Mr. Kebab"
         layout="fill"
         objectFit="cover"
         quality={90}
-      // temp:
-      // onLoadingComplete={(() => index === 0 && setEnableAutoPlay(true))}
       />
     </div>
   )

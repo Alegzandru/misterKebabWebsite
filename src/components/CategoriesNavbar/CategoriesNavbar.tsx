@@ -68,7 +68,7 @@ const CategoriesNavbar = () => {
   }
 
   return (
-    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden sticky top-16 bg-white z-10 md:-top-px')}>
+    <section id="categories" className={classNames(styles.categoriesNavbarContainer, 'overflow-hidden sticky top-16 bg-white z-10')}>
       <nav
         className={classNames(
           styles.categoriesNavbarContainer__navbar,

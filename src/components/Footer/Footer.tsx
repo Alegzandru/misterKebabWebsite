@@ -33,15 +33,27 @@ const Footer = () => {
           </ul>
         </nav>
         <div className="flex items-center flex-half md:flex-none md:h-16">
-          <div className="relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5">
-            <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+          <div className={classNames(styles.footerContainer__logoContainerShadow ,
+            'relative flex items-center w-38 h-14 md:absolute md:inset-x-0 md:mx-auto md:w-50 md:h-16 md:-mt-5 overflow-visible')}>
+            <Link href="/">
+              <a className="overflow-visible">
+                <Image
+                  className={styles.footerContainer__logoShadow}
+                  src={textLogo}
+                  quality={100}
+                  alt="Logo footer Mr. Kebab"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </a>
+            </Link>
           </div>
         </div>
         <Socials className="flex-half flex justify-end items-center md:flex-none" />
       </div>
       {router.pathname !== PAGES.locations.pathname && <LocationsLinks theme={THEMES.dark} />}
       <div className="flex justify-center md:mt-22 lg:mt-18">
-        <a href="#" className={classNames(styles.footerContainer__credits, 'relative flex')}>
+        <a href="https://www.lira.md/" target="blank" className={classNames(styles.footerContainer__credits, 'relative flex')} rel="noreferrer">
           Crafted by
           <span className={classNames(styles.footerContainer__companyName, 'ml-2 flex items-center')}>
             <LiraLogo className="mr-1" /> Lira

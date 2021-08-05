@@ -55,7 +55,11 @@ const Hero = () => {
         styles[currentBackgroundImageType],
         'absolute mix-blend-darken inset-0 bg-no-repeat')}
       />
-      <img className={classNames(styles.heroContainer__logo, 'absolute top-0 z-10 hidden lg:block')} src="/images/logos/logo.png" alt="Logo" />
+      <img
+        className={classNames(styles.heroContainer__logo, 'absolute top-0 z-10 hidden lg:block')}
+        src="/images/logos/logo.png"
+        alt="Logo Mr. Kebab"
+      />
       <div
         className={classNames(
           styles.heroContainer__contentContainer,

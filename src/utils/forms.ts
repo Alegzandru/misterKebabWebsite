@@ -31,3 +31,16 @@ export const careerFormDataHandler = (data: Record<string, string | boolean>) =>
 
     return accumulator
   }, { ...CAREERS_FORM_INITIAL_DATA })
+
+
+export const sendMailCareers = async (data: typeof CAREERS_FORM_INITIAL_DATA ) => {
+  try {
+    await fetch('/api/careers', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+  } catch(error){
+    return 0
+  }
+}

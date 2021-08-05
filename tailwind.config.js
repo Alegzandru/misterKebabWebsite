@@ -13,6 +13,11 @@ module.exports = {
       full: '9999px',
     },
     extend: {
+      colors: {
+        yellow: '#FFB80E',
+        red: '#DF2026',
+        darkRed: '#611220',
+      },
       zIndex: {
         '-10': '-10',
         '90': '90',
@@ -34,6 +39,7 @@ module.exports = {
       minWidth: {
         130: '32.5rem',
         140: '35rem',
+        80: '20rem',
       },
       minHeight: {
         150: '37.5rem',

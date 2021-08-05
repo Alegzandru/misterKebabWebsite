@@ -6,7 +6,6 @@ import 'tailwindcss/tailwind.css'
 
 import { appWithTranslation } from 'next-i18next'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { ParallaxProvider } from 'react-scroll-parallax'
@@ -46,9 +45,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ParallaxProvider>
-      <Head>
-        <title>Mister Kebab</title>
-      </Head>
       <Component {...pageProps} />
     </ParallaxProvider>
   )

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import styles from './Pagination.module.scss'
 
 type Props = {
-  slides: StaticImageData[]
+  slides: string[]
   activeSlide: number
 
   onClick: (index: number) => void

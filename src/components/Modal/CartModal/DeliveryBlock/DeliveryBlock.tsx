@@ -45,7 +45,7 @@ const DeliveryBlock = ({ register }: Props) => {
       <FormBlock heading="Detaliile livrării">
         <Dropdown className="mb-6 w-full" onChange={onChangeDropdownHandler} {...DROPDOWN_DATA.delivery} />
         {showLocationDetails && locationInputs}
-        <Textarea placeholder="Comentarii către comanda.." />
+        <Textarea placeholder="Comentarii către comanda.." register={register}/>
       </FormBlock>
     </>
   )
