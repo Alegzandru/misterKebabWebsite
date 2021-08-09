@@ -9,6 +9,8 @@ export type State = {
 export type ModalState = {
   show: Modals
   product: Product
+  heading: string
+  subheading: string
 }
 
 export type CartState = {

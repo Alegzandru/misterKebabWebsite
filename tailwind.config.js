@@ -53,6 +53,9 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 0.5s ease forwards',
       },
+      inset: {
+        processedPopup : 'calc( ( 100vh - 432px ) / 2 )',
+      },
       keyframes: {
         fadeIn: {
           from: { opacity: 0 },

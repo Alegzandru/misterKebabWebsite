@@ -11,4 +11,5 @@ export const ACTIONS = {
   setCurrentProduct: 'SET_CURRENT_PRODUCT',
   showCartModal: 'SHOW_CART_MODAL',
   showProductModal: 'SHOW_PRODUCT_MODAL',
+  showProcessedModal: 'SHOW_PROCESSED_MODAL',
 }

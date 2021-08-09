@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import CartModal from '../components/Modal/CartModal/CartModal'
 import ProductModal from '../components/Modal/ProductModal/ProductModal'
+import ProcessedModal from '../components/Modal/ProcessedModal/ProcessedModal'
 import { Toppings } from '../types'
 
 export const INITIAL_TOPPINGS: Toppings = { topping: [], without: [], drinks: [] }
@@ -82,11 +83,13 @@ export const WEIGHT_TYPE = {
 export const MODALS = {
   product: 'product' as 'product',
   cart: 'cart' as 'cart',
+  processed: 'processed' as 'processed',
 }
 
 export const MODAL_COMPONENTS = {
   product: ProductModal,
   cart: CartModal,
+  processed: ProcessedModal,
 }
 
 export const CAREERS_FORM_INITIAL_DATA = {

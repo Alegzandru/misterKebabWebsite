@@ -51,7 +51,7 @@ const CartModal = () => {
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm()
 
-  const { state: { show }, actions: { closeModal } } = useContext(ModalContext)
+  const { state: { show }, actions: { closeModal, showProcessedModal } } = useContext(ModalContext)
   const { state: { price, groupedByToppingsProducts } } = useContext(CartContext)
 
   const localName = window.location.host.split('.')[0]
@@ -63,13 +63,16 @@ const CartModal = () => {
 
   const { t } = useTranslation('cart')
 
-  const onSubmit = (data: Record<string, string | boolean>) => {
+  const onSubmit = async (data: Record<string, string | boolean>) => {
 
-    sendProductsToCMS(groupedByToppingsProducts, data, price)
+    await sendProductsToCMS(groupedByToppingsProducts, data, price)
 
     const submitLocal = isValidLocal ? `${localName}.mr.` : TAKEAWAY_LOCATIONS[data.takeawayLocation as string]
 
-    sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
+    await sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
+
+    closeModal()
+    showProcessedModal('Comanda dvs a fost procesată', 'în cel mai apropiat timp veți primi comanda la masa / locația dvs')
   }
 
   const isThroughDelivery = orderType === ORDER_TYPE.delivery

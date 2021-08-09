@@ -1,0 +1,65 @@
+.processedModal{
+
+  &_confetti{
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    inset: 0px;
+  }
+
+  &_done{
+    width: 156px;
+    height: 156px;
+    margin-left: auto;
+    margin-right: auto;
+
+    position: relative;
+    z-index: 20;
+  }
+
+  &_heading{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 32px;
+    text-align: center;
+
+    width: 100%;
+    position: relative;
+    z-index: 20;
+  }
+
+  &_subheading{
+    color: #58606E;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+
+    width: 264px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+
+    position: relative;
+    z-index: 20;
+  }
+
+  &_button{
+    width: 100%;
+    height: 52px;
+    margin-top: 32px;
+
+    background: #DF2026;
+    border-radius: 8px;
+
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+
+    position: relative;
+    z-index: 20;
+  }
+
+}
