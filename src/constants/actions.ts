@@ -12,4 +12,5 @@ export const ACTIONS = {
   showCartModal: 'SHOW_CART_MODAL',
   showProductModal: 'SHOW_PRODUCT_MODAL',
   showProcessedModal: 'SHOW_PROCESSED_MODAL',
+  emptyCart: 'EMPTY_CART',
 }

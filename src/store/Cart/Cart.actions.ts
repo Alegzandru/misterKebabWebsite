@@ -9,6 +9,7 @@ const useActions = (dispatch: Dispatch<AnyAction>) => ({
   removeProduct: (index: number) => dispatch({ type: ACTIONS.removeProduct, payload: { index } }),
   addProducts: (name: string, nameru: string, count: number, toppings: Toppings[] = []) =>
     dispatch({ type: ACTIONS.addProducts, payload: { name, nameru, count, toppings } }),
+  emptyCart: () => dispatch({ type : ACTIONS.emptyCart, payload: {}}),
 })
 
 export default useActions

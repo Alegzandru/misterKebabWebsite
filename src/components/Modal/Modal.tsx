@@ -45,7 +45,8 @@ const Modal = () => {
           { [styles.modalContainer_cart]: show === MODALS.cart },
           { [styles.modalContainer_processed]: show === MODALS.processed },
           'z-100 fixed overflow-y-auto animate-fadeIn mx-auto',
-          `${show === MODALS.processed ? 'inset-x-5 inset-y-processedPopup px-8 py-10' :
+          `${show === MODALS.processed ?
+            'inset-x-5 inset-y-processedPopup px-8 py-10' :
             'inset-0 py-18 px-3 md:py-24 md:px-5 lg:inset-5 lg:px-12'}`,
           show ? 'block' : 'hidden',
         )}

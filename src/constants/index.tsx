@@ -54,7 +54,7 @@ export const CATEGORIES = [
   { id: 'mr-beef-burger', name: 'Mr. Beef Burger', nameru: 'Mr. Beef Бургер' },
   { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger', nameru: 'Mr. Vegetarian Бургер' },
   { id: 'mr-kids-burger', name: 'Mr. Kids Burger', nameru: 'Mr. Kids Бургер' },
-  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет' },
+  { id: 'mr-baghet', name: 'Mr. Baguette', nameru: 'Mr. Baguette' },
   { id: 'mr-pita', name: 'Mr. Pită', nameru: 'Mr. Пита' },
   { id: 'supe', name: 'Supe', nameru: 'Cупы' },
   { id: 'snacks', name: 'Snacks', nameru: 'Закуски' },

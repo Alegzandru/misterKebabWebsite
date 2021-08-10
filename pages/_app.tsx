@@ -8,6 +8,7 @@ import { appWithTranslation } from 'next-i18next'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import TagManager from 'react-gtm-module'
 import { ParallaxProvider } from 'react-scroll-parallax'
 
 import Loader from '../src/components/Loader/Loader'
@@ -38,6 +39,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       router.events.off('routeChangeError', handleComplete)
     }
   }, [router.locale])
+
+  useEffect(() => {
+    TagManager.initialize({ gtmId: 'GTM-KQLD9P8' })
+  }, [])
 
   if (!loaded) {
     return <Loader />
