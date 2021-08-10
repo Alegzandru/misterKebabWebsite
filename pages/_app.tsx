@@ -41,7 +41,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [router.locale])
 
   useEffect(() => {
-    TagManager.initialize({ gtmId: 'GTM-KQLD9P8' })
+    TagManager.initialize({ gtmId: 'GTM-PVZF6G8' })
   }, [])
 
   if (!loaded) {
