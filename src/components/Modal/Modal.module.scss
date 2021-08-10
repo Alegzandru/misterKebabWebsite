@@ -46,6 +46,11 @@
         left: calc(50% + 130px);
       }
     }
+
+    &_processed {
+      max-width: 472px;
+      min-height: 432px;
+    }
   }
 }
 

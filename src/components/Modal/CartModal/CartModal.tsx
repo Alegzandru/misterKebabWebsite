@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import lottie from 'lottie-web'
 
 import { DELIVERY_PRICE, MODALS, TAKEAWAY_LOCATIONS, VALID_LOCALS } from '../../../constants'
 import {
@@ -51,8 +52,8 @@ const CartModal = () => {
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm()
 
-  const { state: { show }, actions: { closeModal } } = useContext(ModalContext)
-  const { state: { price, groupedByToppingsProducts } } = useContext(CartContext)
+  const { state: { show }, actions: { closeModal, showProcessedModal } } = useContext(ModalContext)
+  const { state: { price, groupedByToppingsProducts }, actions : { emptyCart }} = useContext(CartContext)
 
   const localName = window.location.host.split('.')[0]
   const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca
@@ -61,15 +62,41 @@ const CartModal = () => {
   const [orderType, setOrderType] = useState<OrderType>('takeaway')
   const [orderPayment, setOrderPayment] = useState<OrderPayment>('')
 
+  const [loading, setLoading] = useState(false)
+
+  const lottieRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    (
+      async () => {
+        const lottieJson = await import('../../../../public/lottie/loader2.json')
+
+        lottie.loadAnimation({
+          container: lottieRef.current as HTMLDivElement,
+          animationData: lottieJson,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+        })
+
+      }
+    )()
+  }, [])
+
   const { t } = useTranslation('cart')
 
-  const onSubmit = (data: Record<string, string | boolean>) => {
+  const onSubmit = async (data: Record<string, string | boolean>) => {
 
-    sendProductsToCMS(groupedByToppingsProducts, data, price)
+    setLoading(true)
 
+    await sendProductsToCMS(groupedByToppingsProducts, data, price)
     const submitLocal = isValidLocal ? `${localName}.mr.` : TAKEAWAY_LOCATIONS[data.takeawayLocation as string]
+    await sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
 
-    sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
+    closeModal()
+    emptyCart()
+    showProcessedModal('Comanda dvs. a fost preluată', 'în cel mai apropiat timp veți primi comanda la masa / locația dvs')
+
   }
 
   const isThroughDelivery = orderType === ORDER_TYPE.delivery
@@ -136,10 +163,16 @@ const CartModal = () => {
             {t('Total')}: {price + (isThroughDelivery ? DELIVERY_PRICE : 0)} {t('MDL')}
           </h4>
         </div>
-        <Button className={classNames(styles.careersHeroContainer__button, 'mt-8')} type="submit">
-          <Bag className="mr-2" stroke="#ffffff" />
-          {t('Plasează comanda')}
-        </Button>
+        {
+          <div ref={lottieRef} className={`h-32 w-full ${loading ? 'block' : 'hidden'}`}/>
+        }
+        {
+          !loading &&
+            <Button className={classNames(styles.careersHeroContainer__button, 'mt-8')} type="submit">
+              <Bag className="mr-2" stroke="#ffffff" />
+              {t('Plasează comanda')}
+            </Button>
+        }
       </form>
     </div>
   )

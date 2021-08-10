@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import CartModal from '../components/Modal/CartModal/CartModal'
 import ProductModal from '../components/Modal/ProductModal/ProductModal'
+import ProcessedModal from '../components/Modal/ProcessedModal/ProcessedModal'
 import { Toppings } from '../types'
 
 export const INITIAL_TOPPINGS: Toppings = { topping: [], without: [], drinks: [] }
@@ -53,7 +54,7 @@ export const CATEGORIES = [
   { id: 'mr-beef-burger', name: 'Mr. Beef Burger', nameru: 'Mr. Beef Бургер' },
   { id: 'mr-vegetarian-burger', name: 'Mr. Vegetarian Burger', nameru: 'Mr. Vegetarian Бургер' },
   { id: 'mr-kids-burger', name: 'Mr. Kids Burger', nameru: 'Mr. Kids Бургер' },
-  { id: 'mr-baghet', name: 'Mr. Baghet', nameru: 'Mr. Багет' },
+  { id: 'mr-baghet', name: 'Mr. Baguette', nameru: 'Mr. Baguette' },
   { id: 'mr-pita', name: 'Mr. Pită', nameru: 'Mr. Пита' },
   { id: 'supe', name: 'Supe', nameru: 'Cупы' },
   { id: 'snacks', name: 'Snacks', nameru: 'Закуски' },
@@ -82,11 +83,13 @@ export const WEIGHT_TYPE = {
 export const MODALS = {
   product: 'product' as 'product',
   cart: 'cart' as 'cart',
+  processed: 'processed' as 'processed',
 }
 
 export const MODAL_COMPONENTS = {
   product: ProductModal,
   cart: CartModal,
+  processed: ProcessedModal,
 }
 
 export const CAREERS_FORM_INITIAL_DATA = {

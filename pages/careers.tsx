@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Careers from '../src/components/Careers/Careers'
 import Layout from '../src/components/Layout/Layout'
 import Head from 'next/head'
+import Modal from '../src/components/Modal/Modal'
 
 
 const CareersPage = () => (
@@ -30,6 +31,7 @@ const CareersPage = () => (
       <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
     </Head>
     <Careers />
+    <Modal/>
   </Layout>
 )
 
