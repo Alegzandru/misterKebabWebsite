@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'next-i18next'
 
@@ -14,14 +14,19 @@ import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import styles from './Careers.module.scss'
 import CareersCategoryBlock from './CareersCategoryBlock/CareersCategoryBlock'
+import { ModalContext } from '../../store/Modal/Modal.context'
 
 const Careers = () => {
+  const {
+    actions: { showProcessedModal },
+  } = useContext(ModalContext)
+
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [checkboxesErrors, setCheckboxesErrors] = useState(new Set<CareerCheckboxesCategory>())
 
   const { t } = useTranslation('careers')
 
-  const onSubmit = (data: Record<string, string | boolean>) => {
+  const onSubmit = async (data: Record<string, string | boolean>) => {
     const newData = careerFormDataHandler(data)
 
     const checkboxCategories = Object.keys(CAREERS_CHECKBOXES_CATEGORY) as CareerCheckboxesCategory[]
@@ -37,7 +42,9 @@ const Careers = () => {
       return setCheckboxesErrors(new Set(newCheckboxesErrors))
     }
 
-    sendMailCareers(newData)
+    await sendMailCareers(newData)
+
+    showProcessedModal('Mesajul vostru a fost preluat', 'În curând veți primi un email cu un răspuns de la Mr. Kebab!')
   }
 
   const checkboxHandler = (value: CareerCheckboxesCategory) => {

@@ -2,6 +2,7 @@ import { clone, equals } from 'ramda'
 
 import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
+import { DEFAULT_STATE } from '../../constants/initialState'
 import { AnyAction, Product, Toppings } from '../../types'
 import { CartState } from '../../types/state'
 import { defaultDrinks, productToppingsPrice } from '../../utils/products'
@@ -170,6 +171,9 @@ const cartReducer = (state: CartState, { type, payload }: AnyAction) => {
 
     case ACTIONS.removeProduct:
       return removeProduct(state, payload)
+
+    case ACTIONS.emptyCart:
+      return DEFAULT_STATE.cart
 
     default:
       return state

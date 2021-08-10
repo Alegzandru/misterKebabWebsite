@@ -18,6 +18,8 @@ export const DEFAULT_STATE: State = {
       },
       subcategory: '',
     },
+    heading: '',
+    subheading: '',
   },
   cart: {
     products: [],

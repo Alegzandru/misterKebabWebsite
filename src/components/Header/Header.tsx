@@ -122,7 +122,7 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        'fixed w-full z-50 transition-colors',
+        'fixed w-full z-50 transition-colors top-0',
         {
           [styles.headerContainer_boxShadow]: !transparent,
           [styles.headerContainer_transparent]: transparent,
@@ -132,7 +132,7 @@ const Header = () => {
     >
       <div className={classNames(
         styles.headerContainer,
-        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen',
+        'py-2 md:py-0 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen',
         styles.headerContainer__navbarHeight ,
         router.asPath[1] && router.asPath[1] !== '#' ? styles.headerContainer__navbarHeight__wide
           :
