@@ -20,12 +20,14 @@ const Header = () => {
 
   useEffect(() => {
     const checkScrollTop = () => {
-      const { innerWidth, pageYOffset } = window
+      const { pageYOffset } = window
 
-      setTransparent(innerWidth < SIZES.md ? pageYOffset < 200 : true)
+      setTransparent(pageYOffset < 200)
     }
 
     const onResizeHandler = () => {
+      checkScrollTop()
+
       if (window.innerWidth >= SIZES.md) {
         setShowMobileHeader(false)
       }
@@ -77,17 +79,18 @@ const Header = () => {
           {Object.values(PAGES).map(link)}
         </ul>
       </nav>
-      <LanguageButton className="hidden md:flex mr-6" color="#F9F9F9" backgroundColor={transparent ? '#611220' : '#FAB729'} />
+      <LanguageButton className="hidden md:flex mr-6" transparent={transparent}/>
       <a
         style={transparent && !showMobileHeader ? {
           backgroundColor: 'transparent',
           border: 'none',
         } : undefined}
-        className={classNames(styles.headerContainer__callNumber, 'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2')}
+        className={classNames(styles.headerContainer__callNumber,
+          'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2 group')}
         href="tel:+37367559999"
       >
         <span className={styles.headerContainer__callNumberText}>{t('Serviciu de Livrare')}</span>
-        +373 (67) 559 999
+        <span className={transparent && !showMobileHeader ? 'group-hover:text-yellow transition duration-300' : ''}>+373 (67) 559 999</span>
       </a>
     </div>
   )
@@ -119,7 +122,7 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        'fixed w-full z-50 transition-colors md:absolute',
+        'fixed w-full z-50 transition-colors',
         {
           [styles.headerContainer_boxShadow]: !transparent,
           [styles.headerContainer_transparent]: transparent,
@@ -129,14 +132,22 @@ const Header = () => {
     >
       <div className={classNames(
         styles.headerContainer,
-        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen'
+        'py-2 px-4 flex items-center w-full h-16 md:inset-x-0 md:mx-auto max-w-screen',
+        styles.headerContainer__navbarHeight ,
+        router.asPath[1] && router.asPath[1] !== '#' ? styles.headerContainer__navbarHeight__wide
+          :
+          !transparent ? styles.headerContainer__navbarHeight__narrow : styles.headerContainer__navbarHeight__wide
       )}>
         <div className="relative flex mr-auto w-18 h-6 md:w-24 md:h-8">
-          <Image src={textLogo} quality={100} alt="Logo" layout="fill" objectFit="contain" />
+          <Link href="/">
+            <a>
+              <Image src={textLogo} quality={100} alt="Logo header Mr. Kebab" layout="fill" objectFit="contain" />
+            </a>
+          </Link>
         </div>
         {navbar}
         <div className="flex md:hidden">
-          <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} />
+          <LanguageButton className={classNames('mr-6 transition-opacity opacity-0', { 'opacity-100': showMobileHeader })} transparent={transparent}/>
           {mobileButton}
         </div>
       </div>

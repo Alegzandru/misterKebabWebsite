@@ -9,7 +9,7 @@ type Props = {
 
 const Socials = ({ className, color }: Props) => {
   const anchor = ({ href, svgPath }: typeof SOCIALS_LINKS[0], index: number) => (
-    <a key={index} href={href} className="ml-6">
+    <a key={index} href={href} className="ml-6" target="blank">
       <svg
         className={classNames(styles.socialAnchor, 'transition-all')}
         width="24"

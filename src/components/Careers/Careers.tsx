@@ -8,7 +8,7 @@ import careersHero from '../../../public/images/careers-hero.png'
 import { CAREERS_CHECKBOXES_CATEGORY, CAREERS_OTHERS, CAREERS_SERVICES } from '../../constants'
 import { VALIDATIONS } from '../../constants/forms'
 import { CareerCheckboxesCategory, CareerOthersBlock } from '../../types'
-import { careerFormDataHandler } from '../../utils/forms'
+import { careerFormDataHandler, sendMailCareers } from '../../utils/forms'
 import Button from '../Button/Button'
 import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
@@ -37,8 +37,7 @@ const Careers = () => {
       return setCheckboxesErrors(new Set(newCheckboxesErrors))
     }
 
-    // eslint-disable-next-line no-console
-    console.table(newData)
+    sendMailCareers(newData)
   }
 
   const checkboxHandler = (value: CareerCheckboxesCategory) => {
@@ -80,7 +79,7 @@ const Careers = () => {
     <div className={classNames(styles.careersHeroContainer, 'w-full pb-19')}>
       <div className="h-16 md:h-26" />
       <div className={classNames(styles.careersHeroContainer__hero, 'w-full relative flex justify-center items-center')}>
-        <Image src={careersHero} alt="Hero" layout="fill" objectFit="cover" />
+        <Image src={careersHero} alt="Fundal cariere Mr. Kebab" layout="fill" objectFit="cover" />
         <h1 className={classNames(styles.careersHeroContainer__heading, 'absolute z-10 font-bold')}>{t('Cariere')}</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>

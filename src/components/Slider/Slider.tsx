@@ -4,17 +4,20 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import Pagination from './Pagination/Pagination'
 import styles from './Slider.module.scss'
+import {BANNER_PLACEHOLDER} from '../../constants'
 
 type Props = {
-  slides: StaticImageData[]
+  slides: string[]
   autoPlayInterval?: number
 }
 
 const Slider = ({ slides, autoPlayInterval }: Props) => {
+  const [enableAutoPlay] = useState(!!autoPlayInterval)
   const [state, setState] = useState({
     activeSlide: 0,
     translate: 0,
   })
+
   const { translate, activeSlide } = state
 
   const autoPlayRef = useRef<() => void>()
@@ -45,7 +48,7 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
   }
 
   const resetAutoPlayInterval = () => {
-    if (autoPlayInterval) {
+    if (enableAutoPlay) {
       clearInterval(autoPlayIntervalRef.current as NodeJS.Timeout)
       setAutoPlayInterval()
     }
@@ -67,7 +70,7 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
 
     window.addEventListener('resize', onResizeHandler)
 
-    if (autoPlayInterval) {
+    if (enableAutoPlay) {
       setAutoPlayInterval()
 
       return () => {
@@ -88,12 +91,13 @@ const Slider = ({ slides, autoPlayInterval }: Props) => {
     })
   }
 
-  const slide = (image: StaticImageData, index: number) => (
+  const slide = (image: string, index: number) => (
     <div key={index} className="flex-1 relative">
       <Image
         src={image}
         placeholder="blur"
-        alt="Banner"
+        blurDataURL={BANNER_PLACEHOLDER}
+        alt="Banner promoție Mr. Kebab"
         layout="fill"
         objectFit="cover"
         quality={90}

@@ -1,4 +1,7 @@
 .headerContainer {
+
+  box-sizing: border-box;
+  
   &_boxShadow {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   }
@@ -54,6 +57,21 @@
       background-color: #fff7f8;
       color: #611220;
     }
+  }
+  
+  &__navbarHeight{
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    height: auto;
+
+    &__narrow{
+      max-height: 64px;
+    }
+
+    &__wide{
+      max-height: 160px;
+    }
+
   }
 
   &__hamburgerBox {
@@ -173,5 +191,11 @@
 @media only screen and (min-width: 850px) {
   .headerContainer__callNumber {
     padding: 0 16px;
+    transition: 300ms;
+    border: 2px solid transparent;
+
+    &:hover{
+      border: 2px solid #DF2026;
+    }
   }
 }

@@ -2,7 +2,8 @@
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+import lottie from 'lottie-web'
 
 import { DRINKS, MODALS, WEIGHT_TYPE } from '../../../constants'
 import { LANGUAGES, SIZES } from '../../../constants/common'
@@ -11,7 +12,7 @@ import { ModalContext } from '../../../store/Modal/Modal.context'
 import { ProductToppingsContext } from '../../../store/ProductToppings/ProductToppings.context'
 import { Product, Response } from '../../../types'
 import { cancelablePromise } from '../../../utils'
-import { fetcher } from '../../../utils/products'
+import { fetcher, sortToppings } from '../../../utils/products'
 import Badges from '../../Badges/Badges'
 import Button from '../../Button/Button'
 import ProductCount from '../../ProductCount/ProductCount'
@@ -35,6 +36,8 @@ const ProductModal = () => {
     actions: { closeModal },
   } = useContext(ModalContext)
 
+  const lottieRef = useRef<HTMLDivElement>(null)
+
   const router = useRouter()
   const isRo = router.locale === LANGUAGES.ro
 
@@ -45,8 +48,9 @@ const ProductModal = () => {
   const withToppings = !!(toppings.topping.length || toppings.without.length)
 
   useEffect(() => {
-    const { promise, cancel } = cancelablePromise<Response<Product[]>>(fetcher(`?name_eq=${subcategory}`))
+    setData({ ok: true, data: [] })
 
+    const { promise, cancel } = cancelablePromise<Response<Product[]>>(fetcher(`?name_eq=${subcategory}`))
     promise.then((recommendedData) => {
       setData(recommendedData)
     })
@@ -55,14 +59,31 @@ const ProductModal = () => {
   }, [name])
 
   useEffect(() => {
+    (
+      async () => {
+        const lottieJson = await import('../../../../public/lottie/loader2.json')
+
+        lottie.loadAnimation({
+          container: lottieRef.current as HTMLDivElement,
+          animationData: lottieJson,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+        })
+
+      }
+    )()
+  }, [])
+
+  useEffect(() => {
     if (show === MODALS.product) {
       setCurrentProduct(name)
     }
-  }, [show])
+  }, [show, name])
 
   const onClickHandler = () => {
     setCurrentProduct('')
-    addProducts(name, count, withToppings ? currentToppings : [])
+    addProducts(name, nameru, count, withToppings ? currentToppings : [])
 
     closeModal()
   }
@@ -70,9 +91,13 @@ const ProductModal = () => {
   return (
     <div className={classNames(styles.productModalContainer, 'w-full relative mx-auto')}>
       <div className="lg:flex">
-        <div>
+        <div className="relative">
           <HallalInsignia className={classNames(styles.productModalContainer__insignia, 'absolute -left-4 -top-4 lg:-left-8 lg:-top-8')} />
-          <img className="rounded w-full object-cover" src={image} alt="Product image" />
+          <img
+            className={classNames(styles.productModalContainer__image, 'rounded w-full object-cover')}
+            src={image}
+            alt={name}
+          />
         </div>
         <div className="mt-6 font-bold md:mt-13 lg:w-130 lg:min-w-130 lg:ml-10 lg:mt-0 xl:w-140 xl:min-w-140">
           <Badges className={styles.productModalContainer__badges} type="big" badges={badges} />
@@ -93,7 +118,11 @@ const ProductModal = () => {
             }
             {isRo ? ingredients : ingredientsru}
           </p>
-          {withToppings && <ToppingsManager toppings={toppings} />}
+          {withToppings && <ToppingsManager toppings={{
+            topping: toppings.topping.sort(sortToppings(router.locale || LANGUAGES.ro)),
+            without: toppings.without.sort(sortToppings(router.locale || LANGUAGES.ro)),
+            drinks: toppings.drinks ? toppings.drinks.sort(sortToppings(router.locale || LANGUAGES.ro)) : [],
+          }} />}
           <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
             <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
             {t('Adaugă la comandă')}
@@ -102,7 +131,7 @@ const ProductModal = () => {
       </div>
       {
         ok
-          ? data.length ? <Recommended products={data as Product[]} /> : 'Loading...'
+          ? data.length ? <Recommended products={data as Product[]} /> : <div ref={lottieRef} id="lottie" className="mx-auto w-40 md:w-80"/>
           : null
       }
     </div>

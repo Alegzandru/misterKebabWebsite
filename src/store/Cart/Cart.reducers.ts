@@ -4,7 +4,7 @@ import { INITIAL_TOPPINGS } from '../../constants'
 import { ACTIONS } from '../../constants/actions'
 import { AnyAction, Product, Toppings } from '../../types'
 import { CartState } from '../../types/state'
-import { productToppingsPrice } from '../../utils/products'
+import { defaultDrinks, productToppingsPrice } from '../../utils/products'
 
 const addMenuProducts = (state: CartState, payload: Record<string, any>): CartState => {
   const { menuProducts } = payload as { menuProducts: Product[] }
@@ -45,7 +45,7 @@ const groupByToppings = (state: CartState): CartState => {
 }
 
 const addProducts = (state: CartState, payload: Record<string, any>): CartState => {
-  const { name, count, toppings } = payload as { name: string; count: number; toppings: Toppings[] }
+  const { name, count, toppings, nameru } = payload as { name: string; nameru: string; count: number; toppings: Toppings[] }
 
   const {
     products,
@@ -62,7 +62,15 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
   )
 
   const currentProductIndex = products.findIndex((product) => product.name === name)
-  const { image, price } = menuProducts.find((product) => product.name === name) as Product
+  const { image, price, toppings: { drinks } } = menuProducts.find((product) => product.name === name) as Product
+
+  if (drinks && drinks.length !== 0) {
+    newToppings.forEach((newTopping, index) => {
+      if (!newTopping.drinks?.length) {
+        newToppings[index].drinks = defaultDrinks(drinks)
+      }
+    })
+  }
 
   const commonData = {
     price: totalPrice + price * count + newToppingsPrice,
@@ -77,6 +85,7 @@ const addProducts = (state: CartState, payload: Record<string, any>): CartState 
         ...products,
         {
           name,
+          nameru,
           image,
           price,
           allProductsToppings: newToppings.sort((first, second) => first.topping.length - second.topping.length),
@@ -120,15 +129,29 @@ const changeCount = (state: CartState, { index, count }: Record<string, any>): C
 }
 
 const removeProduct = (state: CartState, { index }: Record<string, any>): CartState => {
-  const { groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
+  const { products, groupedByToppingsProducts, price: totalPrice, count: totalCount } = state
 
-  const newProducts = clone(groupedByToppingsProducts)
+  const newGroupedProducts = clone(groupedByToppingsProducts)
 
-  const [{ count, price }] = newProducts.splice(index, 1)
+  const [{ count, price, name, toppings }] = newGroupedProducts.splice(index, 1)
+
+  const newProducts = clone(products)
+
+  const currentProduct = products.findIndex((value) => value.name === name)
+  const { allProductsToppings } = newProducts[currentProduct]
+
+  const newToppings = allProductsToppings.filter((topping) => !equals(topping, toppings))
+
+  if (newToppings.length) {
+    newProducts[currentProduct].allProductsToppings = newToppings
+  } else {
+    newProducts.splice(currentProduct, 1)
+  }
 
   return ({
     ...state,
-    groupedByToppingsProducts: newProducts,
+    products: newProducts,
+    groupedByToppingsProducts: newGroupedProducts,
     price: totalPrice - price,
     count: totalCount - count,
   })

@@ -31,13 +31,29 @@ const setCount = (state: ProductToppingsState, payload: Record<string, any>): Pr
 const setAdditive = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
   const { additive, index, type } = payload as { additive: Additive[]; type: string; index: number }
 
-  const newToppings = [...state.toppings]
+  const newToppings = clone(state.toppings)
 
   newToppings[index][type] = additive
 
   return ({
     ...state,
     toppings: newToppings,
+  })
+}
+
+const removeToppings = (state: ProductToppingsState, payload: Record<string, any>): ProductToppingsState => {
+  const { index } = payload as { index: number }
+
+  const { toppings, count } = state
+
+  const newToppings = clone(toppings)
+
+  newToppings.splice(index, 1)
+
+  return ({
+    ...state,
+    toppings: newToppings,
+    count: count - 1,
   })
 }
 
@@ -51,6 +67,9 @@ const productToppingsReducer = (state: ProductToppingsState, { type, payload }: 
 
     case ACTIONS.setAdditive:
       return setAdditive(state, payload)
+
+    case ACTIONS.removeToppings:
+      return removeToppings(state, payload)
 
     default:
       return state

@@ -15,8 +15,18 @@ type Props = PropsWithChildren<{
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }> & RegisterOptions
 
-const Checkbox = ({ className, name, children, asRadio, defaultChecked, checked, register, onChange, ...registerOptions }: Props) => {
+const Checkbox = ({ className, name, children, asRadio, defaultChecked, checked, onChange, register, ...registerOptions }: Props) => {
   const { t } = useTranslation('careers')
+
+  const { onChange: registerOnChange, ...restRegister } = register ? register(name as string, registerOptions) : { name, onChange: () => null }
+
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event)
+    }
+
+    registerOnChange(event)
+  }
 
   return (
     <label
@@ -31,9 +41,9 @@ const Checkbox = ({ className, name, children, asRadio, defaultChecked, checked,
         className="absolute opacity-0 h-0 w-0"
         type={asRadio ? 'radio' : 'checkbox'}
         defaultChecked={defaultChecked}
-        {...(register ? register(name as string, registerOptions) : { name })}
         checked={checked}
-        onChange={onChange}
+        onChange={onChangeHandler}
+        {...restRegister}
       />
       <span className={classNames(
         styles.checkboxContainer__checkMark,
