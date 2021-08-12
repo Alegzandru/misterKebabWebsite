@@ -47,7 +47,7 @@ const SelectedProduct = ({ name, nameru, image, price, count, toppings: { toppin
           <h3 className="font-bold">{isRo? name : nameru}</h3>
           <div className="mb-2">
             {description(topping, t('topping'))}
-            {description(without, t('fara'))}
+            {description(without, t('exclude'))}
             {description(drinks as Drinks[], t('bautura'))}
           </div>
           <ProductCount background="gray" size={SIZES.sm} value={count} onChange={(value) => changeCount(index, value)} />
