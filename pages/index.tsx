@@ -49,6 +49,7 @@ const MainPage = ({ products, menu, sliders }: Props) => {
   return(
     <Layout>
       <Head>
+        <meta name="google-site-verification" content="11pj34iDWosekV9Z0yPZRGHTXlAzznm0z8_yHbkYDmc" />
         <title>Mr. Kebab</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
@@ -67,8 +68,6 @@ const MainPage = ({ products, menu, sliders }: Props) => {
         <meta name="twitter:description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
         kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!"/>
         <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
-
-        <meta name="google-site-verification" content="11pj34iDWosekV9Z0yPZRGHTXlAzznm0z8_yHbkYDmc" />
       </Head>
       <CartContextProvider>
         <ProductToppingsContextProvider>
