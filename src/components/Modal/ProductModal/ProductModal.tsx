@@ -47,6 +47,8 @@ const ProductModal = () => {
 
   const withToppings = !!(toppings.topping.length || toppings.without.length)
 
+  const [dynamicPrice, setDynamicPrice] = useState(price)
+
   useEffect(() => {
     setData({ ok: true, data: [] })
 
@@ -102,7 +104,7 @@ const ProductModal = () => {
         <div className="mt-6 font-bold md:mt-13 lg:w-130 lg:min-w-130 lg:ml-10 lg:mt-0 xl:w-140 xl:min-w-140">
           <Badges className={styles.productModalContainer__badges} type="big" badges={badges} />
           <h1 className={classNames(styles.productModalContainer__name, 'mt-2 lg:mt-0')}>{isRo ? name : nameru}</h1>
-          <h2 className={styles.productModalContainer__price}>{price} {t('MDL')}</h2>
+          <h2 className={styles.productModalContainer__price}>{dynamicPrice} {t('MDL')}</h2>
           {!withToppings && (
             <ProductCount className="my-6" background="gray" size={SIZES.md} value={count} onChange={setCount} />
           )}
@@ -122,7 +124,10 @@ const ProductModal = () => {
             topping: toppings.topping.sort(sortToppings(router.locale || LANGUAGES.ro)),
             without: toppings.without.sort(sortToppings(router.locale || LANGUAGES.ro)),
             drinks: toppings.drinks ? toppings.drinks.sort(sortToppings(router.locale || LANGUAGES.ro)) : [],
-          }} />}
+          }}
+          setDynamicPrice={setDynamicPrice}
+          initialPrice={price}
+          />}
           <Button className="mt-8 md:mt-14" onClick={onClickHandler}>
             <Bag className={classNames(styles.productCardContainer__bag, 'mr-2')} stroke="#ffffff" />
             {t('Adaugă la comandă')}
