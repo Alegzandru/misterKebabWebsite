@@ -134,7 +134,7 @@ const CartModal = () => {
             className="mb-4"
             name="tel"
             label="Numar de telefon"
-            placeholder="+373 (__) ___ ___"
+            placeholder="(__) ___ ___"
             register={register}
             errors={errors}
             {...VALIDATIONS.tel}

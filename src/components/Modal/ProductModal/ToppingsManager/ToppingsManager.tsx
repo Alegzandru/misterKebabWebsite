@@ -2,7 +2,7 @@
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { SetStateAction, useContext, useEffect, useRef, useState } from 'react'
 
 import { LANGUAGES } from '../../../../constants/common'
 import { ProductToppingsContext } from '../../../../store/ProductToppings/ProductToppings.context'
@@ -14,9 +14,11 @@ import styles from './ToppingsManager.module.scss'
 
 type Props = {
   toppings: Toppings
+  setDynamicPrice: React.Dispatch<SetStateAction<number>>
+  initialPrice: number
 }
 
-const ToppingsManager = ({ toppings }: Props) => {
+const ToppingsManager = ({ toppings, setDynamicPrice, initialPrice }: Props) => {
   const {
     state: { name, count, toppings: currentToppings },
     actions: { setCount, setAdditive, removeToppings },
@@ -31,8 +33,25 @@ const ToppingsManager = ({ toppings }: Props) => {
   const isRo = router.locale === LANGUAGES.ro
 
   useEffect(() => {
+
+    let toppingPrice = 0
+    currentToppings[activeTab]['topping'].forEach((topping) => {
+      toppingPrice += topping.price
+    })
+    const newPrice = initialPrice + toppingPrice
+    setDynamicPrice(newPrice)
+
     formRef.current?.reset()
   }, [activeTab])
+
+  useEffect(() => {
+    let toppingPrice = 0
+    currentToppings[activeTab]['topping'].forEach((topping) => {
+      toppingPrice += topping.price
+    })
+    const newPrice = initialPrice + toppingPrice
+    setDynamicPrice(newPrice)
+  }, [currentToppings[activeTab]['topping']])
 
   useEffect(() => {
     const { drinks } = toppings
