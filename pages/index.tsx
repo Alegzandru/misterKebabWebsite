@@ -1,7 +1,9 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Head from 'next/head'
 import React from 'react'
 import { useEffect } from 'react'
+import { useState } from 'react'
 
 import BackToTopButton from '../src/components/BackToTopButton/BackToTopButton'
 import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavbar'
@@ -11,15 +13,16 @@ import Menu from '../src/components/Menu/Menu'
 import Modal from '../src/components/Modal/Modal'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
+import { LANGUAGES, SIZES } from '../src/constants/common'
 import { API_URL } from '../src/constants/urls'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 import { CartContextProvider } from '../src/store/Cart/Cart.context'
 import { ProductToppingsContextProvider } from '../src/store/ProductToppings/ProductToppings.context'
 import { MenuList, Product } from '../src/types'
 import { productFilter } from '../src/utils/products'
-import { SIZES } from '../src/constants/common'
-import { useState } from 'react'
-import Head from 'next/head'
+import {metaData} from '../src/constants/common'
+import { useRouter } from 'next/router'
+
 
 type Props = {
   products: Product[]
@@ -46,27 +49,27 @@ const MainPage = ({ products, menu, sliders }: Props) => {
     }
   }, [])
 
+  const router = useRouter()
+  const isRo = router.locale === LANGUAGES.ro
+
   return(
     <Layout>
       <Head>
         <meta name="google-site-verification" content="11pj34iDWosekV9Z0yPZRGHTXlAzznm0z8_yHbkYDmc" />
         <title>Mr. Kebab</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
-        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!"/>
+        <meta name="description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
         <meta name="robots" content="index, follow"/>
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Mr. Kebab" />
-        <meta property="og:description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
-        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!" />
+        <meta property="og:description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
         <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
         <meta property="og:url" content="PERMALINK" />
         <meta property="og:site_name" content="Mr. Kebab" />
 
         <meta name="twitter:title" content="Mr. Kebab"/>
-        <meta name="twitter:description" content="Mister Kebab este bucătarul tău de încredere! Aici se pregătesc cele mai gustoase
-        kebaburi din Chișinău. O rețea de fast-food pentru toate gusturile și vârstele!"/>
+        <meta name="twitter:description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
         <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
       </Head>
       <CartContextProvider>

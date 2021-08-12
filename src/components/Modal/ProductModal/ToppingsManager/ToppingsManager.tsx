@@ -33,14 +33,6 @@ const ToppingsManager = ({ toppings, setDynamicPrice, initialPrice }: Props) => 
   const isRo = router.locale === LANGUAGES.ro
 
   useEffect(() => {
-
-    let toppingPrice = 0
-    currentToppings[activeTab]['topping'].forEach((topping) => {
-      toppingPrice += topping.price
-    })
-    const newPrice = initialPrice + toppingPrice
-    setDynamicPrice(newPrice)
-
     formRef.current?.reset()
   }, [activeTab])
 
@@ -51,7 +43,7 @@ const ToppingsManager = ({ toppings, setDynamicPrice, initialPrice }: Props) => 
     })
     const newPrice = initialPrice + toppingPrice
     setDynamicPrice(newPrice)
-  }, [currentToppings[activeTab]['topping']])
+  }, [currentToppings[activeTab]['topping'], activeTab])
 
   useEffect(() => {
     const { drinks } = toppings
