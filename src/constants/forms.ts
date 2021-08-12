@@ -25,7 +25,7 @@ export const VALIDATIONS = {
   tel: {
     required: 'Câmpul este obligatoriu!',
     pattern: {
-      value: /^(\+\d{1,3}[- ]?)?\d{10}$/i,
+      value: /^\s*(?:\+?(\d{2,3}))?[-. (]*(\d{2,3})[-. )]*(\d{3})[-. ]*(\d{3})\s*$/gm,
       message: 'Numarul nu este valid!',
     },
   },
