@@ -22,6 +22,7 @@ import { MenuList, Product } from '../src/types'
 import { productFilter } from '../src/utils/products'
 import {metaData} from '../src/constants/common'
 import { useRouter } from 'next/router'
+import { VALID_LOCALS } from '../src/constants'
 
 
 type Props = {
@@ -51,6 +52,9 @@ const MainPage = ({ products, menu, sliders }: Props) => {
 
   const router = useRouter()
   const isRo = router.locale === LANGUAGES.ro
+
+  const localName = window.location.host.split('.')[0]
+  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca
 
   return(
     <Layout>
@@ -84,7 +88,7 @@ const MainPage = ({ products, menu, sliders }: Props) => {
             <Menu menu={menu} products={products} />
           </ActiveSectionContextProvider>
           <BackToTopButton />
-          <OpenCartButton />
+          {isValidLocal && <OpenCartButton />}
           <Modal />
         </ProductToppingsContextProvider>
       </CartContextProvider>
