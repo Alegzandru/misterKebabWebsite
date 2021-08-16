@@ -10,17 +10,22 @@ const sendMail = async (req, res) => {
   {commentary: '', masa: '', orderPayment: '', orderType: '', address: '', ...data}
 
   const today = new Date()
+  const localOffset = new Date().getTimezoneOffset()
+  const localOffsetMillis = 60 * 1000 * localOffset
+  const localDate = new Date(today.getTime() + localOffsetMillis)
+  const offset = 180
+  const estDate = new Date(localDate.getTime() + offset*60*1000)
 
   const paddedString = (value) => String(value).padStart(2, '0')
 
-  const dd = paddedString(today.getDate())
-  const mm = paddedString(today.getMonth() + 1)
-  const yyyy = today.getFullYear()
+  const dd = paddedString(estDate.getDate())
+  const mm = paddedString(estDate.getMonth() + 1)
+  const yyyy = estDate.getFullYear()
   const date = dd + ' ' + mm + ' ' + yyyy
 
-  const sec = paddedString(today.getSeconds())
-  const min = paddedString(today.getMinutes())
-  const hours = paddedString(today.getHours())
+  const sec = paddedString(estDate.getSeconds())
+  const min = paddedString(estDate.getMinutes())
+  const hours = paddedString(estDate.getHours())
   const time = hours + ':' + min + ':' + sec
 
   const subject = isValidLocal
