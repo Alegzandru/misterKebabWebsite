@@ -28,7 +28,13 @@ export const productFilter = (product: any, subcategories: any[]) => {
       price: product.price,
       weight: product.weight,
       badges: product.ingredients.map((ingredient: any) => (ingredient.name)),
-      image: !product.image.formats.medium ? '/images/food/product-image.png' : product.image.formats.medium.url,
+      image: product.image.formats.medium ?
+        product.image.formats.medium.url
+        :
+        product.image.formats.small ?
+          product.image.formats.small.url
+          :
+          'https://res.cloudinary.com/dbh1vgas3/image/upload/v1627041238/large_placeholder_Kebab_1d091de417.png',
       subcategory: product.subcategory.name,
       ingredients: product.description,
       ingredientsru: product.descriptionru,
