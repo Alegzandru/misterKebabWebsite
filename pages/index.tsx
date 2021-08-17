@@ -113,7 +113,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const products: Product[] = productsRaw.filter((product: any) =>
     product.image &&
-    product.image.formats.medium &&
     product.price !== null &&
     product.name !== null
   )
