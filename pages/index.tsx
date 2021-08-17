@@ -113,8 +113,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const products: Product[] = productsRaw.filter((product: any) =>
     product.image &&
-    product.price !== null &&
-    product.name !== null
+    product.price &&
+    product.name
   )
     .map((product: any) => productFilter(product, subcategories))
 
