@@ -8,27 +8,34 @@ import Head from 'next/head'
 import Modal from '../src/components/Modal/Modal'
 import { useRouter } from 'next/router'
 import { LANGUAGES, metaData } from '../src/constants/common'
+import { useTranslation } from 'react-i18next'
 
 
 const CareersPage = () => {
   const router = useRouter()
   const isRo = router.locale === LANGUAGES.ro
+
+  const {t} = useTranslation('common')
+
   return(
     <Layout>
       <Head>
-        <title>{isRo ? metaData.careers.title.ro : metaData.careers.title.ru}</title>
+        <title>{t('Cariere | Mr. Kebab')}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content={isRo ? metaData.careers.description.ro : metaData.careers.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="description" content="Mr Kebab angajeaza personal care adora kebabul! Devino si tu parte a echipei noastre: chelneri, bucatari, casieri. O retea de fast-food prietenoasa!"/>
         <meta name="robots" content="index, follow"/>
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={isRo ? metaData.careers.title.ro : metaData.careers.title.ru} />
+        {/* eslint-disable-next-line max-len*/}
+        <meta property="og:title" content="Mr Kebab angajeaza personal care adora kebabul! Devino si tu parte a echipei noastre: chelneri, bucatari, casieri. O retea de fast-food prietenoasa!"/>
         <meta property="og:description" content={isRo ? metaData.careers.description.ro : metaData.careers.description.ru} />
         <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
         <meta property="og:url" content="PERMALINK" />
         <meta property="og:site_name" content="Mr. Kebab" />
 
-        <meta name="twitter:title" content={isRo ? metaData.careers.title.ro : metaData.careers.title.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="twitter:title" content="Mr Kebab angajeaza personal care adora kebabul! Devino si tu parte a echipei noastre: chelneri, bucatari, casieri. O retea de fast-food prietenoasa!"/>
         <meta name="twitter:description" content={isRo ? metaData.careers.description.ro : metaData.careers.description.ru}/>
         <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
       </Head>
