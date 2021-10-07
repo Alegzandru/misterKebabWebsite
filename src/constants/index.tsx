@@ -140,6 +140,7 @@ export const COMBO_DRINKS = {
 export const VALID_LOCALS = {
   rascanovca: 'rascanovca',
   botanica: 'botanica',
+  malinamica: 'malinamica',
 }
 
 export const TAKEAWAY_LOCATIONS = {

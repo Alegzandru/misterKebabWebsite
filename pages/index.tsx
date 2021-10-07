@@ -13,16 +13,17 @@ import Menu from '../src/components/Menu/Menu'
 import Modal from '../src/components/Modal/Modal'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
-import { LANGUAGES, SIZES } from '../src/constants/common'
+import { SIZES } from '../src/constants/common'
 import { API_URL } from '../src/constants/urls'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 import { CartContextProvider } from '../src/store/Cart/Cart.context'
 import { ProductToppingsContextProvider } from '../src/store/ProductToppings/ProductToppings.context'
 import { MenuList, Product } from '../src/types'
 import { productFilter } from '../src/utils/products'
-import {metaData} from '../src/constants/common'
-import { useRouter } from 'next/router'
-import { VALID_LOCALS } from '../src/constants'
+// import {metaData} from '../src/constants/common'
+// import {useRouter} from 'next/router'
+import { useTranslation } from 'react-i18next'
+// import { VALID_LOCALS } from '../src/constants'
 
 
 type Props = {
@@ -38,6 +39,8 @@ const MainPage = ({ products, menu, sliders }: Props) => {
 
   const [showBanner, setShowBanner] = useState('Mobile')
 
+  const {t} = useTranslation('common')
+
   useEffect(() => {
     const onResizeHandler = () => {
       setShowBanner(window.innerWidth >= SIZES.md ? 'Desktop' : 'Mobile')
@@ -50,11 +53,11 @@ const MainPage = ({ products, menu, sliders }: Props) => {
     }
   }, [])
 
-  const router = useRouter()
-  const isRo = router.locale === LANGUAGES.ro
+  // const router = useRouter()
+  // const isRo = router.locale === LANGUAGES.ro
 
-  const localName = window.location.host.split('.')[0]
-  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca
+  // const localName = window.location.host.split('.')[0]
+  // const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
 
   return(
     <Layout>
@@ -62,18 +65,21 @@ const MainPage = ({ products, menu, sliders }: Props) => {
         <meta name="google-site-verification" content="11pj34iDWosekV9Z0yPZRGHTXlAzznm0z8_yHbkYDmc" />
         <title>Mr. Kebab</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
         <meta name="robots" content="index, follow"/>
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Mr. Kebab" />
-        <meta property="og:description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta property="og:description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
         <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
         <meta property="og:url" content="PERMALINK" />
         <meta property="og:site_name" content="Mr. Kebab" />
 
         <meta name="twitter:title" content="Mr. Kebab"/>
-        <meta name="twitter:description" content={isRo ? metaData.index.description.ro : metaData.index.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="twitter:description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
         <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
       </Head>
       <CartContextProvider>
@@ -88,7 +94,7 @@ const MainPage = ({ products, menu, sliders }: Props) => {
             <Menu menu={menu} products={products} />
           </ActiveSectionContextProvider>
           <BackToTopButton />
-          {isValidLocal && <OpenCartButton />}
+          {0 && <OpenCartButton />}
           <Modal />
         </ProductToppingsContextProvider>
       </CartContextProvider>
