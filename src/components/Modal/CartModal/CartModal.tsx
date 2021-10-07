@@ -56,7 +56,7 @@ const CartModal = () => {
   const { state: { price, groupedByToppingsProducts }, actions : { emptyCart }} = useContext(CartContext)
 
   const localName = window.location.host.split('.')[0]
-  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca
+  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
   const inputValidations = isValidLocal ? VALIDATIONS.masa : VALIDATIONS.email
 
   const [orderType, setOrderType] = useState<OrderType>('takeaway')

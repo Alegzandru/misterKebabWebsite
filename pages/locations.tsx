@@ -9,27 +9,34 @@ import LocationsLinks from '../src/components/LocationsLinks/LocationsLinks'
 import { LANGUAGES, metaData, THEMES } from '../src/constants/common'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 const LocationsPage = () => {
   const router = useRouter()
   const isRo = router.locale === LANGUAGES.ro
+
+  const {t} = useTranslation('common')
+
   return(
     <Layout>
       <Head>
-        <title>{isRo ? metaData.locations.title.ro : metaData.locations.title.ru}</title>
+        <title>{t('Locatii | Mr. Kebab')}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content={isRo ? metaData.locations.description.ro : metaData.locations.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="description" content={t('Mr Kebab are 4 locatii la Malina Mica, Botanica si Rascani. Alege pe cel mai apropiat tie si comanda! Suna la 0675 59 999 sau vino in unul dintre restaurantele noastre de tip fast-food')}/>
         <meta name="robots" content="index, follow"/>
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content={isRo ? metaData.locations.title.ro : metaData.locations.title.ru} />
-        <meta property="og:description" content={isRo ? metaData.locations.description.ro : metaData.locations.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta property="og:description" content={t('Mr Kebab are 4 locatii la Malina Mica, Botanica si Rascani. Alege pe cel mai apropiat tie si comanda! Suna la 0675 59 999 sau vino in unul dintre restaurantele noastre de tip fast-food')}/>
         <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
         <meta property="og:url" content="PERMALINK" />
         <meta property="og:site_name" content="Mr. Kebab" />
 
         <meta name="twitter:title" content={isRo ? metaData.locations.title.ro : metaData.locations.title.ru}/>
-        <meta name="twitter:description" content={isRo ? metaData.locations.description.ro : metaData.locations.description.ru}/>
+        {/* eslint-disable-next-line max-len*/}
+        <meta name="twitter:description" content={t('Mr Kebab are 4 locatii la Malina Mica, Botanica si Rascani. Alege pe cel mai apropiat tie si comanda! Suna la 0675 59 999 sau vino in unul dintre restaurantele noastre de tip fast-food')}/>
         <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
       </Head>
       <div className="h-16 md:h-26" />
