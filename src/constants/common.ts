@@ -72,3 +72,22 @@ export const metaData = {
     },
   },
 }
+
+export const PHONE_NUMBERS = {
+  rascanovca: {
+    link: '+37367449999',
+    text: '+373 (67) 449 999',
+  },
+  botanica: {
+    link: '+37367559999',
+    text: '+373 (67) 559 999',
+  },
+  malinamica: {
+    link: '+37367549999',
+    text: '+373 (67) 549 999',
+  },
+  general: {
+    link: '+37367559999',
+    text: '+373 (67) 559 999',
+  },
+}

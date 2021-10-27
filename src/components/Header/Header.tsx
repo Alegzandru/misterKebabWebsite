@@ -6,9 +6,10 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 
 import textLogo from '../../../public/images/logos/logo-text.png'
-import { PAGES, SIZES } from '../../constants/common'
+import { PAGES, PHONE_NUMBERS, SIZES } from '../../constants/common'
 import LanguageButton from '../LanguageButton/LanguageButton'
 import styles from './Header.module.scss'
+import { VALID_LOCALS } from '../../constants'
 
 const Header = () => {
   const [showMobileHeader, setShowMobileHeader] = useState(false)
@@ -17,6 +18,12 @@ const Header = () => {
   const { t } = useTranslation('header')
 
   const router = useRouter()
+
+  const localName = window.location.host.split('.')[0]
+  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
+
+  const phoneNumberText = isValidLocal ? PHONE_NUMBERS[localName].text : PHONE_NUMBERS['general'].text
+  const phoneNumberLink = isValidLocal ? PHONE_NUMBERS[localName].link : PHONE_NUMBERS['general'].link
 
   useEffect(() => {
     const checkScrollTop = () => {
@@ -87,10 +94,10 @@ const Header = () => {
         } : undefined}
         className={classNames(styles.headerContainer__callNumber,
           'w-full flex justify-center items-center flex-col font-bold md:items-end md:px-2 group')}
-        href="tel:+37367559999"
+        href={`tel:${phoneNumberLink}`}
       >
         <span className={styles.headerContainer__callNumberText}>{t('Serviciu de Livrare')}</span>
-        <span className={transparent && !showMobileHeader ? 'group-hover:text-yellow transition duration-300' : ''}>+373 (67) 559 999</span>
+        <span className={transparent && !showMobileHeader ? 'group-hover:text-yellow transition duration-300' : ''}>{phoneNumberText}</span>
       </a>
     </div>
   )
