@@ -17,18 +17,19 @@ const LocationsLinks = ({ theme }: Props) => {
   const { t } = useTranslation('common')
   const isLight = theme === THEMES.light
 
-  const block = ({ name, address }: typeof LOCATIONS[0], index: number) => (
+  const block = ({ name, address, phoneText, phoneLink }: typeof LOCATIONS[0], index: number) => (
     <div
       key={index}
       className={classNames(styles.locationsContainer__wrapper, 'transition-all p-6 sm:my-0')}
     >
       <h5 className={styles.locationsContainer__heading}>{t(name)}</h5>
-      <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-6')}>{t(address)}</p>
+      <p className={classNames(styles.locationsContainer__address, 'mt-4 mb-4')}>{t(address)}</p>
+      <a href={`tel:${phoneLink}`} className={classNames('hover:text-red font-medium transition duration-300')}>{phoneText}</a>
       <Link href={{
         pathname: PAGES.locations.pathname,
         query: { address },
       }}>
-        <a className={classNames(styles.locationsContainer__anchor, 'flex items-center relative w-max font-medium transition-all')}>
+        <a className={classNames(styles.locationsContainer__anchor, 'flex items-center relative w-max font-medium transition-all mt-4')}>
           {t('Deschide pe hartă')}
           <ExternalLink className="ml-2" />
         </a>
