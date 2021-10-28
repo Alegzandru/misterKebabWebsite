@@ -20,21 +20,29 @@ export const LOCATIONS = [
   {
     name: 'Malina Mică',
     address: 'Strada Nicolae Testemiţanu 17/6',
+    phoneText: '+373 (67) 549 999',
+    phoneLink: '+37367549999',
     position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
     address: 'Strada Vladimir Korolenko 12',
+    phoneText: '+373 (67) 559 999',
+    phoneLink: '+37367559999',
     position: { lat: 46.995146, lng: 28.825689 },
   },
   {
     name: 'Râşcani',
     address: 'Bd. Moscova 10/1',
+    phoneText: '+373 (67) 449 999',
+    phoneLink: '+37367449999',
     position: { lat: 47.04887, lng: 28.86357 },
   },
   {
     name: 'Botanica',
     address: 'Strada Independenţei 4/3',
+    phoneText: '+373 (67) 559 999',
+    phoneLink: '+37367559999',
     position: { lat: 46.98538, lng: 28.84468 },
   },
 ]
