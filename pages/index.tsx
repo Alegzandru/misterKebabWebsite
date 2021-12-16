@@ -23,7 +23,7 @@ import { productFilter } from '../src/utils/products'
 // import {metaData} from '../src/constants/common'
 // import {useRouter} from 'next/router'
 import { useTranslation } from 'react-i18next'
-// import { VALID_LOCALS } from '../src/constants'
+import { VALID_LOCALS } from '../src/constants'
 
 
 type Props = {
@@ -56,8 +56,8 @@ const MainPage = ({ products, menu, sliders }: Props) => {
   // const router = useRouter()
   // const isRo = router.locale === LANGUAGES.ro
 
-  // const localName = window.location.host.split('.')[0]
-  // const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
+  const localName = window.location.host.split('.')[0]
+  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
 
   return(
     <Layout>
@@ -94,7 +94,7 @@ const MainPage = ({ products, menu, sliders }: Props) => {
             <Menu menu={menu} products={products} />
           </ActiveSectionContextProvider>
           <BackToTopButton />
-          {0 && <OpenCartButton />}
+          {!isValidLocal && <OpenCartButton />}
           <Modal />
         </ProductToppingsContextProvider>
       </CartContextProvider>
