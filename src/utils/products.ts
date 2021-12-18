@@ -140,7 +140,8 @@ export const sendProductsToCMS =
     }))
 
     const {name, tel, email} = data
-    const {commentary, masa, orderPayment, orderType} = {commentary: '', masa: '', orderPayment: 'cash', orderType: '', ...data}
+    const {commentary, masa, orderPayment, orderType, street, block, stair, floor, flat} =
+    {street: '', block: '', stair: '', floor: '', flat: '', commentary: '', masa: '', orderPayment: 'cash', orderType: '', ...data}
 
     const requestOptionsClient = {
       method: 'POST',
@@ -154,6 +155,11 @@ export const sendProductsToCMS =
         commentary,
         masa: parseInt(masa as string, 10),
         mod_de_livrare: getTipulComenzii(orderType as string),
+        address: street,
+        bloc: block,
+        scara: stair,
+        etaj: floor,
+        apartament: flat,
         mod_de_plata: orderPayment as string,
       }),
     }

@@ -153,7 +153,14 @@ const CartModal = () => {
           setValue={setValue}
         />}
         {CurrentShowedBlock &&
-        <CurrentShowedBlock register={register} errors={errors} setValue={setValue} {...VALIDATIONS.takeawayLocation}/>}
+        <CurrentShowedBlock
+          register={register}
+          errors={errors}
+          orderPayment={orderPayment}
+          setOrderPayment={setOrderPayment}
+          setValue={setValue}
+          {...VALIDATIONS.takeawayLocation}
+        />}
         <div className="flex flex-col items-end mt-18">
           <p className={styles.cartModalContainer__subtotal}>{t('Subtotal')}: {price} {t('MDL')}</p>
           {orderType === ORDER_TYPE.delivery && <p className={styles.cartModalContainer__subtotal}>{t('Livrare')}: {DELIVERY_PRICE} {t('MDL')}</p>}
