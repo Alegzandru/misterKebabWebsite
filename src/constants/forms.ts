@@ -49,6 +49,9 @@ export const VALIDATIONS = {
   payment: {
     required: 'Câmpul este obligatoriu!',
   },
+  street: {
+    required: 'Câmpul este obligatoriu!',
+  },
 }
 
 export const ORDER_TYPE = {
@@ -66,17 +69,17 @@ export const ORDER_PAYMENT_BUTTONS = [
     text: 'Cash',
     type: ORDER_PAYMENT_METHODS.cash,
   },
-  {
-    text: 'Card',
-    type: ORDER_PAYMENT_METHODS.card,
-  },
+  // {
+  //   text: 'Card',
+  //   type: ORDER_PAYMENT_METHODS.card,
+  // },
 ]
 
 export const ORDER_TYPE_BUTTONS = [
-  // {
-  //   text: 'Livrare prin curier',
-  //   type: ORDER_TYPE.delivery,
-  // },
+  {
+    text: 'Livrare prin curier',
+    type: ORDER_TYPE.delivery,
+  },
   {
     text: 'Ridicare din local',
     type: ORDER_TYPE.takeaway,
@@ -120,19 +123,11 @@ export const DROPDOWN_DATA = {
         price: 15,
       },
       {
-        name: 'Colonita',
-        price: 15,
-      },
-      {
         name: 'Costiujeni',
         price: 15,
       },
       {
         name: 'Durlesti',
-        price: 15,
-      },
-      {
-        name: 'Ialoveni',
         price: 15,
       },
       {
@@ -169,9 +164,9 @@ export const DROPDOWN_DATA = {
 }
 
 export const LOCATIONS_INPUTS = {
-  street: { name: 'street', placeholder: 'street' },
-  block: { name: 'block', placeholder: 'block' },
-  stair: { name: 'stair', placeholder: 'stair' },
-  floor: { name: 'floor', placeholder: 'floor' },
-  flat: { name: 'flat', placeholder: 'flat' },
+  street: { name: 'street', placeholder: 'Strada' },
+  block: { name: 'block', placeholder: 'Blocul' },
+  stair: { name: 'stair', placeholder: 'Scara' },
+  floor: { name: 'floor', placeholder: 'Etajul' },
+  flat: { name: 'flat', placeholder: 'Apartamentul' },
 }
