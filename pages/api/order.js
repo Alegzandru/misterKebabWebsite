@@ -6,8 +6,8 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_EMAIL_API_KEY2)
 const sendMail = async (req, res) => {
 
   const { data, products, submitLocal, isValidLocal } = req.body
-  const {name, tel, price, commentary, masa, orderPayment, orderType, address} =
-  {commentary: '', masa: '', orderPayment: '', orderType: '', address: '', ...data}
+  const {name, tel, price, commentary, masa, orderPayment, orderType, street, block, stair, floor, flat} =
+  {street: '', block: '', stair: '', floor: '', flat: '', commentary: '', masa: '', orderPayment: '', orderType: '', ...data}
 
   const today = new Date()
   const localOffset = new Date().getTimezoneOffset()
@@ -44,7 +44,11 @@ const sendMail = async (req, res) => {
     tel,
     mod_de_plata: orderPayment,
     mod_de_livrare: getTipulComenziiMail(orderType),
-    address,
+    address: street,
+    bloc: block,
+    scara: stair,
+    etaj: floor,
+    apartament: flat,
     commentary,
     orders: products.map((product) => ({
       name: product.name,
