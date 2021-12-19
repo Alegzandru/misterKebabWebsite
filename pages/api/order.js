@@ -1,4 +1,5 @@
 import sgMail from '@sendgrid/mail'
+import { DELIVERY_PRICE } from '../../src/constants'
 import {getTipulComenziiMail} from '../../src/utils/products'
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_EMAIL_API_KEY2)
@@ -6,8 +7,9 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_EMAIL_API_KEY2)
 const sendMail = async (req, res) => {
 
   const { data, products, submitLocal, isValidLocal } = req.body
-  const {name, tel, price, commentary, masa, orderPayment, orderType, street, block, stair, floor, flat} =
-  {street: '', block: '', stair: '', floor: '', flat: '', commentary: '', masa: '', orderPayment: '', orderType: '', ...data}
+  const {name, tel, price, commentary, masa, orderPayment, orderType, street, block, stair, floor, flat, takeawayLocation, regionToDeliver} =
+  {street: '', block: '', stair: '', floor: '', flat: '', takeawayLocation: '', commentary: '', masa: '', orderPayment: '',
+    regionToDeliver: '', orderType: '', ...data}
 
   const today = new Date()
   const localOffset = new Date().getTimezoneOffset()
@@ -21,7 +23,7 @@ const sendMail = async (req, res) => {
   const dd = paddedString(estDate.getDate())
   const mm = paddedString(estDate.getMonth() + 1)
   const yyyy = estDate.getFullYear()
-  const date = dd + ' ' + mm + ' ' + yyyy
+  const date = dd + '.' + mm + '.' + yyyy
 
   const sec = paddedString(estDate.getSeconds())
   const min = paddedString(estDate.getMinutes())
@@ -30,7 +32,9 @@ const sendMail = async (req, res) => {
 
   const subject = isValidLocal
     ? `Masa #${masa}, ${orderPayment}`
-    : `Comanda nouă la ${data.takeawayLocation}`
+    : orderType === 'delivery' ?
+      `Comanda cu livrare la ${street}` :
+      `Comanda cu preluare la ${takeawayLocation}`
 
   const templateData = {
     subject,
@@ -38,12 +42,15 @@ const sendMail = async (req, res) => {
     time,
     masa,
     sum : price,
-    shipping: '',
-    total: price,
+    shipping: DELIVERY_PRICE,
+    total: price + DELIVERY_PRICE,
     name,
     tel,
-    mod_de_plata: orderPayment,
+    mod_de_plata: 'Cash',
     mod_de_livrare: getTipulComenziiMail(orderType),
+    takeawayConstant: 'Preluare din local',
+    takeawayLocation,
+    regionToDeliver,
     address: street,
     bloc: block,
     scara: stair,

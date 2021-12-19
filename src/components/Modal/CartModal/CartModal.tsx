@@ -4,7 +4,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import lottie from 'lottie-web'
 
-import { DELIVERY_PRICE, MODALS, TAKEAWAY_LOCATIONS, VALID_LOCALS } from '../../../constants'
+import { DELIVERY_PRICE, MODALS, VALID_LOCALS } from '../../../constants'
 import {
   CART_FORM_COMPONENTS,
   ORDER_FROM,
@@ -90,7 +90,7 @@ const CartModal = () => {
     setLoading(true)
 
     await sendProductsToCMS(groupedByToppingsProducts, data, price)
-    const submitLocal = isValidLocal ? `${localName}.mr.` : TAKEAWAY_LOCATIONS[data.takeawayLocation as string]
+    const submitLocal = 'manager.mister'
     await sendMailOrder(data, groupedByToppingsProducts, price, submitLocal, isValidLocal)
 
     closeModal()
