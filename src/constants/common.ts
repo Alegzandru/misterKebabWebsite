@@ -87,7 +87,7 @@ export const PHONE_NUMBERS = {
     text: '+373 (67) 549 999',
   },
   general: {
-    link: '+37367559999',
-    text: '+373 (67) 559 999',
+    link: '+37322559999',
+    text: '+373 (22) 559 999',
   },
 }
