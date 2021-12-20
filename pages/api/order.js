@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.NEXT_PUBLIC_EMAIL_API_KEY2)
 const sendMail = async (req, res) => {
 
   const { data, products, submitLocal, isValidLocal } = req.body
-  const {name, tel, price, commentary, masa, orderPayment, orderType, street, block, stair, floor, flat, takeawayLocation, regionToDeliver} =
+  const {email, name, tel, price, commentary, masa, orderPayment, orderType, street, block, stair, floor, flat, takeawayLocation, regionToDeliver} =
   {street: '', block: '', stair: '', floor: '', flat: '', takeawayLocation: '', commentary: '', masa: '', orderPayment: '',
     regionToDeliver: '', orderType: '', ...data}
 
@@ -36,14 +36,16 @@ const sendMail = async (req, res) => {
       `Comanda cu livrare la ${street}` :
       `Comanda cu preluare la ${takeawayLocation}`
 
+  const realDeliveryPrice = price >= 300 ? 0 : DELIVERY_PRICE
+
   const templateData = {
     subject,
     date,
     time,
     masa,
     sum : price,
-    shipping: DELIVERY_PRICE,
-    total: price + DELIVERY_PRICE,
+    shipping: realDeliveryPrice,
+    total: price + realDeliveryPrice,
     name,
     tel,
     mod_de_plata: 'Cash',
@@ -70,7 +72,14 @@ const sendMail = async (req, res) => {
 
   const msg = {
     from: 'manager.mister.kebab@gmail.com',
-    to : `${submitLocal}kebab@gmail.com`,
+    personalizations: [
+      {
+        to : `${submitLocal}kebab@gmail.com`,
+      },
+      {
+        to: email,
+      },
+    ],
     dynamic_template_data : templateData,
     template_id : 'd-2dacbd7f6f974d20af110a66561995e1',
   }

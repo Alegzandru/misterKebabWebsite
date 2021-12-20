@@ -163,11 +163,13 @@ const CartModal = () => {
         />}
         <div className="flex flex-col items-end mt-18">
           <p className={styles.cartModalContainer__subtotal}>{t('Subtotal')}: {price} {t('MDL')}</p>
-          {orderType === ORDER_TYPE.delivery && <p className={styles.cartModalContainer__subtotal}>{t('Livrare')}: {DELIVERY_PRICE} {t('MDL')}</p>}
+          {orderType === ORDER_TYPE.delivery && <p className={styles.cartModalContainer__subtotal}>
+            {t('Livrare')}: {price >= 300 ? 0 : DELIVERY_PRICE} {t('MDL')}
+          </p>}
           <h4
             className={classNames(styles.cartModalContainer__totalHeading, 'font-bold mt-2')}
           >
-            {t('Total')}: {price + (isThroughDelivery ? DELIVERY_PRICE : 0)} {t('MDL')}
+            {t('Total')}: {price + (isThroughDelivery ? price >= 300 ? 0 : DELIVERY_PRICE : 0)} {t('MDL')}
           </h4>
         </div>
         {
