@@ -83,8 +83,8 @@ export const PHONE_NUMBERS = {
     text: '+373 (67) 559 999',
   },
   malinamica: {
-    link: '+37367549999',
-    text: '+373 (67) 549 999',
+    link: '+37367459999',
+    text: '+373 (67) 459 999',
   },
   general: {
     link: '+37322559999',
