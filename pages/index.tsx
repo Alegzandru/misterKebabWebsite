@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import Head from 'next/head'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -8,23 +8,20 @@ import { useState } from 'react'
 import BackToTopButton from '../src/components/BackToTopButton/BackToTopButton'
 import CategoriesNavbar from '../src/components/CategoriesNavbar/CategoriesNavbar'
 import Hero from '../src/components/Hero/Hero'
+import { HeadWithMeta } from '../src/components/Layout/HeadWithMeta'
 import Layout from '../src/components/Layout/Layout'
 import Menu from '../src/components/Menu/Menu'
 import Modal from '../src/components/Modal/Modal'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
-import { SIZES } from '../src/constants/common'
+import { VALID_LOCALS } from '../src/constants'
+import { metaData, SIZES } from '../src/constants/common'
 import { API_URL } from '../src/constants/urls'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
 import { CartContextProvider } from '../src/store/Cart/Cart.context'
 import { ProductToppingsContextProvider } from '../src/store/ProductToppings/ProductToppings.context'
 import { MenuList, Product } from '../src/types'
 import { productFilter } from '../src/utils/products'
-// import {metaData} from '../src/constants/common'
-// import {useRouter} from 'next/router'
-import { useTranslation } from 'react-i18next'
-import { VALID_LOCALS } from '../src/constants'
-
 
 type Props = {
   products: Product[]
@@ -39,7 +36,8 @@ const MainPage = ({ products, menu, sliders }: Props) => {
 
   const [showBanner, setShowBanner] = useState('Mobile')
 
-  const {t} = useTranslation('common')
+  const router = useRouter()
+  const locale = router.locale as string
 
   useEffect(() => {
     const onResizeHandler = () => {
@@ -53,35 +51,17 @@ const MainPage = ({ products, menu, sliders }: Props) => {
     }
   }, [])
 
-  // const router = useRouter()
-  // const isRo = router.locale === LANGUAGES.ro
-
   const localName = window.location.host.split('.')[0]
   const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
 
   return(
     <Layout>
-      <Head>
-        <meta name="google-site-verification" content="11pj34iDWosekV9Z0yPZRGHTXlAzznm0z8_yHbkYDmc" />
-        <title>Mr. Kebab</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        {/* eslint-disable-next-line max-len*/}
-        <meta name="description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
-        <meta name="robots" content="index, follow"/>
-
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Mr. Kebab" />
-        {/* eslint-disable-next-line max-len*/}
-        <meta property="og:description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
-        <meta property="og:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png" />
-        <meta property="og:url" content="PERMALINK" />
-        <meta property="og:site_name" content="Mr. Kebab" />
-
-        <meta name="twitter:title" content="Mr. Kebab"/>
-        {/* eslint-disable-next-line max-len*/}
-        <meta name="twitter:description" content={t('Mister Kebab este bucatarul tau de incredere! Aici se pregatesc cele mai gustoase kebaburi si burgere din Chisinau. O retea de fast-food pentru toate gusturile și varstele!')}/>
-        <meta name="twitter:image" content="https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png"/>
-      </Head>
+      <HeadWithMeta
+        title={metaData.index.title[locale]}
+        description={metaData.index.description[locale]}
+        index={true}
+        img={'https://res.cloudinary.com/dbh1vgas3/image/upload/v1628077326/logo_ps0e0n.png'}
+      />
       <CartContextProvider>
         <ProductToppingsContextProvider>
           <Hero />
