@@ -37,8 +37,8 @@ export const DAY = 24 * 60 * 60 * 1000
 export const metaData = {
   index : {
     title : {
-      ro : '',
-      ru : '',
+      ro : 'Mr. Kebab',
+      ru : 'Mr. Kebab',
     },
     description : {
       // eslint-disable-next-line max-len
