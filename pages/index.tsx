@@ -14,7 +14,7 @@ import Menu from '../src/components/Menu/Menu'
 import Modal from '../src/components/Modal/Modal'
 import OpenCartButton from '../src/components/OpenCartButton/OpenCartButton'
 import Slider from '../src/components/Slider/Slider'
-import { VALID_LOCALS } from '../src/constants'
+// import { VALID_LOCALS } from '../src/constants'
 import { metaData, SIZES } from '../src/constants/common'
 import { API_URL } from '../src/constants/urls'
 import { ActiveSectionContextProvider } from '../src/store/ActiveSection/ActiveSection.context'
@@ -51,8 +51,8 @@ const MainPage = ({ products, menu, sliders }: Props) => {
     }
   }, [])
 
-  const localName = window.location.host.split('.')[0]
-  const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
+  // const localName = window.location.host.split('.')[0]
+  // const isValidLocal = localName === VALID_LOCALS.botanica || localName === VALID_LOCALS.rascanovca || localName === VALID_LOCALS.malinamica
 
   return(
     <Layout>
@@ -74,7 +74,8 @@ const MainPage = ({ products, menu, sliders }: Props) => {
             <Menu menu={menu} products={products} />
           </ActiveSectionContextProvider>
           <BackToTopButton />
-          {!isValidLocal && <OpenCartButton />}
+          {/* temp */}
+          {0 && <OpenCartButton />}
           <Modal />
         </ProductToppingsContextProvider>
       </CartContextProvider>
