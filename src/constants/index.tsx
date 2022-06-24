@@ -20,15 +20,15 @@ export const LOCATIONS = [
   {
     name: 'Malina Mică',
     address: 'Strada Nicolae Testemiţanu 17/6',
-    phoneText: '+373 (67) 459 999',
-    phoneLink: '+37367459999',
+    phoneText: '+373 (67) 549 999',
+    phoneLink: '+37367549999',
     position: { lat: 46.99737, lng: 28.83526 },
   },
   {
     name: 'Telecentru',
     address: 'Strada Vladimir Korolenko 12',
-    phoneText: '+373 (67) 559 999',
-    phoneLink: '+37367559999',
+    phoneText: '+373 (67) 459 999',
+    phoneLink: '+37367459999',
     position: { lat: 46.995146, lng: 28.825689 },
   },
   {
