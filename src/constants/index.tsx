@@ -25,11 +25,11 @@ export const LOCATIONS = [
     position: { lat: 46.99737, lng: 28.83526 },
   },
   {
-    name: 'Telecentru',
-    address: 'Strada Vladimir Korolenko 12',
-    phoneText: '+373 (79) 588 227',
-    phoneLink: '+37379588227',
-    position: { lat: 46.995146, lng: 28.825689 },
+    name: 'Ciocana',
+    address: 'Strada Maria Drăgan 10/2',
+    phoneText: '+373 (67) 549 999',
+    phoneLink: '+37367549999',
+    position: { lat: 47.02660214510507, lng: 28.882887304471126 },
   },
   {
     name: 'Râşcani',
@@ -128,7 +128,7 @@ export const CAREERS_OTHERS = [
   {
     heading: 'Doresc să lucrez la',
     name: 'locations',
-    values: ['Malina Mica', 'Botanica', 'Telecentru', 'Râșcani'],
+    values: ['Malina Mica', 'Botanica', 'Ciocana', 'Râșcani'],
   },
   {
     heading: 'Sunt dispus să lucrez',
@@ -152,7 +152,7 @@ export const VALID_LOCALS = {
 }
 
 export const TAKEAWAY_LOCATIONS = {
-  'Telecentru': 'manager.mister.',
+  'Ciocana': 'manager.mister.',
   'Malina Mică': 'manager.mister.',
   'Râșcani': 'rascanovca.mr.',
   'Botanica': 'botanica.mr.',

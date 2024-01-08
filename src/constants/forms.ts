@@ -151,7 +151,7 @@ export const DROPDOWN_DATA = {
         name: 'Malina Mică',
       },
       {
-        name: 'Telecentru',
+        name: 'Ciocana',
       },
       {
         name: 'Râşcani',

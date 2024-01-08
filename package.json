@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "cls & next -p 3200",
+    "dev": "cls & cross-env NODE_OPTIONS='--openssl-legacy-provider' next -p 3200",
     "build": "next build",
     "start": "next start -p 3200",
     "lint": "next lint",
@@ -19,6 +19,7 @@
     "@next/bundle-analyzer": "11.0.1",
     "@sendgrid/mail": "7.4.5",
     "classnames": "2.3.1",
+    "cross-env": "^7.0.3",
     "lodash.debounce": "4.0.8",
     "lodash.throttle": "4.1.1",
     "lottie-web": "5.7.12",
