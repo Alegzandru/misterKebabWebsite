@@ -39,21 +39,14 @@
   }
 
   &__addToCartButton {
-    background-color: #fff7f8;
-    border: 2px solid #ff2828;
+    background-color: #F2CC38;
     border-radius: 4px;
     height: 36px;
     font-size: 12px;
-    color: #ff2828;
-
+    color: #00A082;
+    
     &:hover {
-      background-color: #ff2828;
-      color: #ffffff;
-
-      .productCardContainer__bag {
-        width: 0;
-        opacity: 0;
-      }
+      border: 2px solid #00A082;
     }
   }
 }
