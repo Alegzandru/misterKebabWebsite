@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "cls & cross-env NODE_OPTIONS='--openssl-legacy-provider' next -p 3200",
-    "build": "next build",
+    "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next -p 3200",
+    "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
     "start": "next start -p 3200",
     "lint": "next lint",
     "analyze": "set ANALYZE=true&& next build"
