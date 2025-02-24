@@ -68,7 +68,7 @@ const CartModal = () => {
   useEffect(() => {
     import('lottie-web').then((lottie) => {
       import('../../../../public/lottie/loader2.json').then((lottieJson) => {
-        lottie.loadAnimation({
+        (lottie as any).loadAnimation({
           container: lottieRef.current as HTMLDivElement,
           animationData: lottieJson,
           renderer: 'svg',

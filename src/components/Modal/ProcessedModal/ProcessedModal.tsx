@@ -25,7 +25,7 @@ const ProcessedModal = () => {
         import('../../../../public/lottie/confetti.json'),
         import('../../../../public/lottie/done.json'),
       ]).then(([confettiJson, doneJson]) => {
-        lottie.loadAnimation({
+        (lottie as any).loadAnimation({
           container: confettiRef.current as HTMLDivElement,
           animationData: confettiJson,
           renderer: 'svg',
@@ -33,7 +33,7 @@ const ProcessedModal = () => {
           autoplay: true,
         })
 
-        lottie.loadAnimation({
+        (lottie as any).loadAnimation({
           container: doneRef.current as HTMLDivElement,
           animationData: doneJson,
           renderer: 'svg',
