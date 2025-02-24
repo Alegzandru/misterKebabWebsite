@@ -1,4 +1,3 @@
-import lottie from 'lottie-web'
 import { useTranslation } from 'next-i18next'
 import { useContext, useEffect, useRef } from 'react'
 
@@ -21,11 +20,11 @@ const ProcessedModal = () => {
   } = useContext(ModalContext)
 
   useEffect(() => {
-    (
-      async () => {
-        const confettiJson = await import('../../../../public/lottie/confetti.json')
-        const doneJson = await import('../../../../public/lottie/done.json')
-
+    import('lottie-web').then((lottie) => {
+      Promise.all([
+        import('../../../../public/lottie/confetti.json'),
+        import('../../../../public/lottie/done.json'),
+      ]).then(([confettiJson, doneJson]) => {
         lottie.loadAnimation({
           container: confettiRef.current as HTMLDivElement,
           animationData: confettiJson,
@@ -41,9 +40,8 @@ const ProcessedModal = () => {
           loop: true,
           autoplay: true,
         })
-
-      }
-    )()
+      })
+    })
   }, [])
 
   return (

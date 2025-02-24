@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import lottie from 'lottie-web'
 
 import { DRINKS, MODALS, WEIGHT_TYPE } from '../../../constants'
 import { LANGUAGES, SIZES } from '../../../constants/common'
@@ -61,10 +60,8 @@ const ProductModal = () => {
   }, [name])
 
   useEffect(() => {
-    (
-      async () => {
-        const lottieJson = await import('../../../../public/lottie/loader2.json')
-
+    import('lottie-web').then((lottie) => {
+      import('../../../../public/lottie/loader2.json').then((lottieJson) => {
         lottie.loadAnimation({
           container: lottieRef.current as HTMLDivElement,
           animationData: lottieJson,
@@ -72,10 +69,10 @@ const ProductModal = () => {
           loop: true,
           autoplay: true,
         })
-
-      }
-    )()
+      })
+    })
   }, [])
+
 
   useEffect(() => {
     if (show === MODALS.product) {

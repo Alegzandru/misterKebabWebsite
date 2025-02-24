@@ -33,7 +33,6 @@ type Props = {
 }
 
 const MainPage = ({ products, menu, sliders }: Props) => {
-
   const [showBanner, setShowBanner] = useState('Mobile')
 
   const router = useRouter()

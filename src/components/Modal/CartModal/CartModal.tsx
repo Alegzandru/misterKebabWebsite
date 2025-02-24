@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { useContext, useEffect, useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import lottie from 'lottie-web'
 
 import { DELIVERY_PRICE, MODALS, VALID_LOCALS } from '../../../constants'
 import {
@@ -67,10 +66,8 @@ const CartModal = () => {
   const lottieRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    (
-      async () => {
-        const lottieJson = await import('../../../../public/lottie/loader2.json')
-
+    import('lottie-web').then((lottie) => {
+      import('../../../../public/lottie/loader2.json').then((lottieJson) => {
         lottie.loadAnimation({
           container: lottieRef.current as HTMLDivElement,
           animationData: lottieJson,
@@ -78,9 +75,8 @@ const CartModal = () => {
           loop: true,
           autoplay: true,
         })
-
-      }
-    )()
+      })
+    })
   }, [])
 
   const { t } = useTranslation('cart')
