@@ -4,6 +4,8 @@ import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss'
 import 'tailwindcss/tailwind.css'
 
+// comment for redeployment
+
 import { appWithTranslation } from 'next-i18next'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
