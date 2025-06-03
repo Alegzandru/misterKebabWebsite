@@ -4,7 +4,7 @@ import 'swiper/components/navigation/navigation.scss'
 import 'swiper/swiper.scss'
 import 'tailwindcss/tailwind.css'
 
-// comment for redeployment 2
+// comment for redeployment 3
 
 import { appWithTranslation } from 'next-i18next'
 import { AppProps } from 'next/app'
