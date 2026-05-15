@@ -18,6 +18,13 @@ export const SOCIALS_LINKS = [
 
 export const LOCATIONS = [
   {
+    name: 'Centru',
+    address: 'Strada Bănulescu Bodoni 61',
+    phoneText: '+373 (78) 349 999',
+    phoneLink: '+37378349999',
+    position: { lat: 47.03075193979352, lng: 28.837559546072917 },
+  },
+  {
     name: 'Malina Mică',
     address: 'Strada Nicolae Testemiţanu 17/6',
     phoneText: '+373 (67) 459 999',
@@ -44,6 +51,13 @@ export const LOCATIONS = [
     phoneText: '+373 (67) 559 999',
     phoneLink: '+37367559999',
     position: { lat: 46.98538, lng: 28.84468 },
+  },
+  {
+    name: 'Buiucani',
+    address: 'Strada Nicolae Costin 33',
+    phoneText: '+373 (78) 649 999',
+    phoneLink: '+37378649999',
+    position: { lat: 47.03512761874293, lng: 28.78802768265422 },
   },
 ]
 
